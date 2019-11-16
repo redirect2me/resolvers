@@ -6,7 +6,15 @@
 * banner image for twitter for redirect2me
 * DNS check for all ips of a specific resolver
 * tags for open resolvers
+* descriptions for open resolvers
+* include: t/f for open resolvers (or from env var)
+* data/xxx.md with details for each open resolvers
+* detail page for open resolvers
+* github issue template for new resolvers
+* link on resolvers-index to contribute
 * LICENSE.txt
+* CONTRIBUTING.md
+* docker-run.sh
 * where am I?
 * where are you?
 * what resolvers are you using?
