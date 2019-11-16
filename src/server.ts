@@ -74,9 +74,10 @@ function displayFlash(ctx:Koa.Context):Handlebars.SafeString|string {
 
     return new Handlebars.SafeString(retVal);
 }
-
+Handlebars.registerHelper('flash', displayFlash);
 
 app.use(KoaViews(path.join(__dirname, '..', 'views'), {
+    autoRender: false,
     map: { hbs: 'handlebars' },
     options: {
         helpers: {
@@ -87,7 +88,7 @@ app.use(KoaViews(path.join(__dirname, '..', 'views'), {
             'equals': function(a:any, b:any, block:any) {
                 return a == b ? block.fn() : '';
             },
-            'flash': displayFlash,
+            // async startup problems 'flash': displayFlash,
             'for': function(from:number, to:number, incr:number, block:any) {
                 let result = '';
                 for (let loop = from; loop < to; loop += incr)
@@ -113,7 +114,7 @@ app.use(async(ctx, next) => {
           if (ctx.path.endsWith('.json')) {
             ctx.body = { message: 'Invalid url', success: false, url: ctx.url };
           } else {
-            await ctx.render('404.hbs', { title: '404', h1: '404 - Page not found', url: ctx.req.url });
+            ctx.body = await ctx.render('404.hbs', { title: '404', h1: '404 - Page not found', url: ctx.req.url });
           }
       }
   } catch (err) {
@@ -122,7 +123,7 @@ app.use(async(ctx, next) => {
       if (ctx.path.endsWith('.json')) {
         ctx.body = { message: `Server error ${err.message}`, success: false };
       } else {
-        await ctx.render('500.hbs', { title: 'Server Error', message: err.message });
+        ctx.body = await ctx.render('500.hbs', { title: 'Server Error', message: err.message });
       }
   }
 });
@@ -134,15 +135,15 @@ rootRouter.get('/index.html', async (ctx) => {
 });
 
 rootRouter.get('/', async (ctx:any) => {
-	await ctx.render('index.hbs', { title: 'Resolve.rs', h1: 'Resolve.rs' });
+  ctx.body = await ctx.render('index.hbs', { title: 'Resolve.rs', h1: 'Resolve.rs' });
 });
 
 rootRouter.get('/resolvers/index.html', async (ctx:any) => {
-	await ctx.render('resolvers-index.hbs', { title: 'Open Resolver List', resolvers: resolvers.getAll() });
+  ctx.body = await ctx.render('resolvers-index.hbs', { title: 'Open Resolver List', resolvers: resolvers.getAll() });
 });
 
 rootRouter.get('/dns-check.html', async (ctx:any) => {
-	await ctx.render('dns-check.hbs', {
+  ctx.body = await ctx.render('dns-check.hbs', {
     hostname: ctx.query.hostname,
     title: 'DNS Check'
   });
