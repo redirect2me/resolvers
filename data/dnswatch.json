@@ -1,0 +1,14 @@
+{
+  "name": "DNS.WATCH",
+  "url": "https://dns.watch/index",
+  "icon": "https://www.vectorlogo.zone/logos/dnswatch/dnswatch-icon.svg",
+  "logo": "https://www.vectorlogo.zone/logos/dnswatch/dnswatch-ar21.svg",
+  "ipv4": [
+    "84.200.69.80",
+    "84.200.70.40"
+  ],
+  "ipv6": [
+    "2001:1608:10:25::1c04:b12f",
+    "2001:1608:10:25::9249:d69b"
+  ]
+}

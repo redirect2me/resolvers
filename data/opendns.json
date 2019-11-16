@@ -1,0 +1,10 @@
+{
+  "name": "OpenDNS",
+  "url": "https://www.opendns.com/",
+  "icon": "https://www.vectorlogo.zone/logos/opendns/opendns-icon.svg",
+  "logo": "https://www.vectorlogo.zone/logos/opendns/opendns-ar21.svg",
+  "ipv4": [
+    "208.67.222.222",
+    "208.67.220.220"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "delay": "0",
+  "exec": "tsc && yarn run start | bunyan",
+  "ext": "json,ts",
+  "ignore": [ ".idea/*", "dist/*" ],
+  "verbose": true
+}

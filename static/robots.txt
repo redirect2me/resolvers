@@ -1,0 +1,6 @@
+#
+# robots.txt for resolve.rs
+#
+
+User-Agent: *
+Allow: /

@@ -1,0 +1,22 @@
+{{> above}}
+<div class="card-deck">
+  {{#each resolvers}}
+  <div class="card">
+
+    <a href="{{this.url}}" title="{{this.name}}"><img alt="{{this.name}}" class="card-img-top" src="{{this.logo}}"></a>
+
+    <div class="card-body">
+
+      <h5 class="card-title text-center">{{this.name}}</h5>
+
+      <p class="card-text">something</p>
+
+    </div>
+
+    <div class="card-footer">
+      <small class="text-muted">Last updated 3 mins ago</small>
+    </div>
+  </div>
+  {{/each}}
+</ul>
+{{> below}}
