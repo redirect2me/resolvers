@@ -1,5 +1,6 @@
 {
-  "name": "Yandex",
+  "company": "Yandex",
+  "name": "Yandex.DNS",
   "url": "https://dns.yandex.com/",
   "icon": "https://www.vectorlogo.zone/logos/yandex/yandex-icon.svg",
   "logo": "https://www.vectorlogo.zone/logos/yandex/yandex-ar21.svg",

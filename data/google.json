@@ -1,5 +1,6 @@
 {
-  "name": "Google",
+  "company": "Google",
+  "name": "Google Public DNS",
   "url": "https://developers.google.com/speed/public-dns/",
   "icon": "https://www.vectorlogo.zone/logos/google/google-icon.svg",
   "logo": "https://www.vectorlogo.zone/logos/google/google-ar21.svg",

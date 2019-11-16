@@ -1,10 +1,12 @@
 # To Do
 
+* sitemap.xml
+* register on GWebmasterTools
 * tile on VLZ for redirect2me
 * banner image for twitter for redirect2me
-* footer images/links
-* DNS check - all resolvers
 * DNS check for all ips of a specific resolver
+* tags for open resolvers
+* LICENSE.txt
 * where am I?
 * where are you?
 * what resolvers are you using?

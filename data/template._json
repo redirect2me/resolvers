@@ -1,8 +1,8 @@
 {
-  "name": "LATER",
-  "url": "LATER",
+  "company": "LATER",
+  "description": "LATER",
+  "details": "LATER",
   "icon": "https://www.vectorlogo.zone/logos/LATER/LATER-icon.svg",
-  "logo": "https://www.vectorlogo.zone/logos/LATER/LATER-ar21.svg",
   "ipv4": [
     "LATER",
     "LATER"
@@ -10,5 +10,9 @@
   "ipv6": [
     "LATER",
     "LATER"
-  ]
+  ],
+  "logo": "https://www.vectorlogo.zone/logos/LATER/LATER-ar21.svg",
+  "name": "LATER",
+  "tags": [ ],
+  "url": "LATER"
 }
