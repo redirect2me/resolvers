@@ -1,7 +1,7 @@
 {{> above}}
-<div class="card-deck">
-  {{#each resolvers}}
-  <div class="card">
+<div class="d-flex flex-wrap">
+  {{#each resolvers }}
+  <div class="card m-4" style="width:18rem;">
 
     <a href="{{this.url}}" title="{{this.name}}"><img alt="{{this.name}}" class="card-img-top" src="{{this.logo}}"></a>
 
@@ -18,5 +18,5 @@
     </div>
   </div>
   {{/each}}
-</ul>
+  </div>
 {{> below}}
