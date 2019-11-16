@@ -1,9 +1,6 @@
 {
   "company": "Google",
-  "name": "Google Public DNS",
-  "url": "https://developers.google.com/speed/public-dns/",
   "icon": "https://www.vectorlogo.zone/logos/google/google-icon.svg",
-  "logo": "https://www.vectorlogo.zone/logos/google/google-ar21.svg",
   "ipv4": [
     "8.8.8.8",
     "8.8.4.4"
@@ -11,5 +8,10 @@
   "ipv6": [
     "2001:4860:4860::8888",
     "2001:4860:4860::8844"
-  ]
+  ],
+  "location": "us",
+  "logo": "https://www.vectorlogo.zone/logos/google/google-ar21.svg",
+  "name": "Google Public DNS",
+  "tags": [],
+  "url": "https://developers.google.com/speed/public-dns/"
 }

@@ -14,7 +14,11 @@
     </div>
 
     <div class="card-footer">
-      <small class="text-muted"><!-- LATER: tags --></small>
+      <small class="text-muted"><!-- LATER: tags -->
+      {{#if this.location}}
+      <img alt="{{this.location}}" class="float-right" src="/images/flags/{{this.location}}.png" style="height:20pt;" title="{{this.location}}" />
+      {{/if}}
+      </small>
     </div>
   </div>
   {{/each}}
