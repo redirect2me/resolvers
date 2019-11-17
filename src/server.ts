@@ -135,7 +135,11 @@ rootRouter.get('/index.html', async (ctx) => {
 });
 
 rootRouter.get('/', async (ctx:any) => {
-  ctx.body = await ctx.render('index.hbs', { title: 'Resolve.rs', h1: 'Resolve.rs' });
+  ctx.body = await ctx.render('index.hbs', { 
+    current_ip: ctx.ips.length > 0 ? ctx.ips[ctx.ips.length - 1] : ctx.ip,
+    h1: 'Resolve.rs',
+    title: 'Resolve.rs', 
+  });
 });
 
 rootRouter.get('/resolvers/', async (ctx) => {

@@ -1,16 +1,11 @@
 # To Do
 
-* sitemap.xml
 * all local resources
-* register on GWebmasterTools
 * tile on VLZ for redirect2me
-* redirects from /resolvers/ to index.html
 * DNS check for all ips of a specific resolver
 * tags for open resolvers
 * descriptions for open resolvers
-* include: t/f for open resolvers (or from env var)
 * data/xxx.md with details for each open resolvers
-* detail page for open resolvers
 * github issue template for new resolvers
 * link on resolvers-index to contribute
 * CONTRIBUTING.md
@@ -29,7 +24,7 @@
 
 * https://public-dns.info/
 
-* https://www.comodo.com/secure-dns/
+* DNSFilter, Neustar, Norton, NuSec, SafeDNS
 * https://www.verisign.com/en_US/security-services/public-dns/index.xhtml
 
 ## which.resolve.rs

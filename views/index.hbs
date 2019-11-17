@@ -1,3 +1,18 @@
 {{> above}}
-<div class="alert alert-info">Coming soon!</div>
+<table class="table table-striped">
+    <tbody>
+        <tr>
+            <td>Your IP</td>
+            <td>{{current_ip}}</td>
+        </tr>
+        <!--
+        <tr>
+            <td>Reverse DNS for {{current_ip}}</td>
+            <td id="reversedns">
+                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading reverse DNS info" />
+            </td>
+        </tr>
+        -->
+    </tbody>
+</table>
 {{> below}}
