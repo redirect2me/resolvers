@@ -1,5 +1,6 @@
 {
   "company": "VPNReactor",
+  "draft": true,
   "icon": "https://www.vectorlogo.zone/logos/vpnreactor/vpnreactor-icon.svg",
   "ipv4": [
     "104.236.210.29",

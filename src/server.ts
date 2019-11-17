@@ -138,8 +138,30 @@ rootRouter.get('/', async (ctx:any) => {
   ctx.body = await ctx.render('index.hbs', { title: 'Resolve.rs', h1: 'Resolve.rs' });
 });
 
+rootRouter.get('/resolvers/', async (ctx) => {
+  await ctx.redirect('/resolvers/index.html');
+});
+
 rootRouter.get('/resolvers/index.html', async (ctx:any) => {
   ctx.body = await ctx.render('resolvers-index.hbs', { title: 'Open Resolver List', resolvers: resolvers.getAll() });
+});
+
+rootRouter.get('/resolvers/:resolver/', async (ctx) => {
+  await ctx.redirect('index.html');
+});
+
+rootRouter.get('/resolvers/:resolver/index.html', async (ctx: any) => {
+
+  const resolverData = resolvers.get(ctx.params.resolver);
+  if (!resolverData) {
+    ctx.flash('error', `Sorry, we don't have any info for an open resolver "${ctx.params.resolver}".`)
+    ctx.redirect("/resolvers/index.html");
+    return;
+  }
+  ctx.body = await ctx.render('resolvers-detail.hbs', { 
+    title: resolverData.name, 
+    resolver: resolverData
+  });
 });
 
 rootRouter.get('/dns-check.html', async (ctx:any) => {
@@ -205,6 +227,21 @@ rootRouter.post('/dns-check.html', async (ctx:any) => {
   });
 });
 
+rootRouter.get('/sitemap.xml', async (ctx:any) => {
+
+  const urls:string[] = [];
+
+  urls.push("/");
+  urls.push("/dns-check.html");
+  urls.push("/resolvers/index.html");
+  for (const resolver of resolvers.getAll()) {
+    urls.push(`/resolvers/${resolver.key}/index.html`);
+  }
+
+  ctx.body = await ctx.render('sitemap.hbs', { urls });
+  ctx.type = "text/xml;charset=utf-8";
+});
+
 rootRouter.get('/status.json', async (ctx) => {
 
     const retVal: {[key: string]: any} = {};
@@ -239,6 +276,8 @@ rootRouter.get('/status.json', async (ctx) => {
     retVal["process.uptime"] = process.uptime();
     retVal["process.version"] = process.version;
     retVal["process.versions"] = process.versions;
+ 
+    retVal["resolvers"] = resolvers.getAll().length;
 
     const callback = ctx.request.query['callback'];
     if (callback && callback.match(/^[$A-Za-z_][0-9A-Za-z_$]*$/) != null) {

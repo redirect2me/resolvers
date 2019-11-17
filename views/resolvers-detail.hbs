@@ -1,0 +1,42 @@
+{{> above}}
+
+<div class="container">
+{{this.description}}
+</div>
+
+<table class="table table-striped">
+    <tbody>
+        <tr>
+            <td>Name</td>
+            <td>{{resolver.name}}</td>
+        </tr>
+        <tr>
+            <td>Website</td>
+            <td><a href="{{resolver.url}}">{{resolver.url}}</a></td>
+        </tr>
+        <tr>
+            <td>Company</td>
+            <td>{{resolver.company}}</td>
+        </tr>
+        <tr>
+            <td>Location</td>
+            <td>
+            {{#if resolver.location}}
+            <img alt="{{resolver.location}}" src="/images/flags/{{resolver.location}}.png" style="height:20pt;" title="{{resolver.location}}" />
+            {{else}}
+            <i>(unknown)</i>
+            {{/if}}
+            </td>
+        </tr>
+        <tr>
+            <td>IP v4</td>
+            <td>{{resolver.ipv4}}</td>
+        </tr>
+        <tr>
+            <td>IP v6</td>
+            <td>{{resolver.ipv6}}</td>
+        </tr>
+    </tbody>
+</table>
+
+{{> below}}

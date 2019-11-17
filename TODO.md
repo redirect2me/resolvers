@@ -1,9 +1,10 @@
 # To Do
 
 * sitemap.xml
+* all local resources
 * register on GWebmasterTools
 * tile on VLZ for redirect2me
-* banner image for twitter for redirect2me
+* redirects from /resolvers/ to index.html
 * DNS check for all ips of a specific resolver
 * tags for open resolvers
 * descriptions for open resolvers
@@ -12,7 +13,6 @@
 * detail page for open resolvers
 * github issue template for new resolvers
 * link on resolvers-index to contribute
-* LICENSE.txt
 * CONTRIBUTING.md
 * docker-run.sh
 * where am I?
@@ -37,7 +37,7 @@
 - [ ] dns server that resolves static IP for `XXX.which.resolve.rs`
 - [ ] stores requesting IP mapped by `XXX` value
 - [ ] api.json: return IP used to resolve `XXX`
-- [ ] any access w/o `XXX` -> redirect to `UUID.which.resolve.rs`
+- [ ] any access w/o `XXX` -> redirect to `UUID.which.resolve.rs/index.html`
 - [ ] robots.txt: deny all
 - [ ] favicon.ico/svg
 - [ ] status.json
