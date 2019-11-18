@@ -1,6 +1,7 @@
 # To Do
 
-* all local resources
+* timeouts (and timing) on dns-check
+* multiple simultaneous checks for dns-check
 * tile on VLZ for redirect2me
 * DNS check for all ips of a specific resolver
 * tags for open resolvers
@@ -15,17 +16,17 @@
 * what resolvers are you using?
 * JSON schema for resolvers
 * more open resolvers
-* note about adding a new resolver
-* credits section of readme
-* note about how to figure out what resolver you are using
-* UUID hostname to force lookup, returns hostname with ip of querying server
 * option to do reverse-dns on resolved IP addresses
 
+## Open Resolvers
 
 * https://public-dns.info/
-
 * DNSFilter, Neustar, Norton, NuSec, SafeDNS
 * https://www.verisign.com/en_US/security-services/public-dns/index.xhtml
+
+## other tools
+
+* https://www.dnsperf.com/
 
 ## which.resolve.rs
 
