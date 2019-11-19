@@ -34,7 +34,7 @@
     "@types/koa-router": "^7.0.42",
     "@types/koa-session": "^5.10.1",
     "@types/koa-static": "^4.0.1",
-    "@types/koa-views": "^2.0.3",
+    "@types/koa-views": "^2.0.4",
     "@types/luxon": "^1.15.2",
     "@types/node": "^12.6.9",
     "@types/pino": "^5.8.8",
