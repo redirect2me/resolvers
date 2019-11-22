@@ -126,7 +126,7 @@
     "@types/koa" "*"
     "@types/koa-send" "*"
 
-"@types/koa-views@^2.0.3":
+"@types/koa-views@^2.0.4":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@types/koa-views/-/koa-views-2.0.4.tgz#3fa87ba13174f9816c6f7701fbf129dfe9855e39"
   integrity sha512-aGFBVLiPC7FkXTqHLhnmjKhx3COV+GeJHO9OkLX/p/iAQTgDB5bbnsddx3XgrS6aACWyxR3BpQJVDdSqCNY1lw==

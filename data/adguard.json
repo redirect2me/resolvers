@@ -1,0 +1,35 @@
+{
+  "DoH": [
+    "https://dns.adguard.com/dns-query",
+    "https://dns-family.adguard.com/dns"
+  ],
+  "DoT": [
+    "dns.adguard.com",
+    "dns-family.adguard.com"
+  ],
+  "company": "AdGuard",
+  "description": "LATER",
+  "details": "LATER",
+  "draft": true,
+  "icon": "https://www.vectorlogo.zone/logos/adguard/adguard-icon.svg",
+  "ipv4": [
+    "176.103.130.130",
+    "176.103.130.131",
+    "176.103.130.132",
+    "176.103.130.134"
+  ],
+  "ipv6": [
+    "2a00:5a60::ad1:0ff",
+    "2a00:5a60::ad2:0ff",
+    "2a00:5a60::bad1:0ff",
+    "2a00:5a60::bad2:0ff"
+  ],
+  "location": "cy",
+  "logo": "https://www.vectorlogo.zone/logos/adguard/adguard-ar21.svg",
+  "name": "AdGuard",
+  "tags": [
+    "adblock",
+    "family"
+  ],
+  "url": "https://adguard.com/en/adguard-dns/overview.html"
+}

@@ -32,10 +32,12 @@
             <td>IP v4</td>
             <td>{{resolver.ipv4}}</td>
         </tr>
+        {{#if resolver.ipv6}}
         <tr>
             <td>IP v6</td>
             <td>{{resolver.ipv6}}</td>
         </tr>
+        {{/if}}
     </tbody>
 </table>
 

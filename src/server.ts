@@ -86,7 +86,7 @@ app.use(KoaViews(path.join(__dirname, '..', 'views'), {
             },
             'envtag': () => config.get('envTag'),
             'equals': function(a:any, b:any, block:any) {
-                return a == b ? block.fn() : '';
+                return a == b ? block.fn() : block.inverse(this);
             },
             // async startup problems 'flash': displayFlash,
             'for': function(from:number, to:number, incr:number, block:any) {
@@ -135,10 +135,10 @@ rootRouter.get('/index.html', async (ctx) => {
 });
 
 rootRouter.get('/', async (ctx:any) => {
-  ctx.body = await ctx.render('index.hbs', { 
+  ctx.body = await ctx.render('index.hbs', {
     current_ip: ctx.ips.length > 0 ? ctx.ips[ctx.ips.length - 1] : ctx.ip,
     h1: 'Resolve.rs',
-    title: 'Resolve.rs', 
+    title: 'Resolve.rs',
   });
 });
 
@@ -162,8 +162,8 @@ rootRouter.get('/resolvers/:resolver/index.html', async (ctx: any) => {
     ctx.redirect("/resolvers/index.html");
     return;
   }
-  ctx.body = await ctx.render('resolvers-detail.hbs', { 
-    title: resolverData.name, 
+  ctx.body = await ctx.render('resolvers-detail.hbs', {
+    title: resolverData.name,
     resolver: resolverData
   });
 });
@@ -280,7 +280,7 @@ rootRouter.get('/status.json', async (ctx) => {
     retVal["process.uptime"] = process.uptime();
     retVal["process.version"] = process.version;
     retVal["process.versions"] = process.versions;
- 
+
     retVal["resolvers"] = resolvers.getAll().length;
 
     const callback = ctx.request.query['callback'];

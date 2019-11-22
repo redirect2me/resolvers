@@ -3,13 +3,13 @@
   {{#each resolvers }}
   <div class="card m-4" style="width:18rem;">
 
-    <a href="{{this.url}}" title="{{this.name}}"><img alt="{{this.name}}" class="card-img-top" src="{{this.logo}}"></a>
+    <a href="{{this.key}}/index.html" title="{{this.name}}"><img alt="{{this.name}}" class="card-img-top" src="{{this.logo}}"></a>
 
     <div class="card-body">
 
       <h5 class="card-title text-center">{{this.name}}</h5>
 
-      <p class="card-text">{{this.description}}</p>
+      <p class="card-text">{{#equals this.description "LATER"}}{{else}}{{this.description}}{{/equals}}</p>
 
     </div>
 

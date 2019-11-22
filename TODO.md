@@ -1,10 +1,16 @@
 # To Do
 
+* force https
+* logo on resolvers-detail
+* arrayToHtml, use on resolvers-detail
+* resolver-detail: form to test a hostname (on all IPs/methods)
+* tags for all resolvers
+* show tags on resolver-detail
 * timeouts (and timing) on dns-check
+* no reverse-dns (by default) on dns-check
 * multiple simultaneous checks for dns-check
+
 * tile on VLZ for redirect2me
-* DNS check for all ips of a specific resolver
-* tags for open resolvers
 * descriptions for open resolvers
 * data/xxx.md with details for each open resolvers
 * github issue template for new resolvers
@@ -15,8 +21,11 @@
 * where are you?
 * what resolvers are you using?
 * JSON schema for resolvers
+* twitter/facebook in resolvers.json
+* "Social Links" line in resolver-detail
 * more open resolvers
 * option to do reverse-dns on resolved IP addresses
+* resolver-test: run which on all IPs/methods
 * square brackets around ipv6 addresses
 * make and use map of country code to country name
 
@@ -27,13 +36,10 @@
 * https://www.lifewire.com/free-and-public-dns-servers-2626062
 
 
-* AdGuard, https://adguard.com/en/adguard-dns/overview.html
 * AlternateDNS, https://alternate-dns.com/index.php
 * CleanBrowsing, https://cleanbrowsing.org/filters
 * DNS Advantage
 * DNSFilter, https://www.dnsfilter.com/
-* Fourth Estate, https://www.fourthestate.org/services/dns/
-* FreeDNS, https://freedns.zone/en/why/
 * Hurricane Electric, https://dns.he.net/
 * Level3
 * Neustar, https://www.home.neustar/dns-services/ultra-recursive-dns
