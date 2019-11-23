@@ -14,6 +14,16 @@
             <td>Website</td>
             <td><a href="{{resolver.url}}">{{resolver.url}}</a></td>
         </tr>
+        {{#if resolver.ipv6}}
+        <tr>
+            <td>Social media</td>
+            <td>
+            {{#each resolver.social}}
+                <a class="pr-2" href="{{this}}">{{@key}}</a>
+            {{/each}}
+            </td>
+        </tr>
+        {{/if}}
         <tr>
             <td>Company</td>
             <td>{{resolver.company}}</td>
