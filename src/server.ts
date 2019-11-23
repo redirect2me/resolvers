@@ -81,6 +81,13 @@ app.use(KoaViews(path.join(__dirname, '..', 'views'), {
     map: { hbs: 'handlebars' },
     options: {
         helpers: {
+            'arrayToHtml': function (lines: any): Handlebars.SafeString {
+              let retVal = "";
+              for (const line of lines) {
+                retVal += Handlebars.escapeExpression(line) + "<br/>";
+              }
+              return new Handlebars.SafeString(retVal);
+            },
             'encodeURIComponent': function(a:any) {
                 return encodeURIComponent(a)
             },

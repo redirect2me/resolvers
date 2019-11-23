@@ -10,11 +10,22 @@
             <td>Name</td>
             <td>{{resolver.name}}</td>
         </tr>
+        {{#if resolver.tags}}
+        <tr>
+            <td>Tags</td>
+            <td>
+                {{#each resolver.tags}}
+                <!--<a class="badge badge-secondary p-1" href="{{this}}">{{this}}</a>-->
+                <span class="badge badge-secondary p-1">{{this}}</span>
+                {{/each}}
+            </td>
+        </tr>
+        {{/if}}
         <tr>
             <td>Website</td>
             <td><a href="{{resolver.url}}">{{resolver.url}}</a></td>
         </tr>
-        {{#if resolver.ipv6}}
+        {{#if resolver.social}}
         <tr>
             <td>Social media</td>
             <td>
@@ -40,12 +51,12 @@
         </tr>
         <tr>
             <td>IP v4</td>
-            <td>{{resolver.ipv4}}</td>
+            <td>{{arrayToHtml resolver.ipv4}}</td>
         </tr>
         {{#if resolver.ipv6}}
         <tr>
             <td>IP v6</td>
-            <td>{{resolver.ipv6}}</td>
+            <td>{{arrayToHtml resolver.ipv6}}</td>
         </tr>
         {{/if}}
     </tbody>
