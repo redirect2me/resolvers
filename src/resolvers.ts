@@ -2,21 +2,25 @@ import { promises as fsPromises } from 'fs';
 import * as path from 'path';
 import Pino from 'pino';
 
-const cache = new Map<string, string>();
+type resolverData = {
+  draft?: boolean,
+}
+
+const cache = new Map<string, resolverData>();
 
 async function initialize(logger:Pino.Logger) {
 
-  const queryDir = path.join(__dirname, '..', 'data');
+  const dataDir = path.join(__dirname, '..', 'data');
 
-  const fileNames = await fsPromises.readdir(queryDir);
+  const fileNames = await fsPromises.readdir(dataDir);
 
   for (const fileName of fileNames) {
     if (fileName.endsWith(".json")) {
       const key = fileName.slice(0, -5);
-      const resolver = JSON.parse(await fsPromises.readFile(path.join(queryDir, fileName), "utf-8"));
-      if (resolver.draft) {
+      if (key === "template") {
         continue;
       }
+      const resolver = JSON.parse(await fsPromises.readFile(path.join(dataDir, fileName), "utf-8"));
       resolver.key = key;
       cache.set(key, resolver);
     }
@@ -36,10 +40,17 @@ function get(fileName:string): any {
   return retVal;
 }
 
-function getAll(): any[] {
+function getAll(draft?: boolean): any[] {
   const retVal = [];
 
   for (const key of cache.keys()) {
+    const resolver:resolverData|undefined = cache.get(key);
+    if (!resolver) {
+      continue;
+    }
+    if (!draft && resolver.draft) {
+      continue;
+    }
     console.log(`${key}=${JSON.stringify(cache.get(key))}`)
     retVal.push(cache.get(key));
   }

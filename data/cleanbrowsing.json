@@ -8,7 +8,7 @@
   "description": "LATER",
   "details": "LATER",
   "draft": true,
-  "icon": "https://www.vectorlogo.zone/logos/LATER/LATER-icon.svg",
+  "icon": "https://www.vectorlogo.zone/logos/cleanbrowsing/cleanbrowsing-icon.svg",
   "ipv4": [
     "185.228.168.9",
     "185.228.169.9",
@@ -26,8 +26,8 @@
     "2a0d:2a00:2::2"
   ],
   "location": "LATER",
-  "logo": "https://www.vectorlogo.zone/logos/LATER/LATER-ar21.svg",
-  "name": "LATER",
+  "logo": "https://www.vectorlogo.zone/logos/cleanbrowsing/cleanbrowsing-ar21.svg",
+  "name": "CleanBrowsing",
   "social": {
     "facebook": "",
     "twitter": "https://twitter.com/cleanbrowsing"

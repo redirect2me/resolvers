@@ -97,6 +97,9 @@ app.use(KoaViews(path.join(__dirname, '..', 'views'), {
             },
             toIso: function(d:Date) { return d ? d.toISOString() : '(none)'; },
             toJson: function(context:any) { return JSON.stringify(context, null, 2); },
+            'toUpper': function (a: any) {
+              return a ? a.toString().toUpperCase() : "";
+            },
         },
         partials: {
             above: path.join(__dirname, '..', 'partials', 'above'),
@@ -147,7 +150,17 @@ rootRouter.get('/resolvers/', async (ctx) => {
 });
 
 rootRouter.get('/resolvers/index.html', async (ctx:any) => {
-  ctx.body = await ctx.render('resolvers-index.hbs', { title: 'Open Resolver List', resolvers: resolvers.getAll() });
+  ctx.body = await ctx.render('resolvers-index.hbs', { 
+    title: 'Open Resolver List', 
+    resolvers: resolvers.getAll(ctx.request.query.draft).sort((a, b) => {
+      if (a.name > b.name) {
+        return 1;
+      } else if (a.name < b.name) {
+        return -1;
+      } 
+      return 0;
+    }) 
+  });
 });
 
 rootRouter.get('/resolvers/:resolver/', async (ctx) => {

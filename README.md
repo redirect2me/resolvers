@@ -10,6 +10,12 @@ Website for troubleshooting DNS resolution issues
 
 LATER
 
+Get additional flags with:
+
+```bash
+cp ~/fork/noto-emoji/build/resized_flags/XX.png ./static/images/flags
+```
+
 ## License
 
 This code is licensed under the [GNU Affero General Public License v3.0](LICENSE.txt).
