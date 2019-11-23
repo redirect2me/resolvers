@@ -1,6 +1,5 @@
 # To Do
 
-* ability to see drafts in production
 * force https
 * logo on resolvers-detail
 * social media links on resolvers-detail
@@ -40,11 +39,11 @@
 * https://www.lifewire.com/free-and-public-dns-servers-2626062
 * https://dnsprivacy.org/wiki/display/DP/DNS+Privacy+Public+Resolvers
 
-* CleanBrowsing, https://cleanbrowsing.org/filters
 * DNS Advantage
 * Level3
 * OpenNIC, https://www.opennic.org/
 * SafeDNS, https://www.safedns.com/en/
+* NextDNS, https://www.nextdns.io/
 
 ## Not included:
 * DNSFilter, https://www.dnsfilter.com/, Commercial only

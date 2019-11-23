@@ -307,6 +307,11 @@ rootRouter.get('/status.json', async (ctx) => {
     }
 });
 
+rootRouter.get('/util/headers.json', async (ctx) => {
+  ctx.body = ctx.request.headers;
+});
+
+
 app.use(rootRouter.routes());
 
 
