@@ -1,20 +1,19 @@
 # To Do
 
-* force https
-* logo on resolvers-detail
-* social media links on resolvers-detail
-* arrayToHtml, use on resolvers-detail
-* resolver-detail: form to test a hostname (on all IPs/methods)
-* tags for all resolvers
-* show tags on resolver-detail
-* timeouts (and timing) on dns-check
-* no reverse-dns (by default) on dns-check
-* multiple simultaneous checks for dns-check
-* https://www.npmjs.com/package/dns-over-tls
-
+* more stuff on home page
 * tile on VLZ for redirect2me
-* descriptions for open resolvers
-* data/xxx.md with details for each open resolvers
+
+## DNS Check Improvements
+
+* timeouts (and timing) on dns-check
+* option for reverse-dns (on by default) on dns checks
+* multiple simultaneous checks for dns-check
+* timing data for dns-check
+* [DoT](https://www.npmjs.com/package/dns-over-tls)
+* resolver-detail: test on ipv6, DoT, DoH
+
+## General
+
 * github issue template for new resolvers
 * link on resolvers-index to contribute
 * CONTRIBUTING.md
@@ -22,14 +21,18 @@
 * where am I?
 * where are you?
 * what resolvers are you using?
-* JSON schema for resolvers
-* twitter/facebook in resolvers.json
-* "Social Links" line in resolver-detail
-* more open resolvers
-* option to do reverse-dns on resolved IP addresses
-* resolver-test: run which on all IPs/methods
-* square brackets around ipv6 addresses
 * make and use map of country code to country name
+* tags page
+* countries page
+
+## Data Enhancements
+
+* JSON schema for resolver data
+* square brackets around ipv6 addresses
+* fill in tags for all resolvers
+* fill in social media links
+* descriptions for open resolvers
+* data/xxx.md with details for each open resolvers
 * https://cleanbrowsing.org/guides/dnsovertls
 
 ## Open Resolvers
@@ -46,6 +49,7 @@
 * NextDNS, https://www.nextdns.io/
 
 ## Not included:
+
 * DNSFilter, https://www.dnsfilter.com/, Commercial only
 * Hurricane Electric, https://dns.he.net/, Registration required
 
