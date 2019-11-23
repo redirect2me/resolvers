@@ -177,6 +177,7 @@ rootRouter.get('/resolvers/:resolver/index.html', async (ctx: any) => {
   }
   ctx.body = await ctx.render('resolvers-detail.hbs', {
     title: resolverData.name,
+    titleimg: resolverData.icon,
     resolver: resolverData
   });
 });

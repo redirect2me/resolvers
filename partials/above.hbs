@@ -35,7 +35,7 @@
   </div>
 </nav>
 <div class="container pt-3">
-  <h1 class="font-weight-bold">{{#if h1}}{{ h1 }}{{else}}{{ title }}{{/if}}</h1>
+  <h1 class="font-weight-bold">{{#if titleimg}}<img class="pr-3" src="{{titleimg}}" style="height:2.1rem;vertical-align:baseline;" />{{/if}}{{#if h1}}{{ h1 }}{{else}}{{ title }}{{/if}}</h1>
   <hr/>
   {{flash ctx}}
 
