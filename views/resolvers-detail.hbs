@@ -62,4 +62,28 @@
     </tbody>
 </table>
 
+<h2>Test {{resolver.name}}</h2>
+
+<div class="container d-flex flex-column">
+    <div class="row align-items-center justify-content-center no-gutters min-vh-100">
+        <div class="col-12 col-md-5 col-lg-4 py-8 py-md-11">
+            <form action="index.html" class="mb-6" method="POST" role="form">
+
+                <div class="form-group">
+                    <label for="hostname">
+                        Host name
+                    </label>
+                    <input type="text" class="form-control" id="hostname" name="hostname" placeholder=""
+                        value="{{hostname}}" />
+                </div>
+                <button class="btn btn-block btn-primary" type="submit">
+                    Check
+                </button>
+
+            </form>
+        </div>
+    </div> <!-- / .row -->
+</div> <!-- / .container -->
+
+
 {{> below}}
