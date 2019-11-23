@@ -1,0 +1,30 @@
+{
+  "company": "Emerald Cactus Ventures",
+  "description": "LATER",
+  "details": "LATER",
+  "draft": true,
+  "icon": "https://www.vectorlogo.zone/logos/tenta/tenta-icon.svg",
+  "ipv4": [
+    "99.192.182.200",
+    "99.192.182.201",
+    "99.192.182.100",
+    "99.192.182.101"
+  ],
+  "ipv6": [
+    "LATER",
+    "LATER"
+  ],
+  "location": "LATER",
+  "logo": "https://www.vectorlogo.zone/logos/tenta/tenta-ar21.svg",
+  "name": "LATER",
+  "social": {
+    "facebook": "https://facebook.com/tentabrowser",
+    "github": "https://github.com/tenta-browser/tenta-dns",
+    "reddit": "https://www.reddit.com/user/tentabrowser",
+    "twitter": "https://twitter.com/tentabrowser"
+  },
+  "tags": [
+    "OpenNIC"
+  ],
+  "url": "https://tenta.com/dns-setup-guides"
+}

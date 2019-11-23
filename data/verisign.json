@@ -1,0 +1,20 @@
+{
+  "company": "Verisign",
+  "description": "LATER",
+  "details": "LATER",
+  "draft": true,
+  "icon": "https://www.vectorlogo.zone/logos/verisign/verisign-icon.svg",
+  "ipv4": [
+    "64.6.64.6",
+    "64.6.65.6"
+  ],
+  "ipv6": [
+    "2620:74:1b::1:1",
+    "2620:74:1c::2:2"
+  ],
+  "location": "us",
+  "logo": "https://www.vectorlogo.zone/logos/verisign/verisign-ar21.svg",
+  "name": "Verisign Public DNS",
+  "tags": [],
+  "url": "https://www.verisign.com/en_US/security-services/public-dns/index.xhtml"
+}

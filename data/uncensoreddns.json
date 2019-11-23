@@ -1,0 +1,24 @@
+{
+  "company": "Thomas Steen Rasmussen",
+  "description": "LATER",
+  "details": "LATER",
+  "draft": true,
+  "icon": "https://www.vectorlogo.zone/logos/uncensoreddns/uncensoreddns-icon.svg",
+  "ipv4": [
+    "91.239.100.100",
+    "89.233.43.71"
+  ],
+  "ipv6": [
+    "2001:67c:28a4::",
+    "2a01:3a0:53:53::"
+  ],
+  "location": "dk",
+  "logo": "https://www.vectorlogo.zone/logos/uncensoreddns/uncensoreddns-ar21.svg",
+  "name": "UncensoredDNS",
+  "social": {
+    "irc": "#censurfridns (Freenode)",
+    "twitter": "https://twitter.com/censurfridns"
+  },
+  "tags": [ "uncensored" ],
+  "url": "https://blog.uncensoreddns.org/"
+}

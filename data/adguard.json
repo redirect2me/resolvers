@@ -29,7 +29,8 @@
   "name": "AdGuard",
   "tags": [
     "adblock",
-    "family"
+    "family",
+    "malware"
   ],
   "url": "https://adguard.com/en/adguard-dns/overview.html"
 }

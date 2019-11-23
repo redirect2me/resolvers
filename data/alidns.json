@@ -1,24 +1,20 @@
 {
-  "company": "LATER",
+  "company": "Alibaba",
   "description": "LATER",
   "details": "LATER",
   "draft": true,
   "icon": "https://www.vectorlogo.zone/logos/LATER/LATER-icon.svg",
   "ipv4": [
-    "LATER",
-    "LATER"
+    "223.5.5.5",
+    "223.6.6.6"
   ],
   "ipv6": [
-    "LATER",
-    "LATER"
+    "2400:3200::1",
+    "2400:3200:baba::1"
   ],
-  "location": "LATER",
+  "location": "cn",
   "logo": "https://www.vectorlogo.zone/logos/LATER/LATER-ar21.svg",
-  "name": "LATER",
-  "social": {
-    "facebook": "",
-    "twitter": ""
-  },
+  "name": "AliDNS",
   "tags": [],
-  "url": "LATER"
+  "url": "http://www.alidns.com/faqs/"
 }

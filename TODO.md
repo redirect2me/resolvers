@@ -1,7 +1,9 @@
 # To Do
 
+* ability to see drafts in production
 * force https
 * logo on resolvers-detail
+* social media links on resolvers-detail
 * arrayToHtml, use on resolvers-detail
 * resolver-detail: form to test a hostname (on all IPs/methods)
 * tags for all resolvers
@@ -9,6 +11,7 @@
 * timeouts (and timing) on dns-check
 * no reverse-dns (by default) on dns-check
 * multiple simultaneous checks for dns-check
+* https://www.npmjs.com/package/dns-over-tls
 
 * tile on VLZ for redirect2me
 * descriptions for open resolvers
@@ -28,27 +31,25 @@
 * resolver-test: run which on all IPs/methods
 * square brackets around ipv6 addresses
 * make and use map of country code to country name
+* https://cleanbrowsing.org/guides/dnsovertls
 
 ## Open Resolvers
 
 * https://public-dns.info/
 * https://www.publicdns.xyz/
 * https://www.lifewire.com/free-and-public-dns-servers-2626062
+* https://dnsprivacy.org/wiki/display/DP/DNS+Privacy+Public+Resolvers
 
-
-* AlternateDNS, https://alternate-dns.com/index.php
 * CleanBrowsing, https://cleanbrowsing.org/filters
 * DNS Advantage
-* DNSFilter, https://www.dnsfilter.com/
-* Hurricane Electric, https://dns.he.net/
 * Level3
-* Neustar, https://www.home.neustar/dns-services/ultra-recursive-dns
 * OpenNIC, https://www.opennic.org/
-* puntCat, http://www.servidordenoms.cat/
 * SafeDNS, https://www.safedns.com/en/
-* Tenta, https://tenta.com/dns-setup-guides
-* UncensoredDNS, https://blog.uncensoreddns.org/
-* Verisign, https://www.verisign.com/en_US/security-services/public-dns/index.xhtml
+
+## Not included:
+* DNSFilter, https://www.dnsfilter.com/, Commercial only
+* Hurricane Electric, https://dns.he.net/, Registration required
+
 
 ## other tools
 
