@@ -7,7 +7,6 @@
   "company": "CleanBrowsing",
   "description": "LATER",
   "details": "LATER",
-  "draft": true,
   "icon": "https://www.vectorlogo.zone/logos/cleanbrowsing/cleanbrowsing-icon.svg",
   "ipv4": [
     "185.228.168.9",
@@ -31,6 +30,10 @@
   "social": {
     "twitter": "https://twitter.com/cleanbrowsing"
   },
-  "tags": [ "malware", "family", "freemium" ],
+  "tags": [
+    "malware",
+    "family",
+    "freemium"
+  ],
   "url": "https://cleanbrowsing.org/"
 }

@@ -19,6 +19,9 @@
     "facebook": "https://www.facebook.com/freedns.zone",
     "twitter": "https://twitter.com/free_dns"
   },
-  "tags": [ "uncensored", "nologging" ],
+  "tags": [
+    "uncensored",
+    "nologging"
+  ],
   "url": "https://freedns.zone/en/why/"
 }

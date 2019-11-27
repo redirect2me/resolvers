@@ -19,6 +19,8 @@
     "irc": "#censurfridns (Freenode)",
     "twitter": "https://twitter.com/censurfridns"
   },
-  "tags": [ "uncensored" ],
+  "tags": [
+    "uncensored"
+  ],
   "url": "https://blog.uncensoreddns.org/"
 }
