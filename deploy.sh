@@ -1,5 +1,4 @@
 #!/bin/bash
-#docker login -u oauth2accesstoken -p "$(gcloud auth print-access-token)" https://gcr.io
 
 set -o errexit
 set -o pipefail

@@ -7,6 +7,7 @@
   "company": "CleanBrowsing",
   "description": "LATER",
   "details": "LATER",
+  "draft": false,
   "icon": "https://www.vectorlogo.zone/logos/cleanbrowsing/cleanbrowsing-icon.svg",
   "ipv4": [
     "185.228.168.9",
