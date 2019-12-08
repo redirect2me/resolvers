@@ -1,0 +1,26 @@
+{
+  "DoH": [ "https://dns.nextdns.io/833bac" ],
+  "DoT": [ "833bac.dns.nextdns.io" ],
+  "company": "NextDNS",
+  "description": "LATER",
+  "details": "LATER",
+  "draft": true,
+  "icon": "https://www.vectorlogo.zone/logos/LATER/LATER-icon.svg",
+  "ipv4": [
+    "45.90.28.198",
+    "45.90.30.198"
+  ],
+  "ipv6": [
+    "2a07:a8c0::83:3bac",
+    "2a07:a8c1::83:3bac"
+  ],
+  "location": "LATER",
+  "logo": "https://www.vectorlogo.zone/logos/LATER/LATER-ar21.svg",
+  "name": "LATER",
+  "social": {
+    "facebook": "",
+    "twitter": ""
+  },
+  "tags": [ "filtered", "customizable" ],
+  "url": "LATER"
+}
