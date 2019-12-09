@@ -3,6 +3,8 @@
   "description": "LATER",
   "details": "LATER",
   "icon": "https://www.vectorlogo.zone/logos/alibabagroup/alibabagroup-icon.svg",
+  "config": {
+    "default" : {
   "ipv4": [
     "223.5.5.5",
     "223.6.6.6"
@@ -10,7 +12,9 @@
   "ipv6": [
     "2400:3200::1",
     "2400:3200:baba::1"
-  ],
+  ]
+}
+},
   "location": "cn",
   "logo": "https://www.vectorlogo.zone/logos/alibabagroup/alibabagroup-ar21.svg",
   "name": "AliDNS",

@@ -1,10 +1,12 @@
 {
   "company": "Quad9",
   "icon": "https://www.vectorlogo.zone/logos/quad9/quad9-icon.svg",
-  "ipv4": [
+  "config": {
+    "default": {
+      "ipv4": [
     "9.9.9.9",
     "149.112.112.112"
-  ],
+  ]}},
   "location": "us",
   "logo": "https://www.vectorlogo.zone/logos/quad9/quad9-ar21.svg",
   "name": "Quad9",

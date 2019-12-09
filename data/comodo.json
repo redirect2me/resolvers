@@ -1,10 +1,12 @@
 {
   "company": "Comodo",
   "icon": "https://www.vectorlogo.zone/logos/comodo/comodo-icon.svg",
-  "ipv4": [
+  "config": {
+    "default": {
+      "ipv4": [
     "8.26.56.26",
     "8.20.247.20"
-  ],
+  ]}},
   "location": "us",
   "logo": "https://www.vectorlogo.zone/logos/comodo/comodo-ar21.svg",
   "name": "Comodo Secure DNS",

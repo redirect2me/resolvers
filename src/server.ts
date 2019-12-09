@@ -225,13 +225,16 @@ rootRouter.post('/dns-check.html', async (ctx:any) => {
   streamer.streamResponse(ctx, `DNS Check on ${hostname}`, async (stream) => {
 
     for (const resolver of resolvers.getAll()) {
-      const dnsResolver = new dnsPromises.Resolver();
-      dnsResolver.setServers(resolver.ipv4);
-      stream.write(`<p>${resolver.name}: `);
-      const results = await dnsResolver.resolve4(hostname);
-      for (const result of results) {
-        stream.write(`${result} `);
-        stream.write(`(${ await reverseDns(dnsResolver, result)})`);
+      for (const configKey of Object.keys(resolver.config)) {
+        const config = resolver.config[configKey];
+        const dnsResolver = new dnsPromises.Resolver();
+        dnsResolver.setServers(config.ipv4);
+        stream.write(`<p>${resolver.name} (${configKey}): `);
+        const results = await dnsResolver.resolve4(hostname);
+        for (const result of results) {
+          stream.write(`${result} `);
+          //stream.write(`(${ await reverseDns(dnsResolver, result)})`);
+        }
       }
     }
 /*

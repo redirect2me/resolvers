@@ -49,16 +49,35 @@
             {{/if}}
             </td>
         </tr>
+        {{#each resolver.config}}
+        <tr>
+            <td colspan="2"><h3>{{@key}}</h3></td>
+        </tr>
+        {{#if this.ipv4}}
         <tr>
             <td>IP v4</td>
-            <td>{{arrayToHtml resolver.ipv4}}</td>
-        </tr>
-        {{#if resolver.ipv6}}
-        <tr>
-            <td>IP v6</td>
-            <td>{{arrayToHtml resolver.ipv6}}</td>
+            <td>{{arrayToHtml this.ipv4}}</td>
         </tr>
         {{/if}}
+        {{#if this.ipv6}}
+        <tr>
+            <td>IP v6</td>
+            <td>{{arrayToHtml this.ipv6}}</td>
+        </tr>
+        {{/if}}
+        {{#if this.dot}}
+        <tr>
+            <td>DNS-over-TLS (DoT)</td>
+            <td>{{arrayToHtml this.dot}}</td>
+        </tr>
+        {{/if}}
+        {{#if this.doh}}
+        <tr>
+            <td>DNS-over-HTTPS (DoH)</td>
+            <td>{{arrayToHtml this.doh}}</td>
+        </tr>
+        {{/if}}
+        {{/each}}
     </tbody>
 </table>
 

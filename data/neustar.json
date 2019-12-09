@@ -4,7 +4,9 @@
   "details": "LATER",
   "draft": true,
   "icon": "https://www.vectorlogo.zone/logos/neustar/neustar-icon.svg",
-  "ipv4": [
+  "config": {
+    "default": {
+      "ipv4": [
     "156.154.70.1",
     "156.154.71.1",
     "156.154.70.5",
@@ -27,7 +29,7 @@
     "2610:a1:1019::3",
     "2610:a1:1018::4",
     "2610:a1:1019::4"
-  ],
+  ]}},
   "location": "us",
   "logo": "https://www.vectorlogo.zone/logos/neustar/neustar-ar21.svg",
   "name": "UltraRecursive DNS",

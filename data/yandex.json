@@ -1,25 +1,40 @@
 {
   "company": "Yandex",
   "icon": "https://www.vectorlogo.zone/logos/yandex/yandex-icon.svg",
-  "ipv4": [
+  "config": {
+    "basic": {
+      "ipv4": [
     "77.88.8.8",
-    "77.88.8.1",
-    "77.88.8.88",
-    "77.88.8.2",
-    "77.88.8.7",
-    "77.88.8.3"
+    "77.88.8.1"
   ],
   "ipv6": [
     "2a02:6b8::feed:0ff",
-    "2a02:6b8:0:1::feed:0ff",
-    "2a02:6b8::feed:bad",
-    "2a02:6b8:0:1::feed:bad",
-    "2a02:6b8::feed:a11",
-    "2a02:6b8:0:1::feed:a11"
+    "2a02:6b8:0:1::feed:0ff"
+  ]},
+"safe": {
+  "ipv4": [
+    "77.88.8.88",
+    "77.88.8.2"
   ],
+  "ipv6": [
+     "2a02:6b8::feed:bad",
+    "2a02:6b8:0:1::feed:bad"
+  ]
+},
+    "family": {
+      "ipv4": [
+        "77.88.8.7",
+        "77.88.8.3"
+      ],
+      "ipv6": [
+        "2a02:6b8::feed:a11",
+        "2a02:6b8:0:1::feed:a11"
+      ]
+    }},
+  "default-config": "basic",
   "location": "ru",
   "logo": "https://www.vectorlogo.zone/logos/yandex/yandex-ar21.svg",
   "name": "Yandex.DNS",
-  "tags": [],
+  "tags": [ "unfiltered", "malware", "family" ],
   "url": "https://dns.yandex.com/"
 }

@@ -5,13 +5,15 @@
   "details": "LATER",
   "draft": true,
   "icon": "https://www.vectorlogo.zone/logos/freednszone/freednszone-icon.svg",
-  "ipv4": [
+  "config": {
+    "default": {
+      "ipv4": [
     "172.104.237.57",
     "172.104.49.100",
     "37.235.1.174",
     "37.235.1.177",
     "45.33.97.5"
-  ],
+  ]}},
   "location": "ro",
   "logo": "https://www.vectorlogo.zone/logos/freednszone/freednszone-ar21.svg",
   "name": "FreeDNS",
