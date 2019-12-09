@@ -279,19 +279,22 @@ rootRouter.post('/resolvers/:resolver/index.html', async (ctx: any) => {
   }
 
   streamer.streamResponse(ctx, `DNS Results from ${resolverData.name} for ${hostname}`, async (stream) => {
+    for (const configKey of Object.keys(resolverData.config)) {
+      const config = resolverData.config[configKey];
 
-    for (const ipv4 of resolverData.ipv4) {
-      const dnsResolver = new dnsPromises.Resolver();
-      dnsResolver.setServers([ipv4]);
-      stream.write(`<p>${ipv4}: `);
-      const results = await dnsResolver.resolve4(hostname);
-      stream.write("<ul>")
-      for (const result of results) {
-        stream.write(`<li>${result} `);
-        stream.write(`(${await reverseDns(dnsResolver, result)})`);
-        stream.write(`</li>`);
+      for (const ipv4 of config.ipv4) {
+        const dnsResolver = new dnsPromises.Resolver();
+        dnsResolver.setServers([ipv4]);
+        stream.write(`<p>${ipv4}: `);
+        const results = await dnsResolver.resolve4(hostname);
+        stream.write("<ul>")
+        for (const result of results) {
+          stream.write(`<li>${result} `);
+          stream.write(`(${await reverseDns(dnsResolver, result)})`);
+          stream.write(`</li>`);
+        }
+        stream.write("</ul>")
       }
-      stream.write("</ul>")
     }
 
     stream.write(`<div class="alert alert-info">`);
