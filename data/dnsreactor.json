@@ -1,13 +1,15 @@
 {
   "company": "VPNReactor",
-  "draft": true,
-  "icon": "https://www.vectorlogo.zone/logos/vpnreactor/vpnreactor-icon.svg",
   "config": {
     "default": {
       "ipv4": [
-    "104.236.210.29",
-    "45.55.155.25"
-  ]}},
+        "104.236.210.29",
+        "45.55.155.25"
+      ]
+    }
+  },
+  "draft": true,
+  "icon": "https://www.vectorlogo.zone/logos/vpnreactor/vpnreactor-icon.svg",
   "location": "us",
   "logo": "https://www.vectorlogo.zone/logos/vpnreactor/vpnreactor-ar21.svg",
   "name": "DNSReactor",

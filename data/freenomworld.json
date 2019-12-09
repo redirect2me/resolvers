@@ -1,12 +1,14 @@
 {
   "company": "Freenom",
-  "icon": "https://www.vectorlogo.zone/logos/freenomworld/freenomworld-icon.svg",
   "config": {
     "default": {
       "ipv4": [
-    "80.80.80.80",
-    "80.80.81.81"
-  ]}},
+        "80.80.80.80",
+        "80.80.81.81"
+      ]
+    }
+  },
+  "icon": "https://www.vectorlogo.zone/logos/freenomworld/freenomworld-icon.svg",
   "location": "nl",
   "logo": "https://www.vectorlogo.zone/logos/freenomworld/freenomworld-ar21.svg",
   "name": "Freenom World",

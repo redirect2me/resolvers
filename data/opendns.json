@@ -1,14 +1,16 @@
 {
   "company": "OpenDNS",
-  "icon": "https://www.vectorlogo.zone/logos/opendns/opendns-icon.svg",
   "config": {
     "default": {
       "ipv4": [
-    "208.67.222.222",
-    "208.67.220.220",
-    "208.67.222.123",
-    "208.67.220.123"
-  ]}},
+        "208.67.222.222",
+        "208.67.220.220",
+        "208.67.222.123",
+        "208.67.220.123"
+      ]
+    }
+  },
+  "icon": "https://www.vectorlogo.zone/logos/opendns/opendns-icon.svg",
   "location": "us",
   "logo": "https://www.vectorlogo.zone/logos/opendns/opendns-ar21.svg",
   "name": "OpenDNS",

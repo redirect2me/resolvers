@@ -1,14 +1,16 @@
 {
   "company": "Fourth Estate",
-  "description": "LATER",
-  "details": "As part of our public-benefit mission, we provide free, uncensored Domain Name System (DNS) servers for internet users Journalists and Public Interest News Organizations.",
-  "icon": "https://www.vectorlogo.zone/logos/fourthestate/fourthestate-icon.svg",
   "config": {
     "default": {
       "ipv4": [
-    "45.77.165.194",
-    "45.32.36.36"
-  ]}},
+        "45.77.165.194",
+        "45.32.36.36"
+      ]
+    }
+  },
+  "description": "LATER",
+  "details": "As part of our public-benefit mission, we provide free, uncensored Domain Name System (DNS) servers for internet users Journalists and Public Interest News Organizations.",
+  "icon": "https://www.vectorlogo.zone/logos/fourthestate/fourthestate-icon.svg",
   "location": "us",
   "logo": "https://www.vectorlogo.zone/logos/fourthestate/fourthestate-ar21.svg",
   "name": "Fourth Estate",
