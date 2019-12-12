@@ -1,14 +1,18 @@
 {
   "company": "Google",
+  "config": {
+    "default": {
+      "ipv4": [
+        "8.8.8.8",
+        "8.8.4.4"
+      ],
+      "ipv6": [
+        "2001:4860:4860::8888",
+        "2001:4860:4860::8844"
+      ]
+    }
+  },
   "icon": "https://www.vectorlogo.zone/logos/google/google-icon.svg",
-  "ipv4": [
-    "8.8.8.8",
-    "8.8.4.4"
-  ],
-  "ipv6": [
-    "2001:4860:4860::8888",
-    "2001:4860:4860::8844"
-  ],
   "location": "us",
   "logo": "https://www.vectorlogo.zone/logos/google/google-ar21.svg",
   "name": "Google Public DNS",

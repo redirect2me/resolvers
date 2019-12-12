@@ -1,14 +1,18 @@
 {
   "company": "puntCAT",
+  "config": {
+    "default": {
+      "ipv4": [
+        "109.69.8.51"
+      ],
+      "ipv6": [
+        "2a00:1508:0:4::9"
+      ]
+    }
+  },
   "description": "LATER",
   "details": "LATER",
   "icon": "https://www.vectorlogo.zone/logos/puntcat/puntcat-icon.svg",
-  "ipv4": [
-    "109.69.8.51"
-  ],
-  "ipv6": [
-    "2a00:1508:0:4::9"
-  ],
   "location": "es",
   "logo": "https://www.vectorlogo.zone/logos/puntcat/puntcat-ar21.svg",
   "name": "DNS públic de puntCAT",
