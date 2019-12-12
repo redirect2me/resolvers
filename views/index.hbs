@@ -2,7 +2,7 @@
 <table class="table table-striped">
     <tbody>
         <tr>
-            <td>Your IP</td>
+            <td>Your current IP address</td>
             <td>{{current_ip}}</td>
         </tr>
         <!--
@@ -13,6 +13,29 @@
             </td>
         </tr>
         -->
+        <tr>
+            <td>Your current DNS server</td>
+            <td id="currentdns">
+                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading current DNS server info" />
+            </td>
+        </tr>
     </tbody>
 </table>
+<script>
+$(function() {
+    const dnsPromise = fetch(`http://4.${Math.floor(Math.random() * 1000000000).toString()}.dns.whatsmydnsserver.com/api`, {
+        mode: 'cors',
+        cache: 'no-cache',
+    });
+    dnsPromise.then( async (resp) => {
+        console.log(JSON.stringify(resp));
+        console.log(resp);
+        const data = await resp.json();
+        console.log(data);
+        console.log(JSON.stringify(data));
+        $('#currentdns').text(`${data.dnsServerInfoArray[0].ipAddress.isp} (${data.dnsServerInfoArray[0].ipAddress.ipAddress})`);
+    });
+});
+
+</script>
 {{> below}}
