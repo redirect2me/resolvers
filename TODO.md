@@ -14,6 +14,7 @@
 
 ## General
 
+* contact page
 * github issue template for new resolvers
 * link on resolvers-index to contribute
 * CONTRIBUTING.md
@@ -27,6 +28,8 @@
 
 ## Data Enhancements
 
+* ASN data
+* Geolocation data
 * JSON schema for resolver data
 * square brackets around ipv6 addresses
 * fill in tags for all resolvers
@@ -34,6 +37,12 @@
 * descriptions for open resolvers
 * data/xxx.md with details for each open resolvers
 * https://cleanbrowsing.org/guides/dnsovertls
+
+## Features
+
+* A to F grade
+* Blackhole check
+* email configuration check
 
 ## Open Resolvers
 
@@ -59,6 +68,7 @@
 * https://www.dnsperf.com/
 * https://dnsmap.io/articles/
 * https://www.opennic.org/
+* https://dnsdetective.net/
 
 ## which.resolve.rs
 
@@ -66,9 +76,5 @@
 - [ ] stores requesting IP mapped by `XXX` value
 - [ ] api.json: return IP used to resolve `XXX`
 - [ ] any access w/o `XXX` -> redirect to `UUID.which.resolve.rs/index.html`
-- [ ] robots.txt: deny all
-- [ ] favicon.ico/svg
-- [ ] status.json
-- [ ] additional formats: txt, jsonp, html
 - [ ] optional forward DNS
 

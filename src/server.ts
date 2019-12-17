@@ -145,9 +145,14 @@ rootRouter.get('/index.html', async (ctx) => {
 });
 
 rootRouter.get('/', async (ctx:any) => {
+    const dnsResolver = new dnsPromises.Resolver();
+    const current_ip = ctx.ips.length > 0 ? ctx.ips[ctx.ips.length - 1] : ctx.ip;
+    const reverse_ip = await dnsResolver.reverse("54.164.18.25"); //"50.17.181.25");//current_ip);
+
   ctx.body = await ctx.render('index.hbs', {
-    current_ip: ctx.ips.length > 0 ? ctx.ips[ctx.ips.length - 1] : ctx.ip,
+    current_ip,
     h1: 'Resolve.rs',
+    reverse_ip,
     title: 'Resolve.rs',
   });
 });
@@ -157,16 +162,16 @@ rootRouter.get('/resolvers/', async (ctx) => {
 });
 
 rootRouter.get('/resolvers/index.html', async (ctx:any) => {
-  ctx.body = await ctx.render('resolvers-index.hbs', { 
-    title: 'Open Resolver List', 
+  ctx.body = await ctx.render('resolvers-index.hbs', {
+    title: 'Open DNS Resolver List',
     resolvers: resolvers.getAll(ctx.request.query.draft).sort((a, b) => {
       if (a.name > b.name) {
         return 1;
       } else if (a.name < b.name) {
         return -1;
-      } 
+      }
       return 0;
-    }) 
+    })
   });
 });
 
@@ -190,10 +195,10 @@ rootRouter.get('/resolvers/:resolver/index.html', async (ctx: any) => {
   });
 });
 
-rootRouter.get('/dns-check.html', async (ctx:any) => {
-  ctx.body = await ctx.render('dns-check.hbs', {
+rootRouter.get('/dns-lookup.html', async (ctx:any) => {
+  ctx.body = await ctx.render('dns-lookup.hbs', {
     hostname: ctx.query.hostname,
-    title: 'DNS Check'
+    title: 'DNS Lookup'
   });
 });
 
@@ -207,22 +212,22 @@ async function reverseDns(dnsResolver:dnsPromises.Resolver, ip:string): Promise<
   }
 }
 
-rootRouter.post('/dns-check.html', async (ctx:any) => {
+rootRouter.post('/dns-lookup.html', async (ctx:any) => {
 
   const hostname = ctx.request.body.hostname;
   if (!hostname) {
     ctx.flash('error', 'You must enter a hostname to check!');
-    ctx.redirect('/dns-check.html');
+    ctx.redirect('/dns-lookup.html');
     return;
   }
 
   if (!psl.isValid(hostname)) {
     ctx.flash('error', `${Handlebars.escapeExpression(hostname)} is not a valid hostname!`);
-    ctx.redirect(`/dns-check.html?hostname=${encodeURIComponent(hostname)}`);
+    ctx.redirect(`/dns-lookup.html?hostname=${encodeURIComponent(hostname)}`);
     return;
   }
 
-  streamer.streamResponse(ctx, `DNS Check on ${hostname}`, async (stream) => {
+  streamer.streamResponse(ctx, `DNS Lookup for ${hostname}`, async (stream) => {
 
     for (const resolver of resolvers.getAll()) {
       for (const configKey of Object.keys(resolver.config)) {
@@ -252,9 +257,16 @@ rootRouter.post('/dns-check.html', async (ctx:any) => {
     stream.write(`Complete`);
     stream.write(`</div>`);
 
-    stream.write(`<p><a class="btn btn-primary" href="/dns-check.html?hostname=${encodeURIComponent(hostname)}">Continue</a>`);
+    stream.write(`<p><a class="btn btn-primary" href="/dns-lookup.html?hostname=${encodeURIComponent(hostname)}">Continue</a>`);
   });
 });
+
+rootRouter.get('/reverse-dns-lookup.html', async (ctx:any) => {
+    ctx.body = await ctx.render('reverse-dns-lookup.hbs', {
+      address: ctx.query.address,
+      title: 'Reverse DNS Lookup'
+    });
+  });
 
 rootRouter.post('/resolvers/:resolver/index.html', async (ctx: any) => {
 
@@ -310,7 +322,7 @@ rootRouter.get('/sitemap.xml', async (ctx:any) => {
   const urls:string[] = [];
 
   urls.push("/");
-  urls.push("/dns-check.html");
+  urls.push("/dns-lookup.html");
   urls.push("/resolvers/index.html");
   for (const resolver of resolvers.getAll()) {
     urls.push(`/resolvers/${resolver.key}/index.html`);

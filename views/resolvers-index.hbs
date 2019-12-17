@@ -1,7 +1,7 @@
 {{> above}}
 <div class="d-flex flex-wrap">
   {{#each resolvers }}
-  <div class="card m-4" style="width:18rem;">
+  <div class="card col-lg-3 col-md-5 col-11 m-3 p-0">
 
     <a href="{{this.key}}/index.html" title="{{this.name}}"><img alt="{{this.name}}" class="card-img-top" src="{{this.logo}}"></a>
 
@@ -23,5 +23,5 @@
     </div>
   </div>
   {{/each}}
-  </div>
+</div>
 {{> below}}

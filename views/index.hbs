@@ -1,9 +1,76 @@
 {{> above}}
+
+<div class="d-flex flex-wrap">
+
+  <div class="card col-lg-3 col-md-5 col-11 m-3 p-0">
+    <div class="card-body">
+      <h5 class="card-title text-center">My DNS Resolver</h5>
+      <p class="card-text">text</p>
+    </div>
+    <div class="card-footer">
+      <a href="{{this.key}}/index.html">More...</a>
+    </div>
+  </div>
+
+  <div class="card col-lg-3 col-md-5 col-11 m-3 p-0">
+    <div class="card-body">
+      <h5 class="card-title text-center">My IP Address</h5>
+      <p class="card-text">{{current_ip}}<br/>reverse={{reverse_ip}}</p>
+    </div>
+
+  </div>
+
+  <div class="card col-lg-3 col-md-5 col-11 m-3 p-0">
+    <div class="card-body">
+      <h5 class="card-title text-center">Open DNS Resolvers</h5>
+      <p class="card-text">You do not have to use your ISP's DNS resolver.  Here are some alternatives
+          that may better suit your needs.
+      </p>
+    </div>
+    <div class="card-footer">
+      <a href="/resolvers/index.html">More...</a>
+    </div>
+  </div>
+
+  <div class="card col-lg-3 col-md-5 col-11 m-3 p-0">
+    <div class="card-body">
+      <h5 class="card-title text-center">DNS Lookups</h5>
+      <p class="card-text">Lookup a hostname across all the open resolvers</p>
+    </div>
+    <div class="card-footer">
+      <a href="/dns-lookup.html">More...</a>
+    </div>
+  </div>
+
+  <div class="card col-lg-3 col-md-5 col-11 m-3 p-0">
+    <div class="card-body">
+      <h5 class="card-title text-center">Reverse DNS Lookup</h5>
+      <p class="card-text">Given an address, find the corresponding hostname</p>
+    </div>
+    <div class="card-footer">
+      <a href="/reverse-dns-lookup.html">More...</a>
+    </div>
+  </div>
+
+  <div class="card col-lg-3 col-md-5 col-11 m-3 p-0">
+    <div class="card-body">
+      <h5 class="card-title text-center">Advanced DNS Lookup</h5>
+      <p class="card-text">Detailed results from a given DNS resolvers with a
+          specific lookup protocol.
+      </p>
+    </div>
+    <div class="card-footer">
+      <a href="{{this.key}}/index.html">More...</a>
+    </div>
+  </div>
+
+</div>
+
 <table class="table table-striped">
     <tbody>
         <tr>
             <td>Your current IP address</td>
-            <td>{{current_ip}}</td>
+            <td></td>
         </tr>
         <!--
         <tr>
@@ -21,6 +88,7 @@
         </tr>
     </tbody>
 </table>
+
 <script>
 $(function() {
     const dnsPromise = fetch(`http://4.${Math.floor(Math.random() * 1000000000).toString()}.dns.whatsmydnsserver.com/api`, {
