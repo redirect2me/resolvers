@@ -147,7 +147,13 @@ rootRouter.get('/index.html', async (ctx) => {
 rootRouter.get('/', async (ctx:any) => {
     const dnsResolver = new dnsPromises.Resolver();
     const current_ip = ctx.ips.length > 0 ? ctx.ips[ctx.ips.length - 1] : ctx.ip;
-    const reverse_ip = await dnsResolver.reverse("54.164.18.25"); //"50.17.181.25");//current_ip);
+    var reverse_ip:string = "";
+    try {
+        //"54.164.18.25", "50.17.181.25"
+        reverse_ip = (await dnsResolver.reverse(current_ip)).join(',');
+    } catch (err) {
+        reverse_ip = err.message;
+    }
 
   ctx.body = await ctx.render('index.hbs', {
     current_ip,
