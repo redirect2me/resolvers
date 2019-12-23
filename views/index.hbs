@@ -4,8 +4,10 @@
 
   <div class="card col-lg-3 col-md-5 col-11 m-3 p-0">
     <div class="card-body">
-      <h5 class="card-title text-center">My DNS Resolver</h5>
-      <p class="card-text">text</p>
+      <h5 class="card-title text-center">Your DNS Resolver</h5>
+      <p class="card-text" id="currentdns">
+        <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading current DNS server info" />
+      </p>
     </div>
     <div class="card-footer">
       <a href="{{this.key}}/index.html">More...</a>
@@ -14,7 +16,7 @@
 
   <div class="card col-lg-3 col-md-5 col-11 m-3 p-0">
     <div class="card-body">
-      <h5 class="card-title text-center">My IP Address</h5>
+      <h5 class="card-title text-center">Your IP Address</h5>
       <p class="card-text">{{current_ip}}<br/>Reverse DNS: {{reverse_ip}}</p>
     </div>
 
@@ -66,43 +68,29 @@
 
 </div>
 
-<table class="table table-striped">
-    <tbody>
-        <tr>
-            <td>Your current IP address</td>
-            <td></td>
-        </tr>
-        <!--
-        <tr>
-            <td>Reverse DNS for {{current_ip}}</td>
-            <td id="reversedns">
-                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading reverse DNS info" />
-            </td>
-        </tr>
-        -->
-        <tr>
-            <td>Your current DNS server</td>
-            <td id="currentdns">
-                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading current DNS server info" />
-            </td>
-        </tr>
-    </tbody>
-</table>
-
 <script>
 $(function() {
-    const dnsPromise = fetch(`http://4.${Math.floor(Math.random() * 1000000000).toString()}.dns.whatsmydnsserver.com/api`, {
-        mode: 'cors',
-        cache: 'no-cache',
-    });
-    dnsPromise.then( async (resp) => {
-        console.log(JSON.stringify(resp));
-        console.log(resp);
-        const data = await resp.json();
-        console.log(data);
-        console.log(JSON.stringify(data));
-        $('#currentdns').text(`${data.dnsServerInfoArray[0].ipAddress.isp} (${data.dnsServerInfoArray[0].ipAddress.ipAddress})`);
-    });
+  $.ajax({
+    dataType: "jsonp",
+    error: function (xhr, status, err) {
+      var content = $("#currentdns").empty();
+      content.append($("<div>").addClass("alert").addClass("alert-info").text(err));
+      console.error("ERROR: " + status + " (" + err + ")");
+    },
+    method: "POST",
+    success: function (data, status, xhr) {
+      console.log("data=" + JSON.stringify(data));
+      var content = $("#currentdns").empty();
+      if (!data.success) {
+        content.append($("<div>").addClass("alert").addClass("alert-info").text(data.message));
+      }
+      else {
+        content.append(data.output);
+      }
+    },
+    timeout: 15000,
+    url: `https://${Math.floor(Math.random() * 1000000000).toString()}.which.resolve.rs/api.json`
+  });
 });
 
 </script>
