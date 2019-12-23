@@ -12,12 +12,13 @@ import KoaStatic from 'koa-static';
 import KoaViews from 'koa-views';
 import * as os from 'os';
 import * as path from 'path';
-import * as psl from 'psl';
 
 import config from './config';
+import { detailRouter } from './resolver-detail';
 import { logger, options as loggerOptions } from './logger';
+import { lookupRouter } from './lookup';
 import * as resolvers from './resolvers';
-import * as streamer from './streamer';
+import { reverseRouter } from './reverse-lookup';
 
 const app = new Koa();
 
@@ -181,147 +182,8 @@ rootRouter.get('/resolvers/index.html', async (ctx:any) => {
   });
 });
 
-rootRouter.get('/resolvers/:resolver/', async (ctx) => {
-  await ctx.redirect('index.html');
-});
 
-rootRouter.get('/resolvers/:resolver/index.html', async (ctx: any) => {
 
-  const resolverData = resolvers.get(ctx.params.resolver);
-  if (!resolverData) {
-    ctx.flash('error', `Sorry, we don't have any info for an open resolver "${ctx.params.resolver}".`)
-    ctx.redirect("/resolvers/index.html");
-    return;
-  }
-  ctx.body = await ctx.render('resolvers-detail.hbs', {
-    hostname: ctx.query.hostname,
-    title: resolverData.name,
-    titleimg: resolverData.icon,
-    resolver: resolverData
-  });
-});
-
-rootRouter.get('/dns-lookup.html', async (ctx:any) => {
-  ctx.body = await ctx.render('dns-lookup.hbs', {
-    hostname: ctx.query.hostname,
-    title: 'DNS Lookup'
-  });
-});
-
-async function reverseDns(dnsResolver:dnsPromises.Resolver, ip:string): Promise<string>{
-
-  try {
-    return (await dnsResolver.reverse(ip)).join(',');
-  }
-  catch (err) {
-    return err.message;
-  }
-}
-
-rootRouter.post('/dns-lookup.html', async (ctx:any) => {
-
-  const hostname = ctx.request.body.hostname;
-  if (!hostname) {
-    ctx.flash('error', 'You must enter a hostname to check!');
-    ctx.redirect('/dns-lookup.html');
-    return;
-  }
-
-  if (!psl.isValid(hostname)) {
-    ctx.flash('error', `${Handlebars.escapeExpression(hostname)} is not a valid hostname!`);
-    ctx.redirect(`/dns-lookup.html?hostname=${encodeURIComponent(hostname)}`);
-    return;
-  }
-
-  streamer.streamResponse(ctx, `DNS Lookup for ${hostname}`, async (stream) => {
-
-    for (const resolver of resolvers.getAll()) {
-      for (const configKey of Object.keys(resolver.config)) {
-        const config = resolver.config[configKey];
-        const dnsResolver = new dnsPromises.Resolver();
-        dnsResolver.setServers(config.ipv4);
-        stream.write(`<p>${resolver.name} (${configKey}): `);
-        const results = await dnsResolver.resolve4(hostname);
-        for (const result of results) {
-          stream.write(`${result} `);
-          //stream.write(`(${ await reverseDns(dnsResolver, result)})`);
-        }
-      }
-    }
-/*
-    const result = await dnsPromises.resolve(hostname);
-
-    stream.write("<details>");
-    stream.write(`<summary>${JSON.stringify(result)}</summary>`);
-    stream.write("<pre>");
-    stream.write(JSON.stringify({}, null, 2));
-    stream.write("</pre>");
-    stream.write("</details>");
-*/
-
-    stream.write(`<div class="alert alert-info">`);
-    stream.write(`Complete`);
-    stream.write(`</div>`);
-
-    stream.write(`<p><a class="btn btn-primary" href="/dns-lookup.html?hostname=${encodeURIComponent(hostname)}">Continue</a>`);
-  });
-});
-
-rootRouter.get('/reverse-dns-lookup.html', async (ctx:any) => {
-    ctx.body = await ctx.render('reverse-dns-lookup.hbs', {
-      address: ctx.query.address,
-      title: 'Reverse DNS Lookup'
-    });
-  });
-
-rootRouter.post('/resolvers/:resolver/index.html', async (ctx: any) => {
-
-  const resolverData = resolvers.get(ctx.params.resolver);
-  if (!resolverData) {
-    ctx.flash('error', `Sorry, we don't have any info for an open resolver "${ctx.params.resolver}".`)
-    ctx.redirect("/resolvers/index.html");
-    return;
-  }
-
-  const hostname = ctx.request.body.hostname;
-  if (!hostname) {
-    ctx.flash('error', 'You must enter a hostname to check!');
-    ctx.redirect('index.html');
-    return;
-  }
-
-  if (!psl.isValid(hostname)) {
-    ctx.flash('error', `${Handlebars.escapeExpression(hostname)} is not a valid hostname!`);
-    ctx.redirect(`index.html?hostname=${encodeURIComponent(hostname)}`);
-    return;
-  }
-
-  streamer.streamResponse(ctx, `DNS Results from ${resolverData.name} for ${hostname}`, async (stream) => {
-    for (const configKey of Object.keys(resolverData.config)) {
-      const config = resolverData.config[configKey];
-
-      for (const ipv4 of config.ipv4) {
-        const dnsResolver = new dnsPromises.Resolver();
-        dnsResolver.setServers([ipv4]);
-        stream.write(`<p>${ipv4}: `);
-        const results = await dnsResolver.resolve4(hostname);
-        stream.write("<ul>")
-        for (const result of results) {
-          stream.write(`<li>${result} `);
-          stream.write(`(${await reverseDns(dnsResolver, result)})`);
-          stream.write(`</li>`);
-        }
-        stream.write("</ul>")
-      }
-    }
-
-    stream.write(`<div class="alert alert-info">`);
-    stream.write(`Complete`);
-    stream.write(`</div>`);
-
-    stream.write(`<p><a class="btn btn-primary" href="index.html?hostname=${encodeURIComponent(hostname)}">Continue</a>`);
-  });
-});
 
 rootRouter.get('/sitemap.xml', async (ctx:any) => {
 
@@ -329,6 +191,7 @@ rootRouter.get('/sitemap.xml', async (ctx:any) => {
 
   urls.push("/");
   urls.push("/dns-lookup.html");
+  urls.push("/reverse-dns-lookup.html");
   urls.push("/resolvers/index.html");
   for (const resolver of resolvers.getAll()) {
     urls.push(`/resolvers/${resolver.key}/index.html`);
@@ -392,7 +255,9 @@ rootRouter.get('/util/headers.json', async (ctx) => {
 
 
 app.use(rootRouter.routes());
-
+app.use(detailRouter.routes());
+app.use(lookupRouter.routes());
+app.use(reverseRouter.routes());
 
 async function main() {
 
