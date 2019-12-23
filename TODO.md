@@ -15,6 +15,7 @@
 ## General
 
 * contact page
+* privacy policy
 * github issue template for new resolvers
 * link on resolvers-index to contribute
 * CONTRIBUTING.md

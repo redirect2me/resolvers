@@ -1,5 +1,14 @@
 {{> above}}
 
+<div class="alert alert-info">
+  <a href="https://en.wikipedia.org/wiki/Domain_Name_System">DNS</a> 
+  (Domain Name System) is a key part of the internet: it maps human-readable names (like <code>wikipedia.org</code>)
+  to the corresponding numeric <a href="https://en.wikipedia.org/wiki/IP_address">IP address</a> (like <code>208.80.154.224</code>).  The
+  servers that do this mapping are called <a href="https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers">resolvers</a>.
+  <br/><br/>
+  Resolve.rs is a set of tools to help you troubleshoot issues with DNS resolution.
+</div>
+
 <div class="d-flex flex-wrap">
 
   <div class="card col-lg-3 col-md-5 col-11 m-3 p-0">
@@ -69,6 +78,34 @@
 </div>
 
 <script>
+
+function reverseDns(selector, ipaddress) {
+  $(selector).empty().append($("<img>")
+    .attr("alt", "spinner")
+    .attr("src", "/images/spinner.svg")
+    .attr("style", "height:24pt;")
+  );
+  $.ajax({
+    data: { ipaddress },
+    dataType: "jsonp",
+    error: function (xhr, status, err) {
+      var content = $(selector).empty().text("server error");
+    },
+    method: "POST",
+    success: function (data, status, xhr) {
+      console.log("data=" + JSON.stringify(data));
+      if (!data.success) {
+        $(selector).empty().text("not found");
+      }
+      else {
+        $(selector).empty().text(data.results.join(','));
+      }
+    },
+    timeout: 15000,
+    url: `/reverse-dns-lookup.json`
+  });
+}
+
 $(function() {
   $.ajax({
     dataType: "jsonp",
@@ -85,7 +122,12 @@ $(function() {
         content.append($("<div>").addClass("alert").addClass("alert-info").text(data.message));
       }
       else {
+        content.append("IP address: ");
         content.append(data.output);
+        content.append("<br/>");
+        content.append("Reverse DNS lookup: ");
+        content.append($("<span>").attr("id", "currentdns-reverse"));
+        reverseDns("#currentdns-reverse", data.output);
       }
     },
     timeout: 15000,

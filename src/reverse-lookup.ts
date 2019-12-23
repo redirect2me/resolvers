@@ -4,6 +4,7 @@ import Router from 'koa-router';
 
 import * as resolvers from './resolvers';
 import * as streamer from './streamer';
+import { jsonp } from './util';
 
 const reverseRouter = new Router();
 
@@ -16,6 +17,42 @@ async function reverseDns(dnsResolver:dnsPromises.Resolver, ip:string): Promise<
     return err.message;
   }
 }
+
+async function reverseDnsApi(ctx: any, ipaddress: string) {
+
+  const callback = ctx.request.query['callback'];
+  if (!callback || callback.match(/^[$A-Za-z_][0-9A-Za-z_$]*$/) == null) {
+    ctx.body = { success: false, message: `Missing 'callback' parameter` };
+    return;
+  }
+
+  if (!ipaddress) {
+    ctx.body = jsonp(callback, { success: false, message: `Missing 'ipaddress' parameter`});
+    return;
+  }
+
+  if (!isIp(ipaddress)) {
+    ctx.body = jsonp(callback, { success: false, message: `${ipaddress} is not a valid IP address` });
+    return;
+  }
+
+  try {
+    const results = await new dnsPromises.Resolver().reverse(ipaddress);
+    ctx.body = jsonp(callback, { success: true, input: ipaddress, results });
+  }
+  catch (err) {
+    ctx.body = jsonp(callback, { success: false, message: `reverse lookup failed: ${err.message}` });
+  }
+}
+
+reverseRouter.get('/reverse-dns-lookup.json', async (ctx: any) => {
+  await reverseDnsApi(ctx, ctx.query.ipaddress);
+});
+
+reverseRouter.post('/reverse-dns-lookup.json', async (ctx: any) => {
+  await reverseDnsApi(ctx, ctx.request.body.ipaddress);
+});
+
 
 reverseRouter.get('/reverse-dns-lookup.html', async (ctx: any) => {
   ctx.body = await ctx.render('reverse-dns-lookup.hbs', {

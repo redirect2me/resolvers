@@ -123,7 +123,7 @@ app.use(async(ctx, next) => {
       if (status === 404) {
           ctx.status = 404;
           if (ctx.path.endsWith('.json')) {
-            ctx.body = { message: 'Invalid url', success: false, url: ctx.url };
+            ctx.body = { message: 'Invalid url (404)', success: false, url: ctx.url };
           } else {
             ctx.body = await ctx.render('404.hbs', { title: '404', h1: '404 - Page not found', url: ctx.req.url });
           }
