@@ -5,8 +5,9 @@
 
 ## DNS Check Improvements
 
+* error handling
 * timeouts (and timing) on dns-check
-* option for reverse-dns (on by default) on dns checks
+* option for reverse-dns on dns checks
 * multiple simultaneous checks for dns-check
 * timing data for dns-check
 * [DoT](https://www.npmjs.com/package/dns-over-tls)
