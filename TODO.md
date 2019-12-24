@@ -1,10 +1,8 @@
 # To Do
 
-* more stuff on home page
-* tile on VLZ for redirect2me
-
 ## DNS Check Improvements
 
+* sample domain names (or ip addresses) to try
 * error handling
 * timeouts (and timing) on dns-check
 * option for reverse-dns on dns checks
@@ -72,11 +70,6 @@
 * https://www.opennic.org/
 * https://dnsdetective.net/
 
-## which.resolve.rs
+## data enhancement
 
-- [ ] dns server that resolves static IP for `XXX.which.resolve.rs`
-- [ ] stores requesting IP mapped by `XXX` value
-- [ ] api.json: return IP used to resolve `XXX`
-- [ ] any access w/o `XXX` -> redirect to `UUID.which.resolve.rs/index.html`
-- [ ] optional forward DNS
-
+* https://www.npmjs.com/package/maxmind

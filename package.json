@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Resolve.rs website",
   "main": "dist/server.js",
-  "repository": "https://github.com/fileformat/resolvers-node",
+  "repository": "https://github.com/redirect2me/resolvers",
   "license": "Proprietary",
   "private": true,
   "dependencies": {
