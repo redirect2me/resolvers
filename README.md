@@ -1,4 +1,4 @@
-# Resolve.rs [<img alt="Resolve.rs Logo" src="https://resolve.rs/favicon.svg" height="96" align="right"/>](https://resolve.rs)
+# Resolve.rs [<img alt="Resolve.rs Logo" src="https://resolve.rs/favicon.svg" height="96" align="right"/>](https://resolve.rs/)
 
 [![# of open resolvers](https://img.shields.io/badge/dynamic/json.svg?label=Open+resolvers&url=https%3A%2F%2Fresolve.rs%2Fstatus.json&query=%24.resolvers)](https://resolve.rs/resolvers/index.html)
 [![30 day uptime](https://img.shields.io/nodeping/uptime/9c97500s-fhkx-44pj-8lpp-yq4bzpgq0cen.svg?label=30-day%20uptime&style=flat)](https://nodeping.com/reports/checks/9c97500s-fhkx-44pj-8lpp-yq4bzpgq0cen)
