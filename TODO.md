@@ -5,7 +5,9 @@
 * sample domain names (or ip addresses) to try
 * error handling
 * timeouts (and timing) on dns-check
-* option for reverse-dns on dns checks
+* sample domain names (or ip addresses) to try
+* error handling
+* option for reverse-dns on dns checks (or a link)
 * multiple simultaneous checks for dns-check
 * timing data for dns-check
 * [DoT](https://www.npmjs.com/package/dns-over-tls)
@@ -69,6 +71,7 @@
 * https://dnsmap.io/articles/
 * https://www.opennic.org/
 * https://dnsdetective.net/
+* http://www.whatsmydnsserver.com/
 
 ## data enhancement
 
