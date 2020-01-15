@@ -1,7 +1,7 @@
 {{> above}}
 
 <div class="alert alert-info">
-  <a class="alert-link" href="https://en.wikipedia.org/wiki/Domain_Name_System">DNS</a> 
+  <a class="alert-link" href="https://en.wikipedia.org/wiki/Domain_Name_System">DNS</a>
   (Domain Name System) is a key part of the internet: it maps human-readable <a class="alert-link" href="https://en.wikipedia.org/wiki/Domain_name">domain names</a> (like <code>wikipedia.org</code>)
   to the corresponding numeric <a class="alert-link" href="https://en.wikipedia.org/wiki/IP_address">IP address</a> (like <code>208.80.154.224</code>).  The
   servers that do this mapping are called <a class="alert-link" href="https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers">resolvers</a>.
@@ -24,7 +24,10 @@
   <div class="card col-lg-3 col-md-5 col-11 m-3 p-0">
     <div class="card-body">
       <h5 class="card-title text-center">Your IP Address</h5>
-      <p class="card-text">{{current_ip}}<br/>Reverse DNS: {{reverse_ip}}</p>
+      <p class="card-text">{{current_ip}}
+          <br/>Reverse DNS: <span id="currentip-reverse"></span>
+          <br/>ASN: <span id="currentip-asn"></span>
+      </p>
     </div>
 
   </div>
@@ -77,8 +80,8 @@
 
 <script>
 
-function reverseDns(selector, ipaddress) {
-  $(selector).empty().append($("<img>")
+function ipInfo(reverseDnsSelector, asnSelector, ipaddress) {
+  $(reverseDnsSelector).empty().append($("<img>")
     .attr("alt", "spinner")
     .attr("src", "/images/spinner.svg")
     .attr("style", "height:24pt;")
@@ -87,16 +90,18 @@ function reverseDns(selector, ipaddress) {
     data: { ipaddress },
     dataType: "jsonp",
     error: function (xhr, status, err) {
-      var content = $(selector).empty().text("server error");
+      $(reverseDnsSelector).empty().text("server error");
+      $(asnSelector).empty().text("server error");
     },
     method: "POST",
     success: function (data, status, xhr) {
       console.log("data=" + JSON.stringify(data));
       if (!data.success) {
-        $(selector).empty().text("not found");
+        $(reverseDnsSelector).empty().text("not found");
       }
       else {
-        $(selector).empty().text(data.results.join(','));
+        $(reverseDnsSelector).empty().text(data.results.join(','));
+        $(asnSelector).empty().text(data.asn);
       }
     },
     timeout: 15000,
@@ -104,7 +109,11 @@ function reverseDns(selector, ipaddress) {
   });
 }
 
-$(function() {
+$(function reverseMyAddress() {
+    ipInfo("#currentip-reverse", "#currentip-asn", "{{current_ip}}");
+})
+
+$(function whichDns() {
   $.ajax({
     dataType: "jsonp",
     error: function (xhr, status, err) {
@@ -123,9 +132,12 @@ $(function() {
         content.append("IP address: ");
         content.append(data.output);
         content.append("<br/>");
-        content.append("Reverse DNS lookup: ");
+        content.append("Reverse DNS: ");
         content.append($("<span>").attr("id", "currentdns-reverse"));
-        reverseDns("#currentdns-reverse", data.output);
+        content.append("<br/>");
+        content.append("ASN: ");
+        content.append($("<span>").attr("id", "currentdns-asn"));
+        ipInfo("#currentdns-reverse", "#currentdns-asn", data.output);
       }
     },
     timeout: 15000,

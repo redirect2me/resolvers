@@ -2,6 +2,7 @@ import { promises as dnsPromises } from 'dns';
 import { default as isIp } from 'is-ip';
 import Router from 'koa-router';
 
+import * as asn from './asn';
 import * as resolvers from './resolvers';
 import * as streamer from './streamer';
 import { jsonp } from './util';
@@ -38,7 +39,9 @@ async function reverseDnsApi(ctx: any, ipaddress: string) {
 
   try {
     const results = await new dnsPromises.Resolver().reverse(ipaddress);
-    ctx.body = jsonp(callback, { success: true, input: ipaddress, results });
+    const asndata = asn.asnLookup(ipaddress);
+    const asnstr = asndata == null ? "(unknown)" : `${asndata.autonomous_system_organization} (${asndata.autonomous_system_number})`;
+    ctx.body = jsonp(callback, { success: true, input: ipaddress, results, asn: asnstr });
   }
   catch (err) {
     ctx.body = jsonp(callback, { success: false, message: `reverse lookup failed: ${err.message}` });

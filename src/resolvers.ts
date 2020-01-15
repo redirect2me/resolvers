@@ -28,7 +28,7 @@ async function initialize(logger:Pino.Logger) {
 
   logger.trace( { fileNames }, 'files loaded');
 
-  logger.debug( { count: cache.size }, 'Query cache loaded');
+  logger.debug( { count: cache.size }, 'Public resolvers list loaded');
 }
 
 function get(fileName:string): any {

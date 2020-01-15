@@ -5,6 +5,7 @@ dist/
 .idea/
 *.key
 *.log
+*.mmdb
 node_modules/
 tmp/
 *.tmp

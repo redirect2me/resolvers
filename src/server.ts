@@ -1,6 +1,6 @@
 require('source-map-support').install(); // Required for using source-maps with logging
 
-import { promises as dnsPromises } from 'dns';
+//import { promises as dnsPromises } from 'dns';
 import Handlebars from 'handlebars';
 import Koa from 'koa';
 const flash = require('koa-better-flash');
@@ -14,6 +14,7 @@ import * as os from 'os';
 import * as path from 'path';
 
 import config from './config';
+import * as asn from './asn';
 import { detailRouter } from './resolver-detail';
 import { logger, options as loggerOptions } from './logger';
 import { lookupRouter } from './lookup';
@@ -146,26 +147,17 @@ rootRouter.get('/index.html', async (ctx) => {
 });
 
 rootRouter.get('/', async (ctx:any) => {
-    const dnsResolver = new dnsPromises.Resolver();
     const current_ip = ctx.ips.length > 0 ? ctx.ips[ctx.ips.length - 1] : ctx.ip;
-    var reverse_ip:string = "";
-    try {
-        //"54.164.18.25", "50.17.181.25"
-        reverse_ip = (await dnsResolver.reverse(current_ip)).join(',');
-    } catch (err) {
-        reverse_ip = err.message;
-    }
 
   ctx.body = await ctx.render('index.hbs', {
     current_ip,
     h1: 'Resolve.rs',
-    reverse_ip,
     title: 'Resolve.rs',
   });
 });
 
 rootRouter.get('/resolvers/', async (ctx) => {
-  await ctx.redirect('/resolvers/index.html');
+  ctx.redirect('/resolvers/index.html');
 });
 
 rootRouter.get('/resolvers/index.html', async (ctx:any) => {
@@ -260,6 +252,8 @@ app.use(lookupRouter.routes());
 app.use(reverseRouter.routes());
 
 async function main() {
+
+  asn.initialize(logger);
 
   await resolvers.initialize(logger);
 
