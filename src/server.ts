@@ -156,6 +156,14 @@ rootRouter.get('/', async (ctx:any) => {
   });
 });
 
+rootRouter.get('/headers.html', async (ctx:any) => {
+
+    ctx.body = await ctx.render('headers.hbs', {
+     headers: ctx.request.headers,
+     title: 'HTTP Headers',
+  });
+});
+
 rootRouter.get('/resolvers/', async (ctx) => {
   ctx.redirect('/resolvers/index.html');
 });
