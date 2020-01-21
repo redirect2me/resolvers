@@ -10,16 +10,13 @@ const cache = new Map<string, resolverData>();
 
 async function initialize(logger:Pino.Logger) {
 
-  const dataDir = path.join(__dirname, '..', 'data');
+  const dataDir = path.join(__dirname, '..', 'data', 'resolvers');
 
   const fileNames = await fsPromises.readdir(dataDir);
 
   for (const fileName of fileNames) {
     if (fileName.endsWith(".json")) {
       const key = fileName.slice(0, -5);
-      if (key === "template") {
-        continue;
-      }
       const resolver = JSON.parse(await fsPromises.readFile(path.join(dataDir, fileName), "utf-8"));
       resolver.key = key;
       cache.set(key, resolver);

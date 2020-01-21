@@ -1,0 +1,195 @@
+{
+  "$id": "http://resolve.rs/data/resolver.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {},
+  "properties": {
+    "company": {
+      "$id": "#/properties/company",
+      "default": "",
+      "examples": [
+        "Example Ltd"
+      ],
+      "title": "Company Name",
+      "type": "string"
+    },
+    "config": {
+      "$id": "#/properties/config",
+      "minProperties": 1,
+      "patternProperties": {
+        "^([a-z]+)$": {
+          "$id": "#/properties/config/properties",
+          "properties": {
+            "doh": {
+              "$id": "#/properties/config/properties/doh",
+              "items": {
+                "$id": "#/properties/config/properties/doh/items",
+                "default": "",
+                "examples": [
+                  "https://doh.example.com/doh"
+                ],
+                "pattern": "^(.*)$",
+                "title": "URLs for DoH servers",
+                "type": "string"
+              },
+              "title": "DoH server URL list",
+              "type": "array"
+            },
+            "ipv4": {
+              "$id": "#/properties/config/properties/ipv4",
+              "items": {
+                "$id": "#/properties/config/properties/ipv4/items",
+                "default": "",
+                "examples": [
+                  "192.168.1.10",
+                  "192.168.1.11"
+                ],
+                "pattern": "^(.*)$",
+                "title": "IPv4 addresses",
+                "type": "string"
+              },
+              "title": "List of IPv4 Addresses",
+              "type": "array"
+            },
+            "ipv6": {
+              "$id": "#/properties/config/properties/ipv6",
+              "items": {
+                "$id": "#/properties/config/properties/ipv6/items",
+                "default": "",
+                "examples": [
+                  "2a0d:2a00:1::1",
+                  "2a0d:2a00:2::1"
+                ],
+                "pattern": "^(.*)$",
+                "title": "IPv6 address",
+                "type": "string"
+              },
+              "title": "List of IPv6 addresses",
+              "type": "array"
+            }
+          },
+          "required": [
+            "ipv4"
+          ],
+          "title": "A configuration",
+          "type": "object"
+        }
+      },
+      "title": "List of configurations",
+      "type": "object"
+    },
+    "details": {
+      "$id": "#/properties/details",
+      "default": "",
+      "examples": [
+        "LATER"
+      ],
+      "pattern": "^(.*)$",
+      "title": "The Details Schema",
+      "type": "string"
+    },
+    "draft": {
+      "$id": "#/properties/draft",
+      "default": false,
+      "examples": [
+        false
+      ],
+      "title": "Hide this resolver on the public website",
+      "type": "boolean"
+    },
+    "icon": {
+      "$id": "#/properties/icon",
+      "default": "",
+      "examples": [
+        "https://www.vectorlogo.zone/logos/example/example-icon.svg"
+      ],
+      "pattern": "^(.*)$",
+      "title": "The Icon Schema",
+      "type": "string"
+    },
+    "location": {
+      "$id": "#/properties/location",
+      "default": "",
+      "examples": [
+        "unknown"
+      ],
+      "pattern": "^(.*)$",
+      "title": "Country code of this resolver's headquarters",
+      "type": "string"
+    },
+    "logo": {
+      "$id": "#/properties/logo",
+      "default": "",
+      "examples": [
+        "https://www.vectorlogo.zone/logos/example/example-ar21.svg"
+      ],
+      "pattern": "^(.*)$",
+      "title": "SVG logo (2:1 aspect ratio, must include company name)",
+      "type": "string"
+    },
+    "name": {
+      "$id": "#/properties/name",
+      "default": "",
+      "examples": [
+        "Example Public DNS"
+      ],
+      "pattern": "^(.*)$",
+      "title": "Resolver's name.  Often (but not always) the same as the company name",
+      "type": "string"
+    },
+    "social": {
+      "$id": "#/properties/social",
+      "properties": {
+        "twitter": {
+          "$id": "#/properties/social/properties/twitter",
+          "default": "",
+          "examples": [
+            "https://twitter.com/cleanbrowsing"
+          ],
+          "pattern": "^(.*)$",
+          "title": "Twitter handle",
+          "type": "string"
+        }
+      },
+      "title": "Social media links",
+      "type": "object"
+    },
+    "tags": {
+      "$id": "#/properties/tags",
+      "items": {
+        "$id": "#/properties/tags/items",
+        "default": "",
+        "examples": [
+          "malware",
+          "family",
+          "freemium"
+        ],
+        "pattern": "^(.*)$",
+        "title": "The Items Schema",
+        "type": "string"
+      },
+      "title": "Tags",
+      "type": "array"
+    },
+    "url": {
+      "$id": "#/properties/url",
+      "default": "",
+      "examples": [
+        "https://cleanbrowsing.org/"
+      ],
+      "pattern": "^(.*)$",
+      "title": "The Url Schema",
+      "type": "string"
+    }
+  },
+  "required": [
+    "company",
+    "config",
+    "icon",
+    "location",
+    "logo",
+    "name",
+    "url"
+  ],
+  "title": "Resolver",
+  "type": "object"
+}

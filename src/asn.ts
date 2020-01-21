@@ -44,10 +44,10 @@ async function initialize(logger:Pino.Logger) {
         }
         asnDatabase = await maxmind.open<AsnResponse>(asnFileName);
         cityDatabase = await maxmind.open<CityResponse>(cityFileName);
-        logger.debug({ asnFileName, cityFileName }, 'mmdb loaded');
+        logger.debug({ asnFileName, cityFileName }, 'Maxmind data loaded');
     }
     catch (err) {
-        logger.error({ err, asnFileName, cityFileName }, 'Unable to load mmdb files');
+        logger.error({ err, asnFileName, cityFileName }, 'Unable to load Maxmind data files');
     }
 }
 
