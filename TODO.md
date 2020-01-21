@@ -39,6 +39,7 @@
 * descriptions for open resolvers
 * data/xxx.md with details for each open resolvers
 * https://cleanbrowsing.org/guides/dnsovertls
+* IRC social media links are wrong
 
 ## Features
 

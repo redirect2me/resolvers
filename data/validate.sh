@@ -10,4 +10,5 @@ set -o nounset
 #LATER: check if ajv exists
 #npm install -g ajv-cli
 
-ajv validate -s schema.json -d "a*.json"
+ajv validate -s resolver.schema.json -d "resolvers/*.json" 2>&1 >foo
+
