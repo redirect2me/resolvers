@@ -30,9 +30,10 @@
 
 ## Data Enhancements
 
-* ASN data
+
 * Geolocation data
-* JSON schema for resolver data
+* IP Geolocation card on home page
+* Contact page w/link in footer
 * square brackets around ipv6 addresses
 * fill in tags for all resolvers
 * fill in social media links

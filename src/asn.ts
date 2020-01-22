@@ -64,8 +64,26 @@ function cityLookup(ip:string): CityResponse|null {
     }
     return cityDatabase.get(ip);
 }
+
+function cityLookupStr(ip:string): string {
+    if (cityDatabase == null) {
+        return "ERROR: initialize not called or failed";
+    }
+    try {
+        const cityResult = cityDatabase.get(ip);
+
+        if (!cityResult) {
+            return "Unable to geolocate this IP address";
+        }
+        return `${cityResult.city}, ${cityResult.country}, ${cityResult.location?.latitude} ${cityResult.location?.longitude}`;
+    } catch (err) {
+        return err.message;
+    }
+}
+
 export {
     asnLookup,
     cityLookup,
+    cityLookupStr,
     initialize,
 }
