@@ -9,30 +9,7 @@
 
 <div class="d-flex flex-wrap">
 
-  <div class="card col-lg-3 col-md-5 col-11 m-3 p-0">
-    <div class="card-body">
-      <h5 class="card-title text-center">Your DNS Resolver</h5>
-      <p class="card-text" id="currentdns">
-        <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading current DNS server info" />
-      </p>
-    </div>
-    <div class="card-footer">
-      <a href="https://github.com/redirect2me/which-dns">More...</a>
-    </div>
-  </div>
-
-  <div class="card col-lg-3 col-md-5 col-11 m-3 p-0">
-    <div class="card-body">
-      <h5 class="card-title text-center">Your IP Address</h5>
-      <p class="card-text">{{current_ip}}
-          <br/>Reverse DNS: <span id="currentip-reverse"></span>
-          <br/>ASN: <span id="currentip-asn"></span>
-      </p>
-    </div>
-
-  </div>
-
-  <div class="card col-lg-3 col-md-5 col-11 m-3 p-0">
+  <div class="card col-md-5 col-11 m-3 p-0">
     <div class="card-body">
       <h5 class="card-title text-center">Open DNS Resolvers</h5>
       <p class="card-text">You do not have to use your ISP's DNS resolver.  Here are some alternatives
@@ -40,11 +17,46 @@
       </p>
     </div>
     <div class="card-footer">
-      <a href="/resolvers/index.html">More...</a>
+      <a href="/resolvers/index.html">List of alternative resolvers</a>
     </div>
   </div>
 
-  <div class="card col-lg-3 col-md-5 col-11 m-3 p-0">
+  <div class="card col-md-5 col-11 m-3 p-0">
+    <div class="card-body">
+      <h5 class="card-title text-center">Your DNS Resolver</h5>
+      <p class="card-text" id="currentdns">
+        <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading current DNS server info" />
+      </p>
+    </div>
+    <div class="card-footer">
+      <a href="https://github.com/redirect2me/which-dns/blob/master/README.md">How this works</a>
+    </div>
+  </div>
+
+  <div class="card col-md-5 col-11 m-3 p-0">
+    <div class="card-body">
+      <h5 class="card-title text-center">Your IP Address</h5>
+      <p class="card-text">{{current_ip}}
+          <br/>Reverse DNS: <span id="currentip-reverse"></span>
+          <br/>ASN: <span id="currentip-asn"></span>
+      </p>
+    </div>
+  </div>
+
+  <div class="card col-md-5 col-11 m-3 p-0">
+    <div class="card-body">
+      <h5 class="card-title text-center">IP Geolocation</h5>
+      <p class="card-text">
+          IP address can be used to guess an approximate location.<br/>
+          Your location: {{current_location}}
+      </p>
+    </div>
+    <div class="card-footer">
+      <a href="/iplocation.html">More...</a>
+    </div>
+  </div>
+
+  <div class="card col-md-5 col-11 m-3 p-0">
     <div class="card-body">
       <h5 class="card-title text-center">DNS Lookups</h5>
       <p class="card-text">Lookup a hostname across all the open resolvers</p>
@@ -54,7 +66,7 @@
     </div>
   </div>
 
-  <div class="card col-lg-3 col-md-5 col-11 m-3 p-0">
+  <div class="card col-md-5 col-11 m-3 p-0">
     <div class="card-body">
       <h5 class="card-title text-center">Reverse DNS Lookup</h5>
       <p class="card-text">Given an address, find the corresponding hostname</p>
@@ -64,7 +76,7 @@
     </div>
   </div>
 
-  <div class="card col-lg-3 col-md-5 col-11 m-3 p-0">
+  <div class="card col-md-5 col-11 m-3 p-0">
     <div class="card-body">
       <h5 class="card-title text-center">Advanced DNS Lookup</h5>
       <p class="card-text">Detailed results from a given DNS resolvers with a

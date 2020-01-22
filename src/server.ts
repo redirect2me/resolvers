@@ -23,6 +23,7 @@ import { reverseRouter } from './reverse-lookup';
 
 const app = new Koa();
 
+app.proxy = true
 app.use(KoaPinoLogger(loggerOptions));
 app.use(KoaBody());
 app.use(KoaStatic("static"));
@@ -148,9 +149,11 @@ rootRouter.get('/index.html', async (ctx) => {
 
 rootRouter.get('/', async (ctx:any) => {
     const current_ip = ctx.ips.length > 0 ? ctx.ips[ctx.ips.length - 1] : ctx.ip;
+    const current_location = await asn.cityLookupStr(current_ip);
 
   ctx.body = await ctx.render('index.hbs', {
     current_ip,
+    current_location,
     h1: 'Resolve.rs',
     title: 'Resolve.rs',
   });
@@ -160,7 +163,20 @@ rootRouter.get('/headers.html', async (ctx:any) => {
 
     ctx.body = await ctx.render('headers.hbs', {
      headers: ctx.request.headers,
+     ip: ctx.ip,
+     ips: ctx.ips,
      title: 'HTTP Headers',
+  });
+});
+
+rootRouter.get('/iplocation.html', async (ctx:any) => {
+    const current_ip = ctx.ips.length > 0 ? ctx.ips[ctx.ips.length - 1] : ctx.ip;
+    const current_location = await asn.cityLookupStr(current_ip);
+
+  ctx.body = await ctx.render('iplocation.hbs', {
+    current_ip,
+    current_location,
+    title: 'IP Address Geolocation',
   });
 });
 
@@ -182,20 +198,19 @@ rootRouter.get('/resolvers/index.html', async (ctx:any) => {
   });
 });
 
-
-
-
 rootRouter.get('/sitemap.xml', async (ctx:any) => {
 
   const urls:string[] = [];
 
   urls.push("/");
   urls.push("/dns-lookup.html");
-  urls.push("/reverse-dns-lookup.html");
+  urls.push("/headers.html");
+  urls.push("/iplocation.html");
   urls.push("/resolvers/index.html");
   for (const resolver of resolvers.getAll()) {
     urls.push(`/resolvers/${resolver.key}/index.html`);
   }
+  urls.push("/reverse-dns-lookup.html");
 
   ctx.body = await ctx.render('sitemap.hbs', { urls });
   ctx.type = "text/xml;charset=utf-8";
