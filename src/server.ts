@@ -148,7 +148,7 @@ rootRouter.get('/index.html', async (ctx) => {
 });
 
 rootRouter.get('/', async (ctx:any) => {
-    const current_ip = ctx.ips.length > 0 ? ctx.ips[ctx.ips.length - 1] : ctx.ip;
+    const current_ip = ctx.ips.length > 0 ? ctx.ips[0] : ctx.ip;
     const current_location = await asn.cityLookupStr(current_ip);
 
   ctx.body = await ctx.render('index.hbs', {
@@ -170,7 +170,7 @@ rootRouter.get('/headers.html', async (ctx:any) => {
 });
 
 rootRouter.get('/iplocation.html', async (ctx:any) => {
-    const current_ip = ctx.ips.length > 0 ? ctx.ips[ctx.ips.length - 1] : ctx.ip;
+    const current_ip = ctx.ips.length > 0 ? ctx.ips[0] : ctx.ip;
     const current_location = await asn.cityLookupStr(current_ip);
 
   ctx.body = await ctx.render('iplocation.hbs', {
