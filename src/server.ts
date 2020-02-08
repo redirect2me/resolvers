@@ -26,7 +26,7 @@ const app = new Koa();
 app.proxy = true
 app.use(KoaPinoLogger(loggerOptions));
 app.use(KoaBody());
-app.use(KoaStatic("static"));
+app.use(KoaStatic("static", { maxage: 24 * 60 * 60 * 1000 }));
 app.keys = [config.get('sessionKey')];
 app.use(KoaSession({
     key: '_jsessionid',
