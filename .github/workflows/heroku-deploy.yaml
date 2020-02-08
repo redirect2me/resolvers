@@ -1,0 +1,23 @@
+name: Build and deploy to Heroku
+
+on:
+  push:
+    branches:
+    - master
+
+# Environment variables available to all jobs and steps in this workflow
+env:
+  HEROKU_API_KEY: ${{ secrets.HEROKU_API_TOKEN }}
+  HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Deploy to Heroku
+      run: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git origin/master:master
+
+    - name: Update env vars
+      run: heroku config:set --app ${HEROKU_APP_NAME} "COMMIT=${GITHUB_SHA:0:7}" "LASTMOD=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

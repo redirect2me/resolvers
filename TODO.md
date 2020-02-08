@@ -47,6 +47,7 @@
 * A to F grade
 * Blackhole check
 * email configuration check
+* check for domain name availability across all tlds (use single-words in public-suffix-list)
 
 ## Open Resolvers
 
