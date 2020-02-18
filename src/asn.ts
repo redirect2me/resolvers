@@ -58,6 +58,21 @@ function asnLookup(ip:string): AsnResponse|null {
     return asnDatabase.get(ip);
 }
 
+function asnLookupStr(ip:string): string {
+    if (asnDatabase == null) {
+        return "ERROR: initialize not called or failed";
+    }
+    try {
+        const asnResult = asnDatabase.get(ip);
+
+        if (!asnResult) {
+            return `Unable to find ASN for ${ip}`;
+        }
+        return `${asnResult.autonomous_system_organization} (${asnResult.autonomous_system_number})`;
+    } catch (err) {
+        return err.message;
+    }
+}
 function cityLookup(ip:string): CityResponse|null {
     if (cityDatabase == null) {
         throw new Error("asn.initialize not called or failed");
@@ -73,9 +88,9 @@ function cityLookupStr(ip:string): string {
         const cityResult = cityDatabase.get(ip);
 
         if (!cityResult) {
-            return "Unable to geolocate this IP address";
+            return `Unable to geolocate ${ip}`;
         }
-        return `${cityResult.city}, ${cityResult.country}, ${cityResult.location?.latitude} ${cityResult.location?.longitude}`;
+        return `${cityResult.city?.names.en}, ${cityResult.country?.names.en}, ${cityResult.location?.latitude} ${cityResult.location?.longitude}`;
     } catch (err) {
         return err.message;
     }
@@ -83,6 +98,7 @@ function cityLookupStr(ip:string): string {
 
 export {
     asnLookup,
+    asnLookupStr,
     cityLookup,
     cityLookupStr,
     initialize,

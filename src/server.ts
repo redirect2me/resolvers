@@ -150,8 +150,10 @@ rootRouter.get('/index.html', async (ctx) => {
 rootRouter.get('/', async (ctx:any) => {
     const current_ip = ctx.ips.length > 0 ? ctx.ips[0] : ctx.ip;
     const current_location = await asn.cityLookupStr(current_ip);
+    const current_asn = asn.asnLookupStr(current_ip);
 
   ctx.body = await ctx.render('index.hbs', {
+    current_asn,
     current_ip,
     current_location,
     h1: 'Resolve.rs',
