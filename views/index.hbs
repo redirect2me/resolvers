@@ -38,7 +38,7 @@
       <h5 class="card-title text-center">Your IP Address</h5>
       <p class="card-text">{{current_ip}}
           <br/>Reverse DNS: <span id="currentip-reverse"></span>
-          <br/>ASN: <span id="currentip-asn"></span>
+          <br/>ASN: {{current_asn}}
       </p>
     </div>
   </div>
@@ -47,7 +47,7 @@
     <div class="card-body">
       <h5 class="card-title text-center">IP Geolocation</h5>
       <p class="card-text">
-          IP address can be used to guess an approximate location.<br/>
+          Your IP address can be used to guess your approximate location.<br/>
           Your location: {{current_location}}
       </p>
     </div>
@@ -92,7 +92,7 @@
 
 <script>
 
-function ipInfo(reverseDnsSelector, asnSelector, ipaddress) {
+function ipInfo(reverseDnsSelector, ipaddress) {
   $(reverseDnsSelector).empty().append($("<img>")
     .attr("alt", "spinner")
     .attr("src", "/images/spinner.svg")
@@ -103,7 +103,6 @@ function ipInfo(reverseDnsSelector, asnSelector, ipaddress) {
     dataType: "jsonp",
     error: function (xhr, status, err) {
       $(reverseDnsSelector).empty().text("server error");
-      $(asnSelector).empty().text("server error");
     },
     method: "POST",
     success: function (data, status, xhr) {
@@ -113,7 +112,6 @@ function ipInfo(reverseDnsSelector, asnSelector, ipaddress) {
       }
       else {
         $(reverseDnsSelector).empty().text(data.results.join(','));
-        $(asnSelector).empty().text(data.asn);
       }
     },
     timeout: 15000,
