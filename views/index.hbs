@@ -69,7 +69,7 @@
   <div class="card col-md-5 col-11 m-3 p-0">
     <div class="card-body">
       <h5 class="card-title text-center">Reverse DNS Lookup</h5>
-      <p class="card-text">Given an address, find the corresponding hostname</p>
+      <p class="card-text">Given an IP address, find the corresponding hostname</p>
     </div>
     <div class="card-footer">
       <a href="/reverse-dns-lookup.html">More...</a>
@@ -92,7 +92,7 @@
 
 <script>
 
-function ipInfo(reverseDnsSelector, ipaddress) {
+function ipInfo(reverseDnsSelector, asnSelector, ipaddress) {
   $(reverseDnsSelector).empty().append($("<img>")
     .attr("alt", "spinner")
     .attr("src", "/images/spinner.svg")
@@ -113,14 +113,18 @@ function ipInfo(reverseDnsSelector, ipaddress) {
       else {
         $(reverseDnsSelector).empty().text(data.results.join(','));
       }
+      if (data.asn && asnSelector) {
+        $(asnSelector).empty().text(data.asn);
+      }
     },
     timeout: 15000,
     url: `/reverse-dns-lookup.json`
   });
 }
 
+// so the initial page load doesn't wait for the reverse DNS lookup, which can take too long
 $(function reverseMyAddress() {
-    ipInfo("#currentip-reverse", "#currentip-asn", "{{current_ip}}");
+    ipInfo("#currentip-reverse", null, "{{current_ip}}");
 })
 
 $(function whichDns() {
