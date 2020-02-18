@@ -37,14 +37,15 @@ async function reverseDnsApi(ctx: any, ipaddress: string) {
     return;
   }
 
+  const asndata = asn.asnLookup(ipaddress);
+  const asnstr = asndata == null ? "(unknown)" : `${asndata.autonomous_system_organization} (${asndata.autonomous_system_number})`;
+
   try {
     const results = await new dnsPromises.Resolver().reverse(ipaddress);
-    const asndata = asn.asnLookup(ipaddress);
-    const asnstr = asndata == null ? "(unknown)" : `${asndata.autonomous_system_organization} (${asndata.autonomous_system_number})`;
     ctx.body = jsonp(callback, { success: true, input: ipaddress, results, asn: asnstr });
   }
   catch (err) {
-    ctx.body = jsonp(callback, { success: false, message: `reverse lookup failed: ${err.message}` });
+    ctx.body = jsonp(callback, { asn: asnstr, success: false, message: `reverse lookup failed: ${err.message}` });
   }
 }
 
