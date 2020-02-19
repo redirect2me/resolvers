@@ -172,12 +172,18 @@ rootRouter.get('/headers.html', async (ctx:any) => {
 });
 
 rootRouter.get('/iplocation.html', async (ctx:any) => {
+
+    let ip = ctx.request.query['ip'] || ctx.request.body.ip;
     const current_ip = ctx.ips.length > 0 ? ctx.ips[0] : ctx.ip;
-    const current_location = await asn.cityLookupStr(current_ip);
+    if (!ip) {
+      ip = current_ip;
+    }
+    const maxmind = await asn.cityLookupStr(ip);
 
   ctx.body = await ctx.render('iplocation.hbs', {
     current_ip,
-    current_location,
+    maxmind,
+    ip,
     title: 'IP Address Geolocation',
   });
 });

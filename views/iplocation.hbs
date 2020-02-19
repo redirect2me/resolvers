@@ -1,3 +1,58 @@
 {{> above}}
+<div class="alert alert-info">Geolocating an IP address is not an exact science.  It depends on data collected (or volunteered)
+    by the community, and needs constant updates.
+</div>
+
+<h2>Results for {{ip}}</h2>
+
+<table class="table table-striped border-bottom">
+    <thead>
+        <tr>
+            <th>Provider</th>
+            <th>Version</th>
+            <th>Results</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Maxmind</td>
+            <td>{{maxmind_version}}</td>
+            <td>{{maxmind}}</td>
+        </tr>
+        <!--
+        <tr>
+            <td>HostIP.info</td>
+            <td><i>(online service)</i></td>
+            <td>{{hostipinfo}}</td>
+        </tr>
+        -->
+    </tbody>
+</table>
+
+<h2>Specific IP</h2>
+
+<div class="row">
+    <div class="col d-flex justify-content-center">
+    <div class="card col-lg-5 px-0">
+        <div class="card-body">
+            <h5 class="card-title text-center">IP Geolocation</h5>
+            <div class="form-group">
+                <label for="ip">IP Address</label>
+                <input type="text" class="form-control" id="ip" name="ip" value="{{ip}}" />
+            </div>
+            <input class="btn btn-primary" type="submit" value="Locate" />
+        </div>
+    </div>
+    </div>
+</div>
+
+<hr/>
+
+<h2>Other IP Geolocation Databases</h2>
+
+<div class="alert alert-info">
+    Note: all pricing is for the lowest service level possible. They all have higher priced options (of course).
+</div>
+
 
 {{> below}}
