@@ -16,10 +16,13 @@ import * as path from 'path';
 import config from './config';
 import * as asn from './asn';
 import { detailRouter } from './resolver-detail';
+import { domainRouter } from './routers/domainRouter';
 import { logger, options as loggerOptions } from './logger';
 import { lookupRouter } from './lookup';
 import * as resolvers from './resolvers';
 import { reverseRouter } from './reverse-lookup';
+import * as domains from './domains';
+import * as util from './util';
 
 const app = new Koa();
 
@@ -125,7 +128,7 @@ app.use(async(ctx, next) => {
       if (status === 404) {
           ctx.status = 404;
           if (ctx.path.endsWith('.json')) {
-            ctx.body = { message: 'Invalid url (404)', success: false, url: ctx.url };
+            util.handleJsonp(ctx, { message: 'Invalid url (404)', success: false, url: ctx.url });
           } else {
             ctx.body = await ctx.render('404.hbs', { title: '404', h1: '404 - Page not found', url: ctx.req.url });
           }
@@ -134,7 +137,7 @@ app.use(async(ctx, next) => {
       logger.error( { err, url: ctx.url }, '500 error');
       ctx.status = 500;
       if (ctx.path.endsWith('.json')) {
-        ctx.body = { message: `Server error ${err.message}`, success: false };
+        util.handleJsonp(ctx, { message: `Server error ${err.message}`, success: false });
       } else {
         ctx.body = await ctx.render('500.hbs', { title: 'Server Error', message: err.message });
       }
@@ -149,7 +152,7 @@ rootRouter.get('/index.html', async (ctx) => {
 
 rootRouter.get('/', async (ctx:any) => {
     const current_ip = ctx.ips.length > 0 ? ctx.ips[0] : ctx.ip;
-    const current_location = await asn.cityLookupStr(current_ip);
+    const current_location = await asn.cityLookupHtml(current_ip);
     const current_asn = asn.asnLookupStr(current_ip);
 
   ctx.body = await ctx.render('index.hbs', {
@@ -178,7 +181,7 @@ rootRouter.get('/iplocation.html', async (ctx:any) => {
     if (!ip) {
       ip = current_ip;
     }
-    const maxmind = await asn.cityLookupStr(ip);
+    const maxmind = await asn.cityLookupHtml(ip);
 
   ctx.body = await ctx.render('iplocation.hbs', {
     current_ip,
@@ -263,7 +266,7 @@ rootRouter.get('/status.json', async (ctx) => {
 
     const callback = ctx.request.query['callback'];
     if (callback && callback.match(/^[$A-Za-z_][0-9A-Za-z_$]*$/) != null) {
-        ctx.body = callback + '(' + JSON.stringify(retVal) + ');';
+        util.handleJsonp(ctx, retVal);
     } else {
         ctx.set('Access-Control-Allow-Origin', '*');
         ctx.set('Access-Control-Allow-Methods', 'POST, GET');
@@ -281,10 +284,13 @@ app.use(rootRouter.routes());
 app.use(detailRouter.routes());
 app.use(lookupRouter.routes());
 app.use(reverseRouter.routes());
+app.use(domainRouter.routes());
 
 async function main() {
 
   asn.initialize(logger);
+
+  domains.initialize(logger);
 
   await resolvers.initialize(logger);
 

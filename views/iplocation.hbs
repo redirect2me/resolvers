@@ -1,6 +1,6 @@
 {{> above}}
-<div class="alert alert-info">Geolocating an IP address is not an exact science.  It depends on data collected (or volunteered)
-    by the community, and needs constant updates.
+<div class="alert alert-info">Geolocating an IP address is not an exact science.  It depends on data collected (or volunteered
+    by the community), and needs constant updates.
 </div>
 
 <h2>Results for {{ip}}</h2>
@@ -17,7 +17,7 @@
         <tr>
             <td>Maxmind</td>
             <td>{{maxmind_version}}</td>
-            <td>{{maxmind}}</td>
+            <td>{{{maxmind}}}</td>
         </tr>
         <!--
         <tr>
@@ -31,6 +31,7 @@
 
 <h2>Specific IP</h2>
 
+<form action="iplocation.html" method="GET">
 <div class="row">
     <div class="col d-flex justify-content-center">
     <div class="card col-lg-5 px-0">
@@ -45,6 +46,7 @@
     </div>
     </div>
 </div>
+</form>
 
 <hr/>
 
@@ -53,6 +55,5 @@
 <div class="alert alert-info">
     Note: all pricing is for the lowest service level possible. They all have higher priced options (of course).
 </div>
-
 
 {{> below}}

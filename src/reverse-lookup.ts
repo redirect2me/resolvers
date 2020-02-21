@@ -5,7 +5,7 @@ import Router from 'koa-router';
 import * as asn from './asn';
 import * as resolvers from './resolvers';
 import * as streamer from './streamer';
-import { jsonp } from './util';
+import * as util from './util';
 
 const reverseRouter = new Router();
 
@@ -21,31 +21,29 @@ async function reverseDns(dnsResolver:dnsPromises.Resolver, ip:string): Promise<
 
 async function reverseDnsApi(ctx: any, ipaddress: string) {
 
-  const callback = ctx.request.query['callback'];
-  if (!callback || callback.match(/^[$A-Za-z_][0-9A-Za-z_$]*$/) == null) {
-    ctx.body = { success: false, message: `Missing 'callback' parameter` };
-    return;
-  }
+    if (!util.validateCaller(ctx)) {
+        return;
+    }
 
-  if (!ipaddress) {
-    ctx.body = jsonp(callback, { success: false, message: `Missing 'ipaddress' parameter`});
-    return;
-  }
+    if (!ipaddress) {
+        util.handleJsonp(ctx, { success: false, message: `Missing 'ipaddress' parameter`});
+        return;
+    }
 
-  if (!isIp(ipaddress)) {
-    ctx.body = jsonp(callback, { success: false, message: `${ipaddress} is not a valid IP address` });
-    return;
-  }
+    if (!isIp(ipaddress)) {
+        util.handleJsonp(ctx, { success: false, message: `${ipaddress} is not a valid IP address` });
+        return;
+    }
 
   const asndata = asn.asnLookup(ipaddress);
   const asnstr = asndata == null ? "(unknown)" : `${asndata.autonomous_system_organization} (${asndata.autonomous_system_number})`;
 
   try {
     const results = await new dnsPromises.Resolver().reverse(ipaddress);
-    ctx.body = jsonp(callback, { success: true, input: ipaddress, results, asn: asnstr });
+    util.handleJsonp(ctx, { success: true, input: ipaddress, results, asn: asnstr });
   }
   catch (err) {
-    ctx.body = jsonp(callback, { asn: asnstr, success: false, message: `reverse lookup failed: ${err.message}` });
+    util.handleJsonp(ctx, { asn: asnstr, success: false, message: `reverse lookup failed: ${err.message}` });
   }
 }
 

@@ -80,7 +80,7 @@ function cityLookup(ip:string): CityResponse|null {
     return cityDatabase.get(ip);
 }
 
-function cityLookupStr(ip:string): string {
+function cityLookupHtml(ip:string): string {
     if (cityDatabase == null) {
         return "ERROR: initialize not called or failed";
     }
@@ -90,7 +90,7 @@ function cityLookupStr(ip:string): string {
         if (!cityResult) {
             return `Unable to geolocate ${ip}`;
         }
-        return `${cityResult.city?.names.en}, ${cityResult.country?.names.en}, ${cityResult.location?.latitude} ${cityResult.location?.longitude}`;
+        return `${cityResult.city?.names.en}, ${cityResult.country?.names.en}: <a href="https://www.openstreetmap.org/?mlat=${cityResult.location?.latitude}&mlon=${cityResult.location?.longitude}&zoom=12">${cityResult.location?.latitude}, ${cityResult.location?.longitude}</a>`;
     } catch (err) {
         return err.message;
     }
@@ -100,6 +100,6 @@ export {
     asnLookup,
     asnLookupStr,
     cityLookup,
-    cityLookupStr,
+    cityLookupHtml,
     initialize,
 }
