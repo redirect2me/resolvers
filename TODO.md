@@ -23,7 +23,6 @@
 * docker-run.sh
 * where am I?
 * where are you?
-* what resolvers are you using?
 * make and use map of country code to country name
 * tags page
 * countries page

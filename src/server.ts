@@ -209,6 +209,18 @@ rootRouter.get('/resolvers/index.html', async (ctx:any) => {
   });
 });
 
+rootRouter.get('/api.html', async (ctx:any) => {
+    ctx.body = await ctx.render('api.hbs', {
+        title: 'API',
+     });
+});
+
+rootRouter.get('/tools.html', async (ctx:any) => {
+    ctx.body = await ctx.render('tools.hbs', {
+        title: 'Tools',
+     });
+});
+
 rootRouter.get('/sitemap.xml', async (ctx:any) => {
 
   const urls:string[] = [];

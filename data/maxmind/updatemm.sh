@@ -45,15 +45,21 @@ curl --silent "https://download.maxmind.com/app/geoip_download?edition_id=GeoLit
 tar -xzf ${TMP_CITY_FILE} --strip-components 1 "*.mmdb"
 rm "${TMP_CITY_FILE}"
 
-if [ "${MMDB_ENCRYPTION_PASSWORD:-BAD}" = "BAD" ] || [ "${MMDB_ENCRYPTION_IV:-BAD}" == "BAD" ]; then
+if [ "${MMDB_ENCRYPTION_KEY:-BAD}" = "BAD" ]; then
     echo "INFO: no encryption keys, exiting.  (but app can still be run locally)"
     exit 1
 fi
 
+#
+# generate a new IV every time
+#
+MMDB_ENCRYPTION_IV=$(head -c 4096 /dev/urandom | LC_CTYPE=C tr -dc A-F0-9 | head -c 32)
+echo -n ${MMDB_ENCRYPTION_IV} > mmdb.iv
+
 ASN_FILE=GeoLite2-ASN.mmdb
 echo "INFO: starting encryption of ${ASN_FILE} (file size=$(du ${ASN_FILE} | cut -f 1))"
 gzip --stdout ${ASN_FILE} | openssl enc -aes-256-ctr \
-	-K ${MMDB_ENCRYPTION_PASSWORD} \
+	-K ${MMDB_ENCRYPTION_KEY} \
 	-iv ${MMDB_ENCRYPTION_IV} \
 	-out ${ASN_FILE}.enc
 rm ${ASN_FILE}
@@ -62,7 +68,7 @@ echo "INFO: encryption complete (file size=$(du ${ASN_FILE}.enc | cut -f 1))"
 CITY_FILE=GeoLite2-City.mmdb
 echo "INFO: starting encryption of ${CITY_FILE} (file size=$(du ${CITY_FILE} | cut -f 1))"
 gzip --stdout ${CITY_FILE} | openssl enc -aes-256-ctr \
-	-K ${MMDB_ENCRYPTION_PASSWORD} \
+	-K ${MMDB_ENCRYPTION_KEY} \
 	-iv ${MMDB_ENCRYPTION_IV} \
 	-out ${CITY_FILE}.enc
 rm ${CITY_FILE}
