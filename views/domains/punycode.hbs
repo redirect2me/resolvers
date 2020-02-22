@@ -1,0 +1,44 @@
+{{> above}}
+<div class="alert alert-info">Under the hood, all domains are ASCII.  In order to allow non-ASCII domains, browsers
+    encode a domain in <a href="https://en.wikipedia.org/wiki/Punycode">punycode</a> so that the underlying internet infrastructure still sees ASCII domain names, but
+    users can see accents, international characters and emoji.
+</div>
+
+{{#if domain}}
+<h2>Results for {{domain}}</h2>
+<table class="table table-striped border-bottom">
+    <thead>
+        <tr>
+            <th>Domain</th>
+            <th>Conversion</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{domain}}</td>
+            <td>{{conversion}}</td>
+            <td>{{result}}</td>
+        </tr>
+    </tbody>
+</table>
+{{/if}}
+
+<form action="punycode.html" method="GET">
+<div class="row">
+    <div class="col d-flex justify-content-center">
+    <div class="card col-lg-5 px-0">
+        <div class="card-body">
+            <h5 class="card-title text-center">Punycode Conversion</h5>
+            <div class="form-group">
+                <label for="domain">Domain</label>
+                <input type="text" class="form-control" id="domain" name="domain" value="{{domain}}" />
+            </div>
+            <input class="btn btn-primary" type="submit" value="Convert" />
+        </div>
+    </div>
+    </div>
+</div>
+</form>
+
+{{> below}}
