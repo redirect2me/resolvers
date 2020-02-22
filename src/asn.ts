@@ -31,12 +31,12 @@ async function expandFile(fileName:string, key:Buffer, iv:Buffer):Promise<string
 async function initialize(logger:Pino.Logger) {
     let asnFileName = path.join(__dirname, '..', './data/maxmind/GeoLite2-ASN.mmdb');
     let cityFileName = path.join(__dirname, '..', './data/maxmind/GeoLite2-City.mmdb');
+    let ivFileName = path.join(__dirname, '..', './data/maxmind/mmdb.iv');
     try {
 
         const keyHex = config.get('mmdbKey');
-        const ivHex = config.get('mmdbIv');
+        const ivHex = await fs.promises.readFile(ivFileName, 'utf-8');
         if (keyHex && ivHex) {
-
             const key = Buffer.from(keyHex, "hex");
             const iv = Buffer.from(ivHex, "hex");
             asnFileName = await expandFile(asnFileName + '.enc', key, iv);

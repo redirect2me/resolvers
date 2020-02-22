@@ -14,12 +14,6 @@ const config = convict({
     format: String,
     sensitive: true,
   },
-  mmdbIv: {
-    default: null,
-    doc: 'Random IV for encrypting mmdb files',
-    env: 'MMDB_ENCRYPTION_IV',
-    format: String,
-  },
   port: {
     default: 4000,
     doc: 'TCP port at which this service listens',
