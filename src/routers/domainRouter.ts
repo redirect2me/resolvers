@@ -1,4 +1,5 @@
 import Router from 'koa-router';
+import * as punycode from 'punycode';
 import * as domains from '../domains';
 import * as util from '../util';
 
@@ -46,6 +47,32 @@ domainRouter.get('/domains/nice-tlds.html', async (ctx:any) => {
      });
 });
 
+
+domainRouter.get('/domains/punycode.html', async (ctx:any) => {
+
+    const domain = ctx.request.query['domain'];
+    let conversion = '';
+    let result = '';
+
+    if (domain) {
+        if (domain.match(/^[-a-z0-9.]+$/i)) {
+            conversion = 'toUnicode';
+            result = punycode.toUnicode(domain);
+        }
+        else {
+            conversion = 'toASCII';
+            result = punycode.toASCII(domain);
+        }
+    }
+
+    ctx.body = await ctx.render('domains/punycode.hbs', {
+        conversion,
+        domain,
+        h1: 'Punycode Converter',
+        result,
+        title: 'Online Punycode Converter',
+     });
+});
 
 export {
     domainRouter
