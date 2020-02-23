@@ -17,6 +17,7 @@ import config from './config';
 import * as asn from './asn';
 import { detailRouter } from './resolver-detail';
 import { domainRouter } from './routers/domainRouter';
+import { httpRouter } from './routers/httpRouter';
 import { logger, options as loggerOptions } from './logger';
 import { lookupRouter } from './lookup';
 import * as resolvers from './resolvers';
@@ -287,16 +288,13 @@ rootRouter.get('/status.json', async (ctx) => {
     }
 });
 
-rootRouter.get('/util/headers.json', async (ctx) => {
-  ctx.body = ctx.request.headers;
-});
-
 
 app.use(rootRouter.routes());
 app.use(detailRouter.routes());
 app.use(lookupRouter.routes());
 app.use(reverseRouter.routes());
 app.use(domainRouter.routes());
+app.use(httpRouter.routes());
 
 async function main() {
 
