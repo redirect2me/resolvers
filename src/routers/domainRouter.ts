@@ -51,6 +51,12 @@ domainRouter.get('/domains/icann-vs-psl.html', async (ctx:any) => {
      });
 });
 
+domainRouter.get('/domains/psl-tlds.html', async (ctx:any) => {
+    ctx.body = await ctx.render('domains/psl-tlds.hbs', {
+        domains: domainData.pslTlds,
+        title: 'PublicSuffixList Top Level Domains',
+     });
+});
 
 domainRouter.get('/domains/usable-tlds.html', async (ctx:any) => {
     ctx.body = await ctx.render('domains/usable-tlds.hbs', {

@@ -29,7 +29,7 @@ async function initialize(logger:Pino.Logger) {
     const tldSet = new Set<string>();
     for (const domain of publicSuffixes) {
         const parts = domain.split('.');
-        const last = parts[parts.length - 1];
+        const last = parts[parts.length - 1].trim();
         if (tldSet.has(last)) {
             continue;
         }
