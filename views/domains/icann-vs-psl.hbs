@@ -1,9 +1,44 @@
 {{>above}}
 
-icann
-<pre>{{toJson icannOnly}}</pre>
+<div class="alert alert-info">
+    This report compares the list of top-level domains in
+    <a class="alert-link" href="/domains/tlds.html">ICANN</a> (which is the official list) versus
+    the Mozilla <a class="alert-link" href="/domains/psl-tlds.html">PublicSuffixList</a> (which is the list browsers actually use).
+</div>
 
-psl:
-<pre>{{toJson pslOnly}}</pre>
+<h2>ICANN but not in PublicSuffixList</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Domain</th>
+            <th>Punycode</th>
+        </tr>
+    </thead>
+    <tbody>
+{{#each icannOnly}}
+        <tr>
+            <td>{{this}}</td>
+            <td>{{toPunycode this}}</td>
+        </tr>
+{{/each}}
+    </tbody>
+</table>
 
+<h2>PublicSuffixList but not ICANN</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Domain</th>
+            <th>Punycode</th>
+        </tr>
+    </thead>
+    <tbody>
+{{#each pslOnly}}
+        <tr>
+            <td>{{this}}</td>
+            <td>{{toPunycode this}}</td>
+        </tr>
+{{/each}}
+    </tbody>
+</table>
 {{>below}}

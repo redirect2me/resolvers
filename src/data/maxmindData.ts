@@ -8,7 +8,7 @@ import * as tmp from 'tmp-promise';
 import * as util from 'util';
 import * as zlib from 'zlib';
 
-import config from './config';
+import config from '../config';
 const pipeline = util.promisify(stream.pipeline);
 
 let asnDatabase:Reader<AsnResponse>|null = null;
@@ -29,9 +29,9 @@ async function expandFile(fileName:string, key:Buffer, iv:Buffer):Promise<string
 }
 
 async function initialize(logger:Pino.Logger) {
-    let asnFileName = path.join(__dirname, '..', './data/maxmind/GeoLite2-ASN.mmdb');
-    let cityFileName = path.join(__dirname, '..', './data/maxmind/GeoLite2-City.mmdb');
-    let ivFileName = path.join(__dirname, '..', './data/maxmind/mmdb.iv');
+    let asnFileName = path.join(__dirname, '../..', './data/maxmind/GeoLite2-ASN.mmdb');
+    let cityFileName = path.join(__dirname, '../..', './data/maxmind/GeoLite2-City.mmdb');
+    let ivFileName = path.join(__dirname, '../..', './data/maxmind/mmdb.iv');
     try {
 
         const keyHex = config.get('mmdbKey');

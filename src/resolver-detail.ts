@@ -2,7 +2,7 @@ import { promises as dnsPromises } from 'dns';
 import Router from 'koa-router';
 import * as psl from 'psl';
 
-import * as resolvers from './resolvers';
+import * as resolvers from './data/resolverData';
 import * as streamer from './streamer';
 
 const detailRouter = new Router();

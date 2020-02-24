@@ -1,9 +1,12 @@
-import Router from 'koa-router';
+import KoaRouter from 'koa-router';
+import Handlebars from 'handlebars';
 import * as punycode from 'punycode';
+import * as psl from 'psl';
+
 import * as domainData from '../data/domainData';
 import * as util from '../util';
 
-const domainRouter = new Router();
+const domainRouter = new KoaRouter();
 
 domainRouter.get('/domains/tlds.html', async (ctx:any) => {
     ctx.body = await ctx.render('domains/tlds.hbs', {
@@ -55,6 +58,36 @@ domainRouter.get('/domains/psl-tlds.html', async (ctx:any) => {
     ctx.body = await ctx.render('domains/psl-tlds.hbs', {
         domains: domainData.pslTlds,
         title: 'PublicSuffixList Top Level Domains',
+     });
+});
+
+domainRouter.get('/domains/publicsuffix.html', async (ctx:any) => {
+    ctx.body = await ctx.render('domains/publicsuffix.hbs', {
+        hostname: ctx.request.query.hostname,
+        title: 'Public suffix for a hostname',
+     });
+});
+
+domainRouter.post('/domains/publicsuffix.html', async (ctx:any) => {
+
+    const hostname = ctx.request.body.hostname;
+    if (!hostname) {
+      ctx.flash('error', 'You must enter a hostname to check!');
+      ctx.redirect('publicsuffix.html');
+      return;
+    }
+
+    if (!psl.isValid(hostname)) {
+      ctx.flash('error', `${Handlebars.escapeExpression(hostname)} is not a valid hostname!`);
+      ctx.redirect(`publicsuffix.html?hostname=${encodeURIComponent(hostname)}`);
+      return;
+    }
+
+    ctx.body = await ctx.render('domains/publicsuffix.hbs', {
+        hostname: ctx.request.body.hostname,
+        get: psl.get(hostname),
+        parsed: psl.parse(hostname),
+        title: 'Public suffix for a hostname',
      });
 });
 

@@ -10,7 +10,7 @@ const cache = new Map<string, resolverData>();
 
 async function initialize(logger:Pino.Logger) {
 
-  const dataDir = path.join(__dirname, '..', 'data', 'resolvers');
+  const dataDir = path.join(__dirname, '../..', 'data', 'resolvers');
 
   const fileNames = await fsPromises.readdir(dataDir);
 
