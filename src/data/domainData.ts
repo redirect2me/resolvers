@@ -13,7 +13,7 @@ async function initialize(logger:Pino.Logger) {
 
     const icannFileName = path.join(__dirname, '../..', 'data', 'icann', 'tlds-alpha-by-domain.txt');
     const punyIcann = (await fsPromises.readFile(icannFileName, 'utf-8')).split('\n');
-    for (const punyDomain of punyIcann.slice(1)) {
+    for (const punyDomain of punyIcann.slice(1).filter(line => line.length > 0)) {
         icannTlds.push(punycode.toUnicode(punyDomain.toLowerCase()));
     }
 

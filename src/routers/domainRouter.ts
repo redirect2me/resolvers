@@ -35,9 +35,18 @@ domainRouter.get('/domains/tlds.json', async (ctx) => {
 
 domainRouter.get('/domains/icann-vs-psl.html', async (ctx:any) => {
 
+    const icannOnly = new Set<string>();
+    domainData.icannTlds.forEach( domain => icannOnly.add(domain));
+    domainData.pslTlds.forEach( domain => icannOnly.delete(domain));
+
+    const pslOnly = new Set<string>();
+    domainData.pslTlds.forEach( domain => pslOnly.add(domain));
+    domainData.icannTlds.forEach( domain => pslOnly.delete(domain));
 
     ctx.body = await ctx.render('domains/icann-vs-psl.hbs', {
         domains: domainData.usableTlds,
+        icannOnly: [...icannOnly],
+        pslOnly: [...pslOnly],
         title: 'Domains in ICANN vs PublicSuffixList',
      });
 });
