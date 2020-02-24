@@ -6,22 +6,23 @@ import Koa from 'koa';
 const flash = require('koa-better-flash');
 import KoaBody from 'koa-body';
 import KoaPinoLogger from 'koa-pino-logger';
-import KoaRouter from 'koa-router';
 import KoaSession from 'koa-session';
 import KoaStatic from 'koa-static';
 import KoaViews from 'koa-views';
-import * as os from 'os';
 import * as path from 'path';
+import * as punycode from 'punycode';
 
 import config from './config';
-import * as asn from './asn';
+import * as asn from './data/maxmindData';
 import { detailRouter } from './resolver-detail';
 import { domainRouter } from './routers/domainRouter';
 import { httpRouter } from './routers/httpRouter';
 import { logger, options as loggerOptions } from './logger';
 import { lookupRouter } from './lookup';
-import * as resolvers from './resolvers';
+import { mxCheckRouter } from './actions/mxcheck';
+import * as resolvers from './data/resolverData';
 import { reverseRouter } from './reverse-lookup';
+import { rootRouter } from './routers/rootRouter';
 import * as domains from './data/domainData';
 import * as util from './util';
 
@@ -98,7 +99,6 @@ app.use(KoaViews(path.join(__dirname, '..', 'views'), {
             'encodeURIComponent': function(a:any) {
                 return encodeURIComponent(a)
             },
-            'envtag': () => config.get('envTag'),
             'equals': function(a:any, b:any, block:any) {
                 return a == b ? block.fn() : block.inverse(this);
             },
@@ -109,11 +109,13 @@ app.use(KoaViews(path.join(__dirname, '..', 'views'), {
                     result += block.fn(loop);
                 return result;
             },
+            ifDomainUnicode: function(context:any, options:any) { return context && !context.match(/^[a-z]+$/) ? options.fn(this) : options.inverse(this); },
             toIso: function(d:Date) { return d ? d.toISOString() : '(none)'; },
             toJson: function(context:any) { return JSON.stringify(context, null, 2); },
             'toUpper': function (a: any) {
               return a ? a.toString().toUpperCase() : "";
             },
+            toPunycode: function(domain:string) { return domain ? punycode.toASCII(domain) : '(null)'; },
         },
         partials: {
             above: path.join(__dirname, '..', 'partials', 'above'),
@@ -145,52 +147,7 @@ app.use(async(ctx, next) => {
   }
 });
 
-const rootRouter = new KoaRouter();
 
-rootRouter.get('/index.html', async (ctx) => {
-    await ctx.redirect('/');
-});
-
-rootRouter.get('/', async (ctx:any) => {
-    const current_ip = ctx.ips.length > 0 ? ctx.ips[0] : ctx.ip;
-    const current_location = await asn.cityLookupHtml(current_ip);
-    const current_asn = asn.asnLookupStr(current_ip);
-
-  ctx.body = await ctx.render('index.hbs', {
-    current_asn,
-    current_ip,
-    current_location,
-    h1: 'Resolve.rs',
-    title: 'Resolve.rs',
-  });
-});
-
-rootRouter.get('/headers.html', async (ctx:any) => {
-
-    ctx.body = await ctx.render('headers.hbs', {
-     headers: ctx.request.headers,
-     ip: ctx.ip,
-     ips: ctx.ips,
-     title: 'HTTP Headers',
-  });
-});
-
-rootRouter.get('/iplocation.html', async (ctx:any) => {
-
-    let ip = ctx.request.query['ip'] || ctx.request.body.ip;
-    const current_ip = ctx.ips.length > 0 ? ctx.ips[0] : ctx.ip;
-    if (!ip) {
-      ip = current_ip;
-    }
-    const maxmind = await asn.cityLookupHtml(ip);
-
-  ctx.body = await ctx.render('iplocation.hbs', {
-    current_ip,
-    maxmind,
-    ip,
-    title: 'IP Address Geolocation',
-  });
-});
 
 rootRouter.get('/resolvers/', async (ctx) => {
   ctx.redirect('/resolvers/index.html');
@@ -210,87 +167,6 @@ rootRouter.get('/resolvers/index.html', async (ctx:any) => {
   });
 });
 
-rootRouter.get('/api.html', async (ctx:any) => {
-    ctx.body = await ctx.render('api.hbs', {
-        title: 'API',
-     });
-});
-
-rootRouter.get('/tools.html', async (ctx:any) => {
-    ctx.body = await ctx.render('tools.hbs', {
-        title: 'Tools',
-     });
-});
-
-rootRouter.get('/sitemap.xml', async (ctx:any) => {
-
-  const urls:string[] = [];
-
-  urls.push("/");
-  urls.push("/dns-lookup.html");
-  urls.push("/domains/nice-tlds.html");
-  urls.push("/domains/punycode.html");
-  urls.push("/domains/tlds.html");
-  urls.push("/domains/usable-tlds.html");
-  urls.push("/http/headers.html");
-  urls.push("/iplocation.html");
-  urls.push("/resolvers/index.html");
-  for (const resolver of resolvers.getAll()) {
-    urls.push(`/resolvers/${resolver.key}/index.html`);
-  }
-  urls.push("/reverse-dns-lookup.html");
-
-  ctx.body = await ctx.render('sitemap.hbs', { urls });
-  ctx.type = "text/xml;charset=utf-8";
-});
-
-rootRouter.get('/status.json', async (ctx) => {
-
-    const retVal: {[key: string]: any} = {};
-
-    retVal["success"] = true;
-    retVal["message"] = "OK";
-    retVal["timestamp"] = new Date().toISOString();
-    retVal["tech"] = "NodeJS " + process.version;
-    retVal["lastmod"] = process.env.LASTMOD || '(not set)';
-    retVal["commit"] = process.env.COMMIT || '(not set)';
-    retVal["__dirname"] = __dirname;
-    retVal["__filename"] = __filename;
-    retVal["os.hostname"] = os.hostname();
-    retVal["os.type"] = os.type();
-    retVal["os.platform"] = os.platform();
-    retVal["os.arch"] = os.arch();
-    retVal["os.release"] = os.release();
-    retVal["os.uptime"] = os.uptime();
-    retVal["os.loadavg"] = os.loadavg();
-    retVal["os.totalmem"] = os.totalmem();
-    retVal["os.freemem"] = os.freemem();
-    retVal["os.cpus.length"] = os.cpus().length;
-    // too much junk: retVal["os.networkInterfaces"] = os.networkInterfaces();
-
-    retVal["process.arch"] = process.arch;
-    retVal["process.cwd"] = process.cwd();
-    retVal["process.execPath"] = process.execPath;
-    retVal["process.memoryUsage"] = process.memoryUsage();
-    retVal["process.platform"] = process.platform;
-    retVal["process.release"] = process.release;
-    retVal["process.title"] = process.title;
-    retVal["process.uptime"] = process.uptime();
-    retVal["process.version"] = process.version;
-    retVal["process.versions"] = process.versions;
-
-    retVal["resolvers"] = resolvers.getAll().length;
-
-    const callback = ctx.request.query['callback'];
-    if (callback && callback.match(/^[$A-Za-z_][0-9A-Za-z_$]*$/) != null) {
-        util.handleJsonp(ctx, retVal);
-    } else {
-        ctx.set('Access-Control-Allow-Origin', '*');
-        ctx.set('Access-Control-Allow-Methods', 'POST, GET');
-        ctx.set('Access-Control-Max-Age', '604800');
-        ctx.body = retVal;
-    }
-});
 
 
 app.use(rootRouter.routes());
@@ -299,6 +175,7 @@ app.use(lookupRouter.routes());
 app.use(reverseRouter.routes());
 app.use(domainRouter.routes());
 app.use(httpRouter.routes());
+app.use(mxCheckRouter.routes());
 
 async function main() {
 

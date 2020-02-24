@@ -2,8 +2,8 @@ import { promises as dnsPromises } from 'dns';
 import { default as isIp } from 'is-ip';
 import Router from 'koa-router';
 
-import * as asn from './asn';
-import * as resolvers from './resolvers';
+import * as asn from './data/maxmindData';
+import * as resolvers from './data/resolverData';
 import * as streamer from './streamer';
 import * as util from './util';
 

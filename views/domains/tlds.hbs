@@ -1,10 +1,16 @@
 {{> above}}
 
+<div class="alert alert-info">
+    This comes directly from <a class="alert-link" href="https://data.iana.org/TLD/tlds-alpha-by-domain.txt">ICANN</a>.
+    The only modifications are lower-case and <a class="alert-link" href="/domains/punycode.html">decoding punycode</a>.
+    <!-- LATER: last updated -->
+</div>
+
 <p>Count: {{domains.length}}</p>
 
 <ul>
 {{#each domains}}
-<li>{{this}}</li>
+<li>{{this}}{{#ifDomainUnicode this}} ({{toPunycode this}}){{/ifDomainUnicode}}</li>
 {{/each}}
 </ul>
 

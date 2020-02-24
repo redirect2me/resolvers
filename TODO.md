@@ -1,8 +1,12 @@
 # To Do
 
+* check SSL certificate
 * redirect testing
-* show SSL certificate
-*
+* Contact page w/link in footer
+* update credits
+* update sitemap.xml
+* list of domains (and detailed info) from Gandi
+* what's my ip page
 
 ## DNS Check Improvements
 
@@ -30,13 +34,12 @@
 * make and use map of country code to country name
 * tags page
 * countries page
+* translations for domains in foreign languages
 
 ## Data Enhancements
 
 
 * Geolocation data
-* IP Geolocation card on home page
-* Contact page w/link in footer
 * square brackets around ipv6 addresses
 * fill in tags for all resolvers
 * fill in social media links

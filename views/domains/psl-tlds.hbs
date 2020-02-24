@@ -1,10 +1,18 @@
 {{> above}}
 
+<div class="alert alert-info">
+    This comes from the Mozilla <a class="alert-link" href="https://publicsuffix.org/">PublicSuffixList</a>.
+    It is calculated by looking at the last component of every entry in the list.
+    It can be <a class="alert-link" href="icann-vs-psl.html">slightly different</a>
+    from the official <a class="alert-link" href="tlds.html">ICANN list</a>.
+    <!-- LATER: last updated -->
+</div>
+
 <p>Count: {{domains.length}}</p>
 
 <ul>
 {{#each domains}}
-<li>{{this}}</li>
+<li>{{this}}{{#ifDomainUnicode this}} ({{toPunycode this}}){{/ifDomainUnicode}}</li>
 {{/each}}
 </ul>
 
