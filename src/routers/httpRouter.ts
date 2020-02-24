@@ -1,13 +1,13 @@
 import Router from 'koa-router';
 //import * as punycode from 'punycode';
-import * as domains from '../domains';
+import * as domains from '../data/domainData';
 //import * as util from '../util';
 
 const httpRouter = new Router();
 
 httpRouter.get('/domains/tlds.html', async (ctx:any) => {
     ctx.body = await ctx.render('domains/tlds.hbs', {
-        domains: domains.allTlds,
+        domains: domains.icannTlds,
         title: 'Top Level Domains',
      });
 });
