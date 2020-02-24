@@ -1,5 +1,9 @@
 # To Do
 
+* redirect testing
+* show SSL certificate
+*
+
 ## DNS Check Improvements
 
 * sample domain names (or ip addresses) to try

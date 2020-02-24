@@ -1,15 +1,23 @@
 import { promises as fsPromises } from 'fs';
 import * as path from 'path';
 import Pino from 'pino';
+import * as punycode from 'punycode';
 
 const publicSuffixes:string[] = [];
-const allTlds:string[] = [];
+const icannTlds:string[] = [];
+const pslTlds:string[] = [];
 const niceTlds:string[] = [];
 const usableTlds:string[] = [];
 
 async function initialize(logger:Pino.Logger) {
 
-    const psFileName = path.join(__dirname, '..', 'data', 'public_suffix_list.dat');
+    const icannFileName = path.join(__dirname, '../..', 'data', 'icann', 'tlds-alpha-by-domain.txt');
+    const punyIcann = (await fsPromises.readFile(icannFileName, 'utf-8')).split('\n');
+    for (const punyDomain of punyIcann.slice(1)) {
+        icannTlds.push(punycode.toUnicode(punyDomain.toLowerCase()));
+    }
+
+    const psFileName = path.join(__dirname, '../..', 'data', 'public_suffix_list.dat');
 
     publicSuffixes.push(...(await fsPromises.readFile(psFileName, 'utf-8')).split('\n').filter(line => line.length > 0 && !line.startsWith('//')));
 
@@ -28,20 +36,21 @@ async function initialize(logger:Pino.Logger) {
         tldSet.add(last);
     }
 
-    allTlds.push(...tldSet.values());       //LATER: include ones that are in public suffix with a dot (i.e. that don't allow top-level registration)
-    allTlds.sort();
+    pslTlds.push(...tldSet.values());       //LATER: include ones that are in public suffix with a dot (i.e. that don't allow top-level registration)
+    pslTlds.sort();
 
-    const niceFileName = path.join(__dirname, '..', 'data', 'domain-suffix.txt');
+    const niceFileName = path.join(__dirname, '../..', 'data', 'domain-suffix.txt');
 
     niceTlds.push(...(await fsPromises.readFile(niceFileName, 'utf-8')).split('\n').filter(line => line.length > 0 && !line.startsWith('//')));
 
-    logger.info({ tldCount: allTlds.length, niceCount: niceTlds.length }, 'domains loaded');
+    logger.info({ tldCount: pslTlds.length, niceCount: niceTlds.length }, 'domains loaded');
 }
 
 export {
-    allTlds,
+    icannTlds,
     initialize,
     niceTlds,
+    pslTlds,
     publicSuffixes,
     usableTlds,
 }

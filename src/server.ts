@@ -22,7 +22,7 @@ import { logger, options as loggerOptions } from './logger';
 import { lookupRouter } from './lookup';
 import * as resolvers from './resolvers';
 import { reverseRouter } from './reverse-lookup';
-import * as domains from './domains';
+import * as domains from './data/domainData';
 import * as util from './util';
 
 const app = new Koa();
@@ -228,7 +228,11 @@ rootRouter.get('/sitemap.xml', async (ctx:any) => {
 
   urls.push("/");
   urls.push("/dns-lookup.html");
-  urls.push("/headers.html");
+  urls.push("/domains/nice-tlds.html");
+  urls.push("/domains/punycode.html");
+  urls.push("/domains/tlds.html");
+  urls.push("/domains/usable-tlds.html");
+  urls.push("/http/headers.html");
   urls.push("/iplocation.html");
   urls.push("/resolvers/index.html");
   for (const resolver of resolvers.getAll()) {
