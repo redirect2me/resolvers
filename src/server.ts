@@ -14,6 +14,7 @@ import * as punycode from 'punycode';
 
 import config from './config';
 import * as asn from './data/maxmindData';
+import { certCheckRouter } from './actions/certcheck';
 import { detailRouter } from './resolver-detail';
 import { domainRouter } from './routers/domainRouter';
 import { httpRouter } from './routers/httpRouter';
@@ -176,6 +177,7 @@ app.use(reverseRouter.routes());
 app.use(domainRouter.routes());
 app.use(httpRouter.routes());
 app.use(mxCheckRouter.routes());
+app.use(certCheckRouter.routes());
 
 async function main() {
 
