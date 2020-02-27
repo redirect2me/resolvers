@@ -1,4 +1,4 @@
-//import { promises as dnsPromises } from 'dns';
+import { promises as dnsPromises } from 'dns';
 import Handlebars from 'handlebars';
 import Router from 'koa-router';
 import * as psl from 'psl';
@@ -32,7 +32,50 @@ mxCheckRouter.post('/dns/mxcheck.html', async (ctx:any) => {
 
   streamer.streamResponse(ctx, `MX check for ${domain}`, async (stream) => {
 
-    stream.write(`<p>Coming soon!</p>`);
+    stream.write(`<details>`);
+    stream.write(`<summary>DNS lookup of MX records</summary>`);
+    const dnsResolver:any = new dnsPromises.Resolver();
+    dnsResolver.setServers(['1.1.1.1']);
+
+    const results = await dnsResolver.resolveMx(domain);
+
+    //LATER: sort results by priority, then exchange
+    stream.write(`<table class="table table-striped">`);
+    stream.write(`<thead><tr><th>Server</th><th>Priority</th><th>Address</th></tr></thead>`)
+    stream.write(`<tbody>`)
+
+    const addresses:string[] = [];
+    for (const row of results) {
+        stream.write(`<tr>`);
+        stream.write(`<td>${row.exchange}</td>`);
+        stream.write(`<td>${row.priority}</td>`);
+        stream.write(`<td>`);
+        try {
+            const ip4address = await dnsResolver.resolve4(row.exchange);
+            stream.write(`IPv4: ${ip4address}<br/>`);
+            addresses.push(ip4address);
+        }
+        catch (err) {
+            stream.write(`IPv4: ${err.message}`); //LATER: html encode
+        }
+        try {
+            const ip6address = await dnsResolver.resolve6(row.exchange);
+            stream.write(`IPv6: ${ip6address}<br/>`);
+            addresses.push(ip6address);
+        }
+        catch (err) {
+            stream.write(`IPv6: ${err.message}`); //LATER: html encode
+        }
+        stream.write(`</td>`);
+        stream.write(`</tr>`);
+
+    }
+    stream.write(`</tbody></table>`);
+    //stream.write(`<p>${JSON.stringify(results)}</p>`)
+    stream.write(`</details>`);
+
+    //LATER: check all addresses
+
 
     stream.write(`<div class="alert alert-info">`);
     stream.write(`Complete`);
