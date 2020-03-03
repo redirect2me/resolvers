@@ -43,21 +43,9 @@ rootRouter.get('/index.html', async (ctx) => {
 });
 
 rootRouter.get('/iplocation.html', async (ctx:any) => {
-
-    let ip = ctx.request.query['ip'] || ctx.request.body.ip;
-    const current_ip = ctx.ips.length > 0 ? ctx.ips[0] : ctx.ip;
-    if (!ip) {
-      ip = current_ip;
-    }
-    const maxmind = await asn.cityLookupHtml(ip);
-
-  ctx.body = await ctx.render('iplocation.hbs', {
-    current_ip,
-    maxmind,
-    ip,
-    title: 'IP Address Geolocation',
-  });
+    await ctx.redirect('/ip/geolocation.html');
 });
+
 rootRouter.get('/sitemap.xml', async (ctx:any) => {
 
     const urls:string[] = [];

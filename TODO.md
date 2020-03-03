@@ -1,6 +1,7 @@
 # To Do
 
 * check SSL certificate
+* what's my ip: copy to clipboard, links to api
 * redirect testing
 * Contact page w/link in footer
 * update credits
