@@ -1,0 +1,114 @@
+{{> above}}
+<!--
+<div class="alert alert-info">
+    LATER:  explanatory blurb
+</div>
+-->
+{{#if url}}
+<h2>Results</h2>
+
+<table class="table table-striped border-bottom">
+    <thead>
+        <tr>
+            <th>Component</th>
+            <th>Value - Server</th>
+            <th>Value - Browser</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Input&nbsp;URL</td>
+            <td colspan="2"><code>{{url}}</code></td>
+        </tr>
+        <tr>
+            <td>hash</td>
+            <td>{{parsed.hash}}</td>
+            <td id="parsed-hash"></td>
+        </tr>
+        <tr>
+            <td>host</td>
+            <td>{{parsed.host}}</td>
+            <td id="parsed-host"></td>
+        </tr>
+        <tr>
+            <td>hostname</td>
+            <td>{{parsed.hostname}}</td>
+            <td id="parsed-hostname"></td>
+        </tr>
+        <tr>
+            <td>origin</td>
+            <td>{{parsed.origin}}</td>
+            <td id="parsed-origin"></td>
+        </tr>
+        <tr>
+            <td>password</td>
+            <td>{{parsed.password}}</td>
+            <td id="parsed-password"></td>
+        </tr>
+        <tr>
+            <td>pathname</td>
+            <td>{{parsed.pathname}}</td>
+            <td id="parsed-pathname"></td>
+        </tr>
+        <tr>
+            <td>port</td>
+            <td>{{parsed.port}}</td>
+            <td id="parsed-port"></td>
+        </tr>
+        <tr>
+            <td>protocol</td>
+            <td>{{parsed.protocol}}</td>
+            <td id="parsed-protocol"></td>
+        </tr>
+        <tr>
+            <td>search</td>
+            <td>{{parsed.search}}</td>
+            <td id="parsed-search"></td>
+        </tr>
+        <tr>
+            <td>searchParams</td>
+            <td>{{parsed.searchParams}}</td>
+            <td id="parsed-searchParams"></td>
+        </tr>
+        <tr>
+            <td>username</td>
+            <td>{{parsed.username}}</td>
+            <td id="parsed-username"></td>
+        </tr>
+    </tbody>
+</table>
+<script>
+    const parsed = new URL({{{toJson url}}});
+    $("#parsed-hash").text(parsed.hash);
+    $("#parsed-host").text(parsed.host);
+    $("#parsed-hostname").text(parsed.hostname);
+    $("#parsed-origin").text(parsed.origin);
+    $("#parsed-password").text(parsed.password);
+    $("#parsed-pathname").text(parsed.pathname);
+    $("#parsed-port").text(parsed.port);
+    $("#parsed-protocol").text(parsed.protocol);
+    $("#parsed-search").text(parsed.search);
+    $("#parsed-searchParams").text(parsed.searchParams);
+    $("#parsed-username").text(parsed.username);
+    console.log(parsed);
+</script>
+{{/if}}
+
+<form action="urlparse.html" method="GET">
+<div class="row">
+    <div class="col d-flex justify-content-center">
+    <div class="card col-lg-10 px-0">
+        <div class="card-body">
+            <h5 class="card-title text-center">Parse URL</h5>
+            <div class="form-group">
+                <label for="url">URL</label>
+                <input type="text" class="form-control" id="url" name="url" value="{{url}}" />
+            </div>
+            <input class="btn btn-primary" type="submit" value="Convert" />
+        </div>
+    </div>
+    </div>
+</div>
+</form>
+
+{{> below}}

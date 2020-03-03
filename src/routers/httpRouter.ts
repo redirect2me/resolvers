@@ -1,14 +1,18 @@
 import Router from 'koa-router';
 //import * as punycode from 'punycode';
-import * as domains from '../data/domainData';
+//import * as domains from '../data/domainData';
 //import * as util from '../util';
+import { URL } from 'url';
 
 const httpRouter = new Router();
 
-httpRouter.get('/domains/tlds.html', async (ctx:any) => {
-    ctx.body = await ctx.render('domains/tlds.hbs', {
-        domains: domains.icannTlds,
-        title: 'Top Level Domains',
+httpRouter.get('/http/urlparse.html', async (ctx:any) => {
+    const url = ctx.query.url || ctx.request.href;
+
+    ctx.body = await ctx.render('http/urlparse.hbs', {
+        url,
+        parsed: new URL(url),
+        title: 'Parse a URL',
      });
 });
 
