@@ -18,6 +18,7 @@ import { certCheckRouter } from './actions/certcheck';
 import { detailRouter } from './resolver-detail';
 import { domainRouter } from './routers/domainRouter';
 import { httpRouter } from './routers/httpRouter';
+import { ipRouter } from './routers/ipRouter';
 import { logger, options as loggerOptions } from './logger';
 import { lookupRouter } from './lookup';
 import { mxCheckRouter } from './actions/mxcheck';
@@ -176,6 +177,7 @@ app.use(lookupRouter.routes());
 app.use(reverseRouter.routes());
 app.use(domainRouter.routes());
 app.use(httpRouter.routes());
+app.use(ipRouter.routes());
 app.use(mxCheckRouter.routes());
 app.use(certCheckRouter.routes());
 
