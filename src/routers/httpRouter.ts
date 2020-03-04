@@ -6,6 +6,13 @@ import { URL } from 'url';
 
 const httpRouter = new Router();
 
+httpRouter.get('/http/urlencode.html', async (ctx:any) => {
+    ctx.body = await ctx.render('http/urlencode.hbs', {
+        h1: 'URLEncode/URLDecode a String',
+        title: 'URLEncode/URLDecode',
+     });
+});
+
 httpRouter.get('/http/urlparse.html', async (ctx:any) => {
     const url = ctx.query.url || ctx.request.href;
 

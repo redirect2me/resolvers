@@ -1,0 +1,50 @@
+{{> above}}
+<!--
+<div class="alert alert-info">
+    LATER:  explanatory blurb
+</div>
+-->
+
+<h2>Plain Text</h2>
+
+<div class="row py-2">
+    <div class="col">
+        <textarea class="form-control" id="plaintext"></textarea>
+    </div>
+</div>
+
+<div class="row py-2">
+    <div class="col d-flex justify-content-center">
+    <button class="btn btn-outline-primary mr-3" id="encodebtn">
+        URLEncode &#x21e9;
+    </button>
+    <button class="btn btn-outline-primary" id="decodebtn">
+        URLDecode &#x21e7;
+    </button>
+    </div>
+</div>
+
+<h2>URLEncoded Text</h2>
+
+<div class="row py-2">
+    <div class="col">
+        <textarea class="form-control" id="encodedtext"></textarea>
+    </div>
+</div>
+
+<script>
+    $("#encodebtn").on("click", () => {
+        $("#encodedtext").val(encodeURIComponent( $("#plaintext").val() ));
+        console.log(`plain1=${$("#plaintext").val()}`)
+        console.log(`encoded1=${$("#encodedtext").val()}`)
+    });
+    $("#decodebtn").on("click", () => {
+        $("#plaintext").val(decodeURIComponent( $("#encodedtext").val() ));
+        console.log(`plain2=${$("#plaintext").val()}`)
+        console.log(`encoded2=${$("#encodedtext").val()}`)
+    });
+
+</script>
+
+
+{{> below}}
