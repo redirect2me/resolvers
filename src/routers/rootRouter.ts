@@ -1,15 +1,15 @@
 import Router from 'koa-router';
-//import * as punycode from 'punycode';
 import * as asn from '../data/maxmindData';
-//import * as domains from '../data/domainData';
 import * as os from 'os';
+
 import * as resolvers from '../data/resolverData';
 import * as util from '../util';
+import { getCurrentIP } from './ipRouter';
 
 const rootRouter = new Router();
 
 rootRouter.get('/', async (ctx:any) => {
-    const current_ip = ctx.ips.length > 0 ? ctx.ips[0] : ctx.ip;
+    const current_ip = getCurrentIP(ctx);
     const current_location = await asn.cityLookupHtml(current_ip);
     const current_asn = asn.asnLookupStr(current_ip);
 
@@ -118,6 +118,7 @@ rootRouter.get('/sitemap.xml', async (ctx:any) => {
 
 rootRouter.get('/tools.html', async (ctx:any) => {
     ctx.body = await ctx.render('tools.hbs', {
+        current_ip: getCurrentIP(ctx),
         title: 'Tools',
      });
 });

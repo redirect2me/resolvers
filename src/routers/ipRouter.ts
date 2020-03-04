@@ -57,5 +57,6 @@ ipRouter.get('/ip/whatsmyip.txt', async (ctx) => {
 });
 
 export {
+    getCurrentIP,
     ipRouter
 }
