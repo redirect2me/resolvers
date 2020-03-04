@@ -1,5 +1,6 @@
 # To Do
 
+* some tools font-weight-bold
 * check SSL certificate
 * what's my ip: copy to clipboard, links to api
 * redirect testing
@@ -7,7 +8,15 @@
 * update credits
 * update sitemap.xml
 * list of domains (and detailed info) from Gandi
-* what's my ip page
+
+https://github.com/ad-m/github-push-action
+- run: |
+    mkdir ~/.ssh
+    echo "${{ secrets.SECRET_PRIVATE_DEPLOY_KEY }}" > ~/.ssh/id_rsa
+    chmod 600 ~/.ssh/id_rsa
+#        git config --local user.email actions@github.com
+#        git config --local user.name github-actions
+
 
 ## DNS Check Improvements
 
@@ -30,15 +39,14 @@
 * link on resolvers-index to contribute
 * CONTRIBUTING.md
 * docker-run.sh
-* where am I?
-* where are you?
-* make and use map of country code to country name
+
+## Open Resolvers Enhancements
+
 * tags page
 * countries page
 * translations for domains in foreign languages
 
 ## Data Enhancements
-
 
 * Geolocation data
 * square brackets around ipv6 addresses
@@ -48,6 +56,10 @@
 * data/xxx.md with details for each open resolvers
 * https://cleanbrowsing.org/guides/dnsovertls
 * IRC social media links are wrong
+
+## More tools
+
+* base64 decoding (or link to FFI)
 
 ## Features
 
@@ -82,7 +94,3 @@
 * https://www.opennic.org/
 * https://dnsdetective.net/
 * http://www.whatsmydnsserver.com/
-
-## data enhancement
-
-* https://www.npmjs.com/package/maxmind
