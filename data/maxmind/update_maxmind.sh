@@ -8,9 +8,9 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-echo "INFO: starting at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+echo "INFO: starting MaxMind update at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
-ENV_FILE="../../.env"
+ENV_FILE=".env"
 if [ -f "${ENV_FILE}" ]; then
     echo "INFO: loading ${ENV_FILE} into environment"
     export $(cat ${ENV_FILE})
@@ -21,9 +21,7 @@ echo "INFO: creating files in ${TARGET_DIR}"
 
 TMP_ASN_FILE=$(mktemp)
 echo "INFO: download MaxMind ASN database into ${TMP_ASN_FILE}"
-#curl --silent "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&suffix=tar.gz&license_key=${MAXMIND_LICENSE_KEY}" >"${TMP_ASN_FILE}"
-curl "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&suffix=tar.gz&license_key=${MAXMIND_LICENSE_KEY}" >"${TMP_ASN_FILE}"
-tar -tzf ${TMP_ASN_FILE}
+curl --silent "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&suffix=tar.gz&license_key=${MAXMIND_LICENSE_KEY}" >"${TMP_ASN_FILE}"
 tar -xzf ${TMP_ASN_FILE} --directory="${TARGET_DIR}" --wildcards --strip-components 1 "*.mmdb"
 rm "${TMP_ASN_FILE}"
 
@@ -62,4 +60,4 @@ gzip --stdout ${CITY_FILE} | openssl enc -aes-256-ctr \
 rm ${CITY_FILE}
 echo "INFO: encryption complete (file size=$(du ${CITY_FILE}.enc | cut -f 1))"
 
-echo "INFO: complete at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+echo "INFO: complete MaxMind update at $(date -u +%Y-%m-%dT%H:%M:%SZ)"

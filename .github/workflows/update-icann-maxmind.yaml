@@ -1,10 +1,8 @@
-name: Update MaxMind database
+name: Update MaxMind and ICANN databases
 
 on:
   schedule:
   - cron: '42 0 * * 1'
-
-# Environment variables available to all jobs and steps in this workflow
 
 jobs:
   update:
@@ -13,11 +11,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
 
-    - name: Update databases
-      run: data/maxmind/updatemm.sh
+    - name: Update MaxMind
+      run: data/maxmind/update_maxmind.sh
       env:
         MMDB_ENCRYPTION_KEY: ${{ secrets.MMDB_ENCRYPTION_KEY }}
         MAXMIND_LICENSE_KEY: ${{ secrets.MAXMIND_LICENSE_KEY }}
+
+    - name: Update ICANN
+      run: data/icann/update_icann.sh
 
     - name: Install SSH Client
       uses: webfactory/ssh-agent@v0.2.0
@@ -34,7 +35,8 @@ jobs:
     - name: Commit changes
       run: |
         git add data/maxmind/mmdb.iv data/maxmind/GeoLite2-ASN.mmdb.enc data/maxmind/GeoLite2-City.mmdb.enc
-        git commit -m "MaxMind database updated at $(date)"
+        git add data/icann/tlds-alpha-by-domain.txt
+        git commit -m "Databases updated at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
         git push deploy master
 
 
