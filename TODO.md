@@ -60,6 +60,8 @@ https://github.com/ad-m/github-push-action
 ## More tools
 
 * base64 decoding (or link to FFI)
+* check for CORS headers
+* check for robots.txt, favicon & other well-known files
 
 ## Features
 
