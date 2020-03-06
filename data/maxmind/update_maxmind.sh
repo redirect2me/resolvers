@@ -1,48 +1,34 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # downloads a fresh copy of the MaxMind databases for ASN & geolocation lookups
 #
+bash --version
 
 set -o errexit
 set -o pipefail
 set -o nounset
 
-echo "INFO: starting at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+echo "INFO: starting MaxMind update at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
-ENV_FILE="../../.env"
+ENV_FILE=".env"
 if [ -f "${ENV_FILE}" ]; then
     echo "INFO: loading ${ENV_FILE} into environment"
-    export $(CAT ${ENV_FILE})
+    export $(cat ${ENV_FILE})
 fi
 
-#
-# check for required env vars
-#
-REQUIRED_VARS=( MAXMIND_LICENSE_KEY )
-declare -a MISSING_VARS
-for REQUIRED_VAR in "${REQUIRED_VARS[@]}"
-do
-    REQUIRED_VALUE="${!REQUIRED_VAR:-BAD}"
-    if [ "${REQUIRED_VALUE}" = "BAD"  ]; then
-		MISSING_VARS+=(${REQUIRED_VAR})
-	fi
-done
-
-if [ ${#MISSING_VARS[@]} -gt 0 ]; then
-    echo "ERROR: missing env vars: ${MISSING_VARS[*]}"
-    exit 3
-fi
+TARGET_DIR=$(dirname "$0")
+echo "INFO: creating files in ${TARGET_DIR}"
 
 TMP_ASN_FILE=$(mktemp)
 echo "INFO: download MaxMind ASN database into ${TMP_ASN_FILE}"
 curl --silent "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&suffix=tar.gz&license_key=${MAXMIND_LICENSE_KEY}" >"${TMP_ASN_FILE}"
-tar -xzf ${TMP_ASN_FILE} --strip-components 1 "*.mmdb"
+tar -xzf ${TMP_ASN_FILE} --directory="${TARGET_DIR}" --wildcards --strip-components 1 "*.mmdb"
 rm "${TMP_ASN_FILE}"
 
 TMP_CITY_FILE=$(mktemp)
 echo "INFO: download MaxMind City database into ${TMP_CITY_FILE}"
 curl --silent "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&suffix=tar.gz&license_key=${MAXMIND_LICENSE_KEY}" >"${TMP_CITY_FILE}"
-tar -xzf ${TMP_CITY_FILE} --strip-components 1 "*.mmdb"
+tar -xzf ${TMP_CITY_FILE} --directory="${TARGET_DIR}" --wildcards --strip-components 1 "*.mmdb"
 rm "${TMP_CITY_FILE}"
 
 if [ "${MMDB_ENCRYPTION_KEY:-BAD}" = "BAD" ]; then
@@ -51,12 +37,12 @@ if [ "${MMDB_ENCRYPTION_KEY:-BAD}" = "BAD" ]; then
 fi
 
 #
-# generate a new IV every time
+# generate (and save) a new IV every time
 #
 MMDB_ENCRYPTION_IV=$(head -c 4096 /dev/urandom | LC_CTYPE=C tr -dc A-F0-9 | head -c 32)
-echo -n ${MMDB_ENCRYPTION_IV} > mmdb.iv
+echo -n ${MMDB_ENCRYPTION_IV} > ${TARGET_DIR}/mmdb.iv
 
-ASN_FILE=GeoLite2-ASN.mmdb
+ASN_FILE=${TARGET_DIR}/GeoLite2-ASN.mmdb
 echo "INFO: starting encryption of ${ASN_FILE} (file size=$(du ${ASN_FILE} | cut -f 1))"
 gzip --stdout ${ASN_FILE} | openssl enc -aes-256-ctr \
 	-K ${MMDB_ENCRYPTION_KEY} \
@@ -65,7 +51,7 @@ gzip --stdout ${ASN_FILE} | openssl enc -aes-256-ctr \
 rm ${ASN_FILE}
 echo "INFO: encryption complete (file size=$(du ${ASN_FILE}.enc | cut -f 1))"
 
-CITY_FILE=GeoLite2-City.mmdb
+CITY_FILE=${TARGET_DIR}/GeoLite2-City.mmdb
 echo "INFO: starting encryption of ${CITY_FILE} (file size=$(du ${CITY_FILE} | cut -f 1))"
 gzip --stdout ${CITY_FILE} | openssl enc -aes-256-ctr \
 	-K ${MMDB_ENCRYPTION_KEY} \
@@ -74,4 +60,4 @@ gzip --stdout ${CITY_FILE} | openssl enc -aes-256-ctr \
 rm ${CITY_FILE}
 echo "INFO: encryption complete (file size=$(du ${CITY_FILE}.enc | cut -f 1))"
 
-echo "INFO: complete at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+echo "INFO: complete MaxMind update at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
