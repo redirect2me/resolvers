@@ -1,10 +1,12 @@
 # To Do
 
-* some tools font-weight-bold
-* check SSL certificate
 * what's my ip: copy to clipboard, links to api
+* automate download of PSL
+* dnsRouter.ts
+* resolverRouter.ts
+* some tools font-weight-bold
 * redirect testing
-* Contact page w/link in footer
+* check SSL certificate
 * update credits
 * update sitemap.xml
 * list of domains (and detailed info) from Gandi
@@ -33,12 +35,12 @@ https://github.com/ad-m/github-push-action
 
 ## General
 
-* contact page
 * privacy policy
 * github issue template for new resolvers
 * link on resolvers-index to contribute
 * CONTRIBUTING.md
 * docker-run.sh
+* square brackets around ipv6 addresses
 
 ## Open Resolvers Enhancements
 
@@ -46,14 +48,12 @@ https://github.com/ad-m/github-push-action
 * countries page
 * translations for domains in foreign languages
 
-## Data Enhancements
+## Open Resolver Data Enhancements
 
-* Geolocation data
-* square brackets around ipv6 addresses
 * fill in tags for all resolvers
 * fill in social media links
 * descriptions for open resolvers
-* data/xxx.md with details for each open resolvers
+* data/resolvers/xxx.md with details for each open resolvers
 * https://cleanbrowsing.org/guides/dnsovertls
 * IRC social media links are wrong
 
