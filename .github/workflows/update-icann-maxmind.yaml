@@ -2,7 +2,7 @@ name: Update MaxMind and ICANN databases
 
 on:
   schedule:
-  - cron: '42 0 * * 1'
+  - cron: '42 0 * * *'
 
 jobs:
   update:
