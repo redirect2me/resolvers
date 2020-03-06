@@ -3,7 +3,7 @@
 # make the encryption key for the mmdb files since we are not allowed to distribute them as-is
 #
 # usage:
-#   make_key.sh >>../../.env
+#   make_key.sh >>.env
 #
 # you also need to add them to the env whereever you are running the node app
 #

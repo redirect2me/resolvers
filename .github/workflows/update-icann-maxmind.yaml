@@ -1,0 +1,42 @@
+name: Update MaxMind and ICANN databases
+
+on:
+  schedule:
+  - cron: '42 0 * * 1'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Update MaxMind
+      run: data/maxmind/update_maxmind.sh
+      env:
+        MMDB_ENCRYPTION_KEY: ${{ secrets.MMDB_ENCRYPTION_KEY }}
+        MAXMIND_LICENSE_KEY: ${{ secrets.MAXMIND_LICENSE_KEY }}
+
+    - name: Update ICANN
+      run: data/icann/update_icann.sh
+
+    - name: Install SSH Client
+      uses: webfactory/ssh-agent@v0.2.0
+      with:
+        ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+
+    - name: Prepare git and github
+      run: |
+        git config --global user.email "github-action@github.com"
+        git config --global user.name "Github Action"
+        git remote add deploy git@github.com:redirect2me/resolvers.git
+        git checkout master
+
+    - name: Commit changes
+      run: |
+        git add data/maxmind/mmdb.iv data/maxmind/GeoLite2-ASN.mmdb.enc data/maxmind/GeoLite2-City.mmdb.enc
+        git add data/icann/tlds-alpha-by-domain.txt
+        git commit -m "Databases updated at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+        git push deploy master
+
+
