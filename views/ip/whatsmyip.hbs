@@ -1,6 +1,27 @@
 {{>above}}
 
-Your IP is {{current_ip}}
+<script src="/js/clipboard.min.js"></script>
+<script>$(function() {
+        var clipboard = new ClipboardJS('.clipboard');
+
+        clipboard.on('success', function(e) {
+            e.clearSelection();
+            setTimeout( () => { $(e.trigger).tooltip('hide'); }, 1000);
+            });
+
+        $('[data-toggle="tooltip"]').tooltip({ placement: 'auto', title: 'Copied to clipboard!', trigger: 'click' });
+    });
+</script>
+
+<p>
+    Your IP address is <code class="border p-2 rounded bg-light" id="ipaddress">{{current_ip}}</code>
+    <button
+        class="btn btn-sm btn-outline-secondary clipboard ml-2"
+        data-toggle="tooltip"
+        data-clipboard-target="#ipaddress">
+        <img style="height: 16px;" src="/images/clippy.svg" alt="Copy to clipboard">
+    </button>
+</p>
 
 
 {{>below}}

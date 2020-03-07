@@ -6,7 +6,7 @@ on:
     - master
     paths-ignore:
     - '*.md'
-    - '*.sh'
+    - '**/*.sh'
     - '.github/**'
 
 # Environment variables available to all jobs and steps in this workflow
