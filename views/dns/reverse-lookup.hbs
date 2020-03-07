@@ -2,12 +2,12 @@
 <div class="container d-flex flex-column">
     <div class="row align-items-center justify-content-center no-gutters">
         <div class="col-12 col-md-5 col-lg-4 py-8 py-md-11">
-            <form action="/dns-lookup.html" class="mb-6" method="POST">
+            <form action="/dns/reverse-lookup.html" class="mb-6" method="POST">
                 <div class="form-group">
-                    <label for="hostname">
-                        Host name
+                    <label for="ipaddress">
+                        IP Address
                     </label>
-                    <input type="text" class="form-control" id="hostname" name="hostname" placeholder="" value="{{hostname}}" />
+                    <input type="text" class="form-control" id="ipaddress" name="ipaddress" placeholder="" value="{{ipaddress}}" />
                 </div>
                 <button class="btn btn-block btn-primary" type="submit">
                     Check

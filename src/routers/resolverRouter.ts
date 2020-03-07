@@ -2,16 +2,16 @@ import { promises as dnsPromises } from 'dns';
 import Router from 'koa-router';
 import * as psl from 'psl';
 
-import * as resolvers from './data/resolverData';
-import * as streamer from './streamer';
+import * as resolvers from '../data/resolverData';
+import * as streamer from '../streamer';
 
-const detailRouter = new Router();
+const resolverRouter = new Router();
 
-detailRouter.get('/resolvers/:resolver/', async (ctx) => {
+resolverRouter.get('/resolvers/:resolver/', async (ctx) => {
   await ctx.redirect('index.html');
 });
 
-detailRouter.get('/resolvers/:resolver/index.html', async (ctx: any) => {
+resolverRouter.get('/resolvers/:resolver/index.html', async (ctx: any) => {
 
   const resolverData = resolvers.get(ctx.params.resolver);
   if (!resolverData) {
@@ -27,7 +27,7 @@ detailRouter.get('/resolvers/:resolver/index.html', async (ctx: any) => {
   });
 });
 
-detailRouter.post('/resolvers/:resolver/index.html', async (ctx: any) => {
+resolverRouter.post('/resolvers/:resolver/index.html', async (ctx: any) => {
 
   const resolverData = resolvers.get(ctx.params.resolver);
   if (!resolverData) {
@@ -74,6 +74,18 @@ detailRouter.post('/resolvers/:resolver/index.html', async (ctx: any) => {
   });
 });
 
+function getUrls():string[] {
+    const urls = [
+        "/resolvers/index.html"
+    ]
+    for (const resolver of resolvers.getAll()) {
+      urls.push(`/resolvers/${resolver.key}/index.html`);
+    }
+
+    return urls;
+}
+
 export {
-  detailRouter
+    getUrls,
+    resolverRouter
 }

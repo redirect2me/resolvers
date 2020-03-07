@@ -1,23 +1,10 @@
 # To Do
 
-* what's my ip: copy to clipboard, links to api
+* what's my ip: links to api
+* glossary
 * automate download of PSL
-* dnsRouter.ts
-* resolverRouter.ts
-* some tools font-weight-bold
 * redirect testing
-* check SSL certificate
-* update credits
-* update sitemap.xml
 * list of domains (and detailed info) from Gandi
-
-https://github.com/ad-m/github-push-action
-- run: |
-    mkdir ~/.ssh
-    echo "${{ secrets.SECRET_PRIVATE_DEPLOY_KEY }}" > ~/.ssh/id_rsa
-    chmod 600 ~/.ssh/id_rsa
-#        git config --local user.email actions@github.com
-#        git config --local user.name github-actions
 
 
 ## DNS Check Improvements
@@ -32,6 +19,11 @@ https://github.com/ad-m/github-push-action
 * timing data for dns-check
 * [DoT](https://www.npmjs.com/package/dns-over-tls)
 * resolver-detail: test on ipv6, DoT, DoH
+
+# Check SSL improvements
+
+* test on bad/expired certs
+* link to SSLlabs
 
 ## General
 

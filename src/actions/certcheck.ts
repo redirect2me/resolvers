@@ -1,6 +1,4 @@
-//import { promises as dnsPromises } from 'dns';
 import Handlebars from 'handlebars';
-import Router from 'koa-router';
 import * as psl from 'psl';
 import * as http from 'http';
 import * as https from 'https';
@@ -9,17 +7,14 @@ import * as tls from 'tls';
 import { logger } from '../logger';
 import * as streamer from '../streamer';
 
-const certCheckRouter = new Router();
-
-certCheckRouter.get('/http/cert-check.html', async (ctx:any) => {
+async function certCheckGet(ctx:any) {
   ctx.body = await ctx.render('http/cert-check.hbs', {
     hostname: ctx.query.hostname,
     title: 'Certificate Check'
   });
-});
+}
 
-
-certCheckRouter.post('/http/cert-check.html', async (ctx:any) => {
+async function certCheckPost(ctx:any) {
 
   const hostname = ctx.request.body.hostname;
   if (!hostname) {
@@ -98,7 +93,7 @@ certCheckRouter.post('/http/cert-check.html', async (ctx:any) => {
 
     stream.write(`<p><a class="btn btn-primary" href="cert-check.html?hostname=${encodeURIComponent(hostname)}">Continue</a>`);
   });
-});
+}
 
 function httpsRequest(options:any): Promise<{req:http.ClientRequest, res:http.IncomingMessage}> {
     const p:Promise<any> = new Promise( (resolve, reject) => {
@@ -115,5 +110,6 @@ function httpsRequest(options:any): Promise<{req:http.ClientRequest, res:http.In
 }
 
 export {
-    certCheckRouter
+    certCheckGet,
+    certCheckPost
 }

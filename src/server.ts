@@ -14,16 +14,13 @@ import * as punycode from 'punycode';
 
 import config from './config';
 import * as asn from './data/maxmindData';
-import { certCheckRouter } from './actions/certcheck';
-import { detailRouter } from './resolver-detail';
+import { resolverRouter } from './routers/resolverRouter';
 import { domainRouter } from './routers/domainRouter';
 import { httpRouter } from './routers/httpRouter';
 import { ipRouter } from './routers/ipRouter';
 import { logger, options as loggerOptions } from './logger';
-import { lookupRouter } from './lookup';
-import { mxCheckRouter } from './actions/mxcheck';
+import { dnsRouter } from './routers/dnsRouter';
 import * as resolvers from './data/resolverData';
-import { reverseRouter } from './reverse-lookup';
 import { rootRouter } from './routers/rootRouter';
 import * as domains from './data/domainData';
 import * as util from './util';
@@ -172,14 +169,11 @@ rootRouter.get('/resolvers/index.html', async (ctx:any) => {
 
 
 app.use(rootRouter.routes());
-app.use(detailRouter.routes());
-app.use(lookupRouter.routes());
-app.use(reverseRouter.routes());
+app.use(resolverRouter.routes());
+app.use(dnsRouter.routes());
 app.use(domainRouter.routes());
 app.use(httpRouter.routes());
 app.use(ipRouter.routes());
-app.use(mxCheckRouter.routes());
-app.use(certCheckRouter.routes());
 
 async function main() {
 

@@ -4,6 +4,8 @@ import Router from 'koa-router';
 //import * as util from '../util';
 import { URL } from 'url';
 
+import * as certcheck from '../actions/certcheck';
+
 const httpRouter = new Router();
 
 httpRouter.get('/http/urlencode.html', async (ctx:any) => {
@@ -38,10 +40,12 @@ httpRouter.get('/http/headers.html', async (ctx:any) => {
      });
 });
 
-
 httpRouter.get('/http/headers.json', async (ctx) => {
     ctx.body = ctx.request.headers;
   });
+
+httpRouter.get('/http/cert-check.html', certcheck.certCheckGet);
+httpRouter.post('/http/cert-check.html', certcheck.certCheckPost);
 
 function getUrls():string[] {
     return [
