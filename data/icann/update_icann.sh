@@ -4,7 +4,7 @@
 #
 echo "INFO: starting ICANN update at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
-TARGET_DIR="$(dirname "$0")/icann"
+TARGET_DIR="$(dirname "$0")"
 echo "INFO: target directory is ${TARGET_DIR}"
 
 URL="https://data.iana.org/TLD/tlds-alpha-by-domain.txt"
