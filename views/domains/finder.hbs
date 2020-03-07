@@ -1,0 +1,24 @@
+{{> above}}
+
+<div class="alert alert-info">
+    This will search for a word in some of the more popular/usable top-level-domains.
+</div>
+
+<form action="finder.html" method="POST">
+<div class="row">
+    <div class="col d-flex justify-content-center">
+    <div class="card col-lg-5 px-0">
+        <div class="card-body">
+            <!--<h5 class="card-title text-center">Domain Name Finder</h5>-->
+            <div class="form-group">
+                <label for="ip">Word</label>
+                <input type="text" class="form-control" id="word" name="word" value="{{word}}" />
+            </div>
+            <input class="btn btn-primary" type="submit" value="Find" />
+        </div>
+    </div>
+    </div>
+</div>
+</form>
+
+{{> below}}
