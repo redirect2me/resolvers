@@ -4,6 +4,7 @@ import * as punycode from 'punycode';
 import * as psl from 'psl';
 
 import * as domainData from '../data/domainData';
+import * as domainFinder from '../actions/domainfinder';
 import * as util from '../util';
 
 const domainRouter = new KoaRouter();
@@ -132,6 +133,23 @@ domainRouter.get('/domains/punycode.html', async (ctx:any) => {
      });
 });
 
+domainRouter.get('/domains/finder.html', domainFinder.domainFinderGet);
+domainRouter.post('/domains/finder.html', domainFinder.domainFinderPost);
+
+function getUrls():string[] {
+    return [
+        "/domains/finder.html",
+        "/domains/icann-vs-psl.html",
+        "/domains/nice-tlds.html",
+        "/domains/psl-tlds.html",
+        "/domains/publicsuffix.html",
+        "/domains/punycode.html",
+        "/domains/tlds.html",
+        "/domains/usable-tlds.html",
+    ];
+}
+
 export {
-    domainRouter
+    domainRouter,
+    getUrls
 }

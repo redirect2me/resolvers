@@ -22,7 +22,6 @@ import { ipRouter } from './routers/ipRouter';
 import { logger, options as loggerOptions } from './logger';
 import { lookupRouter } from './lookup';
 import { mxCheckRouter } from './actions/mxcheck';
-import { domainFinderRouter } from './actions/domainfinder';
 import * as resolvers from './data/resolverData';
 import { reverseRouter } from './reverse-lookup';
 import { rootRouter } from './routers/rootRouter';
@@ -180,7 +179,6 @@ app.use(domainRouter.routes());
 app.use(httpRouter.routes());
 app.use(ipRouter.routes());
 app.use(mxCheckRouter.routes());
-app.use(domainFinderRouter.routes());
 app.use(certCheckRouter.routes());
 
 async function main() {

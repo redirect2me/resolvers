@@ -1,22 +1,17 @@
 import { promises as dnsPromises } from 'dns';
 import Handlebars from 'handlebars';
-import Router from 'koa-router';
+
 import { niceTlds as tlds } from '../data/domainData';
-
-
 import * as streamer from '../streamer';
 
-const domainFinderRouter = new Router();
-
-domainFinderRouter.get('/domains/finder.html', async (ctx:any) => {
+async function domainFinderGet(ctx:any) {
   ctx.body = await ctx.render('domains/finder.hbs', {
     word: ctx.query.word,
     title: 'Domain Name Finder'
   });
-});
+}
 
-
-domainFinderRouter.post('/domains/finder.html', async (ctx:any) => {
+async function domainFinderPost(ctx:any) {
 
   const word = ctx.request.body.word;
   if (!word) {
@@ -92,8 +87,9 @@ domainFinderRouter.post('/domains/finder.html', async (ctx:any) => {
 
     stream.write(`<p><a class="btn btn-primary" href="finder.html?word=${encodeURIComponent(word)}">Continue</a>`);
   });
-});
+}
 
 export {
-    domainFinderRouter
+    domainFinderGet,
+    domainFinderPost
 }

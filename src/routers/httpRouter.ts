@@ -43,6 +43,16 @@ httpRouter.get('/http/headers.json', async (ctx) => {
     ctx.body = ctx.request.headers;
   });
 
+function getUrls():string[] {
+    return [
+        "/http/cert-check.html",
+        "/http/headers.html",
+        "/http/urlencode.html",
+        "/http/urlparse.html",
+    ];
+}
+
 export {
-    httpRouter
+    httpRouter,
+    getUrls
 }
