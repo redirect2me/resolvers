@@ -5,6 +5,7 @@ import * as os from 'os';
 import * as resolvers from '../data/resolverData';
 import * as util from '../util';
 import { getCurrentIP } from './ipRouter';
+import { sitemap } from '../actions/sitemap';
 
 const rootRouter = new Router();
 
@@ -46,29 +47,9 @@ rootRouter.get('/iplocation.html', async (ctx:any) => {
     await ctx.redirect('/ip/geolocation.html');
 });
 
-rootRouter.get('/sitemap.xml', async (ctx:any) => {
+rootRouter.get('/sitemap.xml', sitemap);
 
-    const urls:string[] = [];
-
-    urls.push("/");
-    urls.push("/dns-lookup.html");
-    urls.push("/domains/nice-tlds.html");
-    urls.push("/domains/punycode.html");
-    urls.push("/domains/tlds.html");
-    urls.push("/domains/usable-tlds.html");
-    urls.push("/http/headers.html");
-    urls.push("/iplocation.html");
-    urls.push("/resolvers/index.html");
-    for (const resolver of resolvers.getAll()) {
-      urls.push(`/resolvers/${resolver.key}/index.html`);
-    }
-    urls.push("/reverse-dns-lookup.html");
-
-    ctx.body = await ctx.render('sitemap.hbs', { urls });
-    ctx.type = "text/xml;charset=utf-8";
-  });
-
-  rootRouter.get('/status.json', async (ctx) => {
+rootRouter.get('/status.json', async (ctx) => {
 
       const retVal: {[key: string]: any} = {};
 

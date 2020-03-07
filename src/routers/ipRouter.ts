@@ -56,7 +56,15 @@ ipRouter.get('/ip/whatsmyip.txt', async (ctx) => {
     ctx.body = getCurrentIP(ctx);
 });
 
+function getUrls():string[] {
+    return [
+        "/ip/geolocation.html",
+        "/ip/whatsmyip.html",
+    ];
+}
+
 export {
     getCurrentIP,
+    getUrls,
     ipRouter
 }
