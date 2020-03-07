@@ -13,6 +13,10 @@ ipRouter.get('/ip/', async (ctx) => {
     ctx.redirect('/ip/index.html');
 });
 
+ipRouter.get('/ip/index.html', async (ctx) => {
+    ctx.redirect('/tools.html#ip');
+});
+
 function getCurrentIP(ctx:any):string {
     return ctx.ips.length > 0 ? ctx.ips[0] : ctx.ip;
 }
@@ -32,10 +36,6 @@ ipRouter.get('/ip/geolocation.html', async (ctx:any) => {
     ip,
     title: 'IP Address Geolocation',
   });
-});
-
-ipRouter.get('/ip/index.html', async (ctx) => {
-    ctx.redirect('/tools.html#ip');
 });
 
 ipRouter.get('/ip/whatsmyip.html', async (ctx:any) => {

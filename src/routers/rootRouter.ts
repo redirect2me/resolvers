@@ -35,16 +35,8 @@ rootRouter.get('/contact.html', async (ctx:any) => {
      });
 });
 
-rootRouter.get('/headers.html', async (ctx:any) => {
-    ctx.redirect('/http/headers.html');
-});
-
 rootRouter.get('/index.html', async (ctx) => {
     await ctx.redirect('/');
-});
-
-rootRouter.get('/iplocation.html', async (ctx:any) => {
-    await ctx.redirect('/ip/geolocation.html');
 });
 
 rootRouter.get('/sitemap.xml', sitemap);
@@ -104,6 +96,28 @@ rootRouter.get('/tools.html', async (ctx:any) => {
      });
 });
 
+/*
+ * I've moved things out of the root: don't break the old links
+ */
+rootRouter.get('/iplocation.html', async (ctx:any) => {
+    await ctx.redirect('/ip/geolocation.html');
+});
+
+rootRouter.get('/reverse-dns-lookup.html', async (ctx:any) => {
+    await ctx.redirect('/dns/reverse-lookup.html');
+});
+
+rootRouter.get('/lookup.html', async (ctx) => {
+    await ctx.redirect('/dns/lookup.html');
+});
+
+rootRouter.get('/dns-lookup.html', async (ctx) => {
+    await ctx.redirect('/dns/lookup.html');
+});
+
+rootRouter.get('/headers.html', async (ctx:any) => {
+    ctx.redirect('/http/headers.html');
+});
 
 export {
     rootRouter

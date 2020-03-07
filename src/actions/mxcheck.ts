@@ -1,21 +1,19 @@
 import { promises as dnsPromises } from 'dns';
 import Handlebars from 'handlebars';
-import Router from 'koa-router';
 import * as psl from 'psl';
 
 import * as streamer from '../streamer';
 
-const mxCheckRouter = new Router();
 
-mxCheckRouter.get('/dns/mxcheck.html', async (ctx:any) => {
+async function mxCheckGet(ctx:any) {
   ctx.body = await ctx.render('dns/mxcheck.hbs', {
     domain: ctx.query.domain,
     title: 'MX Check'
   });
-});
+}
 
 
-mxCheckRouter.post('/dns/mxcheck.html', async (ctx:any) => {
+async function mxCheckPost(ctx:any) {
 
   const domain = ctx.request.body.domain;
   if (!domain) {
@@ -83,8 +81,9 @@ mxCheckRouter.post('/dns/mxcheck.html', async (ctx:any) => {
 
     stream.write(`<p><a class="btn btn-primary" href="mxcheck.html?domain=${encodeURIComponent(domain)}">Continue</a>`);
   });
-});
+}
 
 export {
-    mxCheckRouter
+    mxCheckGet,
+    mxCheckPost
 }

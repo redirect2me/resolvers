@@ -1,13 +1,10 @@
 import { promises as dnsPromises } from 'dns';
 import { default as isIp } from 'is-ip';
-import Router from 'koa-router';
 
-import * as asn from './data/maxmindData';
-import * as resolvers from './data/resolverData';
-import * as streamer from './streamer';
-import * as util from './util';
-
-const reverseRouter = new Router();
+import * as asn from '../data/maxmindData';
+import * as resolvers from '../data/resolverData';
+import * as streamer from '../streamer';
+import * as util from '../util';
 
 async function reverseDns(dnsResolver:dnsPromises.Resolver, ip:string): Promise<string>{
 
@@ -47,23 +44,22 @@ async function reverseDnsApi(ctx: any, ipaddress: string) {
   }
 }
 
-reverseRouter.get('/reverse-dns-lookup.json', async (ctx: any) => {
-  await reverseDnsApi(ctx, ctx.query.ipaddress);
-});
+async function reverseLookupAPIGet(ctx: any) {
+    await reverseDnsApi(ctx, ctx.query.ipaddress);
+}
 
-reverseRouter.post('/reverse-dns-lookup.json', async (ctx: any) => {
-  await reverseDnsApi(ctx, ctx.request.body.ipaddress);
-});
+async function reverseLookupAPIPost(ctx: any) {
+    await reverseDnsApi(ctx, ctx.request.body.ipaddress);
+}
 
-
-reverseRouter.get('/reverse-dns-lookup.html', async (ctx: any) => {
-  ctx.body = await ctx.render('reverse-dns-lookup.hbs', {
+async function reverseLookupGet(ctx: any) {
+    ctx.body = await ctx.render('dns/reverse-lookup.hbs', {
     ipaddress: ctx.query.ipaddress,
     title: 'Reverse DNS Lookup'
   });
-});
+}
 
-reverseRouter.post('/reverse-dns-lookup.html', async (ctx: any) => {
+async function reverseLookupPost(ctx: any) {
 
   const ipaddress = ctx.request.body.ipaddress;
   if (!ipaddress) {
@@ -100,9 +96,12 @@ reverseRouter.post('/reverse-dns-lookup.html', async (ctx: any) => {
 
     stream.write(`<p><a class="btn btn-primary" href="/reverse-dns-lookup.html?ipaddress=${encodeURIComponent(ipaddress)}">Continue</a>`);
   });
-});
+}
 
 export {
   reverseDns,
-  reverseRouter
+  reverseLookupGet,
+  reverseLookupPost,
+  reverseLookupAPIGet,
+  reverseLookupAPIPost
 }
