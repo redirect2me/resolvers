@@ -1,0 +1,107 @@
+{{>above}}
+
+<div class="alert alert-info">There is a lot of technical jargon involved with properly setting up your
+  domain properly: here is a short glossary to help explain what each term means.
+</div>
+
+<dt>DNS</dt>
+<dd><b>D</b>omain <b>N</b>ame <b>S</b>ystem.  This is how a computer
+figures out how the numeric address of a specific server when given a name.
+</dd>
+
+<dt>CNAME</dt>
+<dd><b>Canonical Name</b> - when a computer has multiple names, this points to
+the real name.  In some cases, it can be daisy-chained, so it points to another CNAME
+that then points to the real name.  It is often used to make human-friendly names.
+</dd>
+
+<dt>A</dt>
+<dd><b>Address</b> an IPv4 address record.  This DNS entry maps from a name to an IPv4 address.</dd>
+
+<dt>AAAA</dt>
+<dd><b>Address</b> an IPv6 address record.  This DNS entry maps from a name to an IPv6 address.</dd>
+
+<dt>ALIAS/ANAME</dt>
+<dd>This is a unofficial term for a combination of a CNAME with a A record.  For technical reasons, you cannot
+  put a CNAME on a root/naked hostname.  Since CNAMEs are often necessary, some DNS providers support a workaround
+  that let's you create a CNAME-like entry that resolves like an A/AAAA record.
+</dd>
+
+<dt>TXT</dt>
+<dd><b>Text</b> - DNS entries with random bits of text that have lots of different uses.  Redirect2me can
+you them so you don't have to login to the admin interface to setup your redirections.</dd>
+
+<dt>MX</dt>
+<dd><b>Mail Exchange</b> the DNS records used by email systems to route email.</dd>
+
+<dt>TTL</dt>
+<dd><b>Time To Live</b> - part of a DNS record that specifies how long the record can be cached.  Entered in
+seconds.  Note that it is not always obeyed, especially if it is very short.</dd>
+
+<dt>Naked</dt>
+<dd>Another term for the root hostname of a domain.</dd>
+
+<dt>TLD</dt>
+<dd><b>Top Level Domain</b> - the last part of a domain name.  Originally com, edu, net and org, but now
+expanded to thousands of possibilities.</dd>
+
+<dt>ccTLD</dt>
+<dd><b>Country Code Top Level Domain</b> - the last part of a domain name that is a two-level ISO-LATER country code.</dd>
+
+<dt>dig</dt>
+<dd>A command-line tool to lookup DNS entries.</dd>
+
+<dt>curl</dt>
+<dd>A command-line tool to fetch a web page.  With the proper parameters, you can see exactly which
+  redirections are happening.
+</dd>
+
+<dt>Certificate</dt>
+<dd>Part of the keys to SSL encryption.  A certificate contains the name(s) of the web servers where it is valid.
+  If you use the wrong certificate, you will get a "Certificate Mismatch Error".
+</dd>
+
+<dt>SSL</dt>
+<dd><b>Secure Sockets Layer</b> - the encryption system used by HTTPS (and others) to protect your communications</dd>
+
+<dt>HTTP</dt>
+<dd><b>Hypertext Transport Protocol</b> - the protocal used between a web browser and a web server.</dd>
+
+<dt>HTTPS</dt>
+<dd><b>HTTP Secure</b> - the encrypted version of HTTP.</dd>
+
+<dt>NSLookup</dt>
+<dd>A command-line tool to lookup DNS entries.</dd>
+
+<dt>NS</dt>
+<dd><b>Name Server</b> the DNS entries that control which server is responsible for your domain.</dd>
+
+<dt>Public suffix</dt>
+<dd>This is the part of a domain name that you do not own.  Usually, this is the TLD, like <code>.com</code>
+or <code>.org</code>, but some TLDs and services have multiple parts, like <code>.co.uk</code>.</dd>
+
+<dt>registrar</dt>
+<dd>A company that sells domanin names on behalf of a registry.</dd>
+
+<dt>registry</dt>
+<dd>The company or organization that owns a top-level domain (TLD).  This is generally not the same as who
+  is selling you a domain name.
+</dd>
+
+<dt>Root</dt>
+<dd>The domain without any additional prefixed names.  So, <code>example.com</code> is a root hostname,
+<code>www.example.com</code> is not.</dd>
+
+<hr/>
+
+<p>To Do:</p>
+<ul>
+    <li>eTLD</li>
+    <li>authoritative name server</li>
+    <li>https://dev.to/chrisachard/dns-record-crash-course-for-web-developers-35hn</li>
+    <li>ASN</li>
+    <li>in-addr.arpa</li>
+    <li>arpa</li>
+</ul>
+
+{{>below}}
