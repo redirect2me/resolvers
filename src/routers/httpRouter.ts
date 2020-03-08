@@ -61,6 +61,7 @@ function getUrls():string[] {
         "/http/headers.html",
         "/http/urlencode.html",
         "/http/urlparse.html",
+        "/http/useragent.html",
     ];
 }
 
