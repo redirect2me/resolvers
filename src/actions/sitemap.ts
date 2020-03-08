@@ -1,6 +1,7 @@
 import * as dnsRouter from '../routers/dnsRouter';
 import * as domainRouter from '../routers/domainRouter';
 import * as httpRouter from '../routers/httpRouter';
+import * as infoRouter from '../routers/infoRouter';
 import * as ipRouter from '../routers/ipRouter';
 import * as resolverRouter from '../routers/resolverRouter';
 
@@ -11,6 +12,7 @@ async function sitemap(ctx:any) {
     urls.push(...dnsRouter.getUrls());
     urls.push(...domainRouter.getUrls());
     urls.push(...httpRouter.getUrls());
+    urls.push(...infoRouter.getUrls());
     urls.push(...ipRouter.getUrls());
     urls.push(...resolverRouter.getUrls());
 
