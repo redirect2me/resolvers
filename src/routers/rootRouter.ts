@@ -39,6 +39,18 @@ rootRouter.get('/index.html', async (ctx) => {
     await ctx.redirect('/');
 });
 
+rootRouter.get('/info/glossary.html', async (ctx:any) => {
+    ctx.body = await ctx.render('info/glossary.hbs', {
+        title: 'Glossary',
+     });
+});
+
+rootRouter.get('/info/steps.html', async (ctx:any) => {
+    ctx.body = await ctx.render('info/steps.hbs', {
+        title: 'Steps to get a web page',
+     });
+});
+
 rootRouter.get('/sitemap.xml', sitemap);
 
 rootRouter.get('/status.json', async (ctx) => {

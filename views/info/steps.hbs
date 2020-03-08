@@ -1,0 +1,22 @@
+{{>above}}
+
+<div class="alert alert-info">
+    These are the things that happen behind the scenes when
+    you get a web page.
+</div>
+
+<ol>
+
+<li>You click a link (or type a URL into your browser's address bar)</li>
+<li>The link consists of a protocal (http or https), a hostname (www.example.com) and (optionally) a path (/home)</li>
+<li>Your browser sends a DNS request to your name server in order to figure out what IP address corresponds to this hostname.</li>
+<li>Your name server connects to other name servers to find the authoritative name server for this hostname, which knows the IP address.</li>
+<li>Sometimes, the authoritative name server will return another name instead of the IP address.  In this case, your name server starts again with the new name.  This can happen multiple times, until it finally gets an IP address.</li>
+<li>Your browser makes a TCP connection to this IP address.</li>
+<li>If the protocol is https, the web server and your browser exchange some encryption details, and your browser verifies that the web server's SSL certificate is valid for this hostname.</li>
+<li>Your browser send the details of your request.  This includes the hostname, the optional path, and lots of information about you: the language you speak (or at least have installed on your computer), which browser you are using, what types of files your browser can display, etc.</li>
+<li>The webserver sends back a response.  This response can be a web page, an error page, or a redirect.</li>
+<li>A redirect is another webpage that should be displayed instead of the one you clicked/typed.  If it is a redirect, the whole process starts over from the beginning.  This can happen multiple times until you finally get a web page or an error page.</li>
+</ol>
+
+{{>below}}

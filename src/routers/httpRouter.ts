@@ -25,6 +25,14 @@ httpRouter.get('/http/urlparse.html', async (ctx:any) => {
      });
 });
 
+httpRouter.get('/http/useragent.html', async (ctx:any) => {
+    ctx.body = await ctx.render('http/useragent.hbs', {
+        h1: 'Your User Agent',
+        title: 'User Agent',
+        userAgent: ctx.request.headers['user-agent'],
+     });
+});
+
 httpRouter.get('/http/', async (ctx) => {
     ctx.redirect('/http/index.html');
 });
