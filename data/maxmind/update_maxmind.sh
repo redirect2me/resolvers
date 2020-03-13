@@ -31,6 +31,8 @@ curl --silent "https://download.maxmind.com/app/geoip_download?edition_id=GeoLit
 tar -xzf ${TMP_CITY_FILE} --directory="${TARGET_DIR}" --wildcards --strip-components 1 "*.mmdb"
 rm "${TMP_CITY_FILE}"
 
+md5sum *.mmdb | sort >mmdb.md5
+
 if [ "${MMDB_ENCRYPTION_KEY:-BAD}" = "BAD" ]; then
     echo "INFO: no encryption keys, exiting.  (but app can still be run locally)"
     exit 1
