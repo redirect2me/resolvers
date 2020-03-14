@@ -1,0 +1,25 @@
+{{>above}}
+
+<div class="alert alert-info">
+    The TCP/IP protocol assigns <i>ports</i> to standard software so it
+    can send data to the correct software when it is all running on a single machine.
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th class="text-center">Port</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+{{#each ports}}
+        <tr>
+            <td class="text-center">{{this.port}}</td>
+            <td>{{this.description}}</td>
+        </tr>
+{{/each}}
+    </tbody>
+</table>
+
+{{>below}}

@@ -22,6 +22,7 @@ import { logger, options as loggerOptions } from './logger';
 import { dnsRouter } from './routers/dnsRouter';
 import * as resolvers from './data/resolverData';
 import { rootRouter } from './routers/rootRouter';
+import { infoRouter } from './routers/infoRouter';
 import * as domains from './data/domainData';
 import * as util from './util';
 
@@ -174,6 +175,7 @@ app.use(dnsRouter.routes());
 app.use(domainRouter.routes());
 app.use(httpRouter.routes());
 app.use(ipRouter.routes());
+app.use(infoRouter.routes());
 
 async function main() {
 
