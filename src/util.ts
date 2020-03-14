@@ -14,6 +14,7 @@ function handleJsonp(ctx:any, retVal:Object) {
     const callback = getJsonp(ctx);
     if (callback) {
         ctx.body = callback + '(' + JSON.stringify(retVal) + ');';
+        ctx.set('Content-Type', 'text/javascript');
     } else {
         ctx.set('Access-Control-Allow-Origin', '*');
         ctx.set('Access-Control-Allow-Methods', 'POST, GET');
