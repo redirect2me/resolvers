@@ -1,4 +1,6 @@
+import { promises as fsPromises } from 'fs';
 import Router from 'koa-router';
+import * as path from 'path';
 
 const infoRouter = new Router();
 
@@ -22,10 +24,20 @@ infoRouter.get('/info/steps.html', async (ctx:any) => {
      });
 });
 
+infoRouter.get('/info/tcp-ports.html', async (ctx: any) => {
+    const portsFile = path.join(__dirname, '../..', 'data', 'tcp-ports.json');
+    const ports = JSON.parse(await fsPromises.readFile(portsFile, 'utf-8'));
+    ctx.body = await ctx.render('info/tcp-ports.hbs', {
+        ports,
+        title: 'Common TCP Ports',
+    });
+});
+
 function getUrls():string[] {
     return [
         "/info/glossary.html",
         "/info/steps.html",
+        "/info/tcp-ports.html",
     ];
 }
 
