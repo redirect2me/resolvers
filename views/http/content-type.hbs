@@ -1,0 +1,43 @@
+{{>above}}
+
+<div class="alert alert-info">
+	HTTP includes a header that specifies the file format of the response.  This is just my list of ones 
+	that I keep having to lookup.
+</div>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>File format</th>
+			<th>Extension</th>
+			<th>MIME Content-Type</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each mimeTypes}}
+		<tr>
+			<td>{{this.name}}</td>
+			<td><code>.{{this.extension}}</code></td>
+			<td>{{this.mimetype}}{{#if this.notes}}*{{/if}}</td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
+
+<p>
+	The default for anything text is <code>text/plain</code>, usually with encoding <code>text/plain; charset=UTF-8</code>code.</code>
+</p>
+
+<p>
+	To force a file to be downloaded (vs displayed in the browser), use <code>application/octet-stream</code>.
+</p>
+
+<p>Sources:</p>
+<ul>
+	<li><a href="https://www.iana.org/assignments/media-types/media-types.xhtml">IANA media types</a> - the official list</li>
+	<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types">MDN</a> - Mozilla's list of commonly used ones</li>
+	<li><a href="https://github.com/nginx/nginx/blob/master/conf/mime.types">NGINX standard configuration</a></li>
+	<li><a href="https://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types">Apache standard configuration</a></li>
+</ul>
+
+{{>below}}

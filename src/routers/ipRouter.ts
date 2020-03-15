@@ -1,4 +1,6 @@
+import { promises as fsPromises } from 'fs';
 import Router from 'koa-router';
+import * as path from 'path';
 //import * as punycode from 'punycode';
 //import * as domains from '../data/domainData';
 //import * as util from '../util';
@@ -38,6 +40,15 @@ ipRouter.get('/ip/geolocation.html', async (ctx:any) => {
   });
 });
 
+ipRouter.get('/ip/tcp-ports.html', async (ctx: any) => {
+    const portsFile = path.join(__dirname, '../..', 'data', 'tcp-ports.json');
+    const ports = JSON.parse(await fsPromises.readFile(portsFile, 'utf-8'));
+    ctx.body = await ctx.render('ip/tcp-ports.hbs', {
+        ports,
+        title: 'Common TCP Ports',
+    });
+});
+
 ipRouter.get('/ip/whatsmyip.html', async (ctx:any) => {
     ctx.body = await ctx.render('ip/whatsmyip.hbs', {
         current_ip: getCurrentIP(ctx),
@@ -59,6 +70,7 @@ ipRouter.get('/ip/whatsmyip.txt', async (ctx) => {
 function getUrls():string[] {
     return [
         "/ip/geolocation.html",
+        "/ip/tcp-ports.html",
         "/ip/whatsmyip.html",
     ];
 }

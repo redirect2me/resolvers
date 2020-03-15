@@ -1,4 +1,7 @@
+import { promises as fsPromises } from 'fs';
 import Router from 'koa-router';
+import * as path from 'path';
+import * as yaml from 'js-yaml';
 //import * as punycode from 'punycode';
 //import * as domains from '../data/domainData';
 //import * as util from '../util';
@@ -7,6 +10,15 @@ import { URL } from 'url';
 import * as certcheck from '../actions/certcheck';
 
 const httpRouter = new Router();
+
+httpRouter.get('/http/content-type.html', async (ctx: any) => {
+    const portsFile = path.join(__dirname, '../..', 'data', 'mimetype.yaml');
+    const mimeTypes = yaml.safeLoad(await fsPromises.readFile(portsFile, 'utf-8'));
+    ctx.body = await ctx.render('http/content-type.hbs', {
+        mimeTypes,
+        title: 'MIME Content-Type Values',
+    });
+});
 
 httpRouter.get('/http/urlencode.html', async (ctx:any) => {
     ctx.body = await ctx.render('http/urlencode.hbs', {

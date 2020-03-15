@@ -1,0 +1,46 @@
+
+- extension: csv
+  mimetype: text/csv
+  name: Comma-separated values
+
+- extension: epub
+  mimetype: application/epub+zip
+  name: ePub
+
+- extension: ico
+  mimetype: image/vnd.microsoft.icon
+  name: Icon
+
+- extension: js
+  mimetype: "text/javascript; charset=UTF-8"
+  name: JavaScript
+  notes: "The standard value is 'application/javascript', but older browsers choke on it."
+
+- extension: json
+  mimetype: application/json
+  name: JSON
+
+- extension: pdf
+  mimetype: application/pdf
+  name: PDF
+
+- extension: svg
+  mimetype: image/svg+xml
+  name: SVG
+
+- extension: xlsx
+  mimetype: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+  name: Microsoft Excel
+
+- extension: xml
+  mimetype: text/xml
+  name: XML
+
+- extension: yaml
+  mimetype: "text/yaml; charset=UTF-8"
+  name: YAML
+  notes: "Unofficial"
+
+- extension: zip
+  mimetype: application/zip
+  name: Zip
