@@ -24,6 +24,10 @@
   mimetype: application/pdf
   name: PDF
 
+- extension: rss
+  mimetype: application/rss+xml
+  name: RSS
+
 - extension: svg
   mimetype: image/svg+xml
   name: SVG
