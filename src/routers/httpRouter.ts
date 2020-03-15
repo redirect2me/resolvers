@@ -70,6 +70,7 @@ httpRouter.post('/http/cert-check.html', certcheck.certCheckPost);
 function getUrls():string[] {
     return [
         "/http/cert-check.html",
+        "/http/content-type.html",
         "/http/headers.html",
         "/http/urlencode.html",
         "/http/urlparse.html",
