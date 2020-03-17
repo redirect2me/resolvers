@@ -26,6 +26,10 @@ import { infoRouter } from './routers/infoRouter';
 import * as domains from './data/domainData';
 import * as util from './util';
 
+process.on('unhandledRejection', err => {
+    logger.error({ err }, 'unhandledRejection');
+});
+
 const app = new Koa();
 
 app.proxy = true
@@ -146,8 +150,6 @@ app.use(async(ctx, next) => {
       }
   }
 });
-
-
 
 rootRouter.get('/resolvers/', async (ctx) => {
   ctx.redirect('/resolvers/index.html');
