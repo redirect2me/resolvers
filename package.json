@@ -2,7 +2,6 @@
   "dependencies": {
     "axios": "^0.19.0",
     "convict": "^5.1.0",
-    "crypto": "^1.0.1",
     "handlebars": "^4.1.2",
     "is-ip": "^3.1.0",
     "js-yaml": "^3.13.1",

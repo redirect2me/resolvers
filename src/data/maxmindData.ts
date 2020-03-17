@@ -14,8 +14,9 @@ const pipeline = util.promisify(stream.pipeline);
 let asnDatabase:Reader<AsnResponse>|null = null;
 let cityDatabase:Reader<CityResponse>|null = null;
 
-async function expandFile(fileName:string, key:Buffer, iv:Buffer):Promise<string> {
+async function expandFile(logger:Pino.Logger, fileName:string, key:Buffer, iv:Buffer):Promise<string> {
     const retVal = await tmp.tmpName({ postfix: '.mmdb'});
+    logger.trace( { original: fileName, expanded: retVal }, 'Expanding compressed file');
     var r = fs.createReadStream(fileName);
 
     var decrypt = crypto.createDecipheriv('aes-256-ctr', key, iv)
@@ -39,8 +40,8 @@ async function initialize(logger:Pino.Logger) {
         if (keyHex && ivHex) {
             const key = Buffer.from(keyHex, "hex");
             const iv = Buffer.from(ivHex, "hex");
-            asnFileName = await expandFile(asnFileName + '.enc', key, iv);
-            cityFileName = await expandFile(cityFileName + '.enc', key, iv);
+            asnFileName = await expandFile(logger, asnFileName + '.enc', key, iv);
+            cityFileName = await expandFile(logger, cityFileName + '.enc', key, iv);
         }
         asnDatabase = await maxmind.open<AsnResponse>(asnFileName);
         cityDatabase = await maxmind.open<CityResponse>(cityFileName);
