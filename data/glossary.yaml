@@ -1,0 +1,125 @@
+dns:
+  term: DNS
+  expanded: <b>D</b>omain <b>N</b>ame <b>S</b>ystem
+  definition: This is how a computer figures out how the numeric address of a specific server when given a hostname.
+
+cname:
+  expanded: Canonical Name
+  definition: when a computer has multiple names, this points to
+    the real name.  In some cases, it can be daisy-chained, so it points to another CNAME
+    that then points to the real name.  It is often used to make human-friendly names.
+
+a:
+  term: A record
+  expanded: Address
+  definition: an IPv4 address record.  This DNS entry maps from a name to an IPv4 address.
+
+aaaa:
+  term: AAAA record
+  definition: <b>Address</b> an IPv6 address record.  This DNS entry maps from a name to an IPv6 address.
+
+
+aname:
+  term: ALIAS/ANAME record
+  definition: This is a unofficial term for a combination of a CNAME with a A record.  For technical reasons, you cannot
+    put a CNAME on a root/naked hostname.  Since CNAMEs are often necessary, some DNS providers support a workaround
+    that let's you create a CNAME-like entry that resolves like an A/AAAA record.
+
+txt:
+  term: TXT record
+  expanded: Text
+  definition: DNS entries with random bits of text that have lots of different uses.
+
+mx:
+  term: MX record
+  expanded: <b>M</b>ail E<b>x</b>change
+  definition: the DNS records used by email systems to route email.
+
+ttl:
+  term: TTL
+  expanded: <b>Time To Live</b>
+  definition: part of a DNS record that specifies how long the record can be cached.  Entered in
+    seconds.  Note that it is not always obeyed, especially if it is very short.
+
+naked:
+  term: Naked hostname
+  definition: Another term for the root hostname of a domain.
+
+tld:
+  term: TLD
+  expanded: <b>Top Level Domain</b>
+  definition: the last part of a domain name.  Originally com, edu, net and org, but now
+    expanded to thousands of possibilities.
+
+cctld:
+  term: ccTLD
+  expanded: <b>Country Code Top Level Domain</b>
+  definition: the last part of a domain name that is a two-level ISO-LATER country code.
+
+dig:
+  term: dig
+  definition: A command-line tool to lookup DNS entries.
+
+curl:
+  term: curl
+  definition: A command-line tool to fetch a web page.  With the proper parameters, you can see exactly which
+    redirections are happening.
+
+certificate:
+  term: Certificate
+  definition: Part of the keys to SSL encryption.  A certificate contains the name(s) of the web servers where it is valid.
+    If you use the wrong certificate, you will get a "Certificate Mismatch Error".
+
+ssl:
+  term: SSL
+  expanded: <b>Secure Sockets Layer</b>
+  definition: the encryption system used by HTTPS (and others) to protect your communications
+
+http:
+  term: HTTP
+  expanded: <b>Hypertext Transport Protocol</b>
+  definition: the protocal used between a web browser and a web server.
+
+https:
+  term: HTTPS
+  expanded: <b>HTTP Secure</b>
+  definition: the encrypted version of HTTP.
+
+nslookup:
+  term: NSLookup
+  definition: A command-line tool to lookup DNS entries.
+
+ns:
+  term: NS record
+  expanded: <b>N</b>ame <b>S</b>erver</b>
+  definition: the DNS entries that control which server is responsible for your domain.
+
+publicsuffix:
+  term: Public suffix
+  definition: This is the part of a domain name that you do not own.  Usually, this is the TLD, like <code>.com</code>
+    or <code>.org /code>, but some TLDs and services have multiple parts, like <code>.co.uk</code>.
+
+registrar:
+  term: registrar
+  definition: A company that sells domanin names on behalf of a registry.
+
+registry:
+  term: registry
+  definition: The company or organization that owns a top-level domain (TLD).  This is generally not the same as who
+    is selling you a domain name.
+
+root:
+  term: Root
+  definition: The domain without any additional prefixed names.  So, <code>example.com</code> is a root hostname,
+    <code>www.example.com</code> is not.
+
+<p>To Do:</p>
+<ul>
+    <li>eTLD</li>
+    punycode
+    <li>authoritative name server</li>
+    <li>https://dev.to/chrisachard/dns-record-crash-course-for-web-developers-35hn</li>
+    <li>ASN</li>
+    <li>in-addr.arpa</li>
+    <li>arpa</li>
+</ul>

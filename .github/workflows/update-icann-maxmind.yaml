@@ -33,10 +33,6 @@ jobs:
         git checkout master
 
     - name: Commit changes
-      run: |
-        git add data/maxmind/mmdb.iv data/maxmind/mmdb.md5 data/maxmind/GeoLite2-ASN.mmdb.enc data/maxmind/GeoLite2-City.mmdb.enc
-        git add data/icann/tlds-alpha-by-domain.txt
-        git commit -m "Databases updated at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-        git push deploy master
+      run: data/data-commit.sh
 
 
