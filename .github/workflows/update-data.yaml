@@ -1,4 +1,4 @@
-name: Update MaxMind and ICANN databases
+name: Update databases
 
 on:
   schedule:
@@ -20,6 +20,9 @@ jobs:
     - name: Update ICANN
       run: data/icann/update_icann.sh
 
+    - name: Update PublicSuffixList
+      run: data/publicsuffix/update_publicsuffix.sh
+
     - name: Install SSH Client
       uses: webfactory/ssh-agent@v0.2.0
       with:
@@ -34,5 +37,3 @@ jobs:
 
     - name: Commit changes
       run: data/data-commit.sh
-
-
