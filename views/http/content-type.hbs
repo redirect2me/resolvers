@@ -1,7 +1,7 @@
 {{>above}}
 
 <div class="alert alert-info">
-	HTTP includes a header that specifies the file format of the response.  This is just my list of ones 
+	HTTP includes a header that specifies the file format of the response.  This is just my list of ones
 	that I keep having to lookup.
 </div>
 
@@ -18,14 +18,19 @@
 		<tr>
 			<td>{{this.name}}</td>
 			<td><code>.{{this.extension}}</code></td>
-			<td>{{this.mimetype}}{{#if this.notes}}*{{/if}}</td>
+			<td>
+                {{this.mimetype}}
+                {{#if this.notes}}
+                <span tabindex="0" class="font-weight-bold badge badge-pill badge-primary" role="button" data-toggle="popover" data-trigger="focus" data-content="{{this.notes}}">i</span>
+                {{/if}}
+            </td>
 		</tr>
 		{{/each}}
 	</tbody>
 </table>
 
 <p>
-	The default for anything text is <code>text/plain</code>, usually with encoding <code>text/plain; charset=UTF-8</code>code.</code>
+	The default for anything text is <code>text/plain</code>, usually with encoding <code>text/plain; charset=UTF-8</code>.</code>
 </p>
 
 <p>
@@ -39,5 +44,11 @@
 	<li><a href="https://github.com/nginx/nginx/blob/master/conf/mime.types">NGINX standard configuration</a></li>
 	<li><a href="https://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types">Apache standard configuration</a></li>
 </ul>
+
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    });
+</script>
 
 {{>below}}

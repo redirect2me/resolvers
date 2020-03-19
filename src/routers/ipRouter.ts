@@ -3,8 +3,8 @@ import Router from 'koa-router';
 import * as path from 'path';
 //import * as punycode from 'punycode';
 //import * as domains from '../data/domainData';
+import * as maxmind from '../data/maxmindData';
 //import * as util from '../util';
-import * as asn from '../data/maxmindData';
 //import { URL } from 'url';
 
 import * as util from '../util';
@@ -30,11 +30,13 @@ ipRouter.get('/ip/geolocation.html', async (ctx:any) => {
     if (!ip) {
       ip = current_ip;
     }
-    const maxmind = await asn.cityLookupHtml(ip);
+    const location = maxmind.cityLookupHtml(ip);
+    const asn = maxmind.asnLookupStr(ip);
 
   ctx.body = await ctx.render('ip/geolocation.hbs', {
+    asn,
     current_ip,
-    maxmind,
+    maxmind: location,
     ip,
     title: 'IP Address Geolocation',
   });
@@ -50,8 +52,13 @@ ipRouter.get('/ip/tcp-ports.html', async (ctx: any) => {
 });
 
 ipRouter.get('/ip/whatsmyip.html', async (ctx:any) => {
+    const current_ip = getCurrentIP(ctx);
+    const asn = maxmind.asnLookupStr(current_ip);
+    const location = maxmind.cityLookupHtml(current_ip);
     ctx.body = await ctx.render('ip/whatsmyip.hbs', {
-        current_ip: getCurrentIP(ctx),
+        asn,
+        current_ip,
+        location,
         title: `What's my IP address?`,
      });
 });
