@@ -1,11 +1,23 @@
 # To Do
 
-* what's my ip: links to api
-* glossary
+* glossary from data
 * automate download of PSL
+* pages with API versions: link to the API overview.
 * redirect testing
 * list of domains (and detailed info) from Gandi
 
+## Glossary
+
+```
+id:
+expanded (only for abbreviations)
+term:
+definition (markdown):
+sort:
+wikipedia:
+more (markdown)
+markdown -> use npm markdown-it
+```
 
 ## DNS Check Improvements
 
@@ -51,7 +63,10 @@
 
 ## More tools
 
-* base64 decoding (or link to FFI)
+* ASN lookup
+* OUI lookup https://en.wikipedia.org/wiki/Organizationally_unique_identifier
+* base64 decoding (or link to FFI https://www.fileformat.info/convert/text/base64decoder.htm
+)
 * check for CORS headers
 * check for robots.txt, favicon & other well-known files
 
