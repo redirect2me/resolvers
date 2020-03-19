@@ -17,14 +17,15 @@ async function initialize(logger:Pino.Logger) {
         icannTlds.push(punycode.toUnicode(punyDomain.toLowerCase()));
     }
 
-    const psFileName = path.join(__dirname, '../..', 'data', 'public_suffix_list.dat');
+    const psFileName = path.join(__dirname, '../..', 'data', 'publicsuffix', 'public_suffix_list.dat');
 
     publicSuffixes.push(...(await fsPromises.readFile(psFileName, 'utf-8')).split('\n').filter(line => line.length > 0 && !line.startsWith('//')));
 
+    // tlds that are directly listed
     usableTlds.push(...publicSuffixes.filter(line => line.indexOf('.') == -1 && line.length <= 5 && line.match(/[a-z]+/)));
+    // tlds that are listed with '*'
     publicSuffixes.filter(line => line.startsWith('*.') && line.indexOf('.', 3) == -1).forEach(line => usableTlds.push(line.slice(2)));
     usableTlds.sort();
-    //usableTlds.forEach( tld => tldSet.add(tld));
 
     const tldSet = new Set<string>();
     for (const domain of publicSuffixes) {
@@ -43,7 +44,7 @@ async function initialize(logger:Pino.Logger) {
 
     niceTlds.push(...(await fsPromises.readFile(niceFileName, 'utf-8')).split('\n').filter(line => line.length > 0 && !line.startsWith('//')));
 
-    logger.info({ tldCount: pslTlds.length, niceCount: niceTlds.length }, 'domains loaded');
+    logger.info({ icannCount: icannTlds.length, publicSuffixCount: publicSuffixes.length, niceCount: niceTlds.length }, 'domains loaded');
 }
 
 export {
