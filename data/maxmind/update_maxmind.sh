@@ -42,7 +42,7 @@ DIFF=$(git diff --name-only "${TARGET_DIR}/mmdb.md5")
 
 if [ "${DIFF}" == "" ]; then
     echo "INFO: no substantive changes, exiting at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-    rm ${TARGET}/*.mmdb
+    rm ${TARGET_DIR}/*.mmdb
     exit 0
 fi
 
