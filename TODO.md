@@ -1,10 +1,19 @@
 # To Do
 
 * glossary from data
-* automate download of PSL
 * pages with API versions: link to the API overview.
 * redirect testing
 * list of domains (and detailed info) from Gandi
+* geoip [labstack](https://labstack.com/ip#pricing)
+* geoip [auth0](https://auth0.com/signals/ip)
+* geoip [software77](http://software77.net/geo-ip/)
+* whatsmyip [alternatives](https://dev.to/adityathebe/a-handy-way-to-know-your-public-ip-address-with-dns-servers-4nmn)
+* dnscheck [dnsyo](https://github.com/YoSmudge/dnsyo)
+
+## Grading
+
+- [ ] [MXToolbox](https://mxtoolbox.com/diagnostic.aspx)
+- [ ] [dt](https://github.com/42wim/dt/issues/1)
 
 ## Glossary
 
