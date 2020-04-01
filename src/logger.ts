@@ -1,5 +1,5 @@
 import Pino from 'pino';
-import PinoCaller from 'pino-caller';
+//import PinoCaller from 'pino-caller';
 
 import config from './config';
 
@@ -12,9 +12,9 @@ const options:Pino.LoggerOptions = {
   timestamp: Pino.stdTimeFunctions.isoTime,
 };
 
-const logger: Pino.Logger = PinoCaller(
-  Pino(options)
-);
+const logger: Pino.Logger = //PinoCaller(
+  Pino(options);
+//);
 
 logger.info({ config: JSON.parse(config.toString()) }, 'Configuration loaded');
 
