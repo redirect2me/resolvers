@@ -1,4 +1,4 @@
-name: Update databases
+name: Check for data updates
 
 on:
   schedule:

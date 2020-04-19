@@ -3,6 +3,8 @@
 * glossary from data
 * pages with API versions: link to the API overview.
 * redirect testing
+* what's my locale?
+* Google Analytics ID testing
 * list of domains (and detailed info) from Gandi
 * geoip [labstack](https://labstack.com/ip#pricing)
 * geoip [auth0](https://auth0.com/signals/ip)
@@ -12,12 +14,12 @@
 
 ## Grading
 
-- [ ] [MXToolbox](https://mxtoolbox.com/diagnostic.aspx)
-- [ ] [dt](https://github.com/42wim/dt/issues/1)
+* [ ] [MXToolbox](https://mxtoolbox.com/diagnostic.aspx)
+* [ ] [dt](https://github.com/42wim/dt/issues/1)
 
 ## Glossary
 
-```
+```plain
 id:
 expanded (only for abbreviations)
 term:
@@ -41,7 +43,7 @@ markdown -> use npm markdown-it
 * [DoT](https://www.npmjs.com/package/dns-over-tls)
 * resolver-detail: test on ipv6, DoT, DoH
 
-# Check SSL improvements
+## Check SSL improvements
 
 * test on bad/expired certs
 * link to SSLlabs
