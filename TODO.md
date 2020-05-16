@@ -4,6 +4,7 @@
 * pages with API versions: link to the API overview.
 * redirect testing
 * what's my locale?
+* OpenGraph/schema.org/Twitter/oEmbed/etc metadata checker
 * Google Analytics ID testing
 * list of domains (and detailed info) from Gandi
 * geoip [labstack](https://labstack.com/ip#pricing)
