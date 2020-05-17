@@ -1,4 +1,4 @@
-name: Build and deploy to Heroku
+name: build
 
 on:
   push:
@@ -16,8 +16,8 @@ jobs:
     - name: git checkout
       uses: actions/checkout@v1
 
-    - name: Deploy to Heroku
+    - name: deploy to Heroku
       run: git push https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git origin/master:master
 
-    - name: Update env vars
+    - name: update env vars
       run: heroku config:set --app ${{ secrets.HEROKU_APP_NAME }} "COMMIT=${GITHUB_SHA:0:7}" "LASTMOD=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
