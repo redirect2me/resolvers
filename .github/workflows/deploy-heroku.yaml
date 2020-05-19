@@ -7,7 +7,7 @@ on:
     paths-ignore:
     - '*.md'
     - '**/*.sh'
-    - '.github/**'
+    - '.github/workflows/update-data.yaml'
 
 jobs:
   deploy:
@@ -21,3 +21,5 @@ jobs:
 
     - name: update env vars
       run: heroku config:set --app ${{ secrets.HEROKU_APP_NAME }} "COMMIT=${GITHUB_SHA:0:7}" "LASTMOD=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
