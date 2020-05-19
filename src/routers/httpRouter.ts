@@ -8,6 +8,7 @@ import * as yaml from 'js-yaml';
 import { URL } from 'url';
 
 import * as certcheck from '../actions/certcheck';
+import * as redirectcheck from '../actions/redirectcheck';
 
 const httpRouter = new Router();
 
@@ -62,16 +63,22 @@ httpRouter.get('/http/headers.html', async (ctx:any) => {
 
 httpRouter.get('/http/headers.json', async (ctx) => {
     ctx.body = ctx.request.headers;
-  });
+});
 
 httpRouter.get('/http/cert-check.html', certcheck.certCheckGet);
 httpRouter.post('/http/cert-check.html', certcheck.certCheckPost);
+
+httpRouter.get('/http/redirect-check.html', redirectcheck.redirectCheckGet);
+httpRouter.post('/http/redirect-check.html', redirectcheck.redirectCheckPost);
+httpRouter.get('/http/redirect-check.json', redirectcheck.redirectCheckApiGet);
+httpRouter.post('/http/redirect-check.json', redirectcheck.redirectCheckApiPost);
 
 function getUrls():string[] {
     return [
         "/http/cert-check.html",
         "/http/content-type.html",
         "/http/headers.html",
+        "/http/redirect-check.html",
         "/http/urlencode.html",
         "/http/urlparse.html",
         "/http/useragent.html",
