@@ -1,4 +1,5 @@
 import { promises as dnsPromises } from 'dns';
+import Handlebars from 'handlebars';
 import { default as isIp } from 'is-ip';
 
 import * as asn from '../data/maxmindData';
@@ -64,13 +65,13 @@ async function reverseLookupPost(ctx: any) {
   const ipaddress = ctx.request.body.ipaddress;
   if (!ipaddress) {
     ctx.flash('error', 'You must enter an IP address to check!');
-    ctx.redirect('/reverse-dns-lookup.html');
+    ctx.redirect('/dns/reverse-lookup.html');
     return;
   }
 
   if (!isIp(ipaddress)) {
     ctx.flash('error', `${Handlebars.escapeExpression(ipaddress)} is not a valid IP address!`);
-    ctx.redirect(`/reverse-dns-lookup.html?hostname=${encodeURIComponent(ipaddress)}`);
+    ctx.redirect(`/dns/reverse-lookup.html?ipaddress=${encodeURIComponent(ipaddress)}`);
     return;
   }
 
