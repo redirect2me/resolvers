@@ -14,6 +14,14 @@
         margin: 4pt;
     }
   </style>
+  {{#if rootMeta}}<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://resolve.rs/",
+      "logo": "https://resolve.rs/images/logo512.png"
+    }
+    </script>{{/if}}
 </head>
 <body>
 <nav class="navbar navbar-light bg-light">
