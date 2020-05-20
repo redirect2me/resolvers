@@ -2,9 +2,10 @@ import { promises as fsPromises } from 'fs';
 import Router from 'koa-router';
 import * as path from 'path';
 //import * as punycode from 'punycode';
+import * as asnlookup from '../actions/asnlookup';
 //import * as domains from '../data/domainData';
 import * as maxmind from '../data/maxmindData';
-//import * as util from '../util';
+import { getCurrentIP } from '../util';
 //import { URL } from 'url';
 
 import * as util from '../util';
@@ -19,9 +20,6 @@ ipRouter.get('/ip/index.html', async (ctx) => {
     ctx.redirect('/tools.html#ip');
 });
 
-function getCurrentIP(ctx:any):string {
-    return ctx.ips.length > 0 ? ctx.ips[0] : ctx.ip;
-}
 
 ipRouter.get('/ip/geolocation.html', async (ctx:any) => {
 
@@ -73,9 +71,13 @@ ipRouter.get('/ip/whatsmyip.json', async (ctx) => {
 ipRouter.get('/ip/whatsmyip.txt', async (ctx) => {
     ctx.body = getCurrentIP(ctx);
 });
+ipRouter.get('/ip/asn-lookup.html', asnlookup.asnLookupGet);
+ipRouter.get('/ip/asn-lookup.json', asnlookup.asnLookupAPIGet);
+ipRouter.post('/ip/asn-lookup.json', asnlookup.asnLookupAPIPost);
 
 function getUrls():string[] {
     return [
+        "/ip/asn-lookup.html",
         "/ip/geolocation.html",
         "/ip/tcp-ports.html",
         "/ip/whatsmyip.html",
