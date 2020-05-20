@@ -19,6 +19,7 @@ rootRouter.get('/', async (ctx:any) => {
     current_ip,
     current_location,
     h1: 'Resolve.rs',
+    rootMeta: true,
     title: 'Resolve.rs',
   });
 });
