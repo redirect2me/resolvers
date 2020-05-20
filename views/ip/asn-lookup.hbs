@@ -1,0 +1,43 @@
+{{> above}}
+
+<div class="alert alert-info">
+    ASN stands for Autonomous System Number, which is (essentially) the ISP or Telephone company that controls your IP address.
+    Due to company mergers/buyouts/etc, the company name in the database is often a predecesoor of the current company.
+    <a class="alert-link" href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">Wikipedia</a>.
+</div>
+
+{{#if asndata}}
+<h2>ASN for {{ipaddress}}</h2>
+<table class="table table-striped border-bottom">
+    <tbody>
+        <tr>
+            <td>Autonomous System Number</td>
+            <td>{{asndata.autonomous_system_number}}</td>
+        </tr>
+        <tr>
+            <td>Autonomous System Organization</td>
+            <td>{{asndata.autonomous_system_organization}}</td>
+        </tr>
+    </tbody>
+</table>
+{{/if}}
+<h2>ASN Lookup for a specific IP</h2>
+<div class="container d-flex flex-column">
+    <div class="row align-items-center justify-content-center no-gutters">
+        <div class="col-12 col-md-5 col-lg-4 py-8 py-md-11">
+            <form action="/ip/asn-lookup.html" class="mb-6" method="GET">
+                <div class="form-group">
+                    <label for="ipaddress">
+                        IP Address
+                    </label>
+                    <input type="text" class="form-control" id="ipaddress" name="ipaddress" placeholder="" value="{{ipaddress}}" />
+                </div>
+                <button class="btn btn-block btn-primary" type="submit">
+                    Check
+                </button>
+
+            </form>
+        </div>
+    </div> <!-- / .row -->
+</div> <!-- / .container -->
+{{> below}}

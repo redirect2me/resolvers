@@ -1,3 +1,7 @@
+function getCurrentIP(ctx:any):string {
+    return ctx.ips.length > 0 ? ctx.ips[0] : ctx.ip;
+}
+
 function getJsonp(ctx:any):string|null {
     const callback = ctx.request.query['callback'];
     if (!callback) {
@@ -56,6 +60,7 @@ function validateCaller(ctx:any):boolean {
 }
 
 export {
+    getCurrentIP,
     getJsonp,
     handleJsonp,
     validateApiKey,
