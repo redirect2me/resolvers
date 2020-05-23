@@ -1,0 +1,87 @@
+swagger: "2.0"
+info:
+  description: "This is the API for [Resolve.rs](https://resolve.rs/)"
+  version: "1.0.0"
+  title: "Resolve.rs API"
+  termsOfService: "http://resolve.rs/legal/terms.html"
+  contact:
+    email: "support@resolve.rs"
+  license:
+    name: "AGPL 3+"
+    url: "https://github.com/redirect2me/resolvers/blob/master/LICENSE.txt"
+host: "resolve.rs"
+basePath: "/"
+tags:
+- name: "dns"
+  description: "DNS lookups"
+- name: "domains"
+  description: "Domain names"
+  externalDocs:
+    description: "Official list of top-level domains"
+    url: "https://resolve.rs/domains/tlds.html"
+- name: "ip"
+  description: "TCP/IP and low-level networking"
+- name: "http"
+  description: "HTTP and HTTPS"
+schemes:
+- "https"
+paths:
+  /ip/asn-lookup.json:
+    get:
+      tags:
+      - "ip"
+      summary: "Lookup ASN for an IP address"
+      description: "ASN stands for Autonomous System Number"
+      operationId: "findPetsByStatus"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "ip"
+        in: "query"
+        description: "IPv4 or IPv6 address to lookup"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+          enum:
+          - "available"
+          - "pending"
+          - "sold"
+          default: "available"
+        collectionFormat: "multi"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Pet"
+        "400":
+          description: "Invalid status value"
+      security:
+      - petstore_auth:
+        - "write:pets"
+        - "read:pets"
+securityDefinitions:
+  petstore_auth:
+    type: "oauth2"
+    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:pets: "modify pets in your account"
+      read:pets: "read your pets"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  ApiResponse:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
