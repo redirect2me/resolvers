@@ -17,28 +17,28 @@ async function reverseDns(dnsResolver:dnsPromises.Resolver, ip:string): Promise<
   }
 }
 
-async function reverseDnsApi(ctx: any, ipaddress: string) {
+async function reverseDnsApi(ctx: any, ip: string) {
 
     if (!util.validateCaller(ctx)) {
         return;
     }
 
-    if (!ipaddress) {
-        util.handleJsonp(ctx, { success: false, message: `Missing 'ipaddress' parameter`});
+    if (!ip) {
+        util.handleJsonp(ctx, { success: false, message: `Missing 'ip' parameter`});
         return;
     }
 
-    if (!isIp(ipaddress)) {
-        util.handleJsonp(ctx, { success: false, message: `${ipaddress} is not a valid IP address` });
+    if (!isIp(ip)) {
+        util.handleJsonp(ctx, { success: false, message: `${ip} is not a valid IP address` });
         return;
     }
 
-  const asndata = asn.asnLookup(ipaddress);
+  const asndata = asn.asnLookup(ip);
   const asnstr = asndata == null ? "(unknown)" : `${asndata.autonomous_system_organization} (${asndata.autonomous_system_number})`;
 
   try {
-    const results = await new dnsPromises.Resolver().reverse(ipaddress);
-    util.handleJsonp(ctx, { success: true, input: ipaddress, results, asn: asnstr });
+    const results = await new dnsPromises.Resolver().reverse(ip);
+    util.handleJsonp(ctx, { success: true, input: ip, results, asn: asnstr });
   }
   catch (err) {
     util.handleJsonp(ctx, { asn: asnstr, success: false, message: `reverse lookup failed: ${err.message}` });
@@ -46,36 +46,36 @@ async function reverseDnsApi(ctx: any, ipaddress: string) {
 }
 
 async function reverseLookupAPIGet(ctx: any) {
-    await reverseDnsApi(ctx, ctx.query.ipaddress);
+    await reverseDnsApi(ctx, ctx.query.ip);
 }
 
 async function reverseLookupAPIPost(ctx: any) {
-    await reverseDnsApi(ctx, ctx.request.body.ipaddress);
+    await reverseDnsApi(ctx, ctx.request.body.ip);
 }
 
 async function reverseLookupGet(ctx: any) {
     ctx.body = await ctx.render('dns/reverse-lookup.hbs', {
-    ipaddress: ctx.query.ipaddress,
+        ip: ctx.query.ip,
     title: 'Reverse DNS Lookup'
   });
 }
 
 async function reverseLookupPost(ctx: any) {
 
-  const ipaddress = ctx.request.body.ipaddress;
-  if (!ipaddress) {
+  const ip = ctx.request.body.ip;
+  if (!ip) {
     ctx.flash('error', 'You must enter an IP address to check!');
     ctx.redirect('/dns/reverse-lookup.html');
     return;
   }
 
-  if (!isIp(ipaddress)) {
-    ctx.flash('error', `${Handlebars.escapeExpression(ipaddress)} is not a valid IP address!`);
-    ctx.redirect(`/dns/reverse-lookup.html?ipaddress=${encodeURIComponent(ipaddress)}`);
+  if (!isIp(ip)) {
+    ctx.flash('error', `${Handlebars.escapeExpression(ip)} is not a valid IP address!`);
+    ctx.redirect(`/dns/reverse-lookup.html?ip=${encodeURIComponent(ip)}`);
     return;
   }
 
-  streamer.streamResponse(ctx, `Reverse DNS Lookup for ${ipaddress}`, async (stream) => {
+  streamer.streamResponse(ctx, `Reverse DNS Lookup for ${ip}`, async (stream) => {
 
     for (const resolver of resolvers.getAll()) {
       for (const configKey of Object.keys(resolver.config)) {
@@ -83,7 +83,7 @@ async function reverseLookupPost(ctx: any) {
         const dnsResolver = new dnsPromises.Resolver();
         dnsResolver.setServers(config.ipv4);
         stream.write(`<p>${resolver.name} (${configKey}): `);
-        const results = await dnsResolver.reverse(ipaddress);
+        const results = await dnsResolver.reverse(ip);
         stream.write('<ul>');
         for (const result of results) {
           stream.write(`<li>${result}</li>`);
@@ -95,7 +95,7 @@ async function reverseLookupPost(ctx: any) {
     stream.write(`Complete`);
     stream.write(`</div>`);
 
-    stream.write(`<p><a class="btn btn-primary" href="/reverse-dns-lookup.html?ipaddress=${encodeURIComponent(ipaddress)}">Continue</a>`);
+    stream.write(`<p><a class="btn btn-primary" href="/dns/reverse-lookup.html?ip=${encodeURIComponent(ip)}">Continue</a>`);
   });
 }
 

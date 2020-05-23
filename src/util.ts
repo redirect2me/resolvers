@@ -44,8 +44,12 @@ function validateCaller(ctx:any):boolean {
       return true;
     }
 
-    if (ctx.request.params && ctx.request.params.api_key && validateApiKey(ctx.request.params.api_key)) {
+    if (ctx.query && ctx.query.apikey && validateApiKey(ctx.query.apikey)) {
       return true;
+    }
+
+    if (ctx.request.body && ctx.request.body.apikey && validateApiKey(ctx.request.body.apikey)) {
+        return true;
     }
 
     if (getJsonp(ctx)) {

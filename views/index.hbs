@@ -119,14 +119,14 @@
 
 <script>
 
-function ipInfo(reverseDnsSelector, asnSelector, ipaddress) {
+function ipInfo(reverseDnsSelector, asnSelector, ip) {
   $(reverseDnsSelector).empty().append($("<img>")
     .attr("alt", "spinner")
     .attr("src", "/images/spinner.svg")
     .attr("style", "height:24pt;")
   );
   $.ajax({
-    data: { ipaddress },
+    data: { ip },
     dataType: "jsonp",
     error: function (xhr, status, err) {
       $(reverseDnsSelector).empty().text("server error");

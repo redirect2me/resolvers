@@ -4,60 +4,60 @@ import { default as isIp } from 'is-ip';
 import * as asn from '../data/maxmindData';
 import * as util from '../util';
 
-async function asnLookupApi(ctx: any, ipaddress: string) {
+async function asnLookupApi(ctx: any, ip: string) {
 
     if (!util.validateCaller(ctx)) {
         return;
     }
 
-    if (!ipaddress) {
-        util.handleJsonp(ctx, { success: false, message: `Missing 'ipaddress' parameter`});
+    if (!ip) {
+        util.handleJsonp(ctx, { success: false, message: `Missing 'ip' parameter`});
         return;
     }
 
-    if (!isIp(ipaddress)) {
-        util.handleJsonp(ctx, { success: false, message: `${ipaddress} is not a valid IP address` });
+    if (!isIp(ip)) {
+        util.handleJsonp(ctx, { success: false, message: `${ip} is not a valid IP address` });
         return;
     }
 
-    const asndata = asn.asnLookup(ipaddress);
+    const asndata = asn.asnLookup(ip);
     if (asndata == null) {
         util.handleJsonp(ctx, {
-            input: ipaddress,
+            input: ip,
             message: "Unknown ASN",
             success: false
          });
     } else {
         util.handleJsonp(ctx, {
-            input: ipaddress,
-            message: `${asndata.autonomous_system_organization} (${asndata.autonomous_system_number})`,
             data: asndata,
+            input: ip,
+            message: `${asndata.autonomous_system_organization} (${asndata.autonomous_system_number})`,
             success: true
         });
     }
 }
 
 async function asnLookupAPIGet(ctx: any) {
-    await asnLookupApi(ctx, ctx.query.ipaddress);
+    await asnLookupApi(ctx, ctx.query.ip);
 }
 
 async function asnLookupAPIPost(ctx: any) {
-    await asnLookupApi(ctx, ctx.request.body.ipaddress);
+    await asnLookupApi(ctx, ctx.request.body.ip);
 }
 
 async function asnLookupGet(ctx: any) {
 
-  const ipaddress = ctx.query.ipaddress || util.getCurrentIP(ctx);
+  const ip = ctx.query.ip || util.getCurrentIP(ctx);
 
-  if (!isIp(ipaddress)) {
-    ctx.flash('error', `${Handlebars.escapeExpression(ipaddress)} is not a valid IP address!`);
+  if (!isIp(ip)) {
+    ctx.flash('error', `${Handlebars.escapeExpression(ip)} is not a valid IP address!`);
   }
 
-  const asndata = asn.asnLookup(ipaddress);
+  const asndata = asn.asnLookup(ip);
 
   ctx.body = await ctx.render('ip/asn-lookup.hbs', {
     asndata,
-    ipaddress,
+    ip,
     title: 'ASN Lookup'
   });
 }
