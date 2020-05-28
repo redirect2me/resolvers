@@ -1,3 +1,4 @@
+import * as crypto from 'crypto';
 import Handlebars from 'handlebars';
 import * as psl from 'psl';
 import * as http from 'http';
@@ -40,6 +41,7 @@ async function certCheckPost(ctx:any) {
                 if (expires == null && cert.valid_to) {
                     expires = cert.valid_to;
                 }
+                const sha256 = crypto.createHash('sha256').update(cert.raw).digest().toString('hex');
                 stream.write("<details>");
                 stream.write(`<summary>Certificate for ${cert.subject.CN}</summary>`)
                 stream.write(`<table class="table table-striped"><tbody>`)
@@ -49,6 +51,7 @@ async function certCheckPost(ctx:any) {
                 stream.write(`<tr><td>Valid to</td><td>${cert.valid_to}</td></tr>`);
                 stream.write(`<tr><td>Fingerprint</td><td>${cert.fingerprint256}</td></tr>`);
                 stream.write(`<tr><td>Serial&nbsp;number</td><td>${cert.serialNumber}</td></tr>`);
+                stream.write(`<tr><td>SHA-256</td><td>${sha256}</td></tr>`);
                 stream.write(`</tbody></table>`);
                 stream.write("</details>");
             logger.info({ subject: cert.subject, issuer: cert.issuerCertificate ? cert.issuerCertificate.subject : '(none)'}, "cert");
