@@ -13,12 +13,14 @@ async function domainFinderGet(ctx:any) {
 
 async function domainFinderPost(ctx:any) {
 
-  const word = ctx.request.body.word;
+  let word = ctx.request.body.word;
   if (!word) {
     ctx.flash('error', 'You must enter a word!');
     ctx.redirect('finder.html');
     return;
   }
+
+  word = word.toLowerCase().trim();
 
   if (!word.match(/^[a-z0-9]+/)) {
     ctx.flash('error', `${Handlebars.escapeExpression(word)} is not a valid word: it can only contain a-z and 0-9!`);
@@ -38,6 +40,8 @@ async function domainFinderPost(ctx:any) {
     }
 
   streamer.streamResponse(ctx, `Find available domains for ${word}`, async (stream) => {
+
+    stream.write(`<div class="alert alert-info">In this context, <i>Available</i> really means that it is not configured at the registrar, which is a good but not perfect indication of availability</div>`);
 
     //stream.write(`<details>`);
     //stream.write(`<summary>DNS lookup of MX records</summary>`);
@@ -70,7 +74,7 @@ async function domainFinderPost(ctx:any) {
         }
 
         stream.write(`<tr>`);
-        stream.write(`<td>${domain}</td>`);
+        stream.write(`<td><a href="http://${domain}/">${domain}</a></td>`);
         stream.write(`<td>${nsResults}</td>`);
         stream.write(`<td>${aResults}</td>`);
         //LATER: affiliate links
