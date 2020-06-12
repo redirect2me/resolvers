@@ -7092,7 +7092,7 @@ org.zw
 
 // newGTLDs
 
-// List of new gTLDs imported from https://www.icann.org/resources/registries/gtlds/v2/gtlds.json on 2020-05-28T16:36:11Z
+// List of new gTLDs imported from https://www.icann.org/resources/registries/gtlds/v2/gtlds.json on 2020-06-11T16:44:38Z
 // This list is auto-generated, don't edit it manually.
 // aaa : 2015-02-26 American Automobile Association, Inc.
 aaa
@@ -8168,7 +8168,7 @@ fit
 // fitness : 2014-03-06 Binky Moon, LLC
 fitness
 
-// flickr : 2015-04-02 Yahoo! Domain Services Inc.
+// flickr : 2015-04-02 Flickr, Inc.
 flickr
 
 // flights : 2013-12-05 Binky Moon, LLC
@@ -8864,7 +8864,7 @@ lixil
 // llc : 2017-12-14 Afilias Limited
 llc
 
-// llp : 2019-08-26 Dot Registry LLC
+// llp : 2019-08-26 Uniregistry, Corp.
 llp
 
 // loan : 2014-11-20 dot Loan Limited
@@ -12644,6 +12644,7 @@ platterp.us
 // Submitted by Anton Akhtyamov <program-managers@plesk.com>
 pdns.page
 plesk.page
+pleskns.com
 
 // Port53 : https://port53.io/
 // Submitted by Maximilian Schieder <maxi@zeug.co>
