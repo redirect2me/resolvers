@@ -26,6 +26,19 @@ function handleJsonp(ctx:any, retVal:Object) {
         ctx.body = retVal;
     }
 }
+
+function parseUrl(urlParam:string): URL|null {
+    try {
+        const theUrl = new URL(urlParam);
+        if (!theUrl.protocol) {
+            theUrl.protocol = 'https:';
+        }
+        return theUrl;
+    } catch (err) {
+        return null;
+    }
+}
+
 function validateApiKey(apiKey:string):boolean {
     if (!apiKey) {
         return false;
@@ -67,6 +80,7 @@ export {
     getCurrentIP,
     getJsonp,
     handleJsonp,
+    parseUrl,
     validateApiKey,
     validateCaller
 }

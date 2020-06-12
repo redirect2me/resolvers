@@ -8,6 +8,7 @@ import * as yaml from 'js-yaml';
 import { URL } from 'url';
 
 import * as certcheck from '../actions/certcheck';
+import * as headers from '../actions/headers';
 import * as redirectcheck from '../actions/redirectcheck';
 
 const httpRouter = new Router();
@@ -54,14 +55,14 @@ httpRouter.get('/http/index.html', async (ctx) => {
     ctx.redirect('/tools.html#http');
 });
 
-httpRouter.get('/http/headers.html', async (ctx:any) => {
-    ctx.body = await ctx.render('http/headers.hbs', {
+httpRouter.get('/http/myheaders.html', async (ctx:any) => {
+    ctx.body = await ctx.render('http/myheaders.hbs', {
         headers: ctx.request.headers,
-        title: 'HTTP Headers',
+        title: 'HTTP Request Headers',
      });
 });
 
-httpRouter.get('/http/headers.json', async (ctx) => {
+httpRouter.get('/http/myheaders.json', async (ctx) => {
     ctx.body = ctx.request.headers;
 });
 
@@ -73,11 +74,16 @@ httpRouter.post('/http/redirect-check.html', redirectcheck.redirectCheckPost);
 httpRouter.get('/http/redirect-check.json', redirectcheck.redirectCheckApiGet);
 httpRouter.post('/http/redirect-check.json', redirectcheck.redirectCheckApiPost);
 
+httpRouter.get('/http/headers.html', headers.headersGet);
+httpRouter.get('/http/headers.json', headers.headersApiGet);
+httpRouter.post('/http/headers.json', headers.headersApiPost);
+
 function getUrls():string[] {
     return [
         "/http/cert-check.html",
         "/http/content-type.html",
         "/http/headers.html",
+        "/http/myheaders.html",
         "/http/redirect-check.html",
         "/http/urlencode.html",
         "/http/urlparse.html",

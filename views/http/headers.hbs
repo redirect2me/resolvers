@@ -1,5 +1,51 @@
 {{> above}}
 
-<pre>{{toJson headers}}</pre>
+{{#if result}}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Header</th>
+            <th>Value(s)</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#each result}}
+        <tr>
+            <td>{{@key}}</td>
+            <td>{{#if (isArray this)}}{{arrayToHtml this}}{{else}}{{this}}{{/if}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+<pre>
+    {{toJson result}}
+</pre>
+{{else}}
+<div class="alert alert-info">
+    When a server responds to an HTTP request, along with the content it also returns headers that include metadata for the
+    content as well as information about the server.
+</div>
+{{/if}}
 
+
+<h2>HTTP Headers from a Specific Server</h2>
+<div class="container d-flex flex-column">
+    <div class="row align-items-center justify-content-center no-gutters">
+        <div class="col-12 col-md-5 col-lg-4 py-8 py-md-11">
+            <form action="/http/headers.html" class="mb-6" method="GET">
+                <div class="form-group">
+                    <label for="target">
+                        Target URL
+                    </label>
+                    <input type="text" class="form-control" id="url" name="url" placeholder="" value="{{url}}" />
+                </div>
+                <!-- LATER: method (GET/POST/OPTIONS/HEAD) -->
+                <!-- LATER: user-agent (browsers/curl/wget/custom) -->
+                <button class="btn btn-block btn-primary" type="submit">
+                    Retrieve Headers
+                </button>
+            </form>
+        </div>
+    </div> <!-- / .row -->
+</div> <!-- / .container -->
 {{> below}}

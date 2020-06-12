@@ -35,18 +35,6 @@ async function redirectCheckApiPost(ctx:any) {
     await redirectCheckApiLow(ctx, urlParam);
 }
 
-function parseUrl(urlParam:string): URL|null {
-    try {
-        const theUrl = new URL(urlParam);
-        if (!theUrl.protocol) {
-            theUrl.protocol = 'https:';
-        }
-        return theUrl;
-    } catch (err) {
-        return null;
-    }
-}
-
 async function redirectCheckApiLow(ctx:any, urlParam:string) {
     if (!util.validateCaller(ctx)) {
         return;
@@ -60,7 +48,7 @@ async function redirectCheckApiLow(ctx:any, urlParam:string) {
         return;
     }
 
-    const theUrl = parseUrl(urlParam);
+    const theUrl = util.parseUrl(urlParam);
     if (!theUrl) {
         util.handleJsonp(ctx, {
             success: false,

@@ -71,6 +71,7 @@ ipRouter.get('/ip/whatsmyip.json', async (ctx) => {
 ipRouter.get('/ip/whatsmyip.txt', async (ctx) => {
     ctx.body = getCurrentIP(ctx);
 });
+
 ipRouter.get('/ip/asn-lookup.html', asnlookup.asnLookupGet);
 ipRouter.get('/ip/asn-lookup.json', asnlookup.asnLookupAPIGet);
 ipRouter.post('/ip/asn-lookup.json', asnlookup.asnLookupAPIPost);
