@@ -3,7 +3,21 @@
 <div class="alert alert-info">
     These are the HTTP headers that are being sent my your browser.
 </div>
-
-<pre>{{toJson headers}}</pre>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Header</th>
+            <th>Value(s)</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#each headers}}
+        <tr>
+            <td>{{@key}}</td>
+            <td>{{#if (isArray this)}}{{arrayToHtml this}}{{else}}{{this}}{{/if}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
 
 {{> below}}
