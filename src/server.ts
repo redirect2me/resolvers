@@ -114,6 +114,9 @@ app.use(KoaViews(path.join(__dirname, '..', 'views'), {
                 return result;
             },
             ifDomainUnicode: function(context:any, options:any) { return context && !context.match(/^[a-z]+$/) ? options.fn(this) : options.inverse(this); },
+            isArray: function(target:any) {
+                return target && Array.isArray(target);
+            },
             toIso: function(d:Date) { return d ? d.toISOString() : '(none)'; },
             toJson: function(context:any) { return JSON.stringify(context, null, 2); },
             'toUpper': function (a: any) {
