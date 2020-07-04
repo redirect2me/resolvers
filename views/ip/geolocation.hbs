@@ -17,17 +17,20 @@
     </thead>
     <tbody>
         <tr>
-            <td>Maxmind</td>
+            <td><a href="https://dev.maxmind.com/geoip/geoip2/geolite2/">Maxmind</a></td>
             <td>{{maxmind_version}}</td>
             <td>{{{maxmind}}}</td>
         </tr>
-        <!--
         <tr>
-            <td>HostIP.info</td>
+            <td><a href="http://www.hostip.info/use.php">HostIP.info</a></td>
             <td><i>(online service)</i></td>
-            <td>{{hostipinfo}}</td>
+            <td id="hostipinfo">Pending...</td>
         </tr>
-        -->
+        <tr>
+            <td><a href="https://ipgeolocation.io/">ipgeolocation</a></td>
+            <td><i>(online service)</i></td>
+            <td id="ipgeolocation">Pending...</td>
+        </tr>
     </tbody>
 </table>
 
@@ -57,5 +60,79 @@
 <div class="alert alert-info">
     Note: all pricing is for the lowest service level possible. They all have higher priced options (of course).
 </div>
+
+<ul>
+    <li><a href="https://www.maxmind.com/en/geoip2-precision-services">MaxMind</a> - in addition to their free offering (used above), they have a commercial service that starts at $0.10 per 1,000 lookups.</li>
+    <li><a href="https://ipgeolocation.io/pricing.html">ipgeolocation.io</a> - 1,000/day free.  $15/month for 150,000</li>
+    <li><a href="http://www.ip2nation.com/">ip2nation</a> - free, only gets the country (which is often good enough!)</li>
+    <li><a href="https://www.ip2location.com/">IP2Location</a> - $49 for 100,000 lookups.  They also sell their database(s) for local use.</li>
+    <li>Neustar's <a href="https://www.home.neustar/security-intelligence/ip-geopoint">UltraGeoPoint</a> - no pricing on website</li>
+    <li>Cyscape's <a href="http://www.cyscape.com/products/chawk/">CountryHawk</a> - $669 per server per year</li>
+    <li><a href="http://www.atelierweb.com/products/ip-locator/">Atelier Web IP Locator</a> - $40 for 50,000 lookups.  Free plan is 200 per 30 days.</li>
+</ul>
+
+<h3>Internet Governing Bodies</h3>
+<ul>
+    <li><a href="https://search.arin.net/rdap/">ARIN Whois/RDAP lookup</a></li>
+    <li><a href="https://apps.db.ripe.net/db-web-ui/query">RIPE Database Query</a></li>
+    <li><a href="https://afrinic.net/whois-web/public/query">AFRINIC Query</a></li>
+</ul>
+
+<script>
+    async function hostIpInfo(ip) {
+        const el = document.getElementById('hostipinfo')
+        try {
+            el.innerText = 'Loading...';
+            const response = await fetch(`https://api.hostip.info/get_json.php?ip=${encodeURIComponent(ip)}&position=true`, {
+                referrerPolicy: ''
+                });
+            if (!response.ok) { 
+                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
+                return;
+            }
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                el.innerText = `ERROR non-json response (${contentType})`;
+                return;
+            }
+            const result = await response.json();
+            console.log(`hostip.info result = ${JSON.stringify(result)}`);
+            el.innerText = `${result.country || '(no city)'}, ${result.country || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
+        } catch (err) {
+            el.innerText = `ERROR ${err.message}`;
+        }
+    }
+
+    async function ipGeoLocation(ip) {
+        const el = document.getElementById('ipgeolocation')
+        {{#if ipgeolocation_api_key}}
+        try {
+            el.innerText = 'Loading...';
+            const response = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey={{ipgeolocation_api_key}}&ip=${encodeURIComponent(ip)}&position=true`, {
+                referrerPolicy: ''
+                });
+            if (!response.ok) { 
+                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
+                return;
+            }
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                el.innerText = `ERROR non-json response (${contentType})`;
+                return;
+            }
+            const result = await response.json();
+            console.log(`ipgeolocation.io result = ${JSON.stringify(result)}`);
+            el.innerText = `${result.country || '(no city)'}, ${result.country || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
+        } catch (err) {
+            el.innerText = `ERROR ${err.message}`;
+        }
+        {{else}}
+            el.innerText = 'ERROR: server is not configured with an API key';
+        {{/if}}
+    }
+
+    hostIpInfo("{{ip}}");
+    ipGeoLocation("{{ip}}");
+</script>
 
 {{> below}}

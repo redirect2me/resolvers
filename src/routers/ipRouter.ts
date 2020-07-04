@@ -9,6 +9,7 @@ import { getCurrentIP } from '../util';
 //import { URL } from 'url';
 
 import * as util from '../util';
+import config from '../config';
 
 const ipRouter = new Router();
 
@@ -31,13 +32,14 @@ ipRouter.get('/ip/geolocation.html', async (ctx:any) => {
     const location = maxmind.cityLookupHtml(ip);
     const asn = maxmind.asnLookupStr(ip);
 
-  ctx.body = await ctx.render('ip/geolocation.hbs', {
-    asn,
-    current_ip,
-    maxmind: location,
-    ip,
-    title: 'IP Address Geolocation',
-  });
+    ctx.body = await ctx.render('ip/geolocation.hbs', {
+        asn,
+        current_ip,
+        ip,
+        ipgeolocation_api_key: config.get('ipGeoLocationApiKey'),
+        maxmind: location,
+        title: 'IP Address Geolocation',
+    });
 });
 
 ipRouter.get('/ip/tcp-ports.html', async (ctx: any) => {

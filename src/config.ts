@@ -1,6 +1,13 @@
 import { default as convict } from 'convict';
 
 const config = convict({
+  ipGeoLocationApiKey: {
+    default: null,
+    doc: 'API_KEY for ipgeolocation.io',
+    env: 'IPGEOLOCATION_API_KEY',
+    format: String,
+    sensitive: true,
+  },
   logLevel: {
     default: 'debug',
     doc: 'bunyan logger logging level [fatal, error, warn, info, debug, trace]',
