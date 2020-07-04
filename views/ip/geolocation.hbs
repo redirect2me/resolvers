@@ -114,7 +114,7 @@
             }
             const result = await response.json();
             console.log(`hostip.info result = ${JSON.stringify(result)}`);
-            el.innerText = `${result.country || '(no city)'}, ${result.country || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
+            el.innerText = `${result.city || '(no city)'}, ${result.country_name || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
         } catch (err) {
             el.innerText = `ERROR ${err.message}`;
         }
@@ -139,7 +139,7 @@
             }
             const result = await response.json();
             console.log(`ipgeolocation.io result = ${JSON.stringify(result)}`);
-            el.innerText = `${result.country || '(no city)'}, ${result.country || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
+            el.innerText = `${result.city || '(no city)'}, ${result.country_name || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
         } catch (err) {
             el.innerText = `ERROR ${err.message}`;
         }
