@@ -8,8 +8,9 @@ import * as maxmind from '../data/maxmindData';
 import { getCurrentIP } from '../util';
 //import { URL } from 'url';
 
-import * as util from '../util';
+import * as certcheck from '../actions/certcheck';
 import config from '../config';
+import * as util from '../util';
 
 const ipRouter = new Router();
 
@@ -77,12 +78,15 @@ ipRouter.get('/ip/whatsmyip.txt', async (ctx) => {
 ipRouter.get('/ip/asn-lookup.html', asnlookup.asnLookupGet);
 ipRouter.get('/ip/asn-lookup.json', asnlookup.asnLookupAPIGet);
 ipRouter.post('/ip/asn-lookup.json', asnlookup.asnLookupAPIPost);
+ipRouter.get('/ip/tls-cert-check.html', certcheck.tlsCertCheckGet);
+ipRouter.post('/ip/tls-cert-check.html', certcheck.tlsCertCheckPost);
 
 function getUrls():string[] {
     return [
         "/ip/asn-lookup.html",
         "/ip/geolocation.html",
         "/ip/tcp-ports.html",
+        "/ip/tls-cert-check.html",
         "/ip/whatsmyip.html",
     ];
 }
