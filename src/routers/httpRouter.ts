@@ -66,8 +66,8 @@ httpRouter.get('/http/myheaders.json', async (ctx) => {
     ctx.body = ctx.request.headers;
 });
 
-httpRouter.get('/http/cert-check.html', certcheck.certCheckGet);
-httpRouter.post('/http/cert-check.html', certcheck.certCheckPost);
+httpRouter.get('/http/cert-check.html', certcheck.httpsCertCheckGet);
+httpRouter.post('/http/cert-check.html', certcheck.httpsCertCheckPost);
 
 httpRouter.get('/http/redirect-check.html', redirectcheck.redirectCheckGet);
 httpRouter.post('/http/redirect-check.html', redirectcheck.redirectCheckPost);

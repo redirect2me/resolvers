@@ -1,14 +1,13 @@
 {{> above}}
 
 <div class="alert alert-info">
-    If you are having problems with the HTTPS check, you may be able to get more information from the
-    <a class="alert-link" href="/ip/tls-cert-check.html">TLS Certificate Check</a>.
+    While commonly referred to as &ldquo;SSL&rdquo;, the correct name for the protocol is &ldquo;TLS&rdquo;.
 </div>
 
 <div class="container d-flex flex-column">
     <div class="row align-items-center justify-content-center no-gutters">
         <div class="col-12 col-md-5 col-lg-4 py-8 py-md-11">
-            <form action="cert-check.html" class="mb-6" method="POST">
+            <form action="tls-cert-check.html" class="mb-6" method="POST">
                 <div class="form-group">
                     <label for="hostname">
                         Hostname
@@ -24,10 +23,10 @@
     </div> <!-- / .row -->
 </div> <!-- / .container -->
 
-<div class="row mt-4">
+<div class="row mt-5">
     <div class="col">
         <ul>
-            <li><a href="https://badssl.com/">BadSSL.com</a> - set of websites with invalid SSL, perfect for testing.</li>
+            <li><a href="https://badssl.com/">BadSSL.com</a> - set of websites with various certificate errors, perfect for testing.</li>
         </ul>
     </div>
 </div>
