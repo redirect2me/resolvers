@@ -26,9 +26,9 @@
 
 <div class="row mt-4">
     <div class="col">
-        <ul>
-            <li><a href="https://badssl.com/">BadSSL.com</a> - set of websites with invalid SSL, perfect for testing.</li>
-        </ul>
+        <button class="btn btn-sm btn-outline-primary" onclick="setExample('hostname', 'https://expired.badssl.com/');">Expired</button>
+        <button class="btn btn-sm btn-outline-primary" onclick="setExample('hostname', 'https://wrong.host.badssl.com/');">Wrong Host</button>
+        <button class="btn btn-sm btn-outline-primary" onclick="setExample('hostname', 'https://resolve.rs/');">Valid</button>
     </div>
 </div>
 {{> below}}

@@ -143,7 +143,7 @@ async function tlsCertCheckPost(ctx:any) {
         tlsSocket.on('secureConnect', () => {
             stream.write(`<p>secureConnect</p>`);
         });
-        tlsSocket.on('lookup', (err, family, address, host) => {
+        tlsSocket.on('lookup', (err, address, family, host) => {
             stream.write(`<p>Lookup for <code>${host}</code> returned <code>${address}</code> (TCPv${family})</p>`);
         });
     });
@@ -161,11 +161,20 @@ async function httpsCertCheckGet(ctx:any) {
 
 async function httpsCertCheckPost(ctx:any) {
 
-    const hostname = ctx.request.body.hostname;
+    let hostname = ctx.request.body.hostname;
     if (!hostname) {
       ctx.flash('error', 'You must enter a hostname to check!');
       ctx.redirect('cert-check.html');
       return;
+    }
+
+    try {
+        const url = new URL(hostname);
+        hostname = url.host;
+    } catch (err) {
+        ctx.flash('error', `Unable to parse: ${err.message}`);
+        ctx.redirect(`cert-check.html?hostname=${encodeURIComponent(hostname)}`);
+        return;
     }
 
     if (!psl.isValid(hostname)) {
