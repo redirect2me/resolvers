@@ -9,6 +9,7 @@ import { getCurrentIP } from '../util';
 //import { URL } from 'url';
 
 import * as certcheck from '../actions/certcheck';
+import { keycdnLookup } from '../actions/keycdnlookup';
 import config from '../config';
 import * as util from '../util';
 
@@ -80,6 +81,7 @@ ipRouter.get('/ip/asn-lookup.json', asnlookup.asnLookupAPIGet);
 ipRouter.post('/ip/asn-lookup.json', asnlookup.asnLookupAPIPost);
 ipRouter.get('/ip/tls-cert-check.html', certcheck.tlsCertCheckGet);
 ipRouter.post('/ip/tls-cert-check.html', certcheck.tlsCertCheckPost);
+ipRouter.get('/internal/keycdn.json', keycdnLookup);
 
 function getUrls():string[] {
     return [

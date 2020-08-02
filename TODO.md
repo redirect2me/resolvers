@@ -10,6 +10,11 @@
 * geoip [labstack](https://labstack.com/ip#pricing)
 * geoip [auth0](https://auth0.com/signals/ip)
 * geoip [software77](http://software77.net/geo-ip/)
+* geoip [Cloudflare worker](https://developers.cloudflare.com/workers/templates/pages/country_code/)
+* geoip [AWS CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior)
+* geoip [Fastly via zombees](http://geo.zombe.es/), [source](https://gist.github.com/simonkuhn/a380a6fa205db87a3625f26ad09e6593)
+* geoip [analogic](https://github.com/analogic/ipgeo)
+* geojs
 * whatsmyip [alternatives](https://dev.to/adityathebe/a-handy-way-to-know-your-public-ip-address-with-dns-servers-4nmn)
 * dnscheck [dnsyo](https://github.com/YoSmudge/dnsyo)
 
@@ -110,6 +115,8 @@ markdown -> use npm markdown-it
 
 ## other tools
 
+* http://ifconfig.io/ [source](https://github.com/georgyo/ifconfig.io)
+*
 * https://www.dnsperf.com/
 * https://dnsmap.io/articles/
 * https://www.opennic.org/

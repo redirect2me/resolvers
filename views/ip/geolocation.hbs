@@ -11,25 +11,33 @@
     <thead>
         <tr>
             <th>Provider</th>
-            <th>Version</th>
             <th>Results</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><a href="https://dev.maxmind.com/geoip/geoip2/geolite2/">Maxmind</a></td>
-            <td>{{maxmind_version}}</td>
-            <td>{{{maxmind}}}</td>
+            <td><a href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a></td>
+            <td id="cloudflare">Pending...</td>
+        </tr>
+        <tr>
+            <td><a href="https://cloud.google.com/appengine/docs/standard/go/reference/request-response-headers">Google AppEngine</a></td>
+            <td id="appengine">Pending...</td>
         </tr>
         <tr>
             <td><a href="http://www.hostip.info/use.php">HostIP.info</a></td>
-            <td><i>(online service)</i></td>
             <td id="hostipinfo">Pending...</td>
         </tr>
         <tr>
             <td><a href="https://ipgeolocation.io/">ipgeolocation</a></td>
-            <td><i>(online service)</i></td>
             <td id="ipgeolocation">Pending...</td>
+        </tr>
+        <tr>
+            <td><a href="https://tools.keycdn.com/geo">KeyCDN</a></td>
+            <td id="keycdn">Pending...</td>
+        </tr>
+        <tr>
+            <td><a href="https://dev.maxmind.com/geoip/geoip2/geolite2/">Maxmind</a></td>
+            <td>{{{maxmind}}}</td>
         </tr>
     </tbody>
 </table>
@@ -62,14 +70,17 @@
 </div>
 
 <ul>
-    <li><a href="https://www.maxmind.com/en/geoip2-precision-services">MaxMind</a> - in addition to their free offering (used above), they have a commercial service that starts at $0.10 per 1,000 lookups.</li>
-    <li><a href="https://ipgeolocation.io/pricing.html">ipgeolocation.io</a> - 1,000/day free.  $15/month for 150,000</li>
-    <li><a href="http://www.ip2nation.com/">ip2nation</a> - free, only gets the country (which is often good enough!)</li>
-    <li><a href="https://www.ip2location.com/">IP2Location</a> - $49 for 100,000 lookups.  They also sell their database(s) for local use.</li>
-    <li>Neustar's <a href="https://www.home.neustar/security-intelligence/ip-geopoint">UltraGeoPoint</a> - no pricing on website</li>
-    <li>Cyscape's <a href="http://www.cyscape.com/products/chawk/">CountryHawk</a> - $669 per server per year</li>
+    <li><a href="https://cloud.google.com/appengine/docs/standard/go/reference/request-response-headers">AppEngine</a> (Google) - includes HTTP headers with full details if you are hosting with them.</li>
     <li><a href="http://www.atelierweb.com/products/ip-locator/">Atelier Web IP Locator</a> - $40 for 50,000 lookups.  Free plan is 200 per 30 days.</li>
+    <li><a href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a> - includes an HTTP header with Country if you are using their CDN.</li>
+    <li><a href="http://www.cyscape.com/products/chawk/">CountryHawk</a> (Cyscape) - $669 per server per year</li>
+    <li><a href="https://www.geojs.io/">geojs</a> - free with no rate limits, uses MaxMind data</li>
+    <li><a href="https://ipgeolocation.io/pricing.html">ipgeolocation.io</a> - 1,000/day free.  $15/month for 150,000</li>
+    <li><a href="https://www.ip2location.com/">IP2Location</a> - $49 for 100,000 lookups.  They also sell their database(s) for local use.</li>
+    <li><a href="http://www.ip2nation.com/">ip2nation</a> - free, only gets the country (which is often good enough!)</li>
+    <li><a href="https://www.maxmind.com/en/geoip2-precision-services">MaxMind</a> - in addition to their free offering (used above), they have a commercial service that starts at $0.10 per 1,000 lookups.</li>
     <li><a href="https://www.melissa.com/v2/lookups/iplocation/ip/">Melissa</a> - 1,000/free, then $3 per 1,000.</li>
+    <li><a href="https://www.home.neustar/security-intelligence/ip-geopoint">UltraGeoPoint</a> (Neustar)- no pricing on website</li>
 </ul>
 
 
@@ -96,6 +107,54 @@
 </ul>
 
 <script>
+    async function cloudflare(ip) {
+        const el = document.getElementById('cloudflare')
+        try {
+            el.innerText = 'Loading...';
+            const response = await fetch(`https://cf-geo.redirect2.me/api/cloudflare.json`, {
+                referrerPolicy: ''
+                });
+            if (!response.ok) {
+                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
+                return;
+            }
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                el.innerText = `ERROR non-json response (${contentType})`;
+                return;
+            }
+            const result = await response.json();
+            console.log(`cloudflare result = ${JSON.stringify(result)}`);
+            el.innerText = `${result.country || '(no country)'}`;
+        } catch (err) {
+            el.innerText = `ERROR ${err.message}`;
+        }
+    }
+
+    async function appengine(ip) {
+        const el = document.getElementById('appengine')
+        try {
+            el.innerText = 'Loading...';
+            const response = await fetch(`https://ae-geo.redirect2.me/api/appengine.json`, {
+                referrerPolicy: ''
+                });
+            if (!response.ok) {
+                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
+                return;
+            }
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                el.innerText = `ERROR non-json response (${contentType})`;
+                return;
+            }
+            const result = await response.json();
+            console.log(`appengine result = ${JSON.stringify(result)}`);
+            el.innerText = `${result.city || '(no city)'}, ${result.country || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
+        } catch (err) {
+            el.innerText = `ERROR ${err.message}`;
+        }
+    }
+
     async function hostIpInfo(ip) {
         const el = document.getElementById('hostipinfo')
         try {
@@ -103,7 +162,7 @@
             const response = await fetch(`https://api.hostip.info/get_json.php?ip=${encodeURIComponent(ip)}&position=true`, {
                 referrerPolicy: ''
                 });
-            if (!response.ok) { 
+            if (!response.ok) {
                 el.innerText = `ERROR ${response.status}: ${response.statusText}`;
                 return;
             }
@@ -128,7 +187,7 @@
             const response = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey={{ipgeolocation_api_key}}&ip=${encodeURIComponent(ip)}&position=true`, {
                 referrerPolicy: ''
                 });
-            if (!response.ok) { 
+            if (!response.ok) {
                 el.innerText = `ERROR ${response.status}: ${response.statusText}`;
                 return;
             }
@@ -148,8 +207,35 @@
         {{/if}}
     }
 
+    async function keycdn(ip) {
+        const el = document.getElementById('keycdn')
+        try {
+            el.innerText = 'Loading...';
+            const response = await fetch(`/internal/keycdn.json?ip=${encodeURIComponent(ip)}`, {
+                referrerPolicy: ''
+                });
+            if (!response.ok) {
+                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
+                return;
+            }
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                el.innerText = `ERROR non-json response (${contentType})`;
+                return;
+            }
+            const result = await response.json();
+            console.log(`keycdn result = ${JSON.stringify(result)}`);
+            el.innerText = `${result.city || '(no city)'}, ${result.country_name || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
+        } catch (err) {
+            el.innerText = `ERROR ${err.message}`;
+        }
+    }
+
     hostIpInfo("{{ip}}");
     ipGeoLocation("{{ip}}");
+    cloudflare();
+    appengine();
+    keycdn("{{ip}}");
 </script>
 
 {{> below}}

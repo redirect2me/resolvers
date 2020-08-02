@@ -172,7 +172,7 @@ async function httpsCertCheckPost(ctx:any) {
         const url = new URL(hostname);
         hostname = url.host;
     } catch (err) {
-        ctx.flash('error', `Unable to parse: ${err.message}`);
+        ctx.flash('error', `Unable to parse: ${Handlebars.escapeExpression(err.message)}`);
         ctx.redirect(`cert-check.html?hostname=${encodeURIComponent(hostname)}`);
         return;
     }
