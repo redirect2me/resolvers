@@ -28,8 +28,16 @@
             <td id="hostipinfo">Pending...</td>
         </tr>
         <tr>
+            <td><a href="https://ip-api.com/">IP-API</a></td>
+            <td id="ipapi">Pending...</td>
+        </tr>
+        <tr>
             <td><a href="https://ipgeolocation.io/">ipgeolocation</a></td>
             <td id="ipgeolocation">Pending...</td>
+        </tr>
+        <tr>
+            <td><a href="https://ipstacck/">ipstack</a></td>
+            <td id="ipstack">Pending...</td>
         </tr>
         <tr>
             <td><a href="https://tools.keycdn.com/geo">KeyCDN</a></td>
@@ -70,19 +78,24 @@
 </div>
 
 <ul>
-    <li><a href="https://cloud.google.com/appengine/docs/standard/go/reference/request-response-headers">AppEngine</a> (Google) - includes HTTP headers with full details if you are hosting with them.</li>
+    <li><a href="https://cloud.google.com/appengine/docs/standard/go/reference/request-response-headers">AppEngine</a> (Google) - includes HTTP headers with full details if you are hosting with them. <span class="badge badge-info">browser only</span></li>
     <li><a href="http://www.atelierweb.com/products/ip-locator/">Atelier Web IP Locator</a> - $40 for 50,000 lookups.  Free plan is 200 per 30 days.</li>
-    <li><a href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a> - includes an HTTP header with Country if you are using their CDN.</li>
+    <li><a href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a> - includes an HTTP header with Country if you are using their CDN. <span class="badge badge-info">browser only</span></li>
     <li><a href="http://www.cyscape.com/products/chawk/">CountryHawk</a> (Cyscape) - $669 per server per year</li>
     <li><a href="https://www.geojs.io/">geojs</a> - free with no rate limits, uses MaxMind data</li>
+    <li><a href="https://ip-api.com/">ip-api</a>: 45/minute free for non-commercial use, &euro;13/month for unlimited.  <span class="badge badge-info">browser only</span></li>
     <li><a href="https://ipgeolocation.io/pricing.html">ipgeolocation.io</a> - 1,000/day free.  $15/month for 150,000</li>
     <li><a href="https://www.ip2location.com/">IP2Location</a> - $49 for 100,000 lookups.  They also sell their database(s) for local use.</li>
     <li><a href="http://www.ip2nation.com/">ip2nation</a> - free, only gets the country (which is often good enough!)</li>
+    <li><a href="https://ipstack.com/">ipstack</a> 10,000/month free, $10/month for 50,000</li>
     <li><a href="https://www.maxmind.com/en/geoip2-precision-services">MaxMind</a> - in addition to their free offering (used above), they have a commercial service that starts at $0.10 per 1,000 lookups.</li>
     <li><a href="https://www.melissa.com/v2/lookups/iplocation/ip/">Melissa</a> - 1,000/free, then $3 per 1,000.</li>
     <li><a href="https://www.home.neustar/security-intelligence/ip-geopoint">UltraGeoPoint</a> (Neustar)- no pricing on website</li>
 </ul>
 
+<p>
+    <span class="badge badge-info">browser only</span> means it only looks at the caller's IP address, not an arbitrary address that you pass in.
+</p>
 
 <h3>Internet Governing Bodies</h3>
 <ul>
@@ -95,9 +108,7 @@
 <h3>To Do</h3>
 
 <ul>
-    <li><a href="https://ipstack.com/">ipstack</a> 10,000/month free, $10/month for 50,000</li>
     <li><a href="https://ipdata.co/pricing.html">ipdata</a>: 1,500/day free, $10/month for 2,500/day</li>
-    <li><a href="https://ip-api.com/">ip-api</a>: 45/minute free, &euro;13/month for unlimited</li>
 </ul>
 
 <h3>More Links</h3>
@@ -231,11 +242,61 @@
         }
     }
 
+    async function ipstack(ip) {
+        const el = document.getElementById('ipstack')
+        try {
+            el.innerText = 'Loading...';
+            const response = await fetch(`/internal/ipstack.json?ip=${encodeURIComponent(ip)}`, {
+                referrerPolicy: ''
+                });
+            if (!response.ok) {
+                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
+                return;
+            }
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                el.innerText = `ERROR non-json response (${contentType})`;
+                return;
+            }
+            const result = await response.json();
+            console.log(`ipstack result = ${JSON.stringify(result)}`);
+            el.innerText = `${result.city || '(no city)'}, ${result.country_name || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
+        } catch (err) {
+            el.innerText = `ERROR ${err.message}`;
+        }
+    }
+
+    async function ipapi() {
+        const el = document.getElementById('ipapi')
+        try {
+            el.innerText = 'Loading...';
+            const response = await fetch(`http://ip-api.com/json/`, {
+                referrerPolicy: ''
+                });
+            if (!response.ok) {
+                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
+                return;
+            }
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                el.innerText = `ERROR non-json response (${contentType})`;
+                return;
+            }
+            const result = await response.json();
+            console.log(`ipapi result = ${JSON.stringify(result)}`);
+            el.innerText = `${result.city || '(no city)'}, ${result.country || '(no country)'}: ${result.lat || '(no latitude)'},${result.lon || '(no longitude)'}`;
+        } catch (err) {
+            el.innerText = `ERROR ${err.message}`;
+        }
+    }
+
     hostIpInfo("{{ip}}");
     ipGeoLocation("{{ip}}");
     cloudflare();
     appengine();
+    ipapi();
     keycdn("{{ip}}");
+    ipstack("{{ip}}");
 </script>
 
 {{> below}}
