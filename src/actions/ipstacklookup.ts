@@ -16,6 +16,15 @@ async function ipstackLookup(ctx:any) {
         return;
     }
 
+    const apiKey = config.get('ipstackApiKey');
+    if (!apiKey) {
+        ctx.body = {
+            success: false,
+            message: `IPSTACK_API_KEY not configured`
+        };
+        return;
+    }
+
     let retVal = {
         success: true,
         message: '',
@@ -32,7 +41,7 @@ async function ipstackLookup(ctx:any) {
     });
 
     try {
-        const response = await instance.get(`http://api.ipstack.com/${encodeURIComponent(ip)}?access_key=${config.get('ipstackApiKey')}&format=1`);
+        const response = await instance.get(`http://api.ipstack.com/${encodeURIComponent(ip)}?access_key=${apiKey}&format=1`);
         retVal.message = `${response.status}`;
 
         retVal = response.data;
