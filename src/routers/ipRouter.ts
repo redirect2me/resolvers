@@ -10,6 +10,7 @@ import { getCurrentIP } from '../util';
 
 import * as certcheck from '../actions/certcheck';
 import { keycdnLookup } from '../actions/keycdnlookup';
+import { ipstackLookup } from '../actions/ipstacklookup';
 import config from '../config';
 import * as util from '../util';
 
@@ -22,7 +23,6 @@ ipRouter.get('/ip/', async (ctx) => {
 ipRouter.get('/ip/index.html', async (ctx) => {
     ctx.redirect('/tools.html#ip');
 });
-
 
 ipRouter.get('/ip/geolocation.html', async (ctx:any) => {
 
@@ -82,6 +82,7 @@ ipRouter.post('/ip/asn-lookup.json', asnlookup.asnLookupAPIPost);
 ipRouter.get('/ip/tls-cert-check.html', certcheck.tlsCertCheckGet);
 ipRouter.post('/ip/tls-cert-check.html', certcheck.tlsCertCheckPost);
 ipRouter.get('/internal/keycdn.json', keycdnLookup);
+ipRouter.get('/internal/ipstack.json', ipstackLookup);
 
 function getUrls():string[] {
     return [

@@ -8,6 +8,13 @@ const config = convict({
     format: String,
     sensitive: true,
   },
+  ipstackApiKey: {
+    default: null,
+    doc: 'API key for ipstack.com',
+    env: 'IPSTACK_API_KEY',
+    format: String,
+    sensitive: true,
+  },
   logLevel: {
     default: 'debug',
     doc: 'bunyan logger logging level [fatal, error, warn, info, debug, trace]',
