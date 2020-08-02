@@ -11,6 +11,8 @@ import { getCurrentIP } from '../util';
 import * as certcheck from '../actions/certcheck';
 import { keycdnLookup } from '../actions/keycdnlookup';
 import { ipstackLookup } from '../actions/ipstacklookup';
+import { ipdataLookup } from '../actions/ipdatalookup';
+
 import config from '../config';
 import * as util from '../util';
 
@@ -82,6 +84,7 @@ ipRouter.post('/ip/asn-lookup.json', asnlookup.asnLookupAPIPost);
 ipRouter.get('/ip/tls-cert-check.html', certcheck.tlsCertCheckGet);
 ipRouter.post('/ip/tls-cert-check.html', certcheck.tlsCertCheckPost);
 ipRouter.get('/internal/keycdn.json', keycdnLookup);
+ipRouter.get('/internal/ipdata.json', ipdataLookup);
 ipRouter.get('/internal/ipstack.json', ipstackLookup);
 
 function getUrls():string[] {

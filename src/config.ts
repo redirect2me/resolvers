@@ -1,6 +1,13 @@
 import { default as convict } from 'convict';
 
 const config = convict({
+  ipdataApiKey: {
+    default: null,
+    doc: 'API_KEY for ipdata.co',
+    env: 'IPDATA_API_KEY',
+    format: String,
+    sensitive: true,
+  },
   ipGeoLocationApiKey: {
     default: null,
     doc: 'API_KEY for ipgeolocation.io',
