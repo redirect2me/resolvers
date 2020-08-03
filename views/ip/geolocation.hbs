@@ -40,7 +40,7 @@
             <td id="ipgeolocation">Pending...</td>
         </tr>
         <tr>
-            <td><a href="https://ipstacck/">ipstack</a></td>
+            <td><a href="https://ipstack.com/">ipstack</a></td>
             <td id="ipstack">Pending...</td>
         </tr>
         <tr>
@@ -87,7 +87,7 @@
     <li><a href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a> - includes an HTTP header with Country if you are using their CDN. <span class="badge badge-info">browser only</span></li>
     <li><a href="http://www.cyscape.com/products/chawk/">CountryHawk</a> (Cyscape) - $669 per server per year</li>
     <li><a href="https://www.geojs.io/">geojs</a> - free with no rate limits, uses MaxMind data</li>
-    <li><a href="https://ip-api.com/">ip-api</a>: 45/minute free for non-commercial use, &euro;13/month for unlimited.  <span class="badge badge-info">browser only</span></li>
+    <li><a href="https://ip-api.com/">ip-api</a>: 45/minute free for non-commercial use (http only!), &euro;13/month for unlimited.</li>
     <li><a href="https://ipdata.co/pricing.html">ipdata</a>: 1,500/day free, $10/month for 2,500/day</li>
     <li><a href="https://ipgeolocation.io/pricing.html">ipgeolocation.io</a> - 1,000/day free.  $15/month for 150,000</li>
     <li><a href="https://www.ip2location.com/">IP2Location</a> - $49 for 100,000 lookups.  They also sell their database(s) for local use.</li>
@@ -271,13 +271,13 @@
         }
     }
 
-    async function ipapi() {
+    async function ipapi(ip) {
         const el = document.getElementById('ipapi')
         try {
             el.innerText = 'Loading...';
-            const response = await fetch(`http://ip-api.com/json/`, {
+            const response = await fetch(`/internal/ipapi.json?ip=${encodeURIComponent(ip)}`, {
                 referrerPolicy: ''
-                });
+            });
             if (!response.ok) {
                 el.innerText = `ERROR ${response.status}: ${response.statusText}`;
                 return;
@@ -323,7 +323,7 @@
     ipGeoLocation("{{ip}}");
     cloudflare();
     appengine();
-    ipapi();
+    ipapi("{{ip}}");
     keycdn("{{ip}}");
     ipstack("{{ip}}");
     ipdata("{{ip}}");
