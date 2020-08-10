@@ -33,7 +33,7 @@ jobs:
         git config --global user.email "github-action@github.com"
         git config --global user.name "Github Action"
         git remote add deploy git@github.com:redirect2me/resolvers.git
-        git checkout master
+        git checkout main
 
     - name: Commit changes
       run: data/data-commit.sh
