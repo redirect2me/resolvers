@@ -5,17 +5,19 @@
 [![License: AGPL3+](https://img.shields.io/badge/license-AGPL3%2B-green.svg?style=flat)](LICENSE.txt)
 [![build](https://github.com/redirect2me/resolvers/workflows/build/badge.svg)](https://github.com/redirect2me/resolvers/actions?query=workflow%3Abuild)
 
-Website for troubleshooting DNS resolution issues
+The source for the [Resolve.rs website](https://resolve.rs/) for troubleshooting DNS resolution and other networking issues.
 
 ## How to build and run
 
-LATER
-
-Get additional flags with:
+It is a pretty standard node.js/TypeScript project.  Run with:
 
 ```bash
-cp ~/fork/noto-emoji/build/resized_flags/XX.png ./static/images/flags
+yarn install
+yarn run build
+yarn run start
 ```
+
+See [config.ts](src/config.ts) for the various environment variable that you need to set.  The defaults should work, albeit with limited functionality.
 
 ## License
 
@@ -29,12 +31,13 @@ This code is licensed under the [GNU Affero General Public License v3.0](LICENSE
 [![Digital Ocean](https://www.vectorlogo.zone/logos/digitalocean/digitalocean-ar21.svg)](https://www.digitalocean.com/ "Hosting")
 [![Git](https://www.vectorlogo.zone/logos/git-scm/git-scm-ar21.svg)](https://git-scm.com/ "Version control")
 [![Github](https://www.vectorlogo.zone/logos/github/github-ar21.svg)](https://github.com/ "Code hosting")
-[![Google Noto Emoji](https://www.vectorlogo.zone/logos/google/google-ar21.svg)](https://github.com/googlei18n/noto-emoji "Favicon")
+[![Google Noto Emoji](https://www.vectorlogo.zone/logos/google/google-ar21.svg)](https://github.com/googlei18n/noto-emoji "Favicon and flags")
 [![Google Analytics](https://www.vectorlogo.zone/logos/google_analytics/google_analytics-ar21.svg)](https://www.google.com/analytics "Traffic Measurement")
 [![Handlebars](https://www.vectorlogo.zone/logos/handlebarsjs/handlebarsjs-ar21.svg)](http://handlebarsjs.com/ "Templating")
 [![ICANN](https://www.vectorlogo.zone/logos/icann/icann-ar21.svg)](https://www.icann.org/ "Top-level domain list")
 [![Koa](https://www.vectorlogo.zone/logos/koajs/koajs-ar21.svg)](https://koajs.com/ "Web framework")
 [![lodash](https://www.vectorlogo.zone/logos/lodash/lodash-ar21.svg)](https://www.lodash.com/ "JavaScript utility functions")
+[![maxmind](https://www.vectorlogo.zone/logos/maxmind/maxmind-ar21.svg)](https://www.maxmind.com/ "IP geolocation and ASN databases")
 [![Public Suffix List](https://www.vectorlogo.zone/logos/mozilla/mozilla-ar21.svg)](https://publicsuffix.org/)
 [![Node.js](https://www.vectorlogo.zone/logos/nodejs/nodejs-ar21.svg)](https://nodejs.org/ "Application Server")
 [![npm](https://www.vectorlogo.zone/logos/npmjs/npmjs-ar21.svg)](https://www.npmjs.com/ "JS Package Management")
@@ -43,6 +46,13 @@ This code is licensed under the [GNU Affero General Public License v3.0](LICENSE
 [![TypeScript](https://www.vectorlogo.zone/logos/typescriptlang/typescriptlang-ar21.svg)](https://www.typescriptlang.org/ "Programming Language")
 [![yarn](https://www.vectorlogo.zone/logos/yarnpkg/yarnpkg-ar21.svg)](https://yarnpkg.com/en/ "Node.JS Package Management")
 
-* MaxMind - geolocation database
 * Twitter banner photo by [Enrapture Captivating Media](https://unsplash.com/@enrapture)
+* Additional geolocation sources are credited on the [geolocation test page](https://resolve.rs/ip/geolocation.html)
 
+## Notes
+
+Get additional flags with:
+
+```bash
+cp ~/fork/noto-emoji/build/resized_flags/XX.png ./static/images/flags
+```

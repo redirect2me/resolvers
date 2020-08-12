@@ -24,7 +24,7 @@ const config = convict({
   },
   logLevel: {
     default: 'debug',
-    doc: 'bunyan logger logging level [fatal, error, warn, info, debug, trace]',
+    doc: 'pino logging level [fatal, error, warn, info, debug, trace]',
     env: 'LOG_LEVEL',
     format: ['fatal', 'error', 'warn', 'info', 'debug', 'trace'],
   },
