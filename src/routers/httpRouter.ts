@@ -10,6 +10,7 @@ import { URL } from 'url';
 import * as certcheck from '../actions/certcheck';
 import * as headers from '../actions/headers';
 import * as redirectcheck from '../actions/redirectcheck';
+import * as util from '../util';
 
 const httpRouter = new Router();
 
@@ -62,8 +63,12 @@ httpRouter.get('/http/myheaders.html', async (ctx:any) => {
      });
 });
 
-httpRouter.get('/http/myheaders.json', async (ctx) => {
-    ctx.body = ctx.request.headers;
+httpRouter.all('/http/myheaders.json', async (ctx) => {
+    util.handleJsonp(ctx, {
+        ip: util.getCurrentIP(ctx),
+        headers: ctx.request.headers,
+        method: ctx.request.method,
+    });
 });
 
 httpRouter.get('/http/cert-check.html', certcheck.httpsCertCheckGet);
