@@ -9,4 +9,3 @@ dist/
 node_modules/
 tmp/
 *.tmp
-.vscode/

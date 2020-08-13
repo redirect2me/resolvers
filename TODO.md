@@ -1,5 +1,6 @@
 # To Do
 
+* Unify returned object for geolocation API proxy: { text, country, lat, lng, raw }
 * glossary from data
 * pages with API versions: link to the API overview.
 * redirect testing
