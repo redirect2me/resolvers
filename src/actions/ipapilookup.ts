@@ -1,7 +1,7 @@
 import axios from 'axios';
 //import * as url from 'URL';
 
-//import { logger } from '../logger';
+import { logger } from '../logger';
 //import * as util from '../util';
 
 async function ipapiLookup(ctx: any) {
@@ -36,14 +36,14 @@ async function ipapiLookup(ctx: any) {
 
         retVal = response.data;
         retVal.success = true;
-
+        retVal.message = `${response.status}`;
     } catch (err) {
         ctx.log.error({ err, ip }, 'Unable to check ip with ip-api');
         retVal.success = false;
         retVal.message = err.message;
     }
 
-    console.log(retVal);
+    logger.debug( { geodata: retVal, ip }, "ip-api results");
 
     ctx.body = retVal;
 }

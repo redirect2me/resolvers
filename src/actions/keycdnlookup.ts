@@ -1,7 +1,7 @@
 import axios from 'axios';
 //import * as url from 'URL';
 
-//import { logger } from '../logger';
+import { logger } from '../logger';
 //import * as util from '../util';
 
 async function keycdnLookup(ctx:any) {
@@ -33,16 +33,17 @@ async function keycdnLookup(ctx:any) {
 
     try {
         const response = await instance.get(`https://tools.keycdn.com/geo.json?host=${encodeURIComponent(ip)}`);
-        retVal.message = `${response.status}`;
 
         retVal = response.data.data.geo;
+        retVal.message = `${response.status}`;
+        retVal.success = true;
     } catch (err) {
         ctx.log.error({ err, ip }, 'Unable to check ip with keycdn');
         retVal.success = false;
         retVal.message = err.message;
     }
 
-    console.log(retVal);
+    logger.debug( { geodata: retVal, ip }, "KeyCDN results");
 
     ctx.body = retVal;
 }
