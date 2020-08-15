@@ -39,9 +39,9 @@ ipRouter.get('/ip/geolocation.html', async (ctx:any) => {
 
     ctx.body = await ctx.render('ip/geolocation.hbs', {
         asn,
-        current_ip,
         ip,
         ipgeolocation_api_key: config.get('ipGeoLocationApiKey'),
+        is_current_ip: ip == current_ip,
         maxmind: location,
         title: 'IP Address Geolocation',
     });
