@@ -15,6 +15,11 @@
         </tr>
     </thead>
     <tbody>
+{{#if is_current_ip}}
+        <tr>
+            <td><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS</a></td>
+            <td id="aws">Pending...</td>
+        </tr>
         <tr>
             <td><a href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a></td>
             <td id="cloudflare">Pending...</td>
@@ -23,6 +28,7 @@
             <td><a href="https://cloud.google.com/appengine/docs/standard/go/reference/request-response-headers">Google AppEngine</a></td>
             <td id="appengine">Pending...</td>
         </tr>
+{{/if}}
         <tr>
             <td><a href="http://www.hostip.info/use.php">HostIP.info</a></td>
             <td id="hostipinfo">Pending...</td>
@@ -84,6 +90,7 @@
 <ul>
     <li><a href="https://cloud.google.com/appengine/docs/standard/go/reference/request-response-headers">AppEngine</a> (Google) - includes HTTP headers with full details if you are hosting with them. <span class="badge badge-info">browser only</span></li>
     <li><a href="http://www.atelierweb.com/products/ip-locator/">Atelier Web IP Locator</a> - $40 for 50,000 lookups.  Free plan is 200 per 30 days.</li>
+    <li><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS</a> - includes HTTP header with country if you are using their CloudFront CDN <span class="badge badge-info">browser only</span></li>
     <li><a href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a> - includes an HTTP header with Country if you are using their CDN. <span class="badge badge-info">browser only</span></li>
     <li><a href="https://www.cyscape.com/products/chawk/">CountryHawk</a> (Cyscape) - $669 per server per year</li>
     <li><a href="https://www.geojs.io/">geojs</a> - free with no rate limits, uses MaxMind data</li>
@@ -115,7 +122,6 @@
 <h3>To Do</h3>
 
 <ul>
-    <li><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS CloudFront</a></li>
     <li><a href="https://labstack.com/ip#pricing">LabStack</a></li>
     <li><a href="https://auth0.com/signals/ip">Auth0</a></li>
     <li><a href="https://github.com/analogic/ipgeo">analogic</a></li>
@@ -140,6 +146,11 @@
 </ul>
 
 <script>
+
+    async function formatResult(text, country_code, lat, lng, raw) {
+        //LATER
+    }
+{{#if is_current_ip}}
     async function cloudflare(ip) {
         const el = document.getElementById('cloudflare')
         try {
@@ -187,6 +198,31 @@
             el.innerText = `ERROR ${err.message}`;
         }
     }
+
+    async function aws(ip) {
+        const el = document.getElementById('aws')
+        try {
+            el.innerText = 'Loading...';
+            const response = await fetch(`https://aws-geo.redirect2.me/api/aws.json`, {
+                referrerPolicy: ''
+                });
+            if (!response.ok) {
+                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
+                return;
+            }
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                el.innerText = `ERROR non-json response (${contentType})`;
+                return;
+            }
+            const result = await response.json();
+            console.log(`aws result = ${JSON.stringify(result)}`);
+            el.innerText = `${result.country || '(no country)'}`;
+        } catch (err) {
+            el.innerText = `ERROR ${err.message}`;
+        }
+    }
+{{/if}}
 
     async function hostIpInfo(ip) {
         const el = document.getElementById('hostipinfo')
@@ -282,6 +318,10 @@
             }
             const result = await response.json();
             console.log(`ipstack result = ${JSON.stringify(result)}`);
+            if (!result.success) {
+                el.innerText = result.message;
+                return;
+            }
             el.innerText = `${result.city || '(no city)'}, ${result.country_name || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
         } catch (err) {
             el.innerText = `ERROR ${err.message}`;
@@ -306,6 +346,10 @@
             }
             const result = await response.json();
             console.log(`ipapi result = ${JSON.stringify(result)}`);
+            if (!result.success) {
+                el.innerText = result.message;
+                return;
+            }
             el.innerText = `${result.city || '(no city)'}, ${result.country || '(no country)'}: ${result.lat || '(no latitude)'},${result.lon || '(no longitude)'}`;
         } catch (err) {
             el.innerText = `ERROR ${err.message}`;
@@ -330,16 +374,23 @@
             }
             const result = await response.json();
             console.log(`ipdata result = ${JSON.stringify(result)}`);
+            if (!result.success) {
+                el.innerText = result.message;
+                return;
+            }
             el.innerText = `${result.city || '(no city)'}, ${result.country_name || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
         } catch (err) {
             el.innerText = `ERROR ${err.message}`;
         }
     }
 
-    hostIpInfo("{{ip}}");
-    ipGeoLocation("{{ip}}");
+{{#if is_current_ip}}
+    aws();
     cloudflare();
     appengine();
+{{/if}}
+    hostIpInfo("{{ip}}");
+    ipGeoLocation("{{ip}}");
     ipapi("{{ip}}");
     keycdn("{{ip}}");
     ipstack("{{ip}}");
