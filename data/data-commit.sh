@@ -25,7 +25,7 @@ else
 	echo "INFO: committing changes to ${DIFF}"
 	git add ${DIFF}
 	git commit -m "Databases updated at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-	git push deploy master
+	git push deploy main
 fi
 
 echo "INFO: completed data commit at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
