@@ -147,34 +147,35 @@
 
 <script>
 
-    async function formatResult(text, country_code, lat, lng, raw) {
-        //LATER
-    }
-{{#if is_current_ip}}
-    async function cloudflare(ip) {
-        const el = document.getElementById('cloudflare')
-        try {
-            el.innerText = 'Loading...';
-            const response = await fetch(`https://cf-geo.redirect2.me/api/cloudflare.json`, {
-                referrerPolicy: ''
-                });
-            if (!response.ok) {
-                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
-                return;
-            }
-            const contentType = response.headers.get('content-type');
-            if (!contentType || !contentType.includes('application/json')) {
-                el.innerText = `ERROR non-json response (${contentType})`;
-                return;
-            }
-            const result = await response.json();
-            console.log(`cloudflare result = ${JSON.stringify(result)}`);
-            el.innerText = `${result.country || '(no country)'}`;
-        } catch (err) {
-            el.innerText = `ERROR ${err.message}`;
-        }
+    function htmlEncode(raw) {
+        return raw;
     }
 
+    function formatResult(text, country_code, latitude, longitude, raw) {
+        //LATER
+        const details = document.createElement("details");
+        const summary = document.createElement("summary");
+        summary.append(country_code);
+        summary.append(": ");
+        summary.append(text);
+        details.append(summary);
+
+        if (latitude && longitude) {
+            const mapLink = document.createElement("a");
+            mapLink.setAttribute("href", `https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}&zoom=12`);
+            mapLink.append(`${latitude}, ${longitude}`);
+            summary.append(": ");
+            summary.append(mapLink);
+        }
+
+        const pre = document.createElement("pre");
+        pre.append(JSON.stringify(raw, null, 2));
+        details.append(pre);
+
+        return details;
+    }
+
+{{#if is_current_ip}}
     async function appengine(ip) {
         const el = document.getElementById('appengine')
         try {
@@ -222,6 +223,30 @@
             el.innerText = `ERROR ${err.message}`;
         }
     }
+
+    async function cloudflare(ip) {
+        const el = document.getElementById('cloudflare')
+        try {
+            el.innerText = 'Loading...';
+            const response = await fetch(`https://cf-geo.redirect2.me/api/cloudflare.json`, {
+                referrerPolicy: ''
+                });
+            if (!response.ok) {
+                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
+                return;
+            }
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                el.innerText = `ERROR non-json response (${contentType})`;
+                return;
+            }
+            const result = await response.json();
+            console.log(`cloudflare result = ${JSON.stringify(result)}`);
+            el.innerText = `${result.country || '(no country)'}`;
+        } catch (err) {
+            el.innerText = `ERROR ${err.message}`;
+        }
+    }
 {{/if}}
 
     async function hostIpInfo(ip) {
@@ -242,87 +267,8 @@
             }
             const result = await response.json();
             console.log(`hostip.info result = ${JSON.stringify(result)}`);
-            el.innerText = `${result.city || '(no city)'}, ${result.country_name || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
-        } catch (err) {
-            el.innerText = `ERROR ${err.message}`;
-        }
-    }
-
-    async function ipGeoLocation(ip) {
-        const el = document.getElementById('ipgeolocation')
-        {{#if ipgeolocation_api_key}}
-        try {
-            el.innerText = 'Loading...';
-            const response = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey={{ipgeolocation_api_key}}&ip=${encodeURIComponent(ip)}&position=true`, {
-                referrerPolicy: ''
-                });
-            if (!response.ok) {
-                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
-                return;
-            }
-            const contentType = response.headers.get('content-type');
-            if (!contentType || !contentType.includes('application/json')) {
-                el.innerText = `ERROR non-json response (${contentType})`;
-                return;
-            }
-            const result = await response.json();
-            console.log(`ipgeolocation.io result = ${JSON.stringify(result)}`);
-            el.innerText = `${result.city || '(no city)'}, ${result.country_name || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
-        } catch (err) {
-            el.innerText = `ERROR ${err.message}`;
-        }
-        {{else}}
-            el.innerText = 'ERROR: server is not configured with an API key';
-        {{/if}}
-    }
-
-    async function keycdn(ip) {
-        const el = document.getElementById('keycdn')
-        try {
-            el.innerText = 'Loading...';
-            const response = await fetch(`/internal/keycdn.json?ip=${encodeURIComponent(ip)}`, {
-                referrerPolicy: ''
-                });
-            if (!response.ok) {
-                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
-                return;
-            }
-            const contentType = response.headers.get('content-type');
-            if (!contentType || !contentType.includes('application/json')) {
-                el.innerText = `ERROR non-json response (${contentType})`;
-                return;
-            }
-            const result = await response.json();
-            console.log(`keycdn result = ${JSON.stringify(result)}`);
-            el.innerText = `${result.city || '(no city)'}, ${result.country_name || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
-        } catch (err) {
-            el.innerText = `ERROR ${err.message}`;
-        }
-    }
-
-    async function ipstack(ip) {
-        const el = document.getElementById('ipstack')
-        try {
-            el.innerText = 'Loading...';
-            const response = await fetch(`/internal/ipstack.json?ip=${encodeURIComponent(ip)}`, {
-                referrerPolicy: ''
-                });
-            if (!response.ok) {
-                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
-                return;
-            }
-            const contentType = response.headers.get('content-type');
-            if (!contentType || !contentType.includes('application/json')) {
-                el.innerText = `ERROR non-json response (${contentType})`;
-                return;
-            }
-            const result = await response.json();
-            console.log(`ipstack result = ${JSON.stringify(result)}`);
-            if (!result.success) {
-                el.innerText = result.message;
-                return;
-            }
-            el.innerText = `${result.city || '(no city)'}, ${result.country_name || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
+            el.innerText = '';
+            el.append(formatResult(`${result.city}, ${result.country_name}`, result.country_code, result.latitude, result.longitude, result));
         } catch (err) {
             el.innerText = `ERROR ${err.message}`;
         }
@@ -350,7 +296,8 @@
                 el.innerText = result.message;
                 return;
             }
-            el.innerText = `${result.city || '(no city)'}, ${result.country || '(no country)'}: ${result.lat || '(no latitude)'},${result.lon || '(no longitude)'}`;
+            el.innerText = '';
+            el.append(formatResult(result.text, result.country, result.latitude, result.longitude, result.raw));
         } catch (err) {
             el.innerText = `ERROR ${err.message}`;
         }
@@ -378,23 +325,106 @@
                 el.innerText = result.message;
                 return;
             }
-            el.innerText = `${result.city || '(no city)'}, ${result.country_name || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
+            el.innerText = '';
+            el.append(formatResult(result.text, result.country, result.latitude, result.longitude, result.raw));
+        } catch (err) {
+            el.innerText = `ERROR ${err.message}`;
+        }
+    }
+
+    async function ipGeoLocation(ip) {
+        const el = document.getElementById('ipgeolocation')
+        {{#if ipgeolocation_api_key}}
+        try {
+            el.innerText = 'Loading...';
+            const response = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey={{ipgeolocation_api_key}}&ip=${encodeURIComponent(ip)}&position=true`, {
+                referrerPolicy: ''
+                });
+            if (!response.ok) {
+                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
+                return;
+            }
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                el.innerText = `ERROR non-json response (${contentType})`;
+                return;
+            }
+            const result = await response.json();
+            console.log(`ipgeolocation.io result = ${JSON.stringify(result)}`);
+            el.innerText = '';
+            el.append(formatResult(`${result.city}, ${result.country_name}`, result.country_code, result.latitude, result.longitude, result));
+        } catch (err) {
+            el.innerText = `ERROR ${err.message}`;
+        }
+        {{else}}
+            el.innerText = 'ERROR: server is not configured with an API key';
+        {{/if}}
+    }
+
+    async function ipstack(ip) {
+        const el = document.getElementById('ipstack')
+        try {
+            el.innerText = 'Loading...';
+            const response = await fetch(`/internal/ipstack.json?ip=${encodeURIComponent(ip)}`, {
+                referrerPolicy: ''
+                });
+            if (!response.ok) {
+                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
+                return;
+            }
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                el.innerText = `ERROR non-json response (${contentType})`;
+                return;
+            }
+            const result = await response.json();
+            console.log(`ipstack result = ${JSON.stringify(result)}`);
+            if (!result.success) {
+                el.innerText = result.message;
+                return;
+            }
+            el.innerText = '';
+            el.append(formatResult(result.text, result.country, result.latitude, result.longitude, result.raw));
+        } catch (err) {
+            el.innerText = `ERROR ${err.message}`;
+        }
+    }
+
+    async function keycdn(ip) {
+        const el = document.getElementById('keycdn')
+        try {
+            el.innerText = 'Loading...';
+            const response = await fetch(`/internal/keycdn.json?ip=${encodeURIComponent(ip)}`, {
+                referrerPolicy: ''
+                });
+            if (!response.ok) {
+                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
+                return;
+            }
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                el.innerText = `ERROR non-json response (${contentType})`;
+                return;
+            }
+            const result = await response.json();
+            el.innerText = '';
+            el.append(formatResult(result.text, result.country, result.latitude, result.longitude, result.raw));
         } catch (err) {
             el.innerText = `ERROR ${err.message}`;
         }
     }
 
 {{#if is_current_ip}}
+    appengine();
     aws();
     cloudflare();
-    appengine();
 {{/if}}
     hostIpInfo("{{ip}}");
-    ipGeoLocation("{{ip}}");
     ipapi("{{ip}}");
-    keycdn("{{ip}}");
-    ipstack("{{ip}}");
     ipdata("{{ip}}");
+    ipGeoLocation("{{ip}}");
+    ipstack("{{ip}}");
+    keycdn("{{ip}}");
 </script>
 
 {{> below}}

@@ -15,11 +15,7 @@ async function keycdnLookup(ctx:any) {
         return;
     }
 
-    let retVal = {
-        success: true,
-        message: '',
-        data: {},
-    }
+    let retVal:any = {};
 
     const instance = axios.create({
         headers: { 'User-Agent': 'resolve.rs/1.0' },
@@ -33,10 +29,14 @@ async function keycdnLookup(ctx:any) {
 
     try {
         const response = await instance.get(`https://tools.keycdn.com/geo.json?host=${encodeURIComponent(ip)}`);
-
-        retVal = response.data.data.geo;
-        retVal.message = `${response.status}`;
-        retVal.success = true;
+        retVal.success = response.status == 200;
+        retVal.message = `Status from tools.keycdn.com: ${response.status}`;
+        retVal.ip = ip;
+        retVal.country = response.data.data.geo.country_code;
+        retVal.latitude = response.data.data.geo.latitude;
+        retVal.longitude = response.data.data.geo.longitude;
+        retVal.text = `${response.data.data.geo.city}, ${response.data.data.geo.region_name}, ${response.data.data.geo.country_name}`;
+        retVal.raw = response.data;
     } catch (err) {
         ctx.log.error({ err, ip }, 'Unable to check ip with keycdn');
         retVal.success = false;
