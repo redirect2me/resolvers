@@ -156,8 +156,10 @@
         const details = document.createElement("details");
         const summary = document.createElement("summary");
         summary.append(country_code);
-        summary.append(": ");
-        summary.append(text);
+        if (text) {
+            summary.append(": ");
+            summary.append(text);
+        }
         details.append(summary);
 
         if (latitude && longitude) {
@@ -194,7 +196,8 @@
             }
             const result = await response.json();
             console.log(`appengine result = ${JSON.stringify(result)}`);
-            el.innerText = `${result.city || '(no city)'}, ${result.country || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
+            el.innerText = '';
+            el.append(formatResult(result.text, result.country, result.latitude, result.longitude, result.raw));
         } catch (err) {
             el.innerText = `ERROR ${err.message}`;
         }
@@ -218,7 +221,8 @@
             }
             const result = await response.json();
             console.log(`aws result = ${JSON.stringify(result)}`);
-            el.innerText = `${result.country || '(no country)'}`;
+            el.innerText = '';
+            el.append(formatResult(result.text, result.country, result.latitude, result.longitude, result.raw));
         } catch (err) {
             el.innerText = `ERROR ${err.message}`;
         }
@@ -242,7 +246,8 @@
             }
             const result = await response.json();
             console.log(`cloudflare result = ${JSON.stringify(result)}`);
-            el.innerText = `${result.country || '(no country)'}`;
+            el.innerText = '';
+            el.append(formatResult(result.text, result.country, result.latitude, result.longitude, result.raw));
         } catch (err) {
             el.innerText = `ERROR ${err.message}`;
         }
