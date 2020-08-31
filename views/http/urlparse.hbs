@@ -21,6 +21,11 @@
             <td colspan="2"><code>{{url}}</code></td>
         </tr>
         <tr>
+            <td>auth <span class="badge badge-dark">node</span></td>
+            <td>{{parsed.auth}}</td>
+            <td id="parsed-auth">/td>
+        </tr>
+        <tr>
             <td>hash</td>
             <td>{{parsed.hash}}</td>
             <td id="parsed-hash"></td>
@@ -36,14 +41,24 @@
             <td id="parsed-hostname"></td>
         </tr>
         <tr>
-            <td>origin</td>
+            <td>href</td>
+            <td>{{parsed.href}}</td>
+            <td id="parsed-href"></td>
+        </tr>
+        <tr>
+            <td>origin <span class="badge badge-dark">browser</span></td>
             <td>{{parsed.origin}}</td>
             <td id="parsed-origin"></td>
         </tr>
         <tr>
-            <td>password</td>
+            <td>password <span class="badge badge-dark">node</span></td>
             <td>{{parsed.password}}</td>
             <td id="parsed-password"></td>
+        </tr>
+        <tr>
+            <td>path <span class="badge badge-dark">node</span></td>
+            <td>{{parsed.path}}</td>
+            <td id="parsed-path"></td>
         </tr>
         <tr>
             <td>pathname</td>
@@ -66,17 +81,21 @@
             <td id="parsed-search"></td>
         </tr>
         <tr>
-            <td>searchParams</td>
+            <td>searchParams <span class="badge badge-dark">browser</span></td>
             <td>{{parsed.searchParams}}</td>
             <td id="parsed-searchParams"></td>
         </tr>
         <tr>
-            <td>username</td>
+            <td>username <span class="badge badge-dark">browser</span></td>
             <td>{{parsed.username}}</td>
             <td id="parsed-username"></td>
         </tr>
     </tbody>
 </table>
+<details>
+    <summary>Raw detail</summary>
+    <pre>{{toJson parsed}}</pre>
+</details>
 <script>
     const parsed = new URL({{{toJson url}}});
     $("#parsed-hash").text(parsed.hash);

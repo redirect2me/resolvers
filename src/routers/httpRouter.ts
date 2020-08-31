@@ -5,7 +5,8 @@ import * as yaml from 'js-yaml';
 //import * as punycode from 'punycode';
 //import * as domains from '../data/domainData';
 //import * as util from '../util';
-import { URL } from 'url';
+//import { URL } from 'url';
+import * as url from 'url';
 
 import * as certcheck from '../actions/certcheck';
 import * as headers from '../actions/headers';
@@ -31,11 +32,11 @@ httpRouter.get('/http/urlencode.html', async (ctx:any) => {
 });
 
 httpRouter.get('/http/urlparse.html', async (ctx:any) => {
-    const url = ctx.query.url || ctx.request.href;
+    const theUrl = ctx.query.url || ctx.request.href;
 
     ctx.body = await ctx.render('http/urlparse.hbs', {
-        url,
-        parsed: new URL(url),
+        url: theUrl,
+        parsed: url.parse(theUrl),
         title: 'Parse a URL',
      });
 });
