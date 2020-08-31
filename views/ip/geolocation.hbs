@@ -55,7 +55,7 @@
         </tr>
         <tr>
             <td><a href="https://dev.maxmind.com/geoip/geoip2/geolite2/">Maxmind</a></td>
-            <td>{{{maxmind}}}</td>
+            <td id="maxmind">{{{maxmind_noscript}}}</td>
         </tr>
     </tbody>
 </table>
@@ -421,6 +421,28 @@
             el.innerText = `ERROR ${err.message}`;
         }
     }
+
+    async function maxmind(data) {
+        const el = document.getElementById('maxmind')
+        try {
+
+            const countryCode = data && data.country ? data.country.iso_code : null;
+            const latitude = data && data.location ? data.location.latitude : null;
+            const longitude = data && data.location ? data.location.longitude : null;
+
+            const city = data && data.city && data.city.names ? data.city.names.en : null;
+            const region = data && data.subdivisions && data.subdivisions.length > 0 && data.subdivisions[0].names ? data.subdivisions[0].names.en : null;
+            const country = data && data.country && data.country.names ? data.country.names.en : null;
+
+            el.innerText = '';
+            el.append(formatResult(`${city}, ${region}, ${country}`, countryCode, latitude, longitude, data));
+        } catch (err) {
+            el.innerText = `ERROR ${err.message}`;
+        }
+
+    }
+
+    maxmind({{{toJson maxmind}}})
 
 {{#if is_current_ip}}
     appengine();
