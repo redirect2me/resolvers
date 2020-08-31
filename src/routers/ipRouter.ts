@@ -34,15 +34,14 @@ ipRouter.get('/ip/geolocation.html', async (ctx:any) => {
     if (!ip) {
       ip = current_ip;
     }
-    const location = maxmind.cityLookupHtml(ip);
-    const asn = maxmind.asnLookupStr(ip);
 
     ctx.body = await ctx.render('ip/geolocation.hbs', {
-        asn,
+        asn: maxmind.asnLookupStr(ip),
         ip,
         ipgeolocation_api_key: config.get('ipGeoLocationApiKey'),
         is_current_ip: ip == current_ip,
-        maxmind: location,
+        maxmind_noscript: maxmind.cityLookupHtml(ip),
+        maxmind: maxmind.cityLookup(ip),
         title: 'IP Address Geolocation',
     });
 });
