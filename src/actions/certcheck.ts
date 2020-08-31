@@ -77,7 +77,7 @@ async function tlsCertCheckPost(ctx:any) {
                 stream.write(`<tr><td>Fingerprint</td><td>${cert.fingerprint256}</td></tr>`);
                 stream.write(`<tr><td>Serial&nbsp;number</td><td>${cert.serialNumber}</td></tr>`);
                 stream.write(`<tr><td>SHA-256</td><td>${sha256}</td></tr>`);
-                stream.write(`<tr><td>Public key</td><td><a download="publickey.der" href="application/octet-stream;base64,${cert.raw.toString('base64')}">Download</a> (DER format)</td></tr>`);
+                stream.write(`<tr><td>Public key</td><td><a download="publickey.der" href="data:application/octet-stream;base64,${cert.raw.toString('base64')}">Download</a> (DER format)</td></tr>`);
                 stream.write(`</tbody></table>`);
                 stream.write("</details>");
                 logger.info({ subject: cert.subject, issuer: cert.issuerCertificate ? cert.issuerCertificate.subject : '(none)'}, "cert");
