@@ -8,6 +8,8 @@ on:
     - '*.md'
     - '**/*.sh'
     - '.github/workflows/update-data.yaml'
+    - '.vscode/*'
+    - '.devcontainer'
 
 jobs:
   deploy:

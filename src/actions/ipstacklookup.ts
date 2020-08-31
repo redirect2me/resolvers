@@ -25,11 +25,7 @@ async function ipstackLookup(ctx:any) {
         return;
     }
 
-    let retVal = {
-        success: true,
-        message: '',
-        data: {},
-    }
+    let retVal:any = {};
 
     const instance = axios.create({
         headers: { 'User-Agent': 'resolve.rs/1.0' },
@@ -42,9 +38,14 @@ async function ipstackLookup(ctx:any) {
 
     try {
         const response = await instance.get(`http://api.ipstack.com/${encodeURIComponent(ip)}?access_key=${apiKey}&format=1`);
-        retVal.message = `${response.status}`;
-
-        retVal = response.data;
+        retVal.success = response.status == 200;
+        retVal.message = `Status from api.ipstack.com: ${response.status}`;
+        retVal.ip = ip;
+        retVal.country = response.data.country_code;
+        retVal.latitude = response.data.latitude;
+        retVal.longitude = response.data.longitude;
+        retVal.text = `${response.data.city}, ${response.data.region_name}, ${response.data.country_name}`;
+        retVal.raw = response.data;
     } catch (err) {
         ctx.log.error({ err, ip }, 'Unable to check ip with ipstack');
         retVal.success = false;

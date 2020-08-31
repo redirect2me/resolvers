@@ -5,7 +5,7 @@
 
 <h2>Results for {{ip}}</h2>
 
-<p>ASN: {{asn}} <a href="asn-lookup.html?ip={{ip}}">More</a></p>
+<p><a href="asn-lookup.html?ip={{ip}}">ASN</a>: {{asn}}</p>
 
 <table class="table table-striped border-bottom">
     <thead>
@@ -15,6 +15,11 @@
         </tr>
     </thead>
     <tbody>
+{{#if is_current_ip}}
+        <tr>
+            <td><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS</a></td>
+            <td id="aws">Pending...</td>
+        </tr>
         <tr>
             <td><a href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a></td>
             <td id="cloudflare">Pending...</td>
@@ -23,6 +28,7 @@
             <td><a href="https://cloud.google.com/appengine/docs/standard/go/reference/request-response-headers">Google AppEngine</a></td>
             <td id="appengine">Pending...</td>
         </tr>
+{{/if}}
         <tr>
             <td><a href="http://www.hostip.info/use.php">HostIP.info</a></td>
             <td id="hostipinfo">Pending...</td>
@@ -78,16 +84,19 @@
 <h2>Other IP Geolocation Databases</h2>
 
 <div class="alert alert-info">
-    Note: all pricing is for the lowest service level possible. They all have higher priced options (of course).
+    Note: all pricing is for the lowest service level possible. They all have higher priced options (of course).<br/><br/>
+    In my testing, a lot of the providers are using the MaxMind database, even if they don't admin it.
 </div>
 
 <ul>
     <li><a href="https://cloud.google.com/appengine/docs/standard/go/reference/request-response-headers">AppEngine</a> (Google) - includes HTTP headers with full details if you are hosting with them. <span class="badge badge-info">browser only</span></li>
     <li><a href="http://www.atelierweb.com/products/ip-locator/">Atelier Web IP Locator</a> - $40 for 50,000 lookups.  Free plan is 200 per 30 days.</li>
+    <li><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS</a> - includes HTTP header with country if you are using their CloudFront CDN <span class="badge badge-info">browser only</span></li>
     <li><a href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a> - includes an HTTP header with Country if you are using their CDN. <span class="badge badge-info">browser only</span></li>
     <li><a href="https://www.cyscape.com/products/chawk/">CountryHawk</a> (Cyscape) - $669 per server per year</li>
     <li><a href="https://www.geojs.io/">geojs</a> - free with no rate limits, uses MaxMind data</li>
     <li><a href="https://www.geoplugin.com/">GeoPlugin</a> - free, uses MaxMind data</li>
+    <li><a href="http://www.hostip.info/use.php">HostIP.info</a> - free, and you can download their database, but they recommend MaxMind for higher accuracy</li>
     <li><a href="https://ip-api.com/">ip-api</a>: 45/minute free for non-commercial use (http only!), &euro;13/month for unlimited.</li>
 	<li><a href="https://ifconfig.co/">ipconfig.co</a> - free 1 request/minute.  uses MaxMind data.  source available.
     <li><a href="https://ipdata.co/pricing.html">ipdata</a>: 1,500/day free, $10/month for 2,500/day</li>
@@ -95,6 +104,7 @@
     <li><a href="https://www.ip2location.com/">IP2Location</a> - $49 for 100,000 lookups.  They also sell their database(s) for local use.</li>
     <li><a href="http://www.ip2nation.com/">ip2nation</a> - downloadable database, free, only gets the country (which is often good enough!)</li>
     <li><a href="https://ipstack.com/">ipstack</a> 10,000/month free, $10/month for 50,000</li>
+    <li><a href="https://tools.keycdn.com/geo">KeyCDN</a> - free but requires a link back to their site.  &ldquo;includes data from MaxMind&rdquo;</li>
     <li><a href="https://www.maxmind.com/en/geoip2-precision-services">MaxMind</a> - in addition to their free offering (used above), they have a commercial service that starts at $0.10 per 1,000 lookups.</li>
     <li><a href="https://www.melissa.com/v2/lookups/iplocation/ip/">Melissa</a> - 1,000/free, then $3 per 1,000.</li>
     <li><a href="https://www.home.neustar/security-intelligence/ip-geopoint">UltraGeoPoint</a> (Neustar)- no pricing on website</li>
@@ -115,7 +125,6 @@
 <h3>To Do</h3>
 
 <ul>
-    <li><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS CloudFront</a></li>
     <li><a href="https://labstack.com/ip#pricing">LabStack</a></li>
     <li><a href="https://auth0.com/signals/ip">Auth0</a></li>
     <li><a href="https://github.com/analogic/ipgeo">analogic</a></li>
@@ -140,30 +149,38 @@
 </ul>
 
 <script>
-    async function cloudflare(ip) {
-        const el = document.getElementById('cloudflare')
-        try {
-            el.innerText = 'Loading...';
-            const response = await fetch(`https://cf-geo.redirect2.me/api/cloudflare.json`, {
-                referrerPolicy: ''
-                });
-            if (!response.ok) {
-                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
-                return;
-            }
-            const contentType = response.headers.get('content-type');
-            if (!contentType || !contentType.includes('application/json')) {
-                el.innerText = `ERROR non-json response (${contentType})`;
-                return;
-            }
-            const result = await response.json();
-            console.log(`cloudflare result = ${JSON.stringify(result)}`);
-            el.innerText = `${result.country || '(no country)'}`;
-        } catch (err) {
-            el.innerText = `ERROR ${err.message}`;
-        }
+
+    function htmlEncode(raw) {
+        return raw;
     }
 
+    function formatResult(text, country_code, latitude, longitude, raw) {
+        //LATER
+        const details = document.createElement("details");
+        const summary = document.createElement("summary");
+        summary.append(country_code);
+        if (text) {
+            summary.append(": ");
+            summary.append(text);
+        }
+        details.append(summary);
+
+        if (latitude && longitude) {
+            const mapLink = document.createElement("a");
+            mapLink.setAttribute("href", `https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}&zoom=12`);
+            mapLink.append(`${latitude}, ${longitude}`);
+            summary.append(": ");
+            summary.append(mapLink);
+        }
+
+        const pre = document.createElement("pre");
+        pre.append(JSON.stringify(raw, null, 2));
+        details.append(pre);
+
+        return details;
+    }
+
+{{#if is_current_ip}}
     async function appengine(ip) {
         const el = document.getElementById('appengine')
         try {
@@ -182,11 +199,63 @@
             }
             const result = await response.json();
             console.log(`appengine result = ${JSON.stringify(result)}`);
-            el.innerText = `${result.city || '(no city)'}, ${result.country || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
+            el.innerText = '';
+            el.append(formatResult(result.text, result.country, result.latitude, result.longitude, result.raw));
         } catch (err) {
             el.innerText = `ERROR ${err.message}`;
         }
     }
+
+    async function aws(ip) {
+        const el = document.getElementById('aws')
+        try {
+            el.innerText = 'Loading...';
+            const response = await fetch(`https://aws-geo.redirect2.me/api/aws.json`, {
+                referrerPolicy: ''
+                });
+            if (!response.ok) {
+                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
+                return;
+            }
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                el.innerText = `ERROR non-json response (${contentType})`;
+                return;
+            }
+            const result = await response.json();
+            console.log(`aws result = ${JSON.stringify(result)}`);
+            el.innerText = '';
+            el.append(formatResult(result.text, result.country, result.latitude, result.longitude, result.raw));
+        } catch (err) {
+            el.innerText = `ERROR ${err.message}`;
+        }
+    }
+
+    async function cloudflare(ip) {
+        const el = document.getElementById('cloudflare')
+        try {
+            el.innerText = 'Loading...';
+            const response = await fetch(`https://cf-geo.redirect2.me/api/cloudflare.json`, {
+                referrerPolicy: ''
+                });
+            if (!response.ok) {
+                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
+                return;
+            }
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                el.innerText = `ERROR non-json response (${contentType})`;
+                return;
+            }
+            const result = await response.json();
+            console.log(`cloudflare result = ${JSON.stringify(result)}`);
+            el.innerText = '';
+            el.append(formatResult(result.text, result.country, result.latitude, result.longitude, result.raw));
+        } catch (err) {
+            el.innerText = `ERROR ${err.message}`;
+        }
+    }
+{{/if}}
 
     async function hostIpInfo(ip) {
         const el = document.getElementById('hostipinfo')
@@ -206,7 +275,66 @@
             }
             const result = await response.json();
             console.log(`hostip.info result = ${JSON.stringify(result)}`);
-            el.innerText = `${result.city || '(no city)'}, ${result.country_name || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
+            el.innerText = '';
+            el.append(formatResult(`${result.city}, ${result.country_name}`, result.country_code, result.latitude, result.longitude, result));
+        } catch (err) {
+            el.innerText = `ERROR ${err.message}`;
+        }
+    }
+
+    async function ipapi(ip) {
+        const el = document.getElementById('ipapi')
+        try {
+            el.innerText = 'Loading...';
+            const response = await fetch(`/internal/ipapi.json?ip=${encodeURIComponent(ip)}`, {
+                referrerPolicy: ''
+            });
+            if (!response.ok) {
+                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
+                return;
+            }
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                el.innerText = `ERROR non-json response (${contentType})`;
+                return;
+            }
+            const result = await response.json();
+            console.log(`ipapi result = ${JSON.stringify(result)}`);
+            if (!result.success) {
+                el.innerText = result.message;
+                return;
+            }
+            el.innerText = '';
+            el.append(formatResult(result.text, result.country, result.latitude, result.longitude, result.raw));
+        } catch (err) {
+            el.innerText = `ERROR ${err.message}`;
+        }
+    }
+
+    async function ipdata(ip) {
+        const el = document.getElementById('ipdata')
+        try {
+            el.innerText = 'Loading...';
+            const response = await fetch(`/internal/ipdata.json?ip=${encodeURIComponent(ip)}`, {
+                referrerPolicy: ''
+                });
+            if (!response.ok) {
+                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
+                return;
+            }
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                el.innerText = `ERROR non-json response (${contentType})`;
+                return;
+            }
+            const result = await response.json();
+            console.log(`ipdata result = ${JSON.stringify(result)}`);
+            if (!result.success) {
+                el.innerText = result.message;
+                return;
+            }
+            el.innerText = '';
+            el.append(formatResult(result.text, result.country, result.latitude, result.longitude, result.raw));
         } catch (err) {
             el.innerText = `ERROR ${err.message}`;
         }
@@ -231,37 +359,14 @@
             }
             const result = await response.json();
             console.log(`ipgeolocation.io result = ${JSON.stringify(result)}`);
-            el.innerText = `${result.city || '(no city)'}, ${result.country_name || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
+            el.innerText = '';
+            el.append(formatResult(`${result.city}, ${result.state_prov}, ${result.country_name}`, result.country_code2, result.latitude, result.longitude, result));
         } catch (err) {
             el.innerText = `ERROR ${err.message}`;
         }
         {{else}}
             el.innerText = 'ERROR: server is not configured with an API key';
         {{/if}}
-    }
-
-    async function keycdn(ip) {
-        const el = document.getElementById('keycdn')
-        try {
-            el.innerText = 'Loading...';
-            const response = await fetch(`/internal/keycdn.json?ip=${encodeURIComponent(ip)}`, {
-                referrerPolicy: ''
-                });
-            if (!response.ok) {
-                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
-                return;
-            }
-            const contentType = response.headers.get('content-type');
-            if (!contentType || !contentType.includes('application/json')) {
-                el.innerText = `ERROR non-json response (${contentType})`;
-                return;
-            }
-            const result = await response.json();
-            console.log(`keycdn result = ${JSON.stringify(result)}`);
-            el.innerText = `${result.city || '(no city)'}, ${result.country_name || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
-        } catch (err) {
-            el.innerText = `ERROR ${err.message}`;
-        }
     }
 
     async function ipstack(ip) {
@@ -282,41 +387,22 @@
             }
             const result = await response.json();
             console.log(`ipstack result = ${JSON.stringify(result)}`);
-            el.innerText = `${result.city || '(no city)'}, ${result.country_name || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
+            if (!result.success) {
+                el.innerText = result.message;
+                return;
+            }
+            el.innerText = '';
+            el.append(formatResult(result.text, result.country, result.latitude, result.longitude, result.raw));
         } catch (err) {
             el.innerText = `ERROR ${err.message}`;
         }
     }
 
-    async function ipapi(ip) {
-        const el = document.getElementById('ipapi')
+    async function keycdn(ip) {
+        const el = document.getElementById('keycdn')
         try {
             el.innerText = 'Loading...';
-            const response = await fetch(`/internal/ipapi.json?ip=${encodeURIComponent(ip)}`, {
-                referrerPolicy: ''
-            });
-            if (!response.ok) {
-                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
-                return;
-            }
-            const contentType = response.headers.get('content-type');
-            if (!contentType || !contentType.includes('application/json')) {
-                el.innerText = `ERROR non-json response (${contentType})`;
-                return;
-            }
-            const result = await response.json();
-            console.log(`ipapi result = ${JSON.stringify(result)}`);
-            el.innerText = `${result.city || '(no city)'}, ${result.country || '(no country)'}: ${result.lat || '(no latitude)'},${result.lon || '(no longitude)'}`;
-        } catch (err) {
-            el.innerText = `ERROR ${err.message}`;
-        }
-    }
-
-    async function ipdata(ip) {
-        const el = document.getElementById('ipdata')
-        try {
-            el.innerText = 'Loading...';
-            const response = await fetch(`/internal/ipdata.json?ip=${encodeURIComponent(ip)}`, {
+            const response = await fetch(`/internal/keycdn.json?ip=${encodeURIComponent(ip)}`, {
                 referrerPolicy: ''
                 });
             if (!response.ok) {
@@ -329,21 +415,24 @@
                 return;
             }
             const result = await response.json();
-            console.log(`ipdata result = ${JSON.stringify(result)}`);
-            el.innerText = `${result.city || '(no city)'}, ${result.country_name || '(no country)'}: ${result.latitude || '(no latitude)'},${result.longitude || '(no longitude)'}`;
+            el.innerText = '';
+            el.append(formatResult(result.text, result.country, result.latitude, result.longitude, result.raw));
         } catch (err) {
             el.innerText = `ERROR ${err.message}`;
         }
     }
 
-    hostIpInfo("{{ip}}");
-    ipGeoLocation("{{ip}}");
-    cloudflare();
+{{#if is_current_ip}}
     appengine();
+    aws();
+    cloudflare();
+{{/if}}
+    hostIpInfo("{{ip}}");
     ipapi("{{ip}}");
-    keycdn("{{ip}}");
-    ipstack("{{ip}}");
     ipdata("{{ip}}");
+    ipGeoLocation("{{ip}}");
+    ipstack("{{ip}}");
+    keycdn("{{ip}}");
 </script>
 
 {{> below}}
