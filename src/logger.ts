@@ -7,7 +7,7 @@ import config from './config';
 const options:Pino.LoggerOptions = {
   // @ts-ignore
   level: config.get('logLevel'),
-  name: process.env.npm_package_name || 'moven-newtrx',
+  name: process.env.npm_package_name || 'resolvers',
   redact: ['err.request', 'err.response', 'req.headers.authorization'],
   timestamp: Pino.stdTimeFunctions.isoTime,
 };

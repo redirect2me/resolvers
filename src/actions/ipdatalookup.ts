@@ -25,11 +25,7 @@ async function ipdataLookup(ctx:any) {
         return;
     }
 
-    let retVal = {
-        success: true,
-        message: '',
-        data: {},
-    }
+    let retVal:any = {};
 
     const instance = axios.create({
         headers: { 'User-Agent': 'resolve.rs/1.0' },
@@ -42,9 +38,14 @@ async function ipdataLookup(ctx:any) {
 
     try {
         const response = await instance.get(`https://api.ipdata.co/${encodeURIComponent(ip)}?api-key=${apiKey}`);
-        retVal.message = `${response.status}`;
-
-        retVal = response.data;
+        retVal.success = response.status == 200;
+        retVal.message = `Status from api.ipdata.co: ${response.status}`;
+        retVal.ip = ip;
+        retVal.country = response.data.country_code;
+        retVal.latitude = response.data.latitude;
+        retVal.longitude = response.data.longitude;
+        retVal.text = `${response.data.city}, ${response.data.region}, ${response.data.country_name}`;
+        retVal.raw = response.data;
     } catch (err) {
         ctx.log.error({ err, ip }, 'Unable to check ip with ipdata');
         retVal.success = false;
