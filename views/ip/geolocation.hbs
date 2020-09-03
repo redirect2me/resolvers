@@ -21,6 +21,10 @@
             <td id="aws">Pending...</td>
         </tr>
         <tr>
+            <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API">Browser</a></td>
+            <td id="browser"><button class="btn btn-sm btn-outline-primary" onclick="browser();">Try now</button></td>
+        </tr>
+        <tr>
             <td><a href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a></td>
             <td id="cloudflare">Pending...</td>
         </tr>
@@ -158,7 +162,7 @@
         //LATER
         const details = document.createElement("details");
         const summary = document.createElement("summary");
-        summary.append(country_code);
+        summary.append(country_code || '(no country code)');
         if (text) {
             summary.append(": ");
             summary.append(text);
@@ -231,7 +235,42 @@
         }
     }
 
-    async function cloudflare(ip) {
+    // needs since the position object doesn't own the properties...
+    function toObject(position) {
+        return {
+            coords: {
+                accuracy: position.coords.accuracy,
+                altitude: position.coords.altitude,
+                altitudeAccuracy: position.coords.altitudeAccuracy,
+                heading: position.coords.heading,
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+                speed: position.coords.speed,
+            },
+            timestamp: position.timestamp,
+        };
+    }
+
+    async function browser() {
+        const el = document.getElementById('browser')
+        if('geolocation' in navigator) {
+            el.innerText = 'Calling Geolocation API...';
+            navigator.geolocation.getCurrentPosition((position) => {
+                console.log('browser position', position);
+                const latitude = position && position.coords ? position.coords.latitude : null;
+                const longitude = position && position.coords ? position.coords.longitude : null;
+                el.innerText = '';
+                el.append(formatResult(null, null, latitude, longitude, toObject(position)));
+            },
+            (err) => {
+                el.innerText = `ERROR: ${err.message} (${err.code})`;
+            });
+        } else {
+            el.innerText = 'Geolocation API not available in your browser!';
+        }
+    }
+
+    async function cloudflare() {
         const el = document.getElementById('cloudflare')
         try {
             el.innerText = 'Loading...';
