@@ -1,4 +1,5 @@
 import { promises as fsPromises } from 'fs';
+import Koa from 'koa';
 import Router from 'koa-router';
 import * as path from 'path';
 import * as yaml from 'js-yaml';
@@ -21,6 +22,14 @@ httpRouter.get('/http/content-type.html', async (ctx: any) => {
     ctx.body = await ctx.render('http/content-type.hbs', {
         mimeTypes,
         title: 'MIME Content-Type Values',
+    });
+});
+
+httpRouter.all('/http/echo.json', async (ctx:Koa.ExtendableContext) => {
+    util.handleJsonp(ctx, {
+        headers: ctx.request.headers,
+        href: ctx.request.href,
+        method: ctx.request.method,
     });
 });
 
