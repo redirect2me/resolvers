@@ -13,6 +13,7 @@ import { keycdnLookup } from '../actions/keycdnlookup';
 import { ipstackLookup } from '../actions/ipstacklookup';
 import { ipdataLookup } from '../actions/ipdatalookup';
 import { ip_apiLookup } from '../actions/ip_apilookup';
+import { ipapiLookup } from '../actions/ipapilookup';
 
 import config from '../config';
 import * as util from '../util';
@@ -89,6 +90,7 @@ ipRouter.get('/internal/keycdn.json', keycdnLookup);
 ipRouter.get('/internal/ipdata.json', ipdataLookup);
 ipRouter.get('/internal/ipstack.json', ipstackLookup);
 ipRouter.get('/internal/ip-api.json', ip_apiLookup);
+ipRouter.get('/internal/ipapi.json', ipapiLookup);
 
 function getUrls():string[] {
     return [

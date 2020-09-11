@@ -1,6 +1,13 @@
 import { default as convict } from 'convict';
 
 const config = convict({
+  ipapiAccessKey: {
+    default: null,
+    doc: 'ACCESS_KEY for ipapi.com',
+    env: 'IPAPI_ACCESS_KEY',
+    format: String,
+    sensitive: true,
+  },
   ipdataApiKey: {
     default: null,
     doc: 'API_KEY for ipdata.co',
