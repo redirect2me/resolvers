@@ -4,7 +4,7 @@ import axios from 'axios';
 import { logger } from '../logger';
 //import * as util from '../util';
 
-async function ipapiLookup(ctx: any) {
+async function ip_apiLookup(ctx: any) {
     const ip = ctx.query['ip'];
 
     if (!ip) {
@@ -49,5 +49,5 @@ async function ipapiLookup(ctx: any) {
 }
 
 export {
-    ipapiLookup,
+    ip_apiLookup,
 }
