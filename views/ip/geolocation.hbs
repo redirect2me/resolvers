@@ -39,7 +39,7 @@
         </tr>
         <tr>
             <td><a href="https://ip-api.com/">IP-API</a></td>
-            <td id="ipapi">Pending...</td>
+            <td id="ip_api">Pending...</td>
         </tr>
         <tr>
             <td><a href="https://ipdata.co/">ipdata</a></td>
@@ -321,11 +321,11 @@
         }
     }
 
-    async function ipapi(ip) {
-        const el = document.getElementById('ipapi')
+    async function ip_api(ip) {
+        const el = document.getElementById('ip_api')
         try {
             el.innerText = 'Loading...';
-            const response = await fetch(`/internal/ipapi.json?ip=${encodeURIComponent(ip)}`, {
+            const response = await fetch(`/internal/ip-api.json?ip=${encodeURIComponent(ip)}`, {
                 referrerPolicy: ''
             });
             if (!response.ok) {
@@ -338,7 +338,7 @@
                 return;
             }
             const result = await response.json();
-            console.log(`ipapi result = ${JSON.stringify(result)}`);
+            console.log(`ip_api result = ${JSON.stringify(result)}`);
             if (!result.success) {
                 el.innerText = result.message;
                 return;
@@ -489,7 +489,7 @@
     cloudflare();
 {{/if}}
     hostIpInfo("{{ip}}");
-    ipapi("{{ip}}");
+    ip_api("{{ip}}");
     ipdata("{{ip}}");
     ipGeoLocation("{{ip}}");
     ipstack("{{ip}}");

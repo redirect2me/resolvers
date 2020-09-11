@@ -12,7 +12,7 @@ import * as certcheck from '../actions/certcheck';
 import { keycdnLookup } from '../actions/keycdnlookup';
 import { ipstackLookup } from '../actions/ipstacklookup';
 import { ipdataLookup } from '../actions/ipdatalookup';
-import { ipapiLookup } from '../actions/ipapilookup';
+import { ip_apiLookup } from '../actions/ip_apilookup';
 
 import config from '../config';
 import * as util from '../util';
@@ -33,6 +33,8 @@ ipRouter.get('/ip/geolocation.html', async (ctx:any) => {
     const current_ip = getCurrentIP(ctx);
     if (!ip) {
       ip = current_ip;
+    } else {
+        ip = ip.trim();
     }
 
     ctx.body = await ctx.render('ip/geolocation.hbs', {
@@ -86,7 +88,7 @@ ipRouter.post('/ip/tls-cert-check.html', certcheck.tlsCertCheckPost);
 ipRouter.get('/internal/keycdn.json', keycdnLookup);
 ipRouter.get('/internal/ipdata.json', ipdataLookup);
 ipRouter.get('/internal/ipstack.json', ipstackLookup);
-ipRouter.get('/internal/ipapi.json', ipapiLookup);
+ipRouter.get('/internal/ip-api.json', ip_apiLookup);
 
 function getUrls():string[] {
     return [
