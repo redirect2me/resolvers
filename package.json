@@ -22,6 +22,7 @@
     "punycode": "^2.1.1",
     "source-map-support": "^0.5.13",
     "tmp-promise": "^2.0.2",
+    "transliteration": "^2.1.11",
     "urijs": "^1.19.1",
     "uuid": "7"
   },

@@ -11,6 +11,7 @@ import KoaStatic from 'koa-static';
 import KoaViews from 'koa-views';
 import * as path from 'path';
 import * as punycode from 'punycode';
+import * as transliteration from 'transliteration';
 
 import config from './config';
 import * as asn from './data/maxmindData';
@@ -123,6 +124,12 @@ app.use(KoaViews(path.join(__dirname, '..', 'views'), {
               return a ? a.toString().toUpperCase() : "";
             },
             toPunycode: function(domain:string) { return domain ? punycode.toASCII(domain) : '(null)'; },
+            transliterate: function(s:string) {
+                return transliteration.slugify(s, {
+                    allowedChars: 'a-zA-Z0-9',
+                    trim: true,
+                });
+            },
         },
         partials: {
             above: path.join(__dirname, '..', 'partials', 'above'),

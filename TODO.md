@@ -87,8 +87,9 @@ markdown -> use npm markdown-it
 * email configuration check
 * check for domain name availability across all tlds (use single-words in public-suffix-list)
 
-## Open Resolvers
+## Other Lists of Open Resolvers
 
+* https://en.wikipedia.org/wiki/Public_recursive_name_server
 * https://public-dns.info/
 * https://www.publicdns.xyz/
 * https://www.lifewire.com/free-and-public-dns-servers-2626062
