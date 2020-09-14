@@ -190,55 +190,6 @@
     }
 
 {{#if is_current_ip}}
-    async function appengine(ip) {
-        const el = document.getElementById('appengine')
-        try {
-            el.innerText = 'Loading...';
-            const response = await fetch(`https://ae-geo.redirect2.me/api/appengine.json`, {
-                referrerPolicy: ''
-                });
-            if (!response.ok) {
-                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
-                return;
-            }
-            const contentType = response.headers.get('content-type');
-            if (!contentType || !contentType.includes('application/json')) {
-                el.innerText = `ERROR non-json response (${contentType})`;
-                return;
-            }
-            const result = await response.json();
-            console.log(`appengine result = ${JSON.stringify(result)}`);
-            el.innerText = '';
-            el.append(formatResult(result.text, result.country, result.latitude, result.longitude, result.raw));
-        } catch (err) {
-            el.innerText = `ERROR ${err.message}`;
-        }
-    }
-
-    async function aws(ip) {
-        const el = document.getElementById('aws')
-        try {
-            el.innerText = 'Loading...';
-            const response = await fetch(`https://aws-geo.redirect2.me/api/aws.json`, {
-                referrerPolicy: ''
-                });
-            if (!response.ok) {
-                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
-                return;
-            }
-            const contentType = response.headers.get('content-type');
-            if (!contentType || !contentType.includes('application/json')) {
-                el.innerText = `ERROR non-json response (${contentType})`;
-                return;
-            }
-            const result = await response.json();
-            console.log(`aws result = ${JSON.stringify(result)}`);
-            el.innerText = '';
-            el.append(formatResult(result.text, result.country, result.latitude, result.longitude, result.raw));
-        } catch (err) {
-            el.innerText = `ERROR ${err.message}`;
-        }
-    }
 
     // needs since the position object doesn't own the properties...
     function toObject(position) {
@@ -275,30 +226,6 @@
         }
     }
 
-    async function cloudflare() {
-        const el = document.getElementById('cloudflare')
-        try {
-            el.innerText = 'Loading...';
-            const response = await fetch(`https://cf-geo.redirect2.me/api/cloudflare.json`, {
-                referrerPolicy: ''
-                });
-            if (!response.ok) {
-                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
-                return;
-            }
-            const contentType = response.headers.get('content-type');
-            if (!contentType || !contentType.includes('application/json')) {
-                el.innerText = `ERROR non-json response (${contentType})`;
-                return;
-            }
-            const result = await response.json();
-            console.log(`cloudflare result = ${JSON.stringify(result)}`);
-            el.innerText = '';
-            el.append(formatResult(result.text, result.country, result.latitude, result.longitude, result.raw));
-        } catch (err) {
-            el.innerText = `ERROR ${err.message}`;
-        }
-    }
 {{/if}}
 
     async function hostIpInfo(ip) {
@@ -433,9 +360,9 @@
     maxmind({{{toJson maxmind}}})
 
 {{#if is_current_ip}}
-    appengine();
-    aws();
-    cloudflare();
+    remoteLookup('appengine', 'https://ae-geo.redirect2.me/api/appengine.json');
+    remoteLookup('aws', 'https://aws-geo.redirect2.me/api/aws.json');
+    remoteLookup('cloudflare', 'https://cf-geo.redirect2.me/api/cloudflare.json');
 {{/if}}
     hostIpInfo({{{toJson ip}}});
     ipGeoLocation({{{toJson ip}}});
