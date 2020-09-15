@@ -29,6 +29,10 @@
             <td id="cloudflare">Pending...</td>
         </tr>
         <tr>
+            <td><a href="https://developer.fastly.com/reference/vcl/variables/geolocation/">Fastly</a></td>
+            <td id="fastly">Pending...</td>
+        </tr>
+        <tr>
             <td><a href="https://cloud.google.com/appengine/docs/standard/go/reference/request-response-headers">Google AppEngine</a></td>
             <td id="appengine">Pending...</td>
         </tr>
@@ -363,6 +367,7 @@
     remoteLookup('appengine', 'https://ae-geo.redirect2.me/api/appengine.json');
     remoteLookup('aws', 'https://aws-geo.redirect2.me/api/aws.json');
     remoteLookup('cloudflare', 'https://cf-geo.redirect2.me/api/cloudflare.json');
+    remoteLookup('fastly', 'http://fastly-geo.redirect2.me/api/fastly.json');
 {{/if}}
     hostIpInfo({{{toJson ip}}});
     ipGeoLocation({{{toJson ip}}});
