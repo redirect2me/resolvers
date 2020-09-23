@@ -29,6 +29,13 @@ const config = convict({
     format: String,
     sensitive: true,
   },
+  labstackApiKey: {
+    default: null,
+    doc: 'API key for labstack.com',
+    env: 'LABSTACK_API_KEY',
+    format: String,
+    sensitive: true,
+  },
   logLevel: {
     default: 'debug',
     doc: 'pino logging level [fatal, error, warn, info, debug, trace]',
