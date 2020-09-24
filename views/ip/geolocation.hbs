@@ -20,6 +20,12 @@
             <td><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS</a></td>
             <td id="aws">Pending...</td>
         </tr>
+{{/if}}
+        <tr>
+            <td><a href="https://www.bigdatacloud.com/ip-geolocation-apis">BigDataCloud</a></td>
+            <td id="bigdatacloud">Pending...</td>
+        </tr>
+{{#if is_current_ip}}
         <tr>
             <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API">Browser</a></td>
             <td id="browser"><button class="btn btn-sm btn-outline-primary" onclick="browser();">Try now</button></td>
@@ -100,13 +106,16 @@
 <h2>Other IP Geolocation Databases</h2>
 
 <div class="alert alert-info">
-    Note: all pricing is for the lowest service level possible. They all have higher priced options (of course).<br/><br/>
-    In my testing, a lot of the providers are using the MaxMind database, even if they don't admin it.
+    Note: all pricing is for the lowest service level possible. They all have higher priced options (of course).
+    In my testing, a lot of the providers are using the MaxMind database, even if they don't admit it.
 </div>
 
 <ul>
+    <li><a href="https://github.com/analogic/ipgeo">analogic/ipgeo</a> - free database mapping IP subnet to country, in multiple formats.</li>
     <li><a href="http://www.atelierweb.com/products/ip-locator/">Atelier Web IP Locator</a> - $40 for 50,000 lookups.  Free plan is 200 per 30 days.</li>
-    <li><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS</a> - includes HTTP header with country if you are using their CloudFront CDN <span class="badge badge-info">browser only</span></li>
+    <li><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS</a> - includes HTTP header with country if you are using their CloudFront CDN. <span class="badge badge-info">browser only</span></li>
+    <li><a href="https://www.bigdatacloud.com/">BigDataCloud</a> - free for 10,000/month, then $2/month per 10,000.</li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API">Browser</a> - 100% client-side JavaScript, requires a user to accept permissions in a popup window. <span class="badge badge-info">browser only</span></li>
     <li><a href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a> - includes an HTTP header with Country if you are using their CDN. <span class="badge badge-info">browser only</span></li>
     <li><a href="https://www.cyscape.com/products/chawk/">CountryHawk</a> (Cyscape) - $669 per server per year</li>
     <li><a href="https://developer.fastly.com/reference/vcl/variables/geolocation/">Fastly</a> - includes HTTP headers with full details, free if you are using their CDN. <span class="badge badge-info">browser only</span></li>
@@ -145,16 +154,13 @@
 
 <ul>
     <li><a href="https://auth0.com/signals/ip">Auth0</a></li>
-    <li><a href="https://github.com/analogic/ipgeo">analogic</a></li>
     <li><a href="https://ipwhois.io/">ipwhois</a> - free for 10,000/month non-commerical, $11/month for 250,000.</li>
-    <li><a href="https://www.bigdatacloud.com/">BigDataCloud</a> - free for 10,000/month, then $2/month per 10,000.</li>
     <li><a href="https://ipregistry.co/">ipregistry</a>- free for 100,000/month, then $0.10 per 1,000.</li>
 	<li><a href="http://geolocation-db.com/index">GeolocationDB</a></li>
 	<li><a href="https://ipinfodb.com/api">IpInfoDB</a> - uses ip2location</li>
 	<li><a href="https://developers.google.com/maps/documentation/geolocation/overview">Google Maps</a> - meant to be called with mobile phone info, but will fallback to IP</li>
 	<li><a href="http://software77.net/geo-ip/">Software77</a> - downloadable database</li>
     <li><a href="https://docs.microsoft.com/en-us/rest/api/maps/geolocation/getiptolocationpreview">Microsoft Azure Maps</a></li>
-    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API">Browser</a></li>
 </ul>
 
 <h3>More Links</h3>
@@ -380,6 +386,7 @@
 {{/if}}
     hostIpInfo({{{toJson ip}}});
     ipGeoLocation({{{toJson ip}}});
+    remoteLookup("bigdatacloud", `/internal/bigdatacloud.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("keycdn", `/internal/keycdn.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("ip_api", `/internal/ip-api.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("ipapi", `/internal/ipapi.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
