@@ -9,6 +9,7 @@ import { getCurrentIP } from '../util';
 //import { URL } from 'url';
 
 import * as certcheck from '../actions/certcheck';
+import { bigdatacloudLookup } from '../actions/bigdatacloudlookup';
 import { keycdnLookup } from '../actions/keycdnlookup';
 import { ipstackLookup } from '../actions/ipstacklookup';
 import { ipdataLookup } from '../actions/ipdatalookup';
@@ -87,6 +88,7 @@ ipRouter.get('/ip/asn-lookup.json', asnlookup.asnLookupAPIGet);
 ipRouter.post('/ip/asn-lookup.json', asnlookup.asnLookupAPIPost);
 ipRouter.get('/ip/tls-cert-check.html', certcheck.tlsCertCheckGet);
 ipRouter.post('/ip/tls-cert-check.html', certcheck.tlsCertCheckPost);
+ipRouter.get('/internal/bigdatacloud.json', bigdatacloudLookup);
 ipRouter.get('/internal/keycdn.json', keycdnLookup);
 ipRouter.get('/internal/ipdata.json', ipdataLookup);
 ipRouter.get('/internal/ipstack.json', ipstackLookup);
