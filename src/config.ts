@@ -29,6 +29,13 @@ const config = convict({
     format: String,
     sensitive: true,
   },
+  ipinfoAccessToken: {
+    default: null,
+    doc: 'ACCESS_TOKEN for ipinfo.io',
+    env: 'IPINFO_ACCESS_TOKEN',
+    format: String,
+    sensitive: true,
+  },
   ipstackApiKey: {
     default: null,
     doc: 'API key for ipstack.com',
