@@ -1,6 +1,13 @@
 import { default as convict } from 'convict';
 
 const config = convict({
+  abstractapiApiKey: {
+    default: null,
+    doc: 'API key for abstractapi.com',
+    env: 'ABSTRACTAPI_API_KEY',
+    format: String,
+    sensitive: true,
+  },
   bigdatacloudApiKey: {
     default: null,
     doc: 'API key for bigdatacloud.com',
