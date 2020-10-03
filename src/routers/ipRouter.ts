@@ -17,6 +17,7 @@ import { ip_apiLookup } from '../actions/ip_apilookup';
 import { ipapiLookup } from '../actions/ipapilookup';
 import { labstackLookup } from '../actions/labstacklookup';
 import { ipinfoLookup } from '../actions/ipinfolookup';
+import { abstractapiLookup } from '../actions/abstractapilookup';
 
 import config from '../config';
 import * as util from '../util';
@@ -97,6 +98,7 @@ ipRouter.get('/internal/ip-api.json', ip_apiLookup);
 ipRouter.get('/internal/ipapi.json', ipapiLookup);
 ipRouter.get('/internal/labstack.json', labstackLookup);
 ipRouter.get('/internal/ipinfo.json', ipinfoLookup);
+ipRouter.get('/internal/abstractapi.json', abstractapiLookup);
 
 function getUrls():string[] {
     return [
