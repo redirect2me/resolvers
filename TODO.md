@@ -5,6 +5,7 @@
 * pages with API versions: link to the API overview.
 * redirect testing
 * what's my locale?
+* speed test (page with external links already built)
 * OpenGraph/schema.org/Twitter/oEmbed/etc metadata checker
 * Google Analytics ID testing
 * list of domains (and detailed info) from Gandi
