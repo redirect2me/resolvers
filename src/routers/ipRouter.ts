@@ -53,6 +53,12 @@ ipRouter.get('/ip/geolocation.html', async (ctx:any) => {
     });
 });
 
+ipRouter.get('/ip/speedtest.html', async (ctx: any) => {
+    ctx.body = await ctx.render('ip/speedtest.hbs', {
+        title: 'Speed Test',
+    });
+});
+
 ipRouter.get('/ip/tcp-ports.html', async (ctx: any) => {
     const portsFile = path.join(__dirname, '../..', 'data', 'tcp-ports.json');
     const ports = JSON.parse(await fsPromises.readFile(portsFile, 'utf-8'));
@@ -104,6 +110,7 @@ function getUrls():string[] {
     return [
         "/ip/asn-lookup.html",
         "/ip/geolocation.html",
+        "/ip/speedtest.html",
         "/ip/tcp-ports.html",
         "/ip/tls-cert-check.html",
         "/ip/whatsmyip.html",
