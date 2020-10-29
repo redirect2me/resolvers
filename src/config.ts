@@ -45,7 +45,7 @@ const config = convict({
   },
   ipinsightToken: {
     default: null,
-    doc: 'API key for ipinsights.io',
+    doc: 'API key for ipinsight.io',
     env: 'IPINSIGHT_TOKEN',
     format: String,
     sensitive: true,
