@@ -43,6 +43,13 @@ const config = convict({
     format: String,
     sensitive: true,
   },
+  ipinsightToken: {
+    default: null,
+    doc: 'API key for ipinsights.io',
+    env: 'IPINSIGHT_TOKEN',
+    format: String,
+    sensitive: true,
+  },
   ipstackApiKey: {
     default: null,
     doc: 'API key for ipstack.com',
