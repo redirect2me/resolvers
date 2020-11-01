@@ -48,7 +48,6 @@ function getAll(draft?: boolean): any[] {
     if (!draft && resolver.draft) {
       continue;
     }
-    console.log(`${key}=${JSON.stringify(cache.get(key))}`)
     retVal.push(cache.get(key));
   }
   return retVal;

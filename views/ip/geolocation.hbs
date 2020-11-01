@@ -361,7 +361,20 @@
             const result = await response.json();
             console.log(`${el_id} result = ${JSON.stringify(result)}`);
             if (!result.success) {
-                el.innerText = result.message;
+                if (result.raw) {
+                    const details = document.createElement("details");
+                    const summary = document.createElement("summary");
+                    summary.append(result.message);
+                    details.append(summary);
+
+                    const pre = document.createElement("pre");
+                    pre.append(JSON.stringify(result.raw, null, 2));
+                    details.append(pre);
+                    el.innerText = '';
+                    el.append(details);
+                } else {
+                    el.innerText = result.message;
+                }
                 return;
             }
             el.innerText = '';

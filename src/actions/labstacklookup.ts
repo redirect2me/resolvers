@@ -1,9 +1,6 @@
 import axios from 'axios';
-//import * as url from 'URL';
 
 import config from '../config';
-//import { logger } from '../logger';
-//import * as util from '../util';
 
 async function labstackLookup(ctx:any) {
     const ip = ctx.query['ip'];
@@ -42,18 +39,17 @@ async function labstackLookup(ctx:any) {
         retVal.success = response.status == 200;
         retVal.message = `Status from ip.labstack.com: ${response.status}`;
         retVal.ip = ip;
+        retVal.raw = response.data;
         retVal.country = response.data.country_code;
         retVal.latitude = response.data.latitude;
         retVal.longitude = response.data.longitude;
         retVal.text = `${response.data.city}, ${response.data.region}, ${response.data.country}`;
-        retVal.raw = response.data;
+        ctx.log.debug({ data: retVal, ip, provider: 'labstack' }, 'Geolocation result')
     } catch (err) {
-        ctx.log.error({ err, ip }, 'Unable to check ip with labstack');
         retVal.success = false;
         retVal.message = err.message;
+        ctx.log.warn({ data: retVal, err, ip, provider: 'labstack' }, 'Geolocation error')
     }
-
-    console.log(retVal);
 
     ctx.body = retVal;
 }
