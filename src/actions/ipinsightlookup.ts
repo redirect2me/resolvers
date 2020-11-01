@@ -28,9 +28,7 @@ async function ipinsightLookup(ctx:any) {
         headers: { 'User-Agent': 'resolve.rs/1.0' },
         maxRedirects: 0,
         timeout: 5000,
-        validateStatus: function (status:number) {
-            return status >= 200 && status < 400; // default
-        }
+        validateStatus: () => true,
     });
 
     try {
@@ -38,18 +36,17 @@ async function ipinsightLookup(ctx:any) {
         retVal.success = response.status == 200;
         retVal.message = `Status from api.ipinsight.io: ${response.status}`;
         retVal.ip = ip;
+        retVal.raw = response.data;
         retVal.country = response.data.country_code;
         retVal.latitude = response.data.latitude;
         retVal.longitude = response.data.longitude;
         retVal.text = `${response.data.city_name}, ${response.data.region_name}, ${response.data.country_name}`;
-        retVal.raw = response.data;
+        ctx.log.debug({ data: retVal, ip, provider: 'ipinsight' }, 'Geolocation result')
     } catch (err) {
-        ctx.log.error({ err, ip }, 'Unable to check ip with ipinsight.io');
         retVal.success = false;
         retVal.message = err.message;
+        ctx.log.warn({ data: retVal, err, ip, provider: 'ipinsight' }, 'Geolocation error')
     }
-
-    console.log(retVal);
 
     ctx.body = retVal;
 }

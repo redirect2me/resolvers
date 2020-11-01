@@ -75,17 +75,15 @@ async function redirectCheckApiLow(ctx:any, urlParam:string) {
         }
     });
 
-
     try {
         const response = await instance.get(theUrl.toString());
         retVal.message = `${response.status}: ${response.headers["location"]}`;
+        ctx.log.debug({ data: retVal, urlParam }, 'redirect check');
     } catch (err) {
         ctx.log.error({ err, urlParam }, 'Unable to check redirect');
         retVal.success = false;
         retVal.message = err.message;
     }
-
-    console.log(retVal);
 
     util.handleJsonp(ctx, retVal);
 }

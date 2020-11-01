@@ -1,8 +1,4 @@
 import axios from 'axios';
-//import * as url from 'URL';
-
-import { logger } from '../logger';
-//import * as util from '../util';
 
 async function keycdnLookup(ctx:any) {
     const ip = ctx.query['ip'];
@@ -21,9 +17,7 @@ async function keycdnLookup(ctx:any) {
         headers: { 'User-Agent': 'resolve.rs/1.0' },
         maxRedirects: 0,
         timeout: 5000,
-        validateStatus: function (status:number) {
-            return status >= 200 && status < 400; // default
-        }
+        validateStatus: () => true,
     });
 
 
@@ -32,18 +26,17 @@ async function keycdnLookup(ctx:any) {
         retVal.success = response.status == 200;
         retVal.message = `Status from tools.keycdn.com: ${response.status}`;
         retVal.ip = ip;
+        retVal.raw = response.data;
         retVal.country = response.data.data.geo.country_code;
         retVal.latitude = response.data.data.geo.latitude;
         retVal.longitude = response.data.data.geo.longitude;
         retVal.text = `${response.data.data.geo.city}, ${response.data.data.geo.region_name}, ${response.data.data.geo.country_name}`;
-        retVal.raw = response.data;
+        ctx.log.debug({ data: retVal, ip, provider: 'keycdn' }, 'Geolocation result')
     } catch (err) {
-        ctx.log.error({ err, ip }, 'Unable to check ip with keycdn');
         retVal.success = false;
         retVal.message = err.message;
+        ctx.log.warn({ data: retVal, err, ip, provider: 'keycdn' }, 'Geolocation error')
     }
-
-    logger.debug( { geodata: retVal, ip }, "KeyCDN results");
 
     ctx.body = retVal;
 }

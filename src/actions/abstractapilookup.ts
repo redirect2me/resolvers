@@ -28,9 +28,7 @@ async function abstractapiLookup(ctx:any) {
         headers: { 'User-Agent': 'resolve.rs/1.0' },
         maxRedirects: 0,
         timeout: 5000,
-        validateStatus: function (status:number) {
-            return status >= 200 && status < 400; // default
-        }
+        validateStatus: () => true
     });
 
     try {
@@ -38,18 +36,17 @@ async function abstractapiLookup(ctx:any) {
         retVal.success = response.status == 200;
         retVal.message = `Status from abstractapi.com: ${response.status}`;
         retVal.ip = ip;
+        retVal.raw = response.data;
         retVal.country = response.data.country_code;
         retVal.latitude = response.data.latitude;
         retVal.longitude = response.data.longitude;
         retVal.text = `${response.data.city}, ${response.data.region}, ${response.data.country}`;
-        retVal.raw = response.data;
+        ctx.log.debug({ data: retVal, ip, provider: 'AbstractAPI' }, 'Geolocation result')
     } catch (err) {
-        ctx.log.error({ err, ip }, 'Unable to check ip with abstractapi');
         retVal.success = false;
         retVal.message = err.message;
+        ctx.log.warn({ data: retVal, err, ip, provider: 'AbstractAPI' }, 'Geolocation error');
     }
-
-    console.log(retVal);
 
     ctx.body = retVal;
 }

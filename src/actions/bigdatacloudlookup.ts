@@ -41,6 +41,7 @@ async function bigdatacloudLookup(ctx:any) {
         retVal.success = response.status == 200;
         retVal.message = `Status from ip.bigdatacloud.com: ${response.status}`;
         retVal.ip = ip;
+        retVal.raw = response.data;
         retVal.country = response.data.country ? response.data.country.isoAlpha2 : '(not set)';
         if (response.data.location) {
             retVal.latitude = response.data.location.latitude;
@@ -49,14 +50,12 @@ async function bigdatacloudLookup(ctx:any) {
         } else {
             retVal.text = '(no location info)';
         }
-        retVal.raw = response.data;
+        ctx.log.debug({ data: retVal, ip, provider: 'BigDataCloud' }, 'Geolocation result')
     } catch (err) {
-        ctx.log.error({ err, ip }, 'Unable to check ip with bigdatacloud');
         retVal.success = false;
         retVal.message = err.message;
+        ctx.log.warn({ data: retVal, err, ip, provider: 'BigDataCloud' }, 'Geolocation error');
     }
-
-    console.log(retVal);
 
     ctx.body = retVal;
 }
