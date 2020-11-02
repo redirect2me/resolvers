@@ -282,36 +282,6 @@
         }
     }
 
-
-    async function ipapi(ip) {
-        const el = document.getElementById('ipapi')
-        try {
-            el.innerText = 'Loading...';
-            const response = await fetch(`/internal/ipapi.json?ip=${encodeURIComponent(ip)}`, {
-                referrerPolicy: ''
-            });
-            if (!response.ok) {
-                el.innerText = `ERROR ${response.status}: ${response.statusText}`;
-                return;
-            }
-            const contentType = response.headers.get('content-type');
-            if (!contentType || !contentType.includes('application/json')) {
-                el.innerText = `ERROR non-json response (${contentType})`;
-                return;
-            }
-            const result = await response.json();
-            console.log(`ipapi result = ${JSON.stringify(result)}`);
-            if (!result.success) {
-                el.innerText = result.message;
-                return;
-            }
-            el.innerText = '';
-            el.append(formatResult(result.text, result.country, result.latitude, result.longitude, result.raw));
-        } catch (err) {
-            el.innerText = `ERROR ${err.message}`;
-        }
-    }
-
     async function ipGeoLocation(ip) {
         const el = document.getElementById('ipgeolocation')
         {{#if ipgeolocation_api_key}}
