@@ -15,6 +15,19 @@ const config = convict({
     format: String,
     sensitive: true,
   },
+  ip2locationApiKey: {
+    default: null,
+    doc: 'API key for ip2location.com',
+    env: 'IP2LOCATION_API_KEY',
+    format: String,
+    sensitive: true,
+  },
+  ip2locationPackage: {
+    default: 'ws5',
+    doc: 'Package (=how much data in results) for ip2location.com',
+    env: 'IP2LOCATION_PACKAGE',
+    format: String,
+  },
   ipapiAccessKey: {
     default: null,
     doc: 'ACCESS_KEY for ipapi.com',
