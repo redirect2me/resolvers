@@ -17,7 +17,7 @@ yarn run build
 yarn run start
 ```
 
-See [config.ts](src/config.ts) for the various environment variable that you need to set.  The defaults should work, albeit with limited functionality.
+See [`src/config.ts`](https://github.com/redirect2me/resolvers/blob/main/src/config.ts) for the various environment variables that you can set.  The defaults should run but with limited functionality.
 
 ## License
 
