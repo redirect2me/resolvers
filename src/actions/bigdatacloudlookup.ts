@@ -46,7 +46,7 @@ async function bigdatacloudLookup(ctx:any) {
         if (response.data.location) {
             retVal.latitude = response.data.location.latitude;
             retVal.longitude = response.data.location.longitude;
-            retVal.text = `${response.data.location.city}, ${response.data.location.isoPrincipalSubdivision}, ${response.data.country ? response.data.country.name : '(No country)'}`;
+            retVal.text = `${response.data.location.city || response.data.location.localityName}, ${response.data.location.isoPrincipalSubdivision}, ${response.data.country ? response.data.country.name : '(No country)'}`;
         } else {
             retVal.text = '(no location info)';
         }
