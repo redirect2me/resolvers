@@ -32,7 +32,7 @@
 {{#if is_current_ip}}
         <tr>
             <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API">Browser</a></td>
-            <td id="browser"><button class="btn btn-sm btn-outline-primary" onclick="browser();">Try now</button></td>
+            <td id="browser"><button class="btn btn-sm btn-outline-primary" onclick="browser();">Try now</button>  You will need to grant permission in the popup window.</td>
         </tr>
         <tr>
             <td><a href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a></td>
@@ -127,38 +127,41 @@
 </div>
 
 <ul>
-    <li><a href="https://www.abstractapi.com/ip-geolocation-api">AbstractAPI</a> - free for 20,000/month non-commercial use only, $9/month for 200,000</li>
+    <li><a class="font-weight-bold" href="https://www.abstractapi.com/ip-geolocation-api">AbstractAPI</a> - free for 20,000/month non-commercial use only, $9/month for 200,000</li>
     <li><a href="https://github.com/analogic/ipgeo">analogic/ipgeo</a> - free database mapping IP subnet to country, in multiple formats.</li>
     <li><a href="http://www.atelierweb.com/products/ip-locator/">Atelier Web IP Locator</a> - $40 for 50,000 lookups.  Free plan is 200 per 30 days.</li>
-    <li><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS</a> - includes HTTP header with country if you are using their CloudFront CDN. <span class="badge badge-info">browser only</span></li>
-    <li><a href="https://www.bigdatacloud.com/">BigDataCloud</a> - free for 10,000/month, then $2/month per 10,000.</li>
-    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API">Browser</a> - 100% client-side JavaScript, requires a user to accept permissions in a popup window. <span class="badge badge-info">browser only</span></li>
-    <li><a href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a> - includes an HTTP header with Country if you are using their CDN. <span class="badge badge-info">browser only</span></li>
+    <li><a class="font-weight-bold" href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS</a> - includes HTTP header with country if you are using their CloudFront CDN. <span class="badge badge-info">browser only</span></li>
+    <li><a class="font-weight-bold" href="https://www.bigdatacloud.com/">BigDataCloud</a> - free for 10,000/month, then $2/month per 10,000.</li>
+    <li><a class="font-weight-bold" href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API">Browser</a> - 100% client-side JavaScript, requires a user to accept permissions in a popup window. <span class="badge badge-info">browser only</span></li>
+    <li><a class="font-weight-bold" href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a> - includes an HTTP header with Country if you are using their CDN. <span class="badge badge-info">browser only</span></li>
     <li><a href="https://www.cyscape.com/products/chawk/">CountryHawk</a> (Cyscape) - $669 per server per year</li>
-    <li><a href="https://developer.fastly.com/reference/vcl/variables/geolocation/">Fastly</a> - includes HTTP headers with full details, free if you are using their CDN. <span class="badge badge-info">browser only</span></li>
+    <li><a class="font-weight-bold" href="https://developer.fastly.com/reference/vcl/variables/geolocation/">Fastly</a> - includes HTTP headers with full details, free if you are using their CDN. <span class="badge badge-info">browser only</span></li>
     <li><a href="https://www.geojs.io/">geojs</a> - free with no rate limits, uses MaxMind data</li>
     <li><a href="https://www.geoplugin.com/">GeoPlugin</a> - free, uses MaxMind data</li>
-    <li><a href="https://cloud.google.com/appengine/docs/standard/go/reference/request-response-headers">Google AppEngine</a> - includes HTTP headers with full details if you are hosting with them. <span class="badge badge-info">browser only</span></li>
-    <li><a href="http://www.hostip.info/use.php">HostIP.info</a> - free, and you can download their database, but they recommend MaxMind for higher accuracy</li>
-    <li><a href="https://www.ip2location.com/">IP2Location</a> - $49 for 100,000 lookups.  They also sell their database(s) for local use.</li>
+    <li><a class="font-weight-bold" href="https://cloud.google.com/appengine/docs/standard/go/reference/request-response-headers">Google AppEngine</a> - includes HTTP headers with full details if you are hosting with them. <span class="badge badge-info">browser only</span></li>
+    <li><a class="font-weight-bold" href="http://www.hostip.info/use.php">HostIP.info</a> - free, and you can download their database, but they recommend MaxMind for higher accuracy</li>
+    <li><a class="font-weight-bold" href="https://www.ip2location.com/">IP2Location</a> - $49 for 100,000 lookups.  They also sell their database(s) for local use.</li>
     <li><a href="http://www.ip2nation.com/">ip2nation</a> - downloadable database, free, only gets the country (which is often good enough!)</li>
-    <li><a href="https://ip-api.com/">ip-api</a>: 45/minute free for non-commercial use (http only!), &euro;13/month for unlimited.</li>
-    <li><a href="https://ipapi.com/">ipapi</a>: 10,000/month free, $10/month for 50,000</li>
+    <li><a class="font-weight-bold" href="https://ip-api.com/">ip-api</a>: 45/minute free for non-commercial use (http only!), &euro;13/month for unlimited.</li>
+    <li><a class="font-weight-bold" href="https://ipapi.com/">ipapi</a>: 10,000/month free, $10/month for 50,000</li>
 	<li><a href="https://ifconfig.co/">ipconfig.co</a> - free 1 request/minute.  uses MaxMind data.  source available.
-    <li><a href="https://ipdata.co/pricing.html">ipdata</a>: 1,500/day free, $10/month for 2,500/day</li>
-    <li><a href="https://ipgeolocation.io/pricing.html">ipgeolocation.io</a> - 1,000/day free.  $15/month for 150,000</li>
-    <li><a href="https://ipinfo.io/">ipinfo.io</a> - 50,000/month but only for non-commercial use.  $49 for 250,000/month</li>
-    <li><a href="https://ipinsight.io/">ipinsight.io</a> - 1,000/day free, $30/month for 10,000/day</li>
-    <li><a href="https://ipstack.com/">ipstack</a> 10,000/month free, $10/month for 50,000</li>
-    <li><a href="https://tools.keycdn.com/geo">KeyCDN</a> - free but requires a link back to their site.  &ldquo;includes data from MaxMind&rdquo;</li>
-    <li><a href="https://labstack.com/ip#pricing">LabStack</a> - 10,000/month free, 50,000/month for $7</li>
-    <li><a href="https://www.maxmind.com/en/geoip2-precision-services">MaxMind</a> - in addition to their free offering (used above), they have a commercial service that starts at $0.10 per 1,000 lookups.</li>
+    <li><a class="font-weight-bold" href="https://ipdata.co/pricing.html">ipdata</a>: 1,500/day free, $10/month for 2,500/day</li>
+    <li><a class="font-weight-bold" href="https://ipgeolocation.io/pricing.html">ipgeolocation.io</a> - 1,000/day free.  $15/month for 150,000</li>
+    <li><a class="font-weight-bold" href="https://ipinfo.io/">ipinfo.io</a> - 50,000/month but only for non-commercial use.  $49 for 250,000/month</li>
+    <li><a class="font-weight-bold" href="https://ipinsight.io/">ipinsight.io</a> - 1,000/day free, $30/month for 10,000/day</li>
+    <li><a class="font-weight-bold" href="https://ipstack.com/">ipstack</a> 10,000/month free, $10/month for 50,000</li>
+    <li><a class="font-weight-bold" href="https://tools.keycdn.com/geo">KeyCDN</a> - free but requires a link back to their site.  &ldquo;includes data from MaxMind&rdquo;</li>
+    <li><a class="font-weight-bold" href="https://labstack.com/ip#pricing">LabStack</a> - 10,000/month free, 50,000/month for $7</li>
+    <li><a class="font-weight-bold" href="https://www.maxmind.com/en/geoip2-precision-services">MaxMind</a> - in addition to their free offering (used above), they have a commercial service that starts at $0.10 per 1,000 lookups.</li>
     <li><a href="https://www.melissa.com/v2/lookups/iplocation/ip/">Melissa</a> - 1,000/free, then $3 per 1,000.</li>
     <li><a href="https://www.home.neustar/security-intelligence/ip-geopoint">UltraGeoPoint</a> (Neustar)- no pricing on website</li>
 </ul>
 
 <p>
     <span class="badge badge-info">browser only</span> means it only looks at the caller's IP address, not an arbitrary address that you pass in.
+</p>
+<p>
+    <span class="font-weight-bold">bold</span> means its results are included in the comparison table.
 </p>
 
 <h3>Internet Governing Bodies</h3>
