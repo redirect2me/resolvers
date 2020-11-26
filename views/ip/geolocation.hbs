@@ -19,6 +19,10 @@
             <td><a href="https://www.abstractapi.com/ip-geolocation-api">AbstractAPI</a></td>
             <td id="abstractapi">Pending...</td>
         </tr>
+        <tr>
+            <td><a href="https://astroip.co/">AstroIP</a></td>
+            <td id="astroip">Pending...</td>
+        </tr>
 {{#if is_current_ip}}
         <tr>
             <td><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS</a></td>
@@ -128,6 +132,7 @@
 
 <ul>
     <li><a class="font-weight-bold" href="https://www.abstractapi.com/ip-geolocation-api">AbstractAPI</a> - free for 20,000/month non-commercial use only, $9/month for 200,000</li>
+    <li><a class="font-weight-bold" href="https://www.astroip.co/">AstroIP.co</a> - free for 30,000/month, $10/month for 80,000</li>
     <li><a href="https://github.com/analogic/ipgeo">analogic/ipgeo</a> - free database mapping IP subnet to country, in multiple formats.</li>
     <li><a href="http://www.atelierweb.com/products/ip-locator/">Atelier Web IP Locator</a> - $40 for 50,000 lookups.  Free plan is 200 per 30 days.</li>
     <li><a class="font-weight-bold" href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS</a> - includes HTTP header with country if you are using their CloudFront CDN. <span class="badge badge-info">browser only</span></li>
@@ -392,6 +397,7 @@
     hostIpInfo({{{toJson ip}}});
     ipGeoLocation({{{toJson ip}}});
     remoteLookup("abstractapi", `/internal/abstractapi.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
+    remoteLookup("astroip", `/internal/astroip.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("bigdatacloud", `/internal/bigdatacloud.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("keycdn", `/internal/keycdn.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("ip2location", `/internal/ip2location.json?ip=${encodeURIComponent({{{ toJson ip }}})}`);

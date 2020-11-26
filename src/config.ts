@@ -8,6 +8,13 @@ const config = convict({
     format: String,
     sensitive: true,
   },
+  astroipApiKey: {
+    default: null,
+    doc: 'API key for astroip.co',
+    env: 'ASTROIP_API_KEY',
+    format: String,
+    sensitive: true,
+  },
   bigdatacloudApiKey: {
     default: null,
     doc: 'API key for bigdatacloud.com',

@@ -20,6 +20,7 @@ import { ipinfoLookup } from '../actions/ipinfolookup';
 import { ipinsightLookup } from '../actions/ipinsightlookup';
 import { abstractapiLookup } from '../actions/abstractapilookup';
 import { ip2locationLookup } from '../actions/ip2locationlookup';
+import { astroipLookup } from '../actions/astroiplookup';
 
 import config from '../config';
 import * as util from '../util';
@@ -98,17 +99,18 @@ ipRouter.get('/ip/asn-lookup.json', asnlookup.asnLookupAPIGet);
 ipRouter.post('/ip/asn-lookup.json', asnlookup.asnLookupAPIPost);
 ipRouter.get('/ip/tls-cert-check.html', certcheck.tlsCertCheckGet);
 ipRouter.post('/ip/tls-cert-check.html', certcheck.tlsCertCheckPost);
-ipRouter.get('/internal/bigdatacloud.json', bigdatacloudLookup);
-ipRouter.get('/internal/keycdn.json', keycdnLookup);
-ipRouter.get('/internal/ipdata.json', ipdataLookup);
-ipRouter.get('/internal/ipstack.json', ipstackLookup);
-ipRouter.get('/internal/ip-api.json', ip_apiLookup);
-ipRouter.get('/internal/ipapi.json', ipapiLookup);
-ipRouter.get('/internal/labstack.json', labstackLookup);
-ipRouter.get('/internal/ipinfo.json', ipinfoLookup);
 ipRouter.get('/internal/abstractapi.json', abstractapiLookup);
-ipRouter.get('/internal/ipinsight.json', ipinsightLookup);
+ipRouter.get('/internal/astroip.json', astroipLookup);
+ipRouter.get('/internal/bigdatacloud.json', bigdatacloudLookup);
+ipRouter.get('/internal/ip-api.json', ip_apiLookup);
 ipRouter.get('/internal/ip2location.json', ip2locationLookup);
+ipRouter.get('/internal/ipapi.json', ipapiLookup);
+ipRouter.get('/internal/ipdata.json', ipdataLookup);
+ipRouter.get('/internal/ipinfo.json', ipinfoLookup);
+ipRouter.get('/internal/ipinsight.json', ipinsightLookup);
+ipRouter.get('/internal/ipstack.json', ipstackLookup);
+ipRouter.get('/internal/keycdn.json', keycdnLookup);
+ipRouter.get('/internal/labstack.json', labstackLookup);
 
 function getUrls():string[] {
     return [
