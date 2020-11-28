@@ -88,6 +88,10 @@
             <td id="ipinsight">Pending...</td>
         </tr>
         <tr>
+            <td><a href="https://iplocate.io/">iplocate</a></td>
+            <td id="iplocate">Pending...</td>
+        </tr>
+        <tr>
             <td><a href="https://ipstack.com/">ipstack</a></td>
             <td id="ipstack">Pending...</td>
         </tr>
@@ -145,9 +149,11 @@
     <li><a class="font-weight-bold" href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a> - includes an HTTP header with Country if you are using their CDN. <span class="badge badge-info">browser only</span></li>
     <li><a href="https://www.cyscape.com/products/chawk/">CountryHawk</a> (Cyscape) - $669 per server per year</li>
     <li><a class="font-weight-bold" href="https://www.dailycred.com/docs/public">DailyCred</a> - Free <span class="badge badge-info">browser only</span></li>
+    <li><a href="https://www.getfastah.com/">Fastah</a> - $99/month for 200,000 lookups</li>
     <li><a class="font-weight-bold" href="https://developer.fastly.com/reference/vcl/variables/geolocation/">Fastly</a> - includes HTTP headers with full details, free if you are using their CDN. <span class="badge badge-info">browser only</span></li>
     <li><a href="https://www.geojs.io/">geojs</a> - free with no rate limits, uses MaxMind data</li>
     <li><a href="https://www.geoplugin.com/">GeoPlugin</a> - free, uses MaxMind data</li>
+    <li><a href="https://geotargetly.com/ip-geolocation-api">GeoTargetly</a> - $12/month for 1,000 lookups</li>
     <li><a class="font-weight-bold" href="https://cloud.google.com/appengine/docs/standard/go/reference/request-response-headers">Google AppEngine</a> - includes HTTP headers with full details if you are hosting with them. <span class="badge badge-info">browser only</span></li>
     <li><a class="font-weight-bold" href="http://www.hostip.info/use.php">HostIP.info</a> - free, and you can download their database, but they recommend MaxMind for higher accuracy</li>
     <li><a class="font-weight-bold" href="https://www.ip2location.com/">IP2Location</a> - $49 for 100,000 lookups.  They also sell their database(s) for local use.</li>
@@ -159,6 +165,7 @@
     <li><a class="font-weight-bold" href="https://ipgeolocation.io/pricing.html">ipgeolocation.io</a> - 1,000/day free.  $15/month for 150,000</li>
     <li><a class="font-weight-bold" href="https://ipinfo.io/">ipinfo.io</a> - 50,000/month but only for non-commercial use.  $49 for 250,000/month</li>
     <li><a class="font-weight-bold" href="https://ipinsight.io/">ipinsight.io</a> - 1,000/day free, $30/month for 10,000/day</li>
+    <li><a class="font-weight-bold" href="https://www.iplocate.io/">iplocate.io</a> - 1,000/day free, $15/month for 10,000/month</li>
     <li><a href="https://iplocate.xyz/">iplocate.xyz</a> - nice UI, no API.</li>
     <li><a class="font-weight-bold" href="https://ipstack.com/">ipstack</a> 10,000/month free, $10/month for 50,000</li>
     <li><a class="font-weight-bold" href="https://tools.keycdn.com/geo">KeyCDN</a> - free but requires a link back to their site.  &ldquo;includes data from MaxMind&rdquo;</li>
@@ -427,6 +434,16 @@
     remoteLookup("ipdata", `/internal/ipdata.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("ipinfo", `/internal/ipinfo.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("ipinsight", `/internal/ipinsight.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
+    remoteLookup("iplocate", `https://www.iplocate.io/api/lookup/${encodeURIComponent({{{toJson ip}}})}`, (data) => {
+        return {
+            success: true,
+            country: data.country_code,
+            longitude: data.longitude,
+            latitude: data.latitude,
+            text: `${data.city}, ${data.subdivision} ${data.country}`,
+            raw: data,
+        }
+    });
     remoteLookup("ipstack", `/internal/ipstack.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("labstack", `/internal/labstack.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
 </script>
