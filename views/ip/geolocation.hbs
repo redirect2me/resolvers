@@ -25,7 +25,7 @@
         </tr>
 {{#if is_current_ip}}
         <tr>
-            <td><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS</a></td>
+            <td><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS CloudFront</a></td>
             <td id="aws">Pending...</td>
         </tr>
 {{/if}}
@@ -36,11 +36,15 @@
 {{#if is_current_ip}}
         <tr>
             <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API">Browser</a></td>
-            <td id="browser"><button class="btn btn-sm btn-outline-primary" onclick="browser();">Try now</button>  You will need to grant permission in the popup window.</td>
+            <td id="browser"><button class="btn btn-sm btn-outline-primary mr-2" onclick="browser();">Try now</button>  You will need to grant permission in the popup window.</td>
         </tr>
         <tr>
             <td><a href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a></td>
             <td id="cloudflare">Pending...</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.dailycred.com/docs/public">DailyCred</a></td>
+            <td id="dailycred">Pending...</td>
         </tr>
         <tr>
             <td><a href="https://developer.fastly.com/reference/vcl/variables/geolocation/">Fastly</a></td>
@@ -135,11 +139,12 @@
     <li><a class="font-weight-bold" href="https://www.astroip.co/">AstroIP.co</a> - free for 30,000/month, $10/month for 80,000</li>
     <li><a href="https://github.com/analogic/ipgeo">analogic/ipgeo</a> - free database mapping IP subnet to country, in multiple formats.</li>
     <li><a href="http://www.atelierweb.com/products/ip-locator/">Atelier Web IP Locator</a> - $40 for 50,000 lookups.  Free plan is 200 per 30 days.</li>
-    <li><a class="font-weight-bold" href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS</a> - includes HTTP header with country if you are using their CloudFront CDN. <span class="badge badge-info">browser only</span></li>
+    <li><a class="font-weight-bold" href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS CloudFront</a> - includes HTTP header with country if you are using their CloudFront CDN. <span class="badge badge-info">browser only</span></li>
     <li><a class="font-weight-bold" href="https://www.bigdatacloud.com/">BigDataCloud</a> - free for 10,000/month, then $2/month per 10,000.</li>
     <li><a class="font-weight-bold" href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API">Browser</a> - 100% client-side JavaScript, requires a user to accept permissions in a popup window. <span class="badge badge-info">browser only</span></li>
     <li><a class="font-weight-bold" href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a> - includes an HTTP header with Country if you are using their CDN. <span class="badge badge-info">browser only</span></li>
     <li><a href="https://www.cyscape.com/products/chawk/">CountryHawk</a> (Cyscape) - $669 per server per year</li>
+    <li><a class="font-weight-bold" href="https://www.dailycred.com/docs/public">DailyCred</a> - Free <span class="badge badge-info">browser only</span></li>
     <li><a class="font-weight-bold" href="https://developer.fastly.com/reference/vcl/variables/geolocation/">Fastly</a> - includes HTTP headers with full details, free if you are using their CDN. <span class="badge badge-info">browser only</span></li>
     <li><a href="https://www.geojs.io/">geojs</a> - free with no rate limits, uses MaxMind data</li>
     <li><a href="https://www.geoplugin.com/">GeoPlugin</a> - free, uses MaxMind data</li>
@@ -154,6 +159,7 @@
     <li><a class="font-weight-bold" href="https://ipgeolocation.io/pricing.html">ipgeolocation.io</a> - 1,000/day free.  $15/month for 150,000</li>
     <li><a class="font-weight-bold" href="https://ipinfo.io/">ipinfo.io</a> - 50,000/month but only for non-commercial use.  $49 for 250,000/month</li>
     <li><a class="font-weight-bold" href="https://ipinsight.io/">ipinsight.io</a> - 1,000/day free, $30/month for 10,000/day</li>
+    <li><a href="https://iplocate.xyz/">iplocate.xyz</a> - nice UI, no API.</li>
     <li><a class="font-weight-bold" href="https://ipstack.com/">ipstack</a> 10,000/month free, $10/month for 50,000</li>
     <li><a class="font-weight-bold" href="https://tools.keycdn.com/geo">KeyCDN</a> - free but requires a link back to their site.  &ldquo;includes data from MaxMind&rdquo;</li>
     <li><a class="font-weight-bold" href="https://labstack.com/ip#pricing">LabStack</a> - 10,000/month free, 50,000/month for $7</li>
@@ -175,6 +181,7 @@
     <li><a href="https://apps.db.ripe.net/db-web-ui/query">RIPE Database Query</a></li>
     <li><a href="https://afrinic.net/whois-web/public/query">AFRINIC Query</a></li>
     <li><a href="https://rdap-web.lacnic.net/home">LANIC RDAP Web Client</a> - <a href="https://www.lacnic.net/3106/2/lacnic/ip-geolocation">details</a></li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc8805.html">RFC 8805</a> - A Format for Self-Published IP Geolocation Feeds</li>
 </ul>
 
 <h3>To Do</h3>
@@ -196,6 +203,7 @@
     <li><a href="https://rapidapi.com/blog/ip-geolocation-api/">Top 10 Best IP Geolocation APIs</a> - RapidAPI</li>
     <li><a href="https://geekflare.com/geolocation-ip-api/">10 Best IP Geolocation API to Offer Personalized Content</a> - GeekFlare</li>
     <li><a href="https://medium.com/hackernoon/what-is-the-best-ip-geolocation-api-for-cybersecurity-professionals-87653b625376">11 Best IP Geolocation APIs for Cybersecurity Professionals</a> - Medium/Hackernoon</li>
+    <li><a href="http://giacomoballi.com/blog/comparing-ip-address-geolocation-api-services">Comparing IP Address Geolocation API Services</a> - Giacomo Balli</li>
 </ul>
 
 <script>
@@ -324,7 +332,7 @@
     }
 
 
-    async function remoteLookup(el_id, remoteUrl) {
+    async function remoteLookup(el_id, remoteUrl, mungeFn) {
         const el = document.getElementById(el_id)
         try {
             el.innerText = 'Loading...';
@@ -340,7 +348,10 @@
                 el.innerText = `ERROR non-json response (${contentType})`;
                 return;
             }
-            const result = await response.json();
+            let result = await response.json();
+            if (mungeFn) {
+                result = mungeFn(result);
+            }
             console.log(`${el_id} result = ${JSON.stringify(result)}`);
             if (!result.success) {
                 if (result.raw) {
@@ -393,6 +404,16 @@
     remoteLookup('aws', 'https://aws-geo.redirect2.me/api/aws.json');
     remoteLookup('cloudflare', 'https://cf-geo.redirect2.me/api/cloudflare.json');
     remoteLookup('fastly', 'https://cdn-geo.global.ssl.fastly.net/api/fastly.json');
+    remoteLookup('dailycred', 'https://www.dailycred.com/api/local.json', (data) => {
+        return {
+            success: true,
+            country: data.countryCode,
+            longitude: data.longitude,
+            latitude: data.latitude,
+            text: `${data.city}, ${data.region} ${data.countryName}`,
+            raw: data,
+        }
+    });
 {{/if}}
     hostIpInfo({{{toJson ip}}});
     ipGeoLocation({{{toJson ip}}});
