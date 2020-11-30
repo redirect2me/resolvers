@@ -30,6 +30,10 @@
         </tr>
 {{/if}}
         <tr>
+            <td><a href="https://ipinfo.backchannel.re/">Backchannel</a></td>
+            <td id="backchannel">Pending...</td>
+        </tr>
+        <tr>
             <td><a href="https://www.bigdatacloud.com/ip-geolocation-apis">BigDataCloud</a></td>
             <td id="bigdatacloud">Pending...</td>
         </tr>
@@ -426,6 +430,16 @@
     ipGeoLocation({{{toJson ip}}});
     remoteLookup("abstractapi", `/internal/abstractapi.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("astroip", `/internal/astroip.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
+    remoteLookup("backchannel", `https://ipinfo.backchannel.re/${encodeURIComponent({{{toJson ip}}})}?token=9286a64d-a3a6-497f-a4cf-6f3a429c0766`, (data) => {
+        return {
+            success: true,
+            country: data.country_code,
+            latitude: data.geo ? data.geo.latitude : undefined,
+            longitude: data.geo ? data.geo.longitude : undefined,
+            raw: data,
+            text: `${data.city}, ${data.subdivision} ${data.country}`,
+        };
+    });
     remoteLookup("bigdatacloud", `/internal/bigdatacloud.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("keycdn", `/internal/keycdn.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("ip2location", `/internal/ip2location.json?ip=${encodeURIComponent({{{ toJson ip }}})}`);
