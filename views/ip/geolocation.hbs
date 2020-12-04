@@ -100,6 +100,10 @@
             <td id="ipstack">Pending...</td>
         </tr>
         <tr>
+            <td><a href="https://ipwhois.io/">ipwhois.io</a></td>
+            <td id="ipwhois">Pending...</td>
+        </tr>
+        <tr>
             <td><a href="https://labstack.com/">labstack</a></td>
             <td id="labstack">Pending...</td>
         </tr>
@@ -173,6 +177,7 @@
     <li><a class="font-weight-bold" href="https://www.iplocate.io/">iplocate.io</a> - 1,000/day free, $15/month for 10,000/month</li>
     <li><a href="https://iplocate.xyz/">iplocate.xyz</a> - nice UI, no API.</li>
     <li><a class="font-weight-bold" href="https://ipstack.com/">ipstack</a> 10,000/month free, $10/month for 50,000</li>
+    <li><a class="font-weight-bold" href="https://ipwhois.io/">ipwhois.io</a> - free for 10,000/month non-commerical, $11/month for 250,000.</li>
     <li><a class="font-weight-bold" href="https://tools.keycdn.com/geo">KeyCDN</a> - free but requires a link back to their site.  &ldquo;includes data from MaxMind&rdquo;</li>
     <li><a class="font-weight-bold" href="https://labstack.com/ip#pricing">LabStack</a> - 10,000/month free, 50,000/month for $7</li>
     <li><a class="font-weight-bold" href="https://www.maxmind.com/en/geoip2-precision-services">MaxMind</a> - in addition to their free offering (used above), they have a commercial service that starts at $0.10 per 1,000 lookups.</li>
@@ -200,7 +205,6 @@
 
 <ul>
     <li><a href="https://auth0.com/signals/ip">Auth0</a></li>
-    <li><a href="https://ipwhois.io/">ipwhois</a> - free for 10,000/month non-commerical, $11/month for 250,000.</li>
     <li><a href="https://ipregistry.co/">ipregistry</a>- free for 100,000/month, then $0.10 per 1,000.</li>
 	<li><a href="http://geolocation-db.com/index">GeolocationDB</a></li>
 	<li><a href="https://ipinfodb.com/api">IpInfoDB</a> - uses ip2location</li>
@@ -460,6 +464,16 @@
         }
     });
     remoteLookup("ipstack", `/internal/ipstack.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
+    remoteLookup("ipwhois", `http://ipwhois.app/json/${encodeURIComponent({{{toJson ip}}})}`, (data) => {
+        return {
+            success: true,
+            country: data.country_code,
+            longitude: data.longitude,
+            latitude: data.latitude,
+            text: `${data.city}, ${data.region} ${data.country}`,
+            raw: data,
+        }
+    });
     remoteLookup("labstack", `/internal/labstack.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
 </script>
 
