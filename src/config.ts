@@ -77,6 +77,13 @@ const config = convict({
     format: String,
     sensitive: true,
   },
+  ipregistryApiKey: {
+    default: null,
+    doc: 'API key for ipregistry.co',
+    env: 'IPREGISTRY_API_KEY',
+    format: String,
+    sensitive: true,
+  },
   labstackApiKey: {
     default: null,
     doc: 'API key for labstack.com',
