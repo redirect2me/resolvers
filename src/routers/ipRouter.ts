@@ -15,11 +15,12 @@ import { ipstackLookup } from '../actions/ipstacklookup';
 import { ipdataLookup } from '../actions/ipdatalookup';
 import { ip_apiLookup } from '../actions/ip_apilookup';
 import { ipapiLookup } from '../actions/ipapilookup';
-import { labstackLookup } from '../actions/labstacklookup';
 import { ipinfoLookup } from '../actions/ipinfolookup';
 import { ipinsightLookup } from '../actions/ipinsightlookup';
 import { abstractapiLookup } from '../actions/abstractapilookup';
 import { ip2locationLookup } from '../actions/ip2locationlookup';
+import { ipregistryLookup } from '../actions/ipregistrylookup';
+import { labstackLookup } from '../actions/labstacklookup';
 import { astroipLookup } from '../actions/astroiplookup';
 
 import config from '../config';
@@ -109,6 +110,7 @@ ipRouter.get('/internal/ipdata.json', ipdataLookup);
 ipRouter.get('/internal/ipinfo.json', ipinfoLookup);
 ipRouter.get('/internal/ipinsight.json', ipinsightLookup);
 ipRouter.get('/internal/ipstack.json', ipstackLookup);
+ipRouter.get('/internal/ipregistry.json', ipregistryLookup);
 ipRouter.get('/internal/keycdn.json', keycdnLookup);
 ipRouter.get('/internal/labstack.json', labstackLookup);
 
