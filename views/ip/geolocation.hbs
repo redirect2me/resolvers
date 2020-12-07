@@ -174,7 +174,7 @@
     <li><a class="font-weight-bold" href="https://ip-api.com/">ip-api</a>: 45/minute free for non-commercial use (http only!), &euro;13/month for unlimited.</li>
     <li><a class="font-weight-bold" href="https://ipapi.com/">ipapi</a>: 10,000/month free, $10/month for 50,000</li>
 	<li><a href="https://ifconfig.co/">ipconfig.co</a> - free 1 request/minute.  uses MaxMind data.  source available.
-    <li><a class="font-weight-bold" href="https://ipdata.co/pricing.html">ipdata</a>: 1,500/day free, $10/month for 2,500/day</li>
+    <li><a class="font-weight-bold" href="https://ipdata.co/pricing.html">ipdata.co</a>: 1,500/day free, $10/month for 2,500/day</li>
     <li><a class="font-weight-bold" href="https://ipgeolocation.io/pricing.html">ipgeolocation.io</a> - 1,000/day free.  $15/month for 150,000</li>
     <li><a class="font-weight-bold" href="https://ipinfo.io/">ipinfo.io</a> - 50,000/month but only for non-commercial use.  $49 for 250,000/month</li>
     <li><a class="font-weight-bold" href="https://ipinsight.io/">ipinsight.io</a> - 1,000/day free, $30/month for 10,000/day</li>
@@ -468,7 +468,7 @@
         }
     });
     remoteLookup("ipstack", `/internal/ipstack.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
-    remoteLookup("ipwhois", `http://ipwhois.app/json/${encodeURIComponent({{{toJson ip}}})}`, (data) => {
+    remoteLookup("ipwhois", `https://ipwhois.app/json/${encodeURIComponent({{{toJson ip}}})}`, (data) => {
         return {
             success: true,
             country: data.country_code,
