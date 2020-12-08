@@ -3,6 +3,7 @@ name: Check for data updates
 on:
   schedule:
   - cron: '42 0 * * 1'
+  workflow_dispatch:
 
 jobs:
   update:
