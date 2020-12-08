@@ -51,6 +51,7 @@ app.use(async (ctx, next) => {
   } else if (ctx.query.debug) {
       ctx.state.debug = true;
   }
+  ctx.state.build_id = config.get("buildId");
   await next();
 });
 

@@ -22,6 +22,12 @@ const config = convict({
     format: String,
     sensitive: true,
   },
+  buildId: {
+    default: process.env.COMMIT || `local@${new Date().getTime()}`,
+    doc: 'Unique Build ID (commit hash or timestamp) for cache busting',
+    env: 'BUILD_ID',
+    format: String
+  },
   ip2locationApiKey: {
     default: null,
     doc: 'API key for ip2location.com',

@@ -4,7 +4,6 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-@import url("https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Open+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap");
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -7805,5 +7804,76 @@ a.text-dark:hover, a.text-dark:focus {
   font-family: "Bitter", serif;
   font-weight: 600;
   font-style: italic; }
+
+/* bitter-regular - latin-ext_latin */
+@font-face {
+  font-family: 'Bitter';
+  font-style: normal;
+  font-weight: 400;
+  src: local(""), url("../fonts/bitter-v16-latin-ext_latin-regular.woff2") format("woff2"), url("../fonts/bitter-v16-latin-ext_latin-regular.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */ }
+/* bitter-600 - latin-ext_latin */
+@font-face {
+  font-family: 'Bitter';
+  font-style: normal;
+  font-weight: 600;
+  src: local(""), url("../fonts/bitter-v16-latin-ext_latin-600.woff2") format("woff2"), url("../fonts/bitter-v16-latin-ext_latin-600.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */ }
+/* bitter-700 - latin-ext_latin */
+@font-face {
+  font-family: 'Bitter';
+  font-style: normal;
+  font-weight: 700;
+  src: local(""), url("../fonts/bitter-v16-latin-ext_latin-700.woff2") format("woff2"), url("../fonts/bitter-v16-latin-ext_latin-700.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */ }
+/* bitter-italic - latin-ext_latin */
+@font-face {
+  font-family: 'Bitter';
+  font-style: italic;
+  font-weight: 400;
+  src: local(""), url("../fonts/bitter-v16-latin-ext_latin-italic.woff2") format("woff2"), url("../fonts/bitter-v16-latin-ext_latin-italic.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */ }
+/* bitter-600italic - latin-ext_latin */
+@font-face {
+  font-family: 'Bitter';
+  font-style: italic;
+  font-weight: 600;
+  src: local(""), url("../fonts/bitter-v16-latin-ext_latin-600italic.woff2") format("woff2"), url("../fonts/bitter-v16-latin-ext_latin-600italic.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */ }
+/* bitter-700italic - latin-ext_latin */
+@font-face {
+  font-family: 'Bitter';
+  font-style: italic;
+  font-weight: 700;
+  src: local(""), url("../fonts/bitter-v16-latin-ext_latin-700italic.woff2") format("woff2"), url("../fonts/bitter-v16-latin-ext_latin-700italic.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */ }
+/* open-sans-regular - latin-ext_latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local(""), url("../fonts/open-sans-v18-latin-ext_latin-regular.woff2") format("woff2"), url("../fonts/open-sans-v18-latin-ext_latin-regular.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */ }
+/* open-sans-italic - latin-ext_latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 400;
+  src: local(""), url("../fonts/open-sans-v18-latin-ext_latin-italic.woff2") format("woff2"), url("../fonts/open-sans-v18-latin-ext_latin-italic.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */ }
+/* open-sans-600 - latin-ext_latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: local(""), url("../fonts/open-sans-v18-latin-ext_latin-600.woff2") format("woff2"), url("../fonts/open-sans-v18-latin-ext_latin-600.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */ }
+/* open-sans-600italic - latin-ext_latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 600;
+  src: local(""), url("../fonts/open-sans-v18-latin-ext_latin-600italic.woff2") format("woff2"), url("../fonts/open-sans-v18-latin-ext_latin-600italic.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */ }
 
 /*# sourceMappingURL=style.css.map */
