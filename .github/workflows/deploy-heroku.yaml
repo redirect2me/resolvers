@@ -10,6 +10,7 @@ on:
     - '.github/workflows/update-data.yaml'
     - '.vscode/*'
     - '.devcontainer'
+  workflow_dispatch:
 
 jobs:
   deploy:
