@@ -43,9 +43,12 @@ This code is licensed under the [GNU Affero General Public License v3.0](LICENSE
 [![npm](https://www.vectorlogo.zone/logos/npmjs/npmjs-ar21.svg)](https://www.npmjs.com/ "JS Package Management")
 [![pino](https://www.vectorlogo.zone/logos/getpinoio/getpinoio-ar21.svg)](https://www.getpino.io/ "Logging")
 [![Python](https://www.vectorlogo.zone/logos/python/python-ar21.svg)](https://www.python.org/ "data load script")
+[![Sass](https://www.vectorlogo.zone/logos/sass-lang/sass-lang-ar21.svg)](https://sass-lang.com/ "CSS builder")
 [![TypeScript](https://www.vectorlogo.zone/logos/typescriptlang/typescriptlang-ar21.svg)](https://www.typescriptlang.org/ "Programming Language")
 [![yarn](https://www.vectorlogo.zone/logos/yarnpkg/yarnpkg-ar21.svg)](https://yarnpkg.com/en/ "Node.JS Package Management")
 
+* Bitter by Sol Matas for [Huerta Tipográfica](https://www.huertatipografica.com/en)
+* Open Sans by [Steve Mattison](https://twitter.com/SteveMatteson1)
 * Twitter banner photo by [Enrapture Captivating Media](https://unsplash.com/@enrapture)
 * Additional geolocation sources are credited on the [geolocation test page](https://resolve.rs/ip/geolocation.html)
 

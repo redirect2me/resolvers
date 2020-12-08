@@ -7,5 +7,6 @@ dist/
 *.log
 *.mmdb
 node_modules/
+.sass-cache/
 tmp/
 *.tmp
