@@ -116,6 +116,13 @@ const config = convict({
     env: 'PORT',
     format: 'int',
   },
+  radarioApiKey: {
+    default: null,
+    doc: 'API key for radar.io',
+    env: 'RADARIO_API_KEY',
+    format: String,
+    sensitive: true,
+  },
   sessionKey: {
     default: 'DSTuYdDnzz3R4DX6XP77wVgbMAlXWp7W',
     doc: 'Random key for encrypting session',

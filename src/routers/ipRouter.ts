@@ -21,6 +21,7 @@ import { abstractapiLookup } from '../actions/abstractapilookup';
 import { ip2locationLookup } from '../actions/ip2locationlookup';
 import { ipregistryLookup } from '../actions/ipregistrylookup';
 import { labstackLookup } from '../actions/labstacklookup';
+import { radarioLookup } from '../actions/radariolookup';
 import { astroipLookup } from '../actions/astroiplookup';
 
 import config from '../config';
@@ -113,6 +114,7 @@ ipRouter.get('/internal/ipstack.json', ipstackLookup);
 ipRouter.get('/internal/ipregistry.json', ipregistryLookup);
 ipRouter.get('/internal/keycdn.json', keycdnLookup);
 ipRouter.get('/internal/labstack.json', labstackLookup);
+ipRouter.get('/internal/radario.json', radarioLookup);
 
 function getUrls():string[] {
     return [
