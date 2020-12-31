@@ -24,7 +24,7 @@
     "source-map-support": "^0.5.13",
     "tmp-promise": "^2.0.2",
     "transliteration": "^2.1.11",
-    "urijs": "^1.19.1",
+    "urijs": "^1.19.4",
     "uuid": "7"
   },
   "description": "A website for diagnosing DNS resolution and other networking issues",
