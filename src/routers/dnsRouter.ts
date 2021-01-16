@@ -74,6 +74,7 @@ dnsRouter.post('/dns/lookup.html', async (ctx:any) => {
   });
 });
 
+dnsRouter.get('/dns/mxcheck.json', mxcheck.mxCheckJson);
 dnsRouter.get('/dns/mxcheck.html', mxcheck.mxCheckGet);
 dnsRouter.post('/dns/mxcheck.html', mxcheck.mxCheckPost);
 dnsRouter.get('/dns/reverse-lookup.html', reverselookup.reverseLookupGet);
