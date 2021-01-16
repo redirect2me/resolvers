@@ -3,7 +3,7 @@ import Handlebars from 'handlebars';
 import * as psl from 'psl';
 
 import * as streamer from '../streamer';
-
+import * as util from '../util';
 
 async function mxCheckGet(ctx:any) {
   ctx.body = await ctx.render('dns/mxcheck.hbs', {
@@ -11,7 +11,6 @@ async function mxCheckGet(ctx:any) {
     title: 'MX Check'
   });
 }
-
 
 async function mxCheckPost(ctx:any) {
 
@@ -82,8 +81,39 @@ async function mxCheckPost(ctx:any) {
     stream.write(`<p><a class="btn btn-primary" href="mxcheck.html?domain=${encodeURIComponent(domain)}">Continue</a>`);
   });
 }
+async function mxCheckJson(ctx:any) {
+
+    const domain = ctx.request.query['domain'];
+    if (!domain) {
+        util.handleJsonp(ctx, {
+            'success': false,
+            'message': 'No domain specified'
+        });
+        return;
+    }
+
+    if (!psl.isValid(domain)) {
+        util.handleJsonp(ctx, {
+            'success': false,
+            'message': 'Not a valid top level domain',
+            domain
+        });
+        return;
+    }
+
+    const dnsResolver:any = new dnsPromises.Resolver();
+    dnsResolver.setServers(['1.1.1.1']);
+
+    const results = await dnsResolver.resolveMx(domain);
+
+    util.handleJsonp(ctx, {
+        success: true,
+        mailservers: results
+    });
+}
 
 export {
     mxCheckGet,
+    mxCheckJson,
     mxCheckPost
 }
