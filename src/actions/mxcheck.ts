@@ -104,12 +104,20 @@ async function mxCheckJson(ctx:any) {
     const dnsResolver:any = new dnsPromises.Resolver();
     dnsResolver.setServers(['1.1.1.1']);
 
-    const results = await dnsResolver.resolveMx(domain);
+    try {
+        const results = await dnsResolver.resolveMx(domain);
 
-    util.handleJsonp(ctx, {
-        success: true,
-        mailservers: results
-    });
+        util.handleJsonp(ctx, {
+            success: true,
+            mailservers: results
+        });
+    } catch (err) {
+        util.handleJsonp(ctx, {
+            'success': false,
+            'message': 'DNS lookup failed: ${err.getMessage()}',
+            domain
+        });
+    }
 }
 
 export {
