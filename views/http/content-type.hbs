@@ -1,8 +1,9 @@
 {{>above}}
 
 <div class="alert alert-info">
-	HTTP includes a header that specifies the file format of the response.  This is just my list of ones
-	that I keep having to lookup.
+	HTTP includes a header that specifies the file format of the response.
+	This is just my list of ones that I keep having to lookup.
+	See the <a class="alert-link" href="#notes">Notes</a> at the bottom of the page for links to the complete lists.
 </div>
 
 <table class="table table-striped">
@@ -29,13 +30,14 @@
 	</tbody>
 </table>
 
+<h2 id="notes">Notes</h2>
+
 <p>
 	The default for anything text is <code>text/plain</code>, usually with encoding <code>text/plain; charset=UTF-8</code>.</code>
 </p>
 
 <p>
 	To force a file to be downloaded (vs displayed in the browser), use <code>application/octet-stream</code>.
-	See the links at the bottom of this page for more complete lists.
 </p>
 
 <p>Sources:</p>
@@ -44,6 +46,12 @@
 	<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types">MDN</a> - Mozilla's list of commonly used ones</li>
 	<li><a href="https://github.com/nginx/nginx/blob/master/conf/mime.types">NGINX standard configuration</a></li>
 	<li><a href="https://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types">Apache standard configuration</a></li>
+	<li><a href="https://gitlab.freedesktop.org/xdg/shared-mime-info/-/blob/master/data/freedesktop.org.xml.in">FreeDesktop shared-mime-info data</a> - used by GLib, Gnome and KDE (XML)</a></li>
+	<li>
+		the <a href="https://en.wikipedia.org/wiki/File_(command)"><code>file</code></a> command
+		(<a href="http://www.darwinsys.com/file/">home page</a>,
+		<a href="https://github.com/file/file">source</a>)
+	</li>
 </ul>
 
 <script>
