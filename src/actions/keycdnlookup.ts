@@ -14,7 +14,7 @@ async function keycdnLookup(ctx:any) {
     let retVal:any = {};
 
     const instance = axios.create({
-        headers: { 'User-Agent': 'resolve.rs/1.0' },
+        headers: { 'User-Agent': 'keycdn-tools:https://resolve.rs/ip/geolocation.html' },
         maxRedirects: 0,
         timeout: 5000,
         validateStatus: () => true,
