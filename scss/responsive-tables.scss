@@ -1,0 +1,44 @@
+/*
+ * from https://adrianroselli.com/2020/11/under-engineered-responsive-tables.html
+ */
+
+
+/* Responsive Tables */
+
+[role="region"][aria-labelledby][tabindex] {
+    overflow: auto;
+    border: 0.1em solid #d6d6d6;
+  }
+
+  [role="region"][aria-labelledby][tabindex]:focus {
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
+    outline: 0.1em solid rgba(0, 0, 0, 0.1);
+  }
+
+  [role="region"][aria-labelledby][tabindex] table {
+    margin: 0;
+    border: none;
+  }
+
+  /* Scrolling Visual Cue */
+
+  [role="region"][aria-labelledby][tabindex] {
+    background: linear-gradient(to right, #fff 30%, rgba(255, 255, 255, 0)),
+      linear-gradient(to right, rgba(255, 255, 255, 0), #fff 70%) 0 100%,
+      radial-gradient(
+        farthest-side at 0% 50%,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0)
+      ),
+      radial-gradient(
+          farthest-side at 100% 50%,
+          rgba(0, 0, 0, 0.2),
+          rgba(0, 0, 0, 0)
+        )
+        0 100%;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
+    background-position: 0 0, 100%, 0 0, 100%;
+    background-attachment: local, local, scroll, scroll;
+  }

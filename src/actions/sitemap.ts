@@ -1,3 +1,4 @@
+import * as cryptoRouter from '../routers/cryptoRouter';
 import * as dnsRouter from '../routers/dnsRouter';
 import * as domainRouter from '../routers/domainRouter';
 import * as httpRouter from '../routers/httpRouter';
@@ -9,6 +10,7 @@ async function sitemap(ctx:any) {
 
     let urls:string[] = [];
 
+    urls.push(...cryptoRouter.getUrls());
     urls.push(...dnsRouter.getUrls());
     urls.push(...domainRouter.getUrls());
     urls.push(...httpRouter.getUrls());

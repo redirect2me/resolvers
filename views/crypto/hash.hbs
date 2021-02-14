@@ -1,0 +1,100 @@
+{{>above}}
+
+<div class="alert alert-info">
+    These <a class="alert-link" href="https://en.wikipedia.org/wiki/Hash_function">hashes</a> are calculated with all the algorithms available in <a class="alert-link" href="https://nodejs.org/docs/latest-v14.x/api/crypto.html">NodeJS</a>.
+</div>
+
+<div class="container d-flex flex-column">
+    <div class="row align-items-center justify-content-center no-gutters">
+        <div class="col-12 col-md-7 col-lg-6">
+            <form action="hash.html" class="mb-3 p-3 border" method="GET">
+                <div class="form-group">
+                    <label for="string">
+                        String
+                    </label>
+                    <input type="text" class="form-control" id="string" name="string" placeholder="" value="{{string}}" />
+                </div>
+                <button class="btn btn-block btn-primary" type="submit">
+                    Hash
+                </button>
+            </form>
+
+            <form action="hash.html" class="mb-3 p-3 border" method="GET">
+                <div class="form-group">
+                    <label for="bytes">
+                        Bytes
+                    </label>
+                    <input type="text" class="form-control" id="bytes" name="bytes" placeholder="" value="{{bytes}}" />
+                </div>
+                <button class="btn btn-block btn-primary" type="submit">
+                    Hash
+                </button>
+            </form>
+
+            <form action="hash.html" class="mb-3 p-3 border"  enctype="multipart/form-data" method="POST">
+                <div class="form-group">
+                    <label for="file">
+                        File
+                    </label>
+                    <input type="file" class="form-control" id="file" name="file" placeholder="" value="" />
+                </div>
+                <button class="btn btn-block btn-primary" type="submit">
+                    Hash
+                </button>
+
+            </form>
+        </div>
+    </div> <!-- / .row -->
+</div> <!-- / .container -->
+
+
+<h2>Input</h2>
+<table class="table table-bordered">
+    <tbody>
+        {{#if fileName}}
+        <tr>
+            <td>File&nbsp;name</td>
+            <td>{{fileName}}</td>
+        </tr>
+        {{/if}}
+        {{#if string}}
+        <tr>
+            <td>String</td>
+            <td>{{string}}</td>
+        </tr>
+        {{/if}}
+        <tr>
+            <td>Size</td>
+            <td>{{integerFormat size}}</td>
+        </tr>
+        {{#if hexString}}
+        <tr>
+            <td>Bytes</td>
+            <td>{{hexString}}</td>
+        </tr>
+        {{/if}}
+    </tbody>
+</table>
+
+<h2>Hashes</h2>
+<div role="region" aria-labelledby="Caption01" tabindex="0">
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Algorithm</th>
+            <th>Hash Value</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#each results}}
+        <tr>
+            <td>{{this.algorithm}}</td>
+            <td>{{this.value}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+</div>
+
+{{>below}}

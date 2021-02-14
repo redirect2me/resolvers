@@ -20,6 +20,7 @@ import { domainRouter } from './routers/domainRouter';
 import { httpRouter } from './routers/httpRouter';
 import { ipRouter } from './routers/ipRouter';
 import { logger, options as loggerOptions } from './logger';
+import { cryptoRouter } from './routers/cryptoRouter';
 import { dnsRouter } from './routers/dnsRouter';
 import * as resolvers from './data/resolverData';
 import { rootRouter } from './routers/rootRouter';
@@ -35,7 +36,9 @@ const app = new Koa();
 
 app.proxy = true
 app.use(KoaPinoLogger(loggerOptions));
-app.use(KoaBody());
+app.use(KoaBody({
+    multipart: true,
+  }));
 app.use(KoaStatic("static", { maxage: 24 * 60 * 60 * 1000 }));
 app.keys = [config.get('sessionKey')];
 app.use(KoaSession({
@@ -116,6 +119,18 @@ app.use(KoaViews(path.join(__dirname, '..', 'views'), {
                 return result;
             },
             ifDomainUnicode: function(context:any, options:any) { return context && !context.match(/^[a-z]+$/) ? options.fn(this) : options.inverse(this); },
+            integerFormat: function(theNumber:any):string {
+                if (theNumber == 0) {
+                    return "0";
+                }
+                if (!theNumber) {
+                    return "(invalid)";
+                }
+                return Number(theNumber).toLocaleString('en-US', {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                 });
+            },
             isArray: function(target:any) {
                 return target && Array.isArray(target);
             },
@@ -184,6 +199,7 @@ rootRouter.get('/resolvers/index.html', async (ctx:any) => {
 
 app.use(rootRouter.routes());
 app.use(resolverRouter.routes());
+app.use(cryptoRouter.routes());
 app.use(dnsRouter.routes());
 app.use(domainRouter.routes());
 app.use(httpRouter.routes());
