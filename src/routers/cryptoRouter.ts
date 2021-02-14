@@ -46,7 +46,6 @@ function toHexPretty(bytes:Buffer):Handlebars.SafeString|string {
 
 cryptoRouter.get('/crypto/hash.html', async (ctx: any) => {
 
-
     let bytes:Buffer = Buffer.alloc(0);
     let theString:string = '';
     if (ctx.query) {
@@ -81,11 +80,35 @@ cryptoRouter.post('/crypto/hash.html', async (ctx: any) => {
     });
 });
 
-cryptoRouter.all('/http/hash.json', async (ctx:Koa.ExtendableContext) => {
+cryptoRouter.all('/crypto/hash.json', async (ctx:Koa.ExtendableContext) => {
+
+    let bytes:Buffer = Buffer.alloc(0);
+    let theString:string = '';
+    if (ctx.query) {
+        if (ctx.query.string) {
+            theString = ctx.query.string;
+            bytes = Buffer.from(theString, 'utf8');
+        } else if (ctx.query.bytes) {
+            bytes = Buffer.from(ctx.query.bytes, 'hex');
+        }
+    } else if (ctx.request.method == 'post') {
+        if (ctx.request.files && ctx.request.files.file) {
+            bytes = await fsPromises.readFile(ctx.request.files.file.path);
+        }
+    }
+
+    const output:any = {};
+    for (const hash of getHashes(bytes)) {
+        output[hash.algorithm] = hash.value;
+    }
+
     util.handleJsonp(ctx, {
-        headers: ctx.request.headers,
-        href: ctx.request.href,
-        method: ctx.request.method,
+        input: {
+            size: bytes.length,
+            hex: toHexPretty(bytes),
+        },
+        output,
+        success: true
     });
 });
 

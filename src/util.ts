@@ -16,14 +16,16 @@ function getJsonp(ctx:any):string|null {
 
 function handleJsonp(ctx:any, retVal:Object) {
     const callback = getJsonp(ctx);
+    const jsonStr = ctx.query && ctx.query.pretty ? JSON.stringify(retVal, null, 2) : JSON.stringify(retVal);
     if (callback) {
-        ctx.body = callback + '(' + JSON.stringify(retVal) + ');';
+        ctx.body = callback + '(' + jsonStr + ');';
         ctx.set('Content-Type', 'text/javascript');
     } else {
         ctx.set('Access-Control-Allow-Origin', '*');
         ctx.set('Access-Control-Allow-Methods', 'POST, GET');
         ctx.set('Access-Control-Max-Age', '604800');
-        ctx.body = retVal;
+        ctx.body = jsonStr;
+        ctx.set('Content-Type', 'application/json; charset=utf-8');
     }
 }
 
