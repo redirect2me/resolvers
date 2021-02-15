@@ -97,7 +97,7 @@ cryptoRouter.all('/crypto/hash.json', async (ctx:Koa.ExtendableContext) => {
         }
     }
 
-    const output:any = {};
+    const output:{[key: string]: string} = {};
     for (const hash of getHashes(bytes)) {
         output[hash.algorithm] = hash.value;
     }
