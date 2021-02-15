@@ -86,14 +86,15 @@ cryptoRouter.all('/crypto/hash.json', async (ctx:Koa.ExtendableContext) => {
     let theString:string = '';
     if (ctx.query) {
         if (ctx.query.string) {
-            theString = ctx.query.string;
+            theString = util.getFirst(ctx.query.string);
             bytes = Buffer.from(theString, 'utf8');
         } else if (ctx.query.bytes) {
-            bytes = Buffer.from(ctx.query.bytes, 'hex');
+            bytes = Buffer.from(util.getFirst(ctx.query.bytes), 'hex');
         }
     } else if (ctx.request.method == 'post') {
         if (ctx.request.files && ctx.request.files.file) {
-            bytes = await fsPromises.readFile(ctx.request.files.file.path);
+            const file = Array.isArray(ctx.request.files.file) ? ctx.request.files.file[0] : ctx.request.files.file;
+            bytes = await fsPromises.readFile(file.path);
         }
     }
 

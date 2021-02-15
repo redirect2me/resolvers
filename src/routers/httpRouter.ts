@@ -18,7 +18,7 @@ const httpRouter = new Router();
 
 httpRouter.get('/http/content-type.html', async (ctx: any) => {
     const portsFile = path.join(__dirname, '../..', 'data', 'mimetype.yaml');
-    const mimeTypes = yaml.safeLoad(await fsPromises.readFile(portsFile, 'utf-8'));
+    const mimeTypes = yaml.load(await fsPromises.readFile(portsFile, 'utf-8'));
     ctx.body = await ctx.render('http/content-type.hbs', {
         mimeTypes,
         title: 'MIME Content-Type Values',
