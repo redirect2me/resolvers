@@ -80,7 +80,7 @@ rootRouter.get('/status.json', async (ctx) => {
       retVal["resolvers"] = resolvers.getAll().length;
 
       const callback = ctx.request.query['callback'];
-      if (callback && callback.match(/^[$A-Za-z_][0-9A-Za-z_$]*$/) != null) {
+      if (callback && util.getFirst(callback).match(/^[$A-Za-z_][0-9A-Za-z_$]*$/) != null) {
           util.handleJsonp(ctx, retVal);
       } else {
           ctx.set('Access-Control-Allow-Origin', '*');

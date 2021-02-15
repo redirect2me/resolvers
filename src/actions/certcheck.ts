@@ -97,7 +97,7 @@ async function tlsCertCheckPost(ctx:any) {
         servername: hostname,
     };
 
-    const p = new Promise<any>( (resolve, reject) => {
+    const p = new Promise<void>( (resolve, reject) => {
 
         const  tlsSocket = tls.connect(port, hostname, options, () => {
 

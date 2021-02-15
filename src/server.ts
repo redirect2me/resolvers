@@ -152,7 +152,7 @@ app.use(KoaViews(path.join(__dirname, '..', 'views'), {
             below: path.join(__dirname, '..', 'partials', 'below')
         }
     }
-}));
+}) as any);
 
 app.use(async(ctx, next) => {
   try {
