@@ -48,6 +48,23 @@ function parseUrl(urlParam:string): URL|null {
     }
 }
 
+function safeParseInt(val:string, defaultValue:number): number {
+
+    let retVal = defaultValue;
+    try {
+        retVal = parseInt(val);
+    }
+    catch (err) {
+        // deliberatly do nothing here, including no logging
+    }
+
+    if (isNaN(retVal)) {
+        return defaultValue;
+    }
+
+    return retVal;
+}
+
 function validateApiKey(apiKey:string):boolean {
     if (!apiKey) {
         return false;
@@ -91,6 +108,7 @@ export {
     getJsonp,
     handleJsonp,
     parseUrl,
+    safeParseInt,
     validateApiKey,
     validateCaller
 }

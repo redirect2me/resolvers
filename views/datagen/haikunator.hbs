@@ -1,0 +1,36 @@
+{{> above}}
+
+<div class="alert alert-info">
+    <a class="alert-link" href="https://www.heroku.com/">Heroku</a> generates random names for customer IDs that are oddly poetic and much better than random numbers/strings.
+    This is an online generator that makes similar names using the <a class="alert-link" href="https://github.com/Atrox/haikunatorjs">Haikunator</a> library.
+</div>
+
+<div class="row pt-3 pb-5">
+    <div class="col">
+        Your generated name is <b>{{name}}</b>
+        <!-- LATER: generate another -->
+        <!-- LATER: copy to clipboard -->
+    </div>
+</div>
+
+
+<div class="container d-flex flex-column">
+    <div class="row align-items-center justify-content-center no-gutters">
+        <div class="col-12 col-md-5 col-lg-4 py-8 py-md-11">
+            <form action="haikunator.html" class="mb-6" method="POST">
+                <div class="form-group">
+                    <label for="domain">
+                        Domain
+                    </label>
+                    <input type="text" class="form-control" id="domain" name="domain" placeholder="" value="{{domain}}" />
+                </div>
+                <button class="btn btn-block btn-primary" type="submit">
+                    Generate
+                </button>
+
+            </form>
+        </div>
+    </div> <!-- / .row -->
+</div> <!-- / .container -->
+
+{{> below}}

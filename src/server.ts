@@ -21,6 +21,7 @@ import { httpRouter } from './routers/httpRouter';
 import { ipRouter } from './routers/ipRouter';
 import { logger, options as loggerOptions } from './logger';
 import { cryptoRouter } from './routers/cryptoRouter';
+import { datagenRouter } from './routers/datagenRouter';
 import { dnsRouter } from './routers/dnsRouter';
 import * as resolvers from './data/resolverData';
 import { rootRouter } from './routers/rootRouter';
@@ -200,11 +201,13 @@ rootRouter.get('/resolvers/index.html', async (ctx:any) => {
 app.use(rootRouter.routes());
 app.use(resolverRouter.routes());
 app.use(cryptoRouter.routes());
+app.use(datagenRouter.routes());
 app.use(dnsRouter.routes());
 app.use(domainRouter.routes());
 app.use(httpRouter.routes());
 app.use(ipRouter.routes());
 app.use(infoRouter.routes());
+
 
 async function main() {
 
