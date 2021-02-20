@@ -1,4 +1,5 @@
 am
+app
 at
 blue
 bot
@@ -25,11 +26,13 @@ live
 lv
 me
 monster
+new
 ninja
 one
 onl
 online
 org
+page
 pub
 plus
 red
