@@ -8,32 +8,56 @@ import * as util from '../util';
 
 const datagenRouter = new Router();
 
-function generateName(ctx: any): string {
+const DEFAULT_TOKEN_LENGTH = 2;
+const DEFAULT_TOKEN_CHARS = '23456789';
+const DEFAULT_SEPARATOR = 'x'
+function generateNames(ctx: any): string[] {
+
     var haikunator = new Haikunator({
         defaults: {
-            tokenLength: util.safeParseInt(ctx.request.query.tokenLength, 2),
-            tokenChars: ctx.request.query.tokenChars || '23456789',
+            delimiter: (typeof ctx.request.query.delimiter != "undefined") ? ctx.request.query.delimiter : DEFAULT_SEPARATOR,
+            tokenLength: util.safeParseInt(ctx.request.query.tokenLength, DEFAULT_TOKEN_LENGTH),
+            tokenChars: ctx.request.query.tokenChars || DEFAULT_TOKEN_CHARS,
         }
     });
 
-    let name = haikunator.haikunate();
+    let names:string[] = [];
 
-    return name;
+    let count = util.safeParseInt(ctx.request.query.count, 1);
+    if (count < 1) {
+        count = 1;
+    } else if (count > 256) {
+        count = 256;
+    }
+
+    for (var loop = 0; loop < count; loop++) {
+        names.push(haikunator.haikunate());
+    }
+
+    return names;
 }
 
 datagenRouter.get('/datagen/haikunator.html', async (ctx: any) => {
 
     ctx.body = await ctx.render('datagen/haikunator.hbs', {
-        name: generateName(ctx),
+        count: util.safeParseInt(ctx.request.query.count, 1),
+        delimiter: (typeof ctx.request.query.delimiter != "undefined") ? ctx.request.query.delimiter : DEFAULT_SEPARATOR,
+        names: generateNames(ctx),
         title: 'Heroku-style Name Generator',
+        tokenChars: ctx.request.query.tokenChars || DEFAULT_TOKEN_CHARS,
+        tokenLength: ctx.request.query.tokenLength || DEFAULT_TOKEN_LENGTH,
     });
 
 });
 
-datagenRouter.all('/datagen/haikunator.json', async (ctx:Koa.ExtendableContext) => {
+datagenRouter.get('/datagen/haikunator.json', async (ctx:Koa.ExtendableContext) => {
+
+    if (!util.validateCaller(ctx)) {
+        return;
+    }
 
     const output = {
-        name: generateName(ctx)
+        names: generateNames(ctx)
     };
 
     util.handleJsonp(ctx, {
@@ -44,12 +68,18 @@ datagenRouter.all('/datagen/haikunator.json', async (ctx:Koa.ExtendableContext) 
     });
 });
 
+datagenRouter.get('/datagen/haikunator.txt', async (ctx:Koa.ExtendableContext) => {
+
+    ctx.body = generateNames(ctx).join('\n');
+
+});
+
 datagenRouter.get('/datagen/', async (ctx) => {
     ctx.redirect('/datagen/index.html');
 });
 
 datagenRouter.get('/datagen/index.html', async (ctx) => {
-    ctx.redirect('/tools.html#datagen');
+    ctx.redirect('/tools.html#experimental');
 });
 
 function getUrls():string[] {
