@@ -110,7 +110,7 @@ app.use(KoaViews(path.join(__dirname, '..', 'views'), {
                 return encodeURIComponent(a)
             },
             'equals': function(a:any, b:any, block:any) {
-                return a == b ? block.fn() : block.inverse(this);
+                return a == b ? block.fn(this) : block.inverse(this);
             },
             // async startup problems 'flash': displayFlash,
             'for': function(from:number, to:number, incr:number, block:any) {

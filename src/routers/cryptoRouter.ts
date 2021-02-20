@@ -118,7 +118,7 @@ cryptoRouter.get('/crypto/', async (ctx) => {
 });
 
 cryptoRouter.get('/crypto/index.html', async (ctx) => {
-    ctx.redirect('/tools.html#crypto');
+    ctx.redirect('/tools.html#experimental');
 });
 
 function getUrls():string[] {
