@@ -10,6 +10,7 @@ import * as yaml from 'js-yaml';
 import * as url from 'url';
 
 import * as certcheck from '../actions/certcheck';
+import * as floccheck from '../actions/floccheck';
 import * as headers from '../actions/headers';
 import * as redirectcheck from '../actions/redirectcheck';
 import * as util from '../util';
@@ -83,6 +84,11 @@ httpRouter.all('/http/myheaders.json', async (ctx) => {
 
 httpRouter.get('/http/cert-check.html', certcheck.httpsCertCheckGet);
 httpRouter.post('/http/cert-check.html', certcheck.httpsCertCheckPost);
+
+httpRouter.get('/http/floc-check.html', floccheck.flocCheckGet);
+httpRouter.post('/http/floc-check.html', floccheck.flocCheckPost);
+httpRouter.get('/http/floc-check.json', floccheck.flocCheckApiGet);
+httpRouter.post('/http/floc-check.json', floccheck.flocCheckApiPost);
 
 httpRouter.get('/http/redirect-check.html', redirectcheck.redirectCheckGet);
 httpRouter.post('/http/redirect-check.html', redirectcheck.redirectCheckPost);
