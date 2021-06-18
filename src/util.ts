@@ -21,8 +21,9 @@ function getJsonp(ctx:any):string|null {
     return null;
 }
 
-function handleJsonp(ctx:any, retVal:Object) {
+function handleJsonp(ctx:any, retVal:any) {
     const callback = getJsonp(ctx);
+    retVal.license = 'Free for light, non-commercial use';
     const jsonStr = ctx.query && ctx.query.pretty ? JSON.stringify(retVal, null, 2) : JSON.stringify(retVal);
     if (callback) {
         ctx.body = callback + '(' + jsonStr + ');';

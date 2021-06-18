@@ -103,6 +103,7 @@ function getUrls():string[] {
     return [
         "/http/cert-check.html",
         "/http/content-type.html",
+        "/http/floc-check.html",
         "/http/headers.html",
         "/http/myheaders.html",
         "/http/redirect-check.html",

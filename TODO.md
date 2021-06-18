@@ -1,5 +1,7 @@
 # To Do
 
+* FLoC: note if urlParsed != urlFinal
+
 * tlds: list of reserved
 * tlds: list of inactive
 * glossary from data

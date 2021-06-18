@@ -23,13 +23,13 @@ async function flocCheckGet(ctx:any) {
 async function flocCheckPost(ctx:any) {
     const urlInput = ctx.request.body.urls;
 
-    const urls = urlInput ? urlInput.split(/,|\n/).map((s:string) => s.trim()) : null;
+    const urls = urlInput ? urlInput.split(/,|\n/).map((s:string) => s.trim()) : [];
 
     ctx.body = await ctx.render('http/floc-check.hbs', {
         title: 'FLoC Check',
         rows: urls && urls.length > 5 ? urls.length : 5,
         urlInput: urls && urls.length > 1 ? urls.join('\n') : urlInput,
-        urls,
+        urls: urls.filter((x:string) => x.charAt(0) != '#'),
     });
 }
 async function flocCheckApiGet(ctx:any) {
@@ -57,12 +57,12 @@ async function flocCheckApiLow(ctx:any, urlParam:string) {
         return;
     }
 
-    const theUrl = util.parseUrl(urlParam);
+    const theUrl = util.parseUrl(urlParam.indexOf('/') == -1 ? `http:${urlParam}/` : urlParam);
     if (!theUrl) {
         util.handleJsonp(ctx, {
             success: false,
             message: `${urlParam} is not a valid URL`,
-            url: urlParam
+            urlOriginal: urlParam
         });
         return;
     }
@@ -78,7 +78,7 @@ async function flocCheckApiLow(ctx:any, urlParam:string) {
     };
 
     const instance = axios.create({
-        headers: { 'User-Agent': 'resolve.rs/1.0' },
+        headers: { 'User-Agent': 'resolve.rs/1.0 FLoC check' },
         timeout: 2500,
         validateStatus: function (status:number) {
             return status >= 200 && status < 400; // default

@@ -157,6 +157,9 @@ app.use(KoaViews(path.join(__dirname, '..', 'views'), {
 
 app.use(async(ctx, next) => {
   try {
+      if (ctx.path.endsWith('.html') || ctx.path == '/') {
+          ctx.set('Permissions-Policy', 'interest-cohort=()');
+      }
       await next();
       const status = ctx.status || 404;
       if (status === 404) {
