@@ -14,15 +14,15 @@ type flocReturnValue = {
 }
 
 async function flocCheckGet(ctx:any) {
-    ctx.body = await ctx.render('http/floc-check.hbs', {
-        rows: 5,
-        title: 'FLoC Check'
-    });
+    ctx.log.info('get');
+    await flocCheckPageLow(ctx, ctx.query.urls);
 }
 
 async function flocCheckPost(ctx:any) {
-    const urlInput = ctx.request.body.urls;
+    await flocCheckPageLow(ctx, ctx.request.body.urls);
+}
 
+async function flocCheckPageLow(ctx:any, urlInput:string|undefined) {
     const urls = urlInput ? urlInput.split(/,|\n/).map((s:string) => s.trim()) : [];
 
     ctx.body = await ctx.render('http/floc-check.hbs', {
