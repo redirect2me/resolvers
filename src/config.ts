@@ -103,6 +103,13 @@ const config = convict({
     env: 'LOG_LEVEL',
     format: ['fatal', 'error', 'warn', 'info', 'debug', 'trace'],
   },
+  maxmindUrlBase: {
+    default: null,
+    doc: 'Base URL for encrypted MaxMind data files',
+    env: 'MAXMIND_URL_BASE',
+    format: String,
+    sensitive: true,
+  },
   mmdbKey: {
     default: null,
     doc: 'Random key for encrypting mmdb files',
