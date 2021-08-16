@@ -12,12 +12,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
 
-    - name: Update MaxMind
-      run: data/maxmind/update_maxmind.sh
-      env:
-        MMDB_ENCRYPTION_KEY: ${{ secrets.MMDB_ENCRYPTION_KEY }}
-        MAXMIND_LICENSE_KEY: ${{ secrets.MAXMIND_LICENSE_KEY }}
-
     - name: Update ICANN
       run: data/icann/update_icann.sh
 
