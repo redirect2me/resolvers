@@ -3,6 +3,7 @@ import Handlebars from 'handlebars';
 import Router from 'koa-router';
 import * as psl from 'psl';
 
+import * as dnssec from '../actions/dnssec';
 import * as mxcheck from '../actions/mxcheck';
 import * as resolvers from '../data/resolverData';
 import * as reverselookup from '../actions/reverselookup';
@@ -74,9 +75,18 @@ dnsRouter.post('/dns/lookup.html', async (ctx:any) => {
   });
 });
 
-dnsRouter.get('/dns/mxcheck.json', mxcheck.mxCheckJson);
-dnsRouter.get('/dns/mxcheck.html', mxcheck.mxCheckGet);
-dnsRouter.post('/dns/mxcheck.html', mxcheck.mxCheckPost);
+dnsRouter.get('/dns/mxcheck.html', (ctx:any) => {
+  ctx.redirect('/dns/mx-check.html');
+});
+
+dnsRouter.get('/dns/dnssec-check.json', dnssec.dnssecCheckApiGet);
+dnsRouter.post('/dns/dnssec-check.json', dnssec.dnssecCheckApiPost);
+dnsRouter.get('/dns/dnssec-check.html', dnssec.dnssecCheckGet);
+dnsRouter.post('/dns/dnssec-check.html', dnssec.dnssecCheckPost);
+dnsRouter.get('/dns/mx-check.json', mxcheck.mxCheckApiGet);
+dnsRouter.post('/dns/mx-check.json', mxcheck.mxCheckApiPost);
+dnsRouter.get('/dns/mx-check.html', mxcheck.mxCheckGet);
+dnsRouter.post('/dns/mx-check.html', mxcheck.mxCheckPost);
 dnsRouter.get('/dns/reverse-lookup.html', reverselookup.reverseLookupGet);
 dnsRouter.post('/dns/reverse-lookup.html', reverselookup.reverseLookupPost);
 dnsRouter.get('/dns/reverse-lookup.json', reverselookup.reverseLookupAPIGet);
@@ -84,9 +94,10 @@ dnsRouter.post('/dns/reverse-lookup.json', reverselookup.reverseLookupAPIPost);
 
 function getUrls():string[] {
     return [
-        "/dns/lookup.html",
-        "/dns/mxcheck.html",
-        "/dns/reverse-lookup.html",
+      "/dns/dnssec-check.html",
+      "/dns/lookup.html",
+      "/dns/mx-check.html",
+      "/dns/reverse-lookup.html",
     ];
 }
 

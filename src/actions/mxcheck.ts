@@ -1,93 +1,57 @@
 import { promises as dnsPromises } from 'dns';
-import Handlebars from 'handlebars';
 import * as psl from 'psl';
 
-import * as streamer from '../streamer';
 import * as util from '../util';
 
 async function mxCheckGet(ctx:any) {
-  ctx.body = await ctx.render('dns/mxcheck.hbs', {
-    domain: ctx.query.domain,
-    title: 'MX Check'
-  });
+
+    const domainInput = util.getFirst(ctx.query.domains) || '';
+
+    await mxCheckLow(ctx, domainInput);
 }
 
 async function mxCheckPost(ctx:any) {
 
-  const domain = ctx.request.body.domain;
-  if (!domain) {
-    ctx.flash('error', 'You must enter a domain to check!');
-    ctx.redirect('mxcheck.html');
-    return;
-  }
+    const domainInput = ctx.request.body.domains;
 
-  if (!psl.isValid(domain)) {
-    ctx.flash('error', `${Handlebars.escapeExpression(domain)} is not a valid domain!`);
-    ctx.redirect(`mxcheck.html?domain=${encodeURIComponent(domain)}`);
-    return;
-  }
-
-  streamer.streamResponse(ctx, `MX check for ${domain}`, async (stream) => {
-
-    stream.write(`<details>`);
-    stream.write(`<summary>DNS lookup of MX records</summary>`);
-    const dnsResolver:any = new dnsPromises.Resolver();
-    dnsResolver.setServers(['1.1.1.1']);
-
-    const results = await dnsResolver.resolveMx(domain);
-
-    //LATER: sort results by priority, then exchange
-    stream.write(`<table class="table table-striped">`);
-    stream.write(`<thead><tr><th>Server</th><th>Priority</th><th>Address</th></tr></thead>`)
-    stream.write(`<tbody>`)
-
-    const addresses:string[] = [];
-    for (const row of results) {
-        stream.write(`<tr>`);
-        stream.write(`<td>${row.exchange}</td>`);
-        stream.write(`<td>${row.priority}</td>`);
-        stream.write(`<td>`);
-        try {
-            const ip4address = await dnsResolver.resolve4(row.exchange);
-            stream.write(`IPv4: ${ip4address}<br/>`);
-            addresses.push(ip4address);
-        }
-        catch (err) {
-            stream.write(`IPv4: ${err.message}`); //LATER: html encode
-        }
-        try {
-            const ip6address = await dnsResolver.resolve6(row.exchange);
-            stream.write(`IPv6: ${ip6address}<br/>`);
-            addresses.push(ip6address);
-        }
-        catch (err) {
-            stream.write(`IPv6: ${err.message}`); //LATER: html encode
-        }
-        stream.write(`</td>`);
-        stream.write(`</tr>`);
-
-    }
-    stream.write(`</tbody></table>`);
-    //stream.write(`<p>${JSON.stringify(results)}</p>`)
-    stream.write(`</details>`);
-
-    //LATER: check all addresses
-
-
-    stream.write(`<div class="alert alert-info">`);
-    stream.write(`Complete`);
-    stream.write(`</div>`);
-
-    stream.write(`<p><a class="btn btn-primary" href="mxcheck.html?domain=${encodeURIComponent(domain)}">Continue</a>`);
-  });
+    await mxCheckLow(ctx, domainInput);
 }
-async function mxCheckJson(ctx:any) {
 
-    const domain = ctx.request.query['domain'];
+async function mxCheckLow(ctx:any, domainInput:string) {
+
+    const domains = domainInput ? domainInput.trim().split(/,|\s/).map((s:string) => s.trim()).filter((x:string) => x.trim().length > 0) : null;
+
+    ctx.body = await ctx.render('dns/mx-check.hbs', {
+        title: 'MX Check',
+        rows: domains && domains.length > 5 ? domains.length : 5,
+        domainInput,
+        domains,
+    });
+}
+
+async function mxCheckApiGet(ctx:any) {
+    const domain = util.getFirst(ctx.query['domain']) || '';
+
+    await mxCheckApiLow(ctx, domain);
+}
+
+async function mxCheckApiPost(ctx:any) {
+    const domain = ctx.request.body.domain;
+
+    await mxCheckApiLow(ctx, domain);
+}
+
+async function mxCheckApiLow(ctx:any, domain:string) {
+    if (!util.validateCaller(ctx)) {
+        return;
+    }
+
+    domain = domain.trim();
+
     if (!domain) {
         util.handleJsonp(ctx, {
             'success': false,
-            'message': 'No domain specified'
+            'message': `Missing 'domain' parameter`
         });
         return;
     }
@@ -109,19 +73,56 @@ async function mxCheckJson(ctx:any) {
 
         util.handleJsonp(ctx, {
             success: true,
+            message: makeMxMessage(results),
             mailservers: results
         });
     } catch (err) {
         util.handleJsonp(ctx, {
             'success': false,
-            'message': 'DNS lookup failed: ${err.getMessage()}',
+            'message': `DNS lookup failed: ${err}`,
             domain
         });
     }
 }
 
+//LATER: load from /data
+const companyMap:any = {
+    "google.com": "Google",
+    "googlemail.com": "Google",
+    "outlook.com": "Microsoft",
+}
+
+function domainToCompany(domain:string):string {
+    return companyMap[domain] || domain;
+}
+
+function makeMxMessage(results:any):string {
+    if (!results || results.length == 0) {
+        return '(none)';
+    }
+
+    const companies:Set<string> = new Set<string>();
+
+    for (const result of results) {
+        try {
+            const tld = psl.get(result.exchange);
+            if (!tld) {
+                companies.add(result.exchange);
+            } else {
+                companies.add(domainToCompany(tld));
+            }
+        }
+        catch (err) {
+            companies.add(result.exchange);
+        }
+    }
+
+    return Array.from(companies).sort().join('\n');
+}
+
 export {
+    mxCheckApiGet,
+    mxCheckApiPost,
     mxCheckGet,
-    mxCheckJson,
     mxCheckPost
 }
