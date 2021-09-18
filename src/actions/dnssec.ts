@@ -1,7 +1,14 @@
-import { promises as dnsPromises } from 'dns';
+import axios from 'axios';
 import * as psl from 'psl';
 
 import * as util from '../util';
+
+const axiosInstance = axios.create({
+    headers: { 'User-Agent': 'resolve.rs/1.0' },
+    maxRedirects: 0,
+    timeout: 5000,
+    validateStatus: () => true,
+});
 
 async function dnssecCheckGet(ctx:any) {
   ctx.body = await ctx.render('dns/dnssec-check.hbs', {
@@ -59,23 +66,38 @@ async function dnssecCheckApiLow(ctx:any, domain:string) {
         return;
     }
 
-    const dnsResolver:any = new dnsPromises.Resolver();
-    dnsResolver.setServers(['1.1.1.1']);
+    let retVal:any = {};
+    retVal.domain = domain;
 
     try {
-        const results = await dnsResolver.resolveMx(domain);
-
-        util.handleJsonp(ctx, {
-            success: true,
-            mailservers: results
-        });
+        // https://developers.google.com/speed/public-dns/docs/doh/json
+        const response = await axiosInstance.get(`https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=a&do=1`);
+        retVal.raw = response.data;
+        if (response.status == 200) {
+            if (response.data.AD) {
+                retVal.success = true;
+                if (response.data.Answer?.length > 0) {
+                    retVal.message = 'DNSSEC configured and working';
+                } else {
+                    retVal.message = 'DNSSEC configured but no such hostname';
+                }
+            } else {
+                retVal.success = false;
+                if (response.data.Answer?.length > 0) {
+                    retVal.message = 'DNSSEC not configured';
+                } else {
+                    retVal.message = 'Domain not found';
+                }
+            }
+        } else {
+            retVal.success = false;
+            retVal.message = `Google DoH returned status ${response.status}`;
+        }
     } catch (err) {
-        util.handleJsonp(ctx, {
-            'success': false,
-            'message': `DNS lookup failed: ${err}`,
-            domain
-        });
+        retVal.success = false;
+        retVal.message = `${err}`;
     }
+    util.handleJsonp(ctx, retVal);
 }
 
 export {
