@@ -6,19 +6,25 @@
 * tlds: list of inactive
 * glossary from data
 * pages with API versions: link to the API overview.
-* redirect testing
 * what's my locale?
 * speed test (page with external links already built)
 * OpenGraph/schema.org/Twitter/oEmbed/etc metadata checker
-* Google Analytics ID testing
 * list of domains (and detailed info) from Gandi
 * whatsmyip [alternatives](https://dev.to/adityathebe/a-handy-way-to-know-your-public-ip-address-with-dns-servers-4nmn)
 * dnscheck [dnsyo](https://github.com/YoSmudge/dnsyo)
 
 ## Grading
 
+* [ ] favicon: present, sizes, svg version
+* [ ] robots.txt: present, # of lines, ?parse?
 * [ ] [MXToolbox](https://mxtoolbox.com/diagnostic.aspx)
 * [ ] [dt](https://github.com/42wim/dt/issues/1)
+* [ ] trackers: presense, Google Analytics (or other) ID
+* [ ] OpenGraph/schema.org/Twitter/oEmbed/etc metadata checker
+* [ ] check for CORS headers
+* [ ] check for other headers
+* [ ] other well-known files
+* [ ] show SSL cert info
 
 ## Glossary
 
@@ -81,8 +87,6 @@ markdown -> use npm markdown-it
 * OUI lookup https://en.wikipedia.org/wiki/Organizationally_unique_identifier
 * base64 decoding (or link to FFI https://www.fileformat.info/convert/text/base64decoder.htm
 )
-* check for CORS headers
-* check for robots.txt, favicon & other well-known files
 
 ## Features
 

@@ -5,24 +5,27 @@ import axios from 'axios';
 import * as util from '../util';
 
 async function redirectCheckGet(ctx:any) {
-    ctx.body = await ctx.render('http/redirect-check.hbs', {
-        rows: 5,
-        title: 'Redirect Check'
-    });
+    await redirectCheckLow(ctx, util.getFirst(ctx.query.urls) || '');
 }
 
 async function redirectCheckPost(ctx:any) {
-    const urlInput = ctx.request.body.urls;
+    await redirectCheckLow(ctx, ctx.request.body.urls);
+}
 
-    const urls = urlInput ? urlInput.split(/,|\n/).map((s:string) => s.trim()) : null;
+async function redirectCheckLow(ctx:any, urlInput:string) {
+
+    const urls = urlInput ? urlInput.trim().split(/,|\s/).map((s:string) => s.trim()).filter((x:string) => x.trim().length > 0) : null;
+
+    //LATER: check thta url is valid (maybe expand http & https if missing?)
 
     ctx.body = await ctx.render('http/redirect-check.hbs', {
         title: 'Redirect Check',
         rows: urls && urls.length > 5 ? urls.length : 5,
-        urlInput: urls && urls.length > 1 ? urls.join('\n') : urlInput,
+        urlInput,
         urls,
     });
 }
+
 async function redirectCheckApiGet(ctx:any) {
     const urlParam = ctx.query['url'];
 
@@ -77,6 +80,7 @@ async function redirectCheckApiLow(ctx:any, urlParam:string) {
 
     try {
         const response = await instance.get(theUrl.toString());
+        //LATER: if not redirect, get title from html
         retVal.message = `${response.status}: ${response.headers["location"]}`;
         ctx.log.debug({ data: retVal, urlParam }, 'redirect check');
     } catch (err) {

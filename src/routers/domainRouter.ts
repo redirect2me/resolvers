@@ -37,6 +37,21 @@ domainRouter.get('/domains/tlds.json', async (ctx) => {
     util.handleJsonp(ctx, { success: true, count: domainData.icannTlds.length, domains: domainData.icannTlds });
 });
 
+domainRouter.get('/domains/health-check.html', async (ctx:any) => {
+    await healthCheckLow(ctx, util.getFirst(ctx.query.domain) || '');
+});
+
+domainRouter.post('/domains/health-check.html',  async (ctx:any) => {
+    await healthCheckLow(ctx, ctx.request.body.domain || '');
+});
+
+async function healthCheckLow(ctx:any, domain:string) {
+    ctx.body = await ctx.render('domains/health-check.hbs', {
+        domain,
+        title: 'Domain Health Check'
+      });
+}
+
 domainRouter.get('/domains/icann-vs-psl.html', async (ctx:any) => {
 
     const icannOnly = new Set<string>();
@@ -139,6 +154,7 @@ domainRouter.post('/domains/finder.html', domainFinder.domainFinderPost);
 function getUrls():string[] {
     return [
         "/domains/finder.html",
+        "/domains/health-check.html",
         "/domains/icann-vs-psl.html",
         "/domains/nice-tlds.html",
         "/domains/psl-tlds.html",

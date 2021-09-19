@@ -1,0 +1,92 @@
+{{> above}}
+{{#if domain}}
+
+<h2>Results</h2>
+
+<table class="table table-striped border-bottom">
+    <thead>
+        <tr>
+            <th>Check</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>DNSSEC</td>
+            <td id="dnssec-result">
+                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
+            </td>
+        </tr>
+        <tr>
+            <td>MX</td>
+            <td id="mxcheck-result">
+                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
+            </td>
+        </tr>
+        <tr>
+            <td>Redirect for <a href="http://{{domain}}/">root/http</a></td>
+            <td id="redirectroothttp-result">
+                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
+            </td>
+        </tr>
+        <tr>
+            <td>Redirect for <a href="https://{{domain}}/">root/https</a></td>
+            <td id="redirectroothttps-result">
+                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
+            </td>
+        </tr>
+        <tr>
+            <td>Redirect for <a href="http://www.{{domain}}/">www/http</a></td>
+            <td id="redirectwwwhttp-result">
+                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
+            </td>
+        </tr>
+        <tr>
+            <td>Redirect for <a href="https://www.{{domain}}/">www/https</a></td>
+            <td id="redirectwwwhttps-result">
+                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
+            </td>
+        </tr>
+    </tbody>
+</table>
+<script src="/js/dnssecCheck.js"></script>
+<script src="/js/mxCheck.js"></script>
+<script src="/js/redirectCheck.js"></script>
+<script>
+    $(function() {
+        dnssecCheck("{{domain}}", "#dnssec-result");
+        mxCheck("{{domain}}", "#mxcheck-result");
+        redirectCheck("http://{{domain}}/", "#redirectroothttp-result");
+        redirectCheck("https://{{domain}}/", "#redirectroothttps-result");
+        redirectCheck("http://www.{{domain}}/", "#redirectwwwhttp-result");
+        redirectCheck("https://www.{{domain}}/", "#redirectwwwhttps-result");
+    });
+</script>
+
+<h2>Try Again</h2>
+{{else}}
+<div class="alert alert-info">
+    Runs a series of tests on your domain to spot potential problems
+</div>
+{{/if}}
+
+<div class="container d-flex flex-column">
+    <div class="row align-items-center justify-content-center no-gutters">
+        <div class="col-12 col-md-5 col-lg-4 py-8 py-md-11">
+            <form action="health-check.html" class="mb-6" method="POST">
+                <div class="form-group">
+                    <label for="domain">
+                        Domain
+                    </label>
+                    <input type="text" class="form-control" id="domain" name="domain" placeholder="" value="{{domain}}" />
+                </div>
+                <button class="btn btn-block btn-primary" type="submit">
+                    Check
+                </button>
+
+            </form>
+        </div>
+    </div> <!-- / .row -->
+</div> <!-- / .container -->
+
+{{> below}}
