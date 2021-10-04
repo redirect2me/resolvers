@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import * as psl from 'psl';
 
 import * as util from '../util';
@@ -71,7 +71,7 @@ async function dnssecCheckApiLow(ctx:any, domain:string) {
 
     try {
         // https://developers.google.com/speed/public-dns/docs/doh/json
-        const response = await axiosInstance.get(`https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=a&do=1`);
+        const response: AxiosResponse<any> = await axiosInstance.get(`https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=a&do=1`);
         retVal.raw = response.data;
         if (response.status == 200) {
             if (response.data.AD) {

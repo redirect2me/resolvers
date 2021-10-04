@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import config from '../config';
 
@@ -32,7 +32,7 @@ async function ipinsightLookup(ctx:any) {
     });
 
     try {
-        const response = await instance.get(`https://api.ipinsight.io/ip/${encodeURIComponent(ip)}?token=${token}`);
+        const response: AxiosResponse<any> = await instance.get(`https://api.ipinsight.io/ip/${encodeURIComponent(ip)}?token=${token}`);
         retVal.success = response.status == 200;
         retVal.message = `Status from api.ipinsight.io: ${response.status}`;
         retVal.ip = ip;

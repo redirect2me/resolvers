@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 async function keycdnLookup(ctx:any) {
     const ip = ctx.query['ip'];
@@ -22,7 +22,7 @@ async function keycdnLookup(ctx:any) {
 
 
     try {
-        const response = await instance.get(`https://tools.keycdn.com/geo.json?host=${encodeURIComponent(ip)}`);
+        const response:AxiosResponse<any> = await instance.get(`https://tools.keycdn.com/geo.json?host=${encodeURIComponent(ip)}`);
         retVal.success = response.status == 200;
         retVal.message = `Status from tools.keycdn.com: ${response.status}`;
         retVal.ip = ip;

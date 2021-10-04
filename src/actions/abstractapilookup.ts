@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import config from '../config';
 
@@ -32,7 +32,7 @@ async function abstractapiLookup(ctx:any) {
     });
 
     try {
-        const response = await instance.get(`https://ipgeolocation.abstractapi.com/v1/?api_key=${apiKey}&ip_address=${encodeURIComponent(ip)}`);
+        const response: AxiosResponse<any> = await instance.get(`https://ipgeolocation.abstractapi.com/v1/?api_key=${apiKey}&ip_address=${encodeURIComponent(ip)}`);
         retVal.success = response.status == 200;
         retVal.message = `Status from abstractapi.com: ${response.status}`;
         retVal.ip = ip;

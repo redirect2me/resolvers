@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import config from '../config';
 
@@ -31,7 +31,7 @@ async function astroipLookup(ctx:any) {
     });
 
     try {
-        const response = await instance.get(` https://api.astroip.co/${encodeURIComponent(ip)}?api_key=${apiKey}&useragent=true&hostname=true`);
+        const response: AxiosResponse<any> = await instance.get(` https://api.astroip.co/${encodeURIComponent(ip)}?api_key=${apiKey}&useragent=true&hostname=true`);
         retVal.success = response.status == 200;
         retVal.message = `Status from api.astroip.com: ${response.status}`;
         retVal.ip = ip;

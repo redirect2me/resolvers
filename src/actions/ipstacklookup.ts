@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import config from '../config';
 
@@ -32,7 +32,7 @@ async function ipstackLookup(ctx:any) {
     });
 
     try {
-        const response = await instance.get(`http://api.ipstack.com/${encodeURIComponent(ip)}?access_key=${apiKey}&format=1`);
+        const response: AxiosResponse<any> = await instance.get(`http://api.ipstack.com/${encodeURIComponent(ip)}?access_key=${apiKey}&format=1`);
         retVal.success = response.status == 200;
         retVal.message = `Status from api.ipstack.com: ${response.status}`;
         retVal.ip = ip;

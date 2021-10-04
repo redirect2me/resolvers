@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import config from '../config';
 
@@ -35,7 +35,7 @@ async function labstackLookup(ctx:any) {
     });
 
     try {
-        const response = await instance.get(`https://ip.labstack.com/api/v1/${encodeURIComponent(ip)}`);
+        const response: AxiosResponse<any> = await instance.get(`https://ip.labstack.com/api/v1/${encodeURIComponent(ip)}`);
         retVal.success = response.status == 200;
         retVal.message = `Status from ip.labstack.com: ${response.status}`;
         retVal.ip = ip;

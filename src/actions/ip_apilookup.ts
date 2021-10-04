@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 async function ip_apiLookup(ctx: any) {
     const ip = ctx.query['ip'];
@@ -22,7 +22,7 @@ async function ip_apiLookup(ctx: any) {
 
 
     try {
-        const response = await instance.get(`http://ip-api.com/json/${encodeURIComponent(ip)}`);
+        const response: AxiosResponse<any> = await instance.get(`http://ip-api.com/json/${encodeURIComponent(ip)}`);
         retVal.success = response.status == 200;
         retVal.message = `Status from ip-api.com: ${response.status}`;
         retVal.ip = ip;

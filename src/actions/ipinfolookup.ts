@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import config from '../config';
 
@@ -32,7 +32,7 @@ async function ipinfoLookup(ctx:any) {
     });
 
     try {
-        const response = await instance.get(`https://ipinfo.io/${encodeURIComponent(ip)}/json?token=${accessToken}`);
+        const response: AxiosResponse<any> = await instance.get(`https://ipinfo.io/${encodeURIComponent(ip)}/json?token=${accessToken}`);
         retVal.success = response.status == 200;
         retVal.message = `Status from ipinfo.io: ${response.status}`;
         retVal.ip = ip;

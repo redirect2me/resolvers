@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import config from '../config';
 
@@ -35,7 +35,7 @@ async function radarioLookup(ctx:any) {
     });
 
     try {
-        const response = await instance.get(`https://api.radar.io/v1/geocode/ip?ip=${encodeURIComponent(ip)}`);
+        const response: AxiosResponse<any> = await instance.get(`https://api.radar.io/v1/geocode/ip?ip=${encodeURIComponent(ip)}`);
         retVal.success = response.status == 200;
         retVal.message = `Status from api.radario.com: ${response.status}`;
         retVal.ip = ip;

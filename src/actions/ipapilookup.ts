@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import config from '../config';
 
@@ -32,7 +32,7 @@ async function ipapiLookup(ctx: any) {
     });
 
     try {
-        const response = await instance.get(`http://api.ipapi.com/${encodeURIComponent(ip)}?access_key=${accessKey}`);
+        const response: AxiosResponse<any> = await instance.get(`http://api.ipapi.com/${encodeURIComponent(ip)}?access_key=${accessKey}`);
         retVal.success = response.status == 200;
         retVal.message = `Status from ipapi.com: ${response.status}`;
         retVal.ip = ip;

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import config from '../config';
 
@@ -34,7 +34,7 @@ async function ip2locationLookup(ctx: any) {
     });
 
     try {
-        const response = await instance.get(`https://api.ip2location.com/v2/?ip=${encodeURIComponent(ip)}&lang=en&package=${encodeURIComponent(ip2locationPackage)}&key=${apiKey}`);
+        const response: AxiosResponse<any> = await instance.get(`https://api.ip2location.com/v2/?ip=${encodeURIComponent(ip)}&lang=en&package=${encodeURIComponent(ip2locationPackage)}&key=${apiKey}`);
         retVal.success = response.status == 200;
         retVal.message = `Status from api.ip2location.com: ${response.status}`;
         retVal.ip = ip;

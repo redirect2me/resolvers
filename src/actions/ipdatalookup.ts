@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import config from '../config';
 
@@ -32,7 +32,7 @@ async function ipdataLookup(ctx:any) {
     });
 
     try {
-        const response = await instance.get(`https://api.ipdata.co/${encodeURIComponent(ip)}?api-key=${apiKey}`);
+        const response: AxiosResponse<any> = await instance.get(`https://api.ipdata.co/${encodeURIComponent(ip)}?api-key=${apiKey}`);
         retVal.success = response.status == 200;
         retVal.message = `Status from api.ipdata.co: ${response.status}`;
         retVal.ip = ip;

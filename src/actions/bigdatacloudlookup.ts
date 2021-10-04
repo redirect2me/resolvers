@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 //import * as url from 'URL';
 
 import config from '../config';
@@ -37,7 +37,7 @@ async function bigdatacloudLookup(ctx:any) {
     });
 
     try {
-        const response = await instance.get(`https://api.bigdatacloud.net/data/ip-geolocation-with-confidence?ip=${encodeURIComponent(ip)}&localityLanguage=en&key=${encodeURIComponent(apiKey)}`);
+        const response: AxiosResponse<any> = await instance.get(`https://api.bigdatacloud.net/data/ip-geolocation-with-confidence?ip=${encodeURIComponent(ip)}&localityLanguage=en&key=${encodeURIComponent(apiKey)}`);
         retVal.success = response.status == 200;
         retVal.message = `Status from ip.bigdatacloud.com: ${response.status}`;
         retVal.ip = ip;

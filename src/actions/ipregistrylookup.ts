@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import config from '../config';
 
@@ -34,7 +34,7 @@ async function ipregistryLookup(ctx:any) {
     });
 
     try {
-        const response = await instance.get(`https://api.ipregistry.co/${encodeURIComponent(ip)}?key=${apiKey}`);
+        const response: AxiosResponse<any> = await instance.get(`https://api.ipregistry.co/${encodeURIComponent(ip)}?key=${apiKey}`);
         retVal.success = response.status == 200;
         retVal.message = `Status from ipregistry.co: ${response.status}`;
         retVal.ip = ip;
