@@ -1,8 +1,23 @@
 import axios from 'axios';
+import * as cheerio from 'cheerio';
 //import * as url from 'URL';
 
 //import { logger } from '../logger';
 import * as util from '../util';
+
+function extractTitle(html:string):string {
+
+    try {
+        const dom = cheerio.load(html);
+        const titles = dom("head title");
+        if (titles && titles.length > 0) {
+            return titles.text() || '(empty title)';
+        }
+        return "(no title)";
+    } catch (err) {
+        return "(error ${err} trying to extract title)";
+    }
+}
 
 async function redirectCheckGet(ctx:any) {
     await redirectCheckLow(ctx, util.getFirst(ctx.query.urls) || '');
@@ -16,7 +31,7 @@ async function redirectCheckLow(ctx:any, urlInput:string) {
 
     const urls = urlInput ? urlInput.trim().split(/,|\s/).map((s:string) => s.trim()).filter((x:string) => x.trim().length > 0) : null;
 
-    //LATER: check thta url is valid (maybe expand http & https if missing?)
+    //LATER: check that url is valid (maybe expand http & https if missing?)
 
     ctx.body = await ctx.render('http/redirect-check.hbs', {
         title: 'Redirect Check',
@@ -81,7 +96,11 @@ async function redirectCheckApiLow(ctx:any, urlParam:string) {
     try {
         const response = await instance.get(theUrl.toString());
         //LATER: if not redirect, get title from html
-        retVal.message = `${response.status}: ${response.headers["location"]}`;
+        if (response.status == 200) {
+            retVal.message = `${response.status}: ${extractTitle(response.data)}`;
+        } else {
+            retVal.message = `${response.status}: ${response.headers["location"]}`;
+        }
         ctx.log.debug({ data: retVal, urlParam }, 'redirect check');
     } catch (err) {
         ctx.log.error({ err, urlParam }, 'Unable to check redirect');
