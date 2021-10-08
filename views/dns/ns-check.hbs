@@ -1,0 +1,91 @@
+{{> above}}
+{{#if domains}}
+
+<h2>Results</h2>
+
+<table class="table table-striped border-bottom">
+    <thead>
+        <tr>
+            <th>Domain</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+{{#each domains}}
+        <tr>
+            <td>{{this}}</td>
+            <td id="domain-{{@index}}">
+                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
+            </td>
+        </tr>
+{{/each}}
+    </tbody>
+</table>
+<script>
+    async function nsCheck(domain, el) {
+        console.log(`domain=${domain}`);
+        $.ajax({
+            cache: 'no-cache',
+            data: { name: domain, type: "NS", do: "1" },
+            dataType: 'json',
+            error: function (xhr, status, err) {
+                $(el).empty()
+                    .append($("<img>").attr("src", "/images/16x16/cross-circle.png").addClass("pr-2"))
+                    .append($("<span>").text("server error"));
+            },
+            method: "GET",
+            success: function (data, status, xhr) {
+                console.log("data=" + JSON.stringify(data));
+                if (data.Status != 0) {
+                    $(el).empty()
+                        .append($("<img>").attr("src", "/images/16x16/exclamation-red.png").addClass("pr-2"))
+                        .append($("<span>").text(data.message));
+                }
+                else {
+                    const nameservers = [];
+                    for (const answer of data.Answer) {
+                        if (answer.type == 2) {
+                            nameservers.push(answer.data);
+                        }
+                    }
+                    $(el).empty()
+                        .append($("<img>").attr("src", "/images/16x16/tick.png").addClass("pr-2"))
+                        .append($("<span>").text(nameservers.join(', ')));
+                }
+            },
+            timeout: 15000,
+            url: 'https://dns.google/resolve'
+        });
+    }
+
+    $(function() {
+{{#each domains}}
+        nsCheck("{{this}}", "#domain-{{@index}}");
+{{/each}}
+    });
+</script>
+
+<h2>Try Again</h2>
+{{else}}
+<div class="alert alert-info">
+    DNS <b>NS</b> records point from your registrar to your DNS servers. <!--LATER: link to wikipedia/etc. -->
+</div>
+{{/if}}
+<div class="container d-flex flex-column">
+    <div class="row align-items-center justify-content-center no-gutters">
+        <div class="col-12 col-md-7 col-lg-6 py-8 py-md-11">
+            <form action="ns-check.html" class="mb-6" method="POST">
+                <div class="form-group">
+                    <label for="domains">
+                        Domains
+                    </label>
+                    <textarea class="form-control" id="domains" name="domains" rows="{{rows}}">{{domainInput}}</textarea>
+                </div>
+                <button class="btn btn-block btn-primary" type="submit">
+                    Check
+                </button>
+            </form>
+        </div>
+    </div> <!-- / .row -->
+</div> <!-- / .container -->
+{{> below}}

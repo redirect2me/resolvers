@@ -10,6 +10,7 @@
 - extension: ico
   mimetype: image/vnd.microsoft.icon
   name: Icon
+  notes: "Alternate 'image/x-icon' is also widely used."
 
 - extension: js
   mimetype: "text/javascript; charset=UTF-8"
