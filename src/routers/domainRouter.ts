@@ -11,6 +11,7 @@ import * as util from '../util';
 const domainRouter = new KoaRouter();
 
 domainRouter.get('/domains/tlds.html', async (ctx:any) => {
+
     ctx.body = await ctx.render('domains/tlds.hbs', {
         domains: domainData.icannTlds,
         title: 'Top Level Domains',
@@ -26,7 +27,11 @@ domainRouter.get('/domains/index.html', async (ctx) => {
 });
 
 domainRouter.get('/domains/tlds.txt', async (ctx) => {
-    ctx.body = domainData.icannTlds.join('\n');
+    const ifPunycode = util.getBoolean(ctx.request.query["punycode"], false);
+
+    const domains = ifPunycode ? domainData.icannTlds.map(x => punycode.toASCII(x)) : domainData.icannTlds;
+
+    ctx.body = domains.join('\n');
 });
 
 domainRouter.get('/domains/tlds.json', async (ctx) => {
@@ -35,7 +40,11 @@ domainRouter.get('/domains/tlds.json', async (ctx) => {
         return;
     }
 
-    util.handleJsonp(ctx, { success: true, count: domainData.icannTlds.length, domains: domainData.icannTlds });
+    const ifPunycode = util.getBoolean(ctx.request.query["punycode"], false);
+
+    const domains = ifPunycode ? domainData.icannTlds.map(x => punycode.toASCII(x)) : domainData.icannTlds;
+
+    util.handleJsonp(ctx, { success: true, count: domainData.icannTlds.length, domains });
 });
 
 domainRouter.get('/domains/health-check.html', async (ctx:any) => {

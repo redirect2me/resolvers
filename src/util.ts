@@ -1,3 +1,30 @@
+
+function getBoolean(val:string|string[]|undefined, defaultValue:boolean): boolean {
+
+    if (typeof val === 'undefined') {
+        return defaultValue;
+    }
+
+    if (Array.isArray(val)) {
+        val = val[0];
+    }
+
+    if (val === "") {
+        return defaultValue;
+    }
+
+    if (val === "1") {
+        return true;
+    }
+
+    const ch = val.charAt(0).toLowerCase();
+    if (ch === "t" || ch === "y") {
+        return true;
+    }
+
+    return false;
+}
+
 function getCurrentIP(ctx:any):string {
     return ctx.ips.length > 0 ? ctx.ips[0] : ctx.ip;
 }
@@ -104,6 +131,7 @@ function validateCaller(ctx:any):boolean {
 }
 
 export {
+    getBoolean,
     getCurrentIP,
     getFirst,
     getJsonp,
