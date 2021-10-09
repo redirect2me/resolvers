@@ -1,0 +1,56 @@
+{{> above}}
+{{#if domains}}
+
+<h2>Results</h2>
+
+<table class="table table-striped border-bottom">
+    <thead>
+        <tr>
+            <th>Domain</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+{{#each domains}}
+        <tr>
+            <td>{{this}}</td>
+            <td id="domain-{{@index}}">
+                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
+            </td>
+        </tr>
+{{/each}}
+    </tbody>
+</table>
+<script src="/js/expirationCheck.js"></script>
+<script>
+    $(function() {
+{{#each domains}}
+        expirationCheck("{{this}}", "#domain-{{@index}}");
+{{/each}}
+    });
+</script>
+
+<h2>Try Again</h2>
+{{else}}
+<div class="alert alert-info">
+    Don't let your domains expire!<!--LATER: link to wikipedia/etc. -->
+</div>
+{{/if}}
+<div class="container d-flex flex-column">
+    <div class="row align-items-center justify-content-center no-gutters">
+        <div class="col-12 col-md-7 col-lg-6 py-8 py-md-11">
+            <form action="expiration-check.html" class="mb-6" method="POST">
+                <div class="form-group">
+                    <label for="domains">
+                        Domains
+                    </label>
+                    <textarea class="form-control" id="domains" name="domains" rows="{{rows}}">{{domainInput}}</textarea>
+                </div>
+                <button class="btn btn-block btn-primary" type="submit">
+                    Check
+                </button>
+            </form>
+        </div>
+    </div> <!-- / .row -->
+</div> <!-- / .container -->
+{{> below}}

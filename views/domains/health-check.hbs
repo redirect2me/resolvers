@@ -17,7 +17,12 @@
                 <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
             </td>
         </tr>
-        <tr>
+         <tr>
+            <td>Expiration</td>
+            <td id="expirationcheck-result">
+                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
+            </td>
+       <tr>
             <td>MX</td>
             <td id="mxcheck-result">
                 <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
@@ -56,12 +61,14 @@
     </tbody>
 </table>
 <script src="/js/dnssecCheck.js"></script>
+<script src="/js/expirationCheck.js"></script>
 <script src="/js/mxCheck.js"></script>
 <script src="/js/nsCheck.js"></script>
 <script src="/js/redirectCheck.js"></script>
 <script>
     $(function() {
         dnssecCheck("{{domain}}", "#dnssec-result");
+        expirationCheck("{{domain}}", "#expirationcheck-result");
         mxCheck("{{domain}}", "#mxcheck-result");
         nsCheck("{{domain}}", "#nscheck-result");
         redirectCheck("http://{{domain}}/", "#redirectroothttp-result");

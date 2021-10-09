@@ -5,6 +5,7 @@ import * as psl from 'psl';
 
 import * as domainData from '../data/domainData';
 import * as domainFinder from '../actions/domainfinder';
+import * as expirationCheck from '../actions/expirationCheck';
 import * as util from '../util';
 
 const domainRouter = new KoaRouter();
@@ -150,9 +151,14 @@ domainRouter.get('/domains/punycode.html', async (ctx:any) => {
 
 domainRouter.get('/domains/finder.html', domainFinder.domainFinderGet);
 domainRouter.post('/domains/finder.html', domainFinder.domainFinderPost);
+domainRouter.get('/domains/expiration-check.json', expirationCheck.expirationCheckApiGet);
+domainRouter.post('/domains/expiration-check.json', expirationCheck.expirationCheckApiPost);
+domainRouter.get('/domains/expiration-check.html', expirationCheck.expirationCheckGet);
+domainRouter.post('/domains/expiration-check.html', expirationCheck.expirationCheckPost);
 
 function getUrls():string[] {
     return [
+        "/domains/expiration-check.html",
         "/domains/finder.html",
         "/domains/health-check.html",
         "/domains/icann-vs-psl.html",
