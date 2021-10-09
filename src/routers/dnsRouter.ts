@@ -5,6 +5,7 @@ import * as psl from 'psl';
 
 import * as dnssec from '../actions/dnssec';
 import * as mxcheck from '../actions/mxcheck';
+import * as nscheck from '../actions/nscheck';
 import * as resolvers from '../data/resolverData';
 import * as reverselookup from '../actions/reverselookup';
 import * as streamer from '../streamer';
@@ -87,6 +88,8 @@ dnsRouter.get('/dns/mx-check.json', mxcheck.mxCheckApiGet);
 dnsRouter.post('/dns/mx-check.json', mxcheck.mxCheckApiPost);
 dnsRouter.get('/dns/mx-check.html', mxcheck.mxCheckGet);
 dnsRouter.post('/dns/mx-check.html', mxcheck.mxCheckPost);
+dnsRouter.get('/dns/ns-check.html', nscheck.nsCheckGet);
+dnsRouter.post('/dns/ns-check.html', nscheck.nsCheckPost);
 dnsRouter.get('/dns/reverse-lookup.html', reverselookup.reverseLookupGet);
 dnsRouter.post('/dns/reverse-lookup.html', reverselookup.reverseLookupPost);
 dnsRouter.get('/dns/reverse-lookup.json', reverselookup.reverseLookupAPIGet);
@@ -97,6 +100,7 @@ function getUrls():string[] {
       "/dns/dnssec-check.html",
       "/dns/lookup.html",
       "/dns/mx-check.html",
+      "/dns/ns-check.html",
       "/dns/reverse-lookup.html",
     ];
 }

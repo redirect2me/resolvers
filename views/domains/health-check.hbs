@@ -24,6 +24,12 @@
             </td>
         </tr>
         <tr>
+            <td>NS</td>
+            <td id="nscheck-result">
+                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
+            </td>
+        </tr>
+        <tr>
             <td>Redirect for <a href="http://{{domain}}/">root/http</a></td>
             <td id="redirectroothttp-result">
                 <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
@@ -51,11 +57,13 @@
 </table>
 <script src="/js/dnssecCheck.js"></script>
 <script src="/js/mxCheck.js"></script>
+<script src="/js/nsCheck.js"></script>
 <script src="/js/redirectCheck.js"></script>
 <script>
     $(function() {
         dnssecCheck("{{domain}}", "#dnssec-result");
         mxCheck("{{domain}}", "#mxcheck-result");
+        nsCheck("{{domain}}", "#nscheck-result");
         redirectCheck("http://{{domain}}/", "#redirectroothttp-result");
         redirectCheck("https://{{domain}}/", "#redirectroothttps-result");
         redirectCheck("http://www.{{domain}}/", "#redirectwwwhttp-result");
