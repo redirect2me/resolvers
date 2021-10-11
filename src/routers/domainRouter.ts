@@ -6,6 +6,7 @@ import * as psl from 'psl';
 import * as domainData from '../data/domainData';
 import * as domainFinder from '../actions/domainfinder';
 import * as expirationCheck from '../actions/expirationCheck';
+import * as rdapData from '../data/rdapData';
 import * as util from '../util';
 
 const domainRouter = new KoaRouter();
@@ -158,6 +159,40 @@ domainRouter.get('/domains/punycode.html', async (ctx:any) => {
      });
 });
 
+domainRouter.get('/domains/rdap.html', async (ctx:any) => {
+    const theList = rdapData.list().filter(ri => ri.rdap);
+
+    const ianaSet = new Set<String>();
+    theList.forEach((ri) => { if (ri.official) { ianaSet.add(ri.tld) }});
+
+    const missing = domainData.icannTlds.filter( (tld) => !ianaSet.has(punycode.toASCII(tld)));
+
+    const foundBad = theList.filter(ri => ri.official == false && !ri.working);
+    const foundWorking = theList.filter(ri => ri.official == false && ri.working);
+
+    ctx.body = await ctx.render('domains/rdap.hbs', {
+        foundBad,
+        foundWorking,
+        iana: Array.from(ianaSet).sort(),
+        list: theList,
+        missing,
+        title: 'RDAP Servers',
+     });
+});
+
+domainRouter.get('/domains/rdap.json', async (ctx:any) => {
+
+    if (!util.validateCaller(ctx)) {
+        return;
+    }
+
+    const retVal: { [key:string]:string } = {};
+
+    rdapData.list().filter(ri => ri.official || ri.working).forEach(ri => { if (ri.rdap) { retVal[ri.tld] = ri.rdap; }});
+
+    util.handleJsonp(ctx, retVal);
+});
+
 domainRouter.get('/domains/finder.html', domainFinder.domainFinderGet);
 domainRouter.post('/domains/finder.html', domainFinder.domainFinderPost);
 domainRouter.get('/domains/expiration-check.json', expirationCheck.expirationCheckApiGet);
@@ -175,6 +210,7 @@ function getUrls():string[] {
         "/domains/psl-tlds.html",
         "/domains/publicsuffix.html",
         "/domains/punycode.html",
+        "/domains/rdap.html",
         "/domains/tlds.html",
         "/domains/usable-tlds.html",
     ];

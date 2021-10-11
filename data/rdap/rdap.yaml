@@ -1,0 +1,169 @@
+cctlds:
+  ae:
+    rdap: https://rdap.aeda.net.ae/
+
+  ar:
+    rdap: https://rdap.nic.ar/
+
+  aw:
+    rdap: https://rdap.nic.aw/
+
+  br:
+    rdap: https://rdap.registro.br/
+    working: true
+    registered: true
+
+  by:
+    rdap: https://rdap.cctld.by/
+
+  ca:
+    rdap: https://rdap.ca.fury.ca/rdap/
+    working: true
+    registered: true
+
+  cc:
+    rdap: https://tld-rdap.verisign.com/cc/v1/
+    working: true
+
+  ch:
+    rdap: https://rdap.nic.ch/
+    working: true
+
+  co:
+    rdap: https://rdap.nic.co/
+
+  cr:
+    rdap: https://rdap.nic.cr/
+
+  cz:
+    rdap: https://rdap.nic.cz/
+
+  de:
+    rdap: https://rdap.denic.de/
+    working: true
+
+  eu:
+    rdap: https://rdap.eu/
+    working: false
+    notes: 301 forward to http://www.dewildt.nl/
+
+  fm:
+    rdap: https://rdap.centralnic.com/fm/
+    working: true
+    registered: true
+
+  fo:
+    rdap: https://rdap.centralnic.com/fo/
+    working: true
+    registered: true
+
+  fr:
+    rdap: https://rdap.nic.fr/
+    working: false
+
+  id:
+    rdap: https://rdap.id/
+
+  in:
+    rdap: https://rdap.registry.in/
+
+  is:
+    rdap: https://rdap.isnic.is/
+
+  jp:
+    rdap: https://rdap.gtld.jprs.jp/rdap/
+    working: false
+    notes: should work according to https://www.rdap.gtld.jprs.jp/docs/usage.html
+
+  ke:
+    rdap: https://rdap.kenic.or.ke/
+
+  kg:
+    rdap: https://rdap.nic.kg/
+
+  kr:
+    notes: searched and could not find
+
+  ky:
+    rdap: https://whois.kyregistry.ky/rdap/
+    working: true
+    registered: true
+
+  la:
+    rdap: https://rdap.nic.la/
+
+  li:
+    rdap: https://rdap.nic.li/
+
+  md:
+    rdap: https://rdap.nic.md/
+
+  ng:
+    rdap: https://rdap.nic.net.ng/
+
+  nl:
+    rdap: https://rdap.domain-registry.nl/
+    working: false
+
+  "no":
+    rdap: https://rdap.norid.no/
+    working: true
+    notes: I love yaml foot-guns
+
+  pr:
+    rdap: https://rdap.afilias-srs.net/rdap/pr/
+    working: true
+
+  re:
+    notes: run by [AFNIC](https://www.afnic.fr/en/)
+
+  ro:
+    rdap: https://rdap.nic.ro/
+
+  rs:
+    notes: searched and could not find
+
+  sh:
+    notes: run by 101domain, and there is an RDAP server at https://rdap.101domain.com/ , but everything 404s
+
+  sk:
+    rdap: https://rdap.nic.sk/
+
+  sn:
+    rdap: https://rdap.nic.sn/
+
+  su:
+    rdap: https://rdap.nic.su/
+
+  tn:
+    rdap: https://rdap.ati.tn/
+
+  tv:
+    rdap: https://tld-rdap.verisign.com/tv/v1/
+    working: true
+    registered: true
+
+  tz:
+    rdap: https://whois.tznic.or.tz/rdap/
+    working: true
+    registered: true
+
+  ua:
+    rdap: https://rdap.nic.ua/
+    working: false
+
+  us:
+    rdap: https://rdap.nic.us/
+    working: true
+
+  ve:
+    rdap: https://rdap.nic.ve/rdap/
+    working: true
+
+  vu:
+    rdap: https://rdap.dnrs.neustar/
+    working: true
+
+  ws:
+    rdap: https://rdap.website.ws/
+    working: true

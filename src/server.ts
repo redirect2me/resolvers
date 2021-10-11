@@ -27,6 +27,7 @@ import * as resolvers from './data/resolverData';
 import { rootRouter } from './routers/rootRouter';
 import { infoRouter } from './routers/infoRouter';
 import * as domains from './data/domainData';
+import * as rdapData from './data/rdapData';
 import * as util from './util';
 
 process.on('unhandledRejection', err => {
@@ -217,6 +218,7 @@ async function main() {
   asn.initialize(logger);
 
   domains.initialize(logger);
+  rdapData.initialize(logger);
 
   await resolvers.initialize(logger);
 

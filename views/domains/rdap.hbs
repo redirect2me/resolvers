@@ -1,0 +1,80 @@
+{{> above}}
+
+<div class="alert alert-info">
+    RDAP is the replacement for WHOIS.  This is various information I have gathered on available RDAP servers
+</div>
+
+<details>
+<summary>
+  Official <a href="">IANA list</a> (count: {{iana.length}})</p>
+</summary>
+<ul>
+{{#each iana}}
+    <li>{{this}}</li>
+{{/each}}
+</ul>
+</details>
+
+<details>
+<summary>
+  Missing from IANA list (count: {{missing.length}})</p>
+</summary>
+<ul>
+{{#each missing}}
+    <li>{{this}}</li>
+{{/each}}
+</ul>
+</details>
+
+<details>
+<summary>
+  Found but not working (count: {{foundBad.length}})</p>
+</summary>
+<ul>
+{{#each foundBad}}
+    <li>{{this.tld}}: <a href="{{this.rdap}}">{{this.rdap}}</a></li>
+{{/each}}
+</ul>
+</details>
+
+<details>
+<summary>
+  Found and working (count: {{foundWorking.length}})</p>
+</summary>
+<ul>
+{{#each foundWorking}}
+    <li>{{this.tld}}: {{this.rdap}}</li>
+{{/each}}
+</ul>
+</details>
+
+<details>
+<summary>
+  Complete list (count: {{list.length}})</p>
+</summary>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>TLD</th>
+      <th>Official?</th>
+      <th>Working?</th>
+      <th>RDAP</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+{{#each list}}
+    <tr>
+      <td>{{this.tld}}</td>
+      <td>{{this.official}}</td>
+      <td>{{this.working}}</td>
+      <td>{{this.rdap}}</td>
+      <td>{{this.notes}}</td>
+    </tr>
+{{/each}}
+  </tbody>
+</table>
+</details>
+
+
+{{> below}}
