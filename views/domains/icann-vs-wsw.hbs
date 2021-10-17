@@ -3,10 +3,10 @@
 <div class="alert alert-info">
     This report compares the list of top-level domains in
     <a class="alert-link" href="/domains/tlds.html">ICANN</a> (which is the official list) versus
-    the Mozilla <a class="alert-link" href="/domains/psl-tlds.html">PublicSuffixList</a> (which is the list browsers actually use).
+    the <a class="alert-link" href="https://github.com/7c/whoisserver-world">7c/whoisserver-world</a>.
 </div>
 
-<h2>ICANN but not in PublicSuffixList</h2>
+<h2>ICANN but not in whoisserver-world</h2>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -30,7 +30,7 @@
     </tbody>
 </table>
 
-<h2>PublicSuffixList but not ICANN</h2>
+<h2>whoisserver-world but not ICANN</h2>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -40,7 +40,7 @@
         </tr>
     </thead>
     <tbody>
-{{#each pslOnly}}
+{{#each wswOnly}}
         <tr>
             <td><a href="/tlds/{{this}}/index.html">{{this}}</a></td>
             <td>{{toPunycode this}}</td>

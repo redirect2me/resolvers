@@ -1,6 +1,30 @@
 # To Do
 
+* GHA to check whoisserver-world & error out
+* GHA to update ICANN RDAP list
+* /domains/rdap-test.html - test page
+* whoisserver-world missing rdap|whois|registry
+* /tlds/xxx/index.html - link to edit
+* /tlds/xxx/index.html - link to /domains/rdap-test.html
+* /domains/whois-test.html
+* /tlds/xxx/index.html - link to /domains/whois-test.html
+* rdap-registry and rdap-registry-test pages
+* /tlds/xxx/index.html - more info: notes, wikipedia link
+
+
+* add affiliate links to /tlds/xxx/index.html
+  - [ ] [NameCheap](https://www.namecheap.com/support/api/methods/users/get-pricing/)
+  - [ ] [DNSimple](https://blog.dnsimple.com/2021/04/api-v2-price-endpoints/)
+  - [ ] [Gandi](https://api.gandi.net/docs/domains/)
+
 * FLoC: note if urlParsed != urlFinal
+
+* Google country sites:
+  - https://www.orchidbox.com/list-of-google-websites-with-country-codes
+  - https://sites.google.com/site/tech4teachlearn/googleapps/google-country-codes
+
+* security.txt
+* robots.txt
 
 * tlds: list of reserved
 * tlds: list of inactive

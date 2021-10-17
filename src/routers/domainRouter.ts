@@ -2,6 +2,7 @@ import KoaRouter from 'koa-router';
 import Handlebars from 'handlebars';
 import * as punycode from 'punycode';
 import * as psl from 'psl';
+import * as wsw from 'whoisserver-world'
 
 import * as domainData from '../data/domainData';
 import * as domainFinder from '../actions/domainfinder';
@@ -78,6 +79,24 @@ domainRouter.get('/domains/icann-vs-psl.html', async (ctx:any) => {
         icannOnly: [...icannOnly],
         pslOnly: [...pslOnly],
         title: 'Domains in ICANN vs PublicSuffixList',
+     });
+});
+
+domainRouter.get('/domains/icann-vs-wsw.html', async (ctx:any) => {
+
+    const icannOnly = new Set<string>();
+    domainData.icannTlds.forEach( domain => icannOnly.add(domain));
+    Object.getOwnPropertyNames(wsw.tlds()).forEach( domain => icannOnly.delete(punycode.toUnicode(domain)));
+
+    const wswOnly = new Set<string>();
+    Object.getOwnPropertyNames(wsw.tlds()).forEach( domain => wswOnly.add(punycode.toUnicode(domain)));
+    domainData.icannTlds.forEach( domain => wswOnly.delete(domain));
+
+    ctx.body = await ctx.render('domains/icann-vs-wsw.hbs', {
+        domains: domainData.usableTlds,
+        icannOnly: [...icannOnly],
+        wswOnly: [...wswOnly],
+        title: 'Domains in ICANN vs whoisserver-world',
      });
 });
 
@@ -162,35 +181,53 @@ domainRouter.get('/domains/punycode.html', async (ctx:any) => {
 domainRouter.get('/domains/rdap.html', async (ctx:any) => {
     const theList = rdapData.list().filter(ri => ri.rdap);
 
-    const ianaSet = new Set<String>();
-    theList.forEach((ri) => { if (ri.official) { ianaSet.add(ri.tld) }});
+    theList.sort((a, b) => (a.unicode.localeCompare(b.unicode)));
 
-    const missing = domainData.icannTlds.filter( (tld) => !ianaSet.has(punycode.toASCII(tld)));
+    ctx.body = await ctx.render('domains/rdap.hbs', {
+        list: theList,
+        title: 'RDAP Servers',
+     });
+});
+
+domainRouter.get('/domains/rdap-missing.html', async (ctx:any) => {
+    const theList = rdapData.list().filter(ri => ri.rdap);
+
+    const ianaSet = new Set<String>();
+    theList.forEach((ri) => { if (ri.official) { ianaSet.add(ri.unicode) }});
+
+    const missing:any[] = [];
+
+    domainData.icannTlds.forEach((tld) => {
+        if (!ianaSet.has(tld)) {
+            const rdapInfo = rdapData.get(tld);
+            missing.push({
+                unicode: tld,
+                rdap: rdapInfo?.rdap,
+                unofficial: rdapInfo?.official == false && rdapInfo?.working == true,
+                found: rdapInfo?.official == false && !rdapInfo?.working
+            });
+        }
+    });
 
     const foundBad = theList.filter(ri => ri.official == false && !ri.working);
     const foundWorking = theList.filter(ri => ri.official == false && ri.working);
 
-    ctx.body = await ctx.render('domains/rdap.hbs', {
+    ctx.body = await ctx.render('domains/rdap-missing.hbs', {
         foundBad,
         foundWorking,
         iana: Array.from(ianaSet).sort(),
-        list: theList,
         missing,
-        title: 'RDAP Servers',
+        title: 'Missing and Unofficial RDAP Servers',
      });
 });
 
 domainRouter.get('/domains/rdap.json', async (ctx:any) => {
 
-    if (!util.validateCaller(ctx)) {
-        return;
-    }
+    const lookup: { [key:string]:string } = {};
 
-    const retVal: { [key:string]:string } = {};
+    rdapData.list().filter(ri => ri.official || ri.working).forEach(ri => { if (ri.rdap) { lookup[ri.tld] = ri.rdap; }});
 
-    rdapData.list().filter(ri => ri.official || ri.working).forEach(ri => { if (ri.rdap) { retVal[ri.tld] = ri.rdap; }});
-
-    util.handleJsonp(ctx, retVal);
+    util.handleJsonp(ctx, { success: true, lookup });
 });
 
 domainRouter.get('/domains/finder.html', domainFinder.domainFinderGet);

@@ -2200,6 +2200,11 @@ whoiser@^1.13.0:
   dependencies:
     punycode "^2.1.1"
 
+whoisserver-world@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/whoisserver-world/-/whoisserver-world-1.0.10.tgz#6f32d7885b737b792b90b9ac1da027ee9eafc53d"
+  integrity sha512-66JVZRG2erPN9qA9o5DDBgWNyh+nb5YtF7kMaULUUg1q8bnl4e13GTL3mofAAozamSTrXyQKyEaHVjAZcCFutw==
+
 widest-line@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/widest-line/-/widest-line-3.1.0.tgz#8292333bbf66cb45ff0de1603b136b7ae1496eca"

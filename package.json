@@ -28,7 +28,8 @@
     "transliteration": "^2.1.11",
     "urijs": "^1.19.1",
     "uuid": "^8.3.2",
-    "whoiser": "^1.13.0"
+    "whoiser": "^1.13.0",
+    "whoisserver-world": "^1.0.10"
   },
   "description": "A website for diagnosing DNS resolution and other networking issues",
   "devDependencies": {

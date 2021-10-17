@@ -12,7 +12,7 @@
 
 <ul>
 {{#each domains}}
-<li>{{this}}{{#ifDomainUnicode this}} ({{toPunycode this}}){{/ifDomainUnicode}}</li>
+<li>{<a href="/tlds/{{this}}/index.html">{{this}}</a>{{#ifDomainUnicode this}} ({{toPunycode this}}){{/ifDomainUnicode}}</li>
 {{/each}}
 </ul>
 

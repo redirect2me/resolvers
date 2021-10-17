@@ -1,0 +1,64 @@
+{{> above}}
+
+<div class="alert alert-info">
+  Unfortunately, ICANN is not able to mandate RDAP server support for ccTLDs, and is also
+  not enforcing existance (and working) for gTLDs.
+</div>
+
+<p>
+  <a class="btn btn-outline-primary" href="rdap.html">Complete RDAP server list</a>
+</p>
+
+<details>
+<summary>
+  Official <a href="https://data.iana.org/rdap/dns.json">IANA list</a> (count: {{iana.length}})</p>
+</summary>
+<ul>
+{{#each iana}}
+    <li><a href="/tlds/{{this}}/index.html">{{this}}</a></li>
+{{/each}}
+</ul>
+</details>
+
+
+<details>
+<summary>
+  Found but not working (count: {{foundBad.length}})</p>
+</summary>
+<ul>
+{{#each foundBad}}
+    <li><a href="/tlds/{{this.tld}}/index.html">{{this.tld}}</a>: <a href="{{this.rdap}}">{{this.rdap}}</a></li>
+{{/each}}
+</ul>
+</details>
+
+<details>
+<summary>
+  Found and working but not official (count: {{foundWorking.length}})</p>
+</summary>
+<ul>
+{{#each foundWorking}}
+    <li><a href="/tlds/{{this.tld}}/index.html">{{this.tld}}</a>: {{this.rdap}}</li>
+{{/each}}
+</ul>
+</details>
+
+<h2>
+  Missing from IANA list (count: {{missing.length}})</p>
+</h2>
+<ul>
+{{#each missing}}
+    <li>
+      <a href="{{#if this.rdap}}rdap.html#rdap-{{this.unicode}}{{else}}/tlds/{{this.unicode}}/index.html{{/if}}">{{this.unicode}}
+      {{#if this.found}}
+        <span class="badge badge-danger">not working</span>
+      {{/if}}
+      {{#if this.unofficial}}
+        <span class="badge badge-success">unofficial</span>
+      {{/if}}
+      </a>
+    </li>
+{{/each}}
+</ul>
+
+{{> below}}

@@ -1,0 +1,41 @@
+{{> above}}
+
+<div class="alert alert-info">
+  Detailed info about all the top-level domains (TLDs) via <a class="alert-link" href="https://github.com/7c/whoisserver-world">7c/whoisserver-world</a>
+</div>
+
+<p>Count: {{tlds.length}}</p>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Top Level Domain</th>
+      <th>Type</th>
+      <th>Errors</th>
+    </tr>
+  </thead>
+  <tbody>
+{{#each tlds}}
+    <tr>
+      <td><a href="{{this.unicode}}/index.html">{{this.unicode}}</a></td>
+      <td>{{this.type}}</td>
+      <td class="xtext-right">
+        {{#unless this.ianaUrl}}
+          <span class="badge badge-danger">no IANA</span>
+        {{/unless}}
+        {{#unless this.whoisServer.length}}
+          <span class="badge badge-danger">no WHOIS</span>
+        {{/unless}}
+        {{#unless this.rdapServers.length}}
+          <span class="badge badge-danger">no RDAP</span>
+        {{/unless}}
+        {{#unless this.registry}}
+          <span class="badge badge-danger">no registry</span>
+        {{/unless}}
+      </td>
+    </tr>
+{{/each}}
+  </tbody>
+</table>
+
+{{> below}}

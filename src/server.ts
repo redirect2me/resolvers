@@ -25,6 +25,7 @@ import { datagenRouter } from './routers/datagenRouter';
 import { dnsRouter } from './routers/dnsRouter';
 import * as resolvers from './data/resolverData';
 import { rootRouter } from './routers/rootRouter';
+import { tldsRouter } from './routers/tldsRouter';
 import { infoRouter } from './routers/infoRouter';
 import * as domains from './data/domainData';
 import * as rdapData from './data/rdapData';
@@ -120,6 +121,7 @@ app.use(KoaViews(path.join(__dirname, '..', 'views'), {
                     result += block.fn(loop);
                 return result;
             },
+            fromPunycode: function(domain:string) { return domain ? punycode.toUnicode(domain) : '(null)'; },
             ifDomainUnicode: function(context:any, options:any) { return context && !context.match(/^[a-z]+$/) ? options.fn(this) : options.inverse(this); },
             integerFormat: function(theNumber:any):string {
                 if (theNumber == 0) {
@@ -200,8 +202,6 @@ rootRouter.get('/resolvers/index.html', async (ctx:any) => {
   });
 });
 
-
-
 app.use(rootRouter.routes());
 app.use(resolverRouter.routes());
 app.use(cryptoRouter.routes());
@@ -211,7 +211,7 @@ app.use(domainRouter.routes());
 app.use(httpRouter.routes());
 app.use(ipRouter.routes());
 app.use(infoRouter.routes());
-
+app.use(tldsRouter.routes());
 
 async function main() {
 

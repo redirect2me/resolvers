@@ -4,77 +4,41 @@
     RDAP is the replacement for WHOIS.  This is various information I have gathered on available RDAP servers
 </div>
 
-<details>
-<summary>
-  Official <a href="">IANA list</a> (count: {{iana.length}})</p>
-</summary>
-<ul>
-{{#each iana}}
-    <li>{{this}}</li>
-{{/each}}
-</ul>
-</details>
+<p>
+  <a class="btn btn-outline-primary" href="rdap-missing.html">Missing and unofficial RDAP server report</a>
+</p>
 
-<details>
-<summary>
-  Missing from IANA list (count: {{missing.length}})</p>
-</summary>
-<ul>
-{{#each missing}}
-    <li>{{this}}</li>
-{{/each}}
-</ul>
-</details>
+<p>
+  Working list available as in <a href="rdap.json?pretty=true">JSON</a>.
+</p>
 
-<details>
-<summary>
-  Found but not working (count: {{foundBad.length}})</p>
-</summary>
-<ul>
-{{#each foundBad}}
-    <li>{{this.tld}}: <a href="{{this.rdap}}">{{this.rdap}}</a></li>
-{{/each}}
-</ul>
-</details>
-
-<details>
-<summary>
-  Found and working (count: {{foundWorking.length}})</p>
-</summary>
-<ul>
-{{#each foundWorking}}
-    <li>{{this.tld}}: {{this.rdap}}</li>
-{{/each}}
-</ul>
-</details>
-
-<details>
-<summary>
-  Complete list (count: {{list.length}})</p>
-</summary>
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
-      <th>TLD</th>
-      <th>Official?</th>
-      <th>Working?</th>
+      <th>Top Level Domain</th>
       <th>RDAP</th>
       <th>Notes</th>
     </tr>
   </thead>
   <tbody>
 {{#each list}}
-    <tr>
-      <td>{{this.tld}}</td>
-      <td>{{this.official}}</td>
-      <td>{{this.working}}</td>
+    <tr id="rdap-{{this.unicode}}">
+      <td><a href="/tlds/{{this.unicode}}/index.html">{{this.unicode}}</a></td>
       <td>{{this.rdap}}</td>
-      <td>{{this.notes}}</td>
+      <td>
+        {{#unless this.official}}
+          {{#unless this.working}}
+            <span class="badge badge-danger">not working</span>
+          {{else}}
+            <span class="badge badge-success">unofficial</span>
+          {{/unless}}
+        {{/unless}}
+        {{this.notes}}
+      </td>
     </tr>
 {{/each}}
   </tbody>
 </table>
-</details>
 
 
 {{> below}}

@@ -1,0 +1,100 @@
+{{> above}}
+
+<div class="alert alert-info">
+  All <a class="alert-link" href="/tlds/index.html">TLD Information</a> via <a class="alert-link" href="https://github.com/7c/whoisserver-world">7c/whoisserver-world</a>
+</div>
+
+<table class="table table-striped border-bottom">
+  <!--
+    <thead>
+        <tr>
+            <th>Check</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+  -->
+    <tbody>
+        <tr>
+            <td>Top Level Domain</td>
+            <td>
+                {{tld.unicode}}
+            </td>
+        </tr>
+{{#ifDomainUnicode tld.unicode }}
+        <tr>
+            <td>Punycode</td>
+            <td>
+                {{tld.tld}}
+            </td>
+        </tr>
+        <tr>
+            <td>Transliteration</td>
+            <td>
+                {{transliterate tld.unicode}}
+            </td>
+        </tr>
+{{/ifDomainUnicode}}
+        <tr>
+            <td>Type</td>
+            <td>
+                {{tld.type}}
+            </td>
+        </tr>
+        <tr>
+            <td>Registry</td>
+            <td>
+                <a href="{{tld.registry}}">{{tld.registry}}</a>
+            </td>
+        </tr>
+        <tr>
+            <td>RDAP server</td>
+            <td>
+                {{#each tld.rdapServers}}
+              <!--LATER: link to test page -->
+                {{this}}<br/>
+                {{else}}
+                <i>(none)</i> {{#if rdapUnofficial}}(unofficial: {{rdapUnofficial}}){{/if}}
+                {{/each}}
+            </td>
+        </tr>
+        <tr>
+            <td>WHOIS server</td>
+            <td>
+                {{#each tld.whoisServer}}
+              <!--LATER: link to test page -->
+                {{this}}<br/>
+                {{else}}
+                <i>(none)</i>
+                {{/each}}
+            </td>
+        </tr>
+        <tr>
+            <td>Sample domains</td>
+            <td>
+              {{#if sampleDomains.length}}
+                <details>
+                  <summary>{{sampleDomains.length}}</summary>
+                  {{#each sampleDomains}}
+                  {{this}}<br/>
+                  {{/each}}
+                </details>
+                {{else}}
+                <i>(none)</i>
+                {{/if}}
+            </td>
+        </tr>
+        <tr>
+          <td>Links</td>
+          <td>
+              <a href="{{tld.ianaUrl}}">IANA</a><br/>
+              <a href="https://en.wikipedia.org/wiki/.{{tld.tld}}">Wikipedia</a><br/>
+          </td>
+        </tr>
+    </tbody>
+</table>
+<details>
+<summary>Raw data</summary>
+<pre>{{toJson tld}}</pre>
+</details>
+
+{{>below}}
