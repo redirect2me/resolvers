@@ -237,7 +237,7 @@ domainRouter.get('/domains/expiration-check.json', expirationCheck.expirationChe
 domainRouter.post('/domains/expiration-check.json', expirationCheck.expirationCheckApiPost);
 domainRouter.get('/domains/expiration-check.html', expirationCheck.expirationCheckGet);
 domainRouter.post('/domains/expiration-check.html', expirationCheck.expirationCheckPost);
-domainRouter.get('/domains/rdap-proxy.conf', rdapProxyConf.rdapProxyConfGet );
+domainRouter.get('/domains/rdap-proxy.yaml', rdapProxyConf.rdapProxyConfGet );
 
 function getUrls():string[] {
     return [
