@@ -7,6 +7,7 @@ import * as wsw from 'whoisserver-world'
 import * as domainData from '../data/domainData';
 import * as domainFinder from '../actions/domainfinder';
 import * as expirationCheck from '../actions/expirationCheck';
+import * as rdapProxyConf from '../actions/rdapProxyConf';
 import * as rdapData from '../data/rdapData';
 import * as util from '../util';
 
@@ -236,6 +237,7 @@ domainRouter.get('/domains/expiration-check.json', expirationCheck.expirationChe
 domainRouter.post('/domains/expiration-check.json', expirationCheck.expirationCheckApiPost);
 domainRouter.get('/domains/expiration-check.html', expirationCheck.expirationCheckGet);
 domainRouter.post('/domains/expiration-check.html', expirationCheck.expirationCheckPost);
+domainRouter.get('/domains/rdap-proxy.conf', rdapProxyConf.rdapProxyConfGet );
 
 function getUrls():string[] {
     return [

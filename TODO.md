@@ -1,9 +1,14 @@
 # To Do
 
+* update expiration check page to use RDAP (w/fallback RDAP)
+* /domains/rdap-registry.html
+* update /domains/rdap-missing.html to point to ^^^
+
 * GHA to check whoisserver-world & error out
 * GHA to update ICANN RDAP list
 * /domains/rdap-test.html - test page
 * whoisserver-world missing rdap|whois|registry
+* A to Z page-internal links
 * /tlds/xxx/index.html - link to edit
 * /tlds/xxx/index.html - link to /domains/rdap-test.html
 * /domains/whois-test.html
@@ -11,6 +16,7 @@
 * rdap-registry and rdap-registry-test pages
 * /tlds/xxx/index.html - more info: notes, wikipedia link
 
+* add data from: [zonedb](https://github.com/zonedb/zonedb)
 
 * add affiliate links to /tlds/xxx/index.html
   - [ ] [NameCheap](https://www.namecheap.com/support/api/methods/users/get-pricing/)
@@ -28,6 +34,8 @@
 
 * tlds: list of reserved
 * tlds: list of inactive
+* flags: switch to SVG images
+* flags: alt/title text
 * glossary from data
 * pages with API versions: link to the API overview.
 * what's my locale?

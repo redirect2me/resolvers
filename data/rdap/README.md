@@ -24,3 +24,7 @@ https://github.com/weppos/whois
 https://github.com/whois/ianawhois
 
 https://www.google.com/supported_domains
+
+https://centralnicregistry.com/support/information/rdap
+
+https://gitlab.centralnic.com/centralnic/rootrdap/-/blob/master/rootrdap.pl
