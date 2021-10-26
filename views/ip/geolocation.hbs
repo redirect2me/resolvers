@@ -19,20 +19,24 @@
             <td><a href="https://www.abstractapi.com/ip-geolocation-api">AbstractAPI</a></td>
             <td id="abstractapi">Pending...</td>
         </tr>
+        <!-- DEAD
         <tr>
             <td><a href="https://astroip.co/">AstroIP</a></td>
             <td id="astroip">Pending...</td>
         </tr>
+        -->
 {{#if is_current_ip}}
         <tr>
             <td><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS CloudFront</a></td>
             <td id="aws">Pending...</td>
         </tr>
 {{/if}}
+        <!-- DEAD
         <tr>
             <td><a href="https://ipinfo.backchannel.re/">Backchannel</a></td>
             <td id="backchannel">Pending...</td>
         </tr>
+        -->
         <tr>
             <td><a href="https://www.bigdatacloud.com/ip-geolocation-apis">BigDataCloud</a></td>
             <td id="bigdatacloud">Pending...</td>
@@ -107,10 +111,12 @@
             <td><a href="https://ipregistry.co/">ipregistry.co</a></td>
             <td id="ipregistry">Pending...</td>
         </tr>
+        <!-- DEAD
         <tr>
             <td><a href="https://labstack.com/">labstack</a></td>
             <td id="labstack">Pending...</td>
         </tr>
+        -->
         <tr>
             <td><a href="https://tools.keycdn.com/geo">KeyCDN</a></td>
             <td id="keycdn">Pending...</td>
@@ -156,11 +162,11 @@
 
 <ul>
     <li><a class="font-weight-bold" href="https://www.abstractapi.com/ip-geolocation-api">AbstractAPI</a> - free for 20,000/month non-commercial use only, $9/month for 200,000</li>
-    <li><a class="font-weight-bold" href="https://www.astroip.co/">AstroIP.co</a> - free for 30,000/month, $10/month for 80,000</li>
+    <!--<li><a class="font-weight-bold" href="https://www.astroip.co/">AstroIP.co</a> - free for 30,000/month, $10/month for 80,000</li>-->
     <li><a href="https://github.com/analogic/ipgeo">analogic/ipgeo</a> - free database mapping IP subnet to country, in multiple formats.</li>
     <li><a href="http://www.atelierweb.com/products/ip-locator/">Atelier Web IP Locator</a> - $40 for 50,000 lookups.  Free plan is 200 per 30 days.</li>
     <li><a class="font-weight-bold" href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">AWS CloudFront</a> - includes HTTP header with country if you are using their CloudFront CDN. <span class="badge badge-info">browser only</span></li>
-    <li><a class="font-weight-bold" href="https://ipinfo.backchannel.re/">Backchannel Research</a> - free, MaxMind data with a few additions</li>
+    <!--<li><a class="font-weight-bold" href="https://ipinfo.backchannel.re/">Backchannel Research</a> - free, MaxMind data with a few additions</li>-->
     <li><a class="font-weight-bold" href="https://www.bigdatacloud.com/">BigDataCloud</a> - free for 10,000/month, then $2/month per 10,000.</li>
     <li><a class="font-weight-bold" href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API">Browser</a> - 100% client-side JavaScript, requires a user to accept permissions in a popup window. <span class="badge badge-info">browser only</span></li>
     <li><a class="font-weight-bold" href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a> - includes an HTTP header with Country if you are using their CDN. <span class="badge badge-info">browser only</span></li>
@@ -188,7 +194,7 @@
     <li><a href="https://ipwhois.io/">ipwhois.io</a> - free for 10,000/month non-commerical, $11/month for 250,000.</li>
     <li><a class="font-weight-bold" href="https://ipregistry.co/">ipregistry.co</a> - free for 100,000/month, then $0.10 per 1,000.</li>
     <li><a class="font-weight-bold" href="https://tools.keycdn.com/geo">KeyCDN</a> - free but requires a link back to their site.  &ldquo;includes data from MaxMind&rdquo;</li>
-    <li><a class="font-weight-bold" href="https://labstack.com/ip#pricing">LabStack</a> - 10,000/month free, 50,000/month for $7</li>
+    <!--<li><a class="font-weight-bold" href="https://labstack.com/ip#pricing">LabStack</a> - 10,000/month free, 50,000/month for $7</li>-->
     <li><a class="font-weight-bold" href="https://www.maxmind.com/en/geoip2-precision-services">MaxMind</a> - in addition to their free offering (used above), they have a commercial service that starts at $0.10 per 1,000 lookups.</li>
     <li><a href="https://www.melissa.com/v2/lookups/iplocation/ip/">Melissa</a> - 1,000/free, then $3 per 1,000.</li>
     <li><a href="https://www.home.neustar/security-intelligence/ip-geopoint">UltraGeoPoint</a> (Neustar)- no pricing on website</li>
@@ -232,10 +238,6 @@
 </ul>
 
 <script>
-
-    function htmlEncode(raw) {
-        return raw;
-    }
 
     function formatResult(text, country_code, latitude, longitude, raw) {
         //LATER
@@ -443,8 +445,8 @@
     hostIpInfo({{{toJson ip}}});
     ipGeoLocation({{{toJson ip}}});
     remoteLookup("abstractapi", `/internal/abstractapi.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
-    remoteLookup("astroip", `/internal/astroip.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
-    remoteLookup("backchannel", `https://ipinfo.backchannel.re/${encodeURIComponent({{{toJson ip}}})}?token=9286a64d-a3a6-497f-a4cf-6f3a429c0766`, (data) => {
+    // DEAD: remoteLookup("astroip", `/internal/astroip.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
+    /* DEAD: remoteLookup("backchannel", `https://ipinfo.backchannel.re/${encodeURIComponent({{{toJson ip}}})}?token=9286a64d-a3a6-497f-a4cf-6f3a429c0766`, (data) => {
         return {
             success: true,
             country: data.country_code,
@@ -454,6 +456,7 @@
             text: `${data.city}, ${data.subdivision} ${data.country}`,
         };
     });
+    */
     remoteLookup("bigdatacloud", `/internal/bigdatacloud.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("keycdn", `/internal/keycdn.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("ip2location", `/internal/ip2location.json?ip=${encodeURIComponent({{{ toJson ip }}})}`);
@@ -484,7 +487,7 @@
         }
     });
     remoteLookup("ipregistry", `/internal/ipregistry.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
-    remoteLookup("labstack", `/internal/labstack.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
+    //remoteLookup("labstack", `/internal/labstack.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("radario", `/internal/radario.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
 </script>
 
