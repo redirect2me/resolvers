@@ -51,10 +51,6 @@
             <td id="cloudflare">Pending...</td>
         </tr>
         <tr>
-            <td><a href="https://www.dailycred.com/docs/public">DailyCred</a></td>
-            <td id="dailycred">Pending...</td>
-        </tr>
-        <tr>
             <td><a href="https://developer.fastly.com/reference/vcl/variables/geolocation/">Fastly</a></td>
             <td id="fastly">Pending...</td>
         </tr>
@@ -171,7 +167,6 @@
     <li><a class="font-weight-bold" href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API">Browser</a> - 100% client-side JavaScript, requires a user to accept permissions in a popup window. <span class="badge badge-info">browser only</span></li>
     <li><a class="font-weight-bold" href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a> - includes an HTTP header with Country if you are using their CDN. <span class="badge badge-info">browser only</span></li>
     <li><a href="https://www.cyscape.com/products/chawk/">CountryHawk</a> (Cyscape) - $669 per server per year</li>
-    <li><a class="font-weight-bold" href="https://www.dailycred.com/docs/public">DailyCred</a> - Free <span class="badge badge-info">browser only</span></li>
     <li><a href="https://www.getfastah.com/">Fastah</a> - $99/month for 200,000 lookups</li>
     <li><a class="font-weight-bold" href="https://developer.fastly.com/reference/vcl/variables/geolocation/">Fastly</a> - includes HTTP headers with full details, free if you are using their CDN. <span class="badge badge-info">browser only</span></li>
     <li><a href="https://www.geojs.io/">geojs</a> - free with no rate limits, uses MaxMind data</li>
@@ -431,16 +426,6 @@
     remoteLookup('aws', 'https://aws-geo.redirect2.me/api/aws.json');
     remoteLookup('cloudflare', 'https://cf-geo.redirect2.me/api/cloudflare.json');
     remoteLookup('fastly', 'https://cdn-geo.global.ssl.fastly.net/api/fastly.json');
-    remoteLookup('dailycred', 'https://www.dailycred.com/api/local.json', (data) => {
-        return {
-            success: true,
-            country: data.countryCode,
-            longitude: data.longitude,
-            latitude: data.latitude,
-            text: `${data.city}, ${data.region} ${data.countryName}`,
-            raw: data,
-        }
-    });
 {{/if}}
     hostIpInfo({{{toJson ip}}});
     ipGeoLocation({{{toJson ip}}});

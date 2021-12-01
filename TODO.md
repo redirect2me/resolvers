@@ -15,6 +15,7 @@
 * /tlds/xxx/index.html - link to /domains/whois-test.html
 * rdap-registry and rdap-registry-test pages
 * /tlds/xxx/index.html - more info: notes, wikipedia link
+* export CSVs ready to import into [datasette](https://datasette.io/)
 
 * add data from: [zonedb](https://github.com/zonedb/zonedb)
 
