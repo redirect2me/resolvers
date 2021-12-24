@@ -1,0 +1,58 @@
+- domain:bitnet
+  description: BitNet pseudo-domain
+  reason: historical
+- domain: dd
+  description: East Germany
+  reason: historical
+- domain: CS
+  description: Czechoslovakia (former)
+  reason: historical
+- domain: FX
+  description: France
+  reason: historical
+- domain: NATO
+  description: NATO (now uses nato.int subdomain)
+  reason: historical
+- domain: NT
+  description: Neutral Zone
+  reason: historical
+- domain: TP
+  description: East Timor
+  reason: historical
+- domain: UM
+  description: US Minor Outlying Islands
+  reason: historical
+- domain: uucp
+  description: pseudo-domain for UUCP traffic
+  reason: historical
+- domain: YU
+  description: Yugoslavia
+  reason: historical
+- domain: ZR
+  description: Zaire
+  reason: historical
+
+- domain: example
+  description: reserved for use in examples
+  reason: reserved
+- domain: invalid
+  description: reserved for use in invalid domain names
+  reason: reserved
+- domain: localhost
+  description: reserved to avoid conflict with the traditional use of localhost as a hostname
+  reason: reserved
+- domain: test
+  description: reserved for use in tests
+  reason: reserved
+
+- domain: onion
+  description: self-authenticating names of Tor hidden service
+  reason: decentralized
+- domain: i2p
+  description: Invisible Internet Project
+  reason: decentralized
+- domain: local
+  description: link-local host names resolved via the Multicast DNS
+  reason: decentralized
+
+# maybe include https://en.wikipedia.org/wiki/Alternative_DNS_root
