@@ -35,25 +35,31 @@
             </td>
         </tr>
         <tr>
-            <td>Redirect for <a href="http://{{domain}}/">root/http</a></td>
+            <td>Result from <a href="http://{{domain}}/">root/http</a></td>
             <td id="redirectroothttp-result">
                 <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
             </td>
         </tr>
         <tr>
-            <td>Redirect for <a href="https://{{domain}}/">root/https</a></td>
-            <td id="redirectroothttps-result">
-                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
-            </td>
-        </tr>
-        <tr>
-            <td>Redirect for <a href="http://www.{{domain}}/">www/http</a></td>
+            <td>Result from <a href="http://www.{{domain}}/">www/http</a></td>
             <td id="redirectwwwhttp-result">
                 <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
             </td>
         </tr>
         <tr>
-            <td>Redirect for <a href="https://www.{{domain}}/">www/https</a></td>
+            <td>
+                Result from <a href="https://{{domain}}/">root/https</a>
+                (<a href="https://resolve.rs/http/cert-check.html?hostname=https://{{domain}}/">cert</a>)
+            </td>
+            <td id="redirectroothttps-result">
+                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Result from <a href="https://www.{{domain}}/">www/https</a>
+                (<a href="https://resolve.rs/http/cert-check.html?hostname=https://www.{{domain}}/">cert</a>)
+            </td>
             <td id="redirectwwwhttps-result">
                 <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
             </td>
