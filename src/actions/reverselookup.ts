@@ -1,6 +1,6 @@
 import { promises as dnsPromises } from 'dns';
 import Handlebars from 'handlebars';
-import { default as isIp } from 'is-ip';
+import * as net from 'net';
 
 import * as asn from '../data/maxmindData';
 import * as resolvers from '../data/resolverData';
@@ -28,7 +28,7 @@ async function reverseDnsApi(ctx: any, ip: string) {
         return;
     }
 
-    if (!isIp(ip)) {
+  if (net.isIP(ip) == 0) {
         util.handleJsonp(ctx, { success: false, message: `${ip} is not a valid IP address` });
         return;
     }
@@ -69,7 +69,7 @@ async function reverseLookupPost(ctx: any) {
     return;
   }
 
-  if (!isIp(ip)) {
+  if (net.isIP(ip) == 0) {
     ctx.flash('error', `${Handlebars.escapeExpression(ip)} is not a valid IP address!`);
     ctx.redirect(`/dns/reverse-lookup.html?ip=${encodeURIComponent(ip)}`);
     return;

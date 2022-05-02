@@ -1,6 +1,6 @@
 {
   "delay": "0",
-  "exec": "tsc && yarn run start | bunyan",
+  "exec": "tsc && yarn run start | pino-pretty",
   "ext": "json,ts",
   "ignore": [ ".idea/*", "dist/*" ],
   "verbose": true

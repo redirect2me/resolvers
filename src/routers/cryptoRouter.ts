@@ -94,7 +94,7 @@ cryptoRouter.all('/crypto/hash.json', async (ctx:Koa.ExtendableContext) => {
     } else if (ctx.request.method == 'post') {
         if (ctx.request.files && ctx.request.files.file) {
             const file = Array.isArray(ctx.request.files.file) ? ctx.request.files.file[0] : ctx.request.files.file;
-            bytes = await fsPromises.readFile(file.path);
+            bytes = await fsPromises.readFile(file.filepath);
         }
     }
 

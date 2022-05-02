@@ -1,5 +1,5 @@
 import Handlebars from 'handlebars';
-import { default as isIp } from 'is-ip';
+import * as net from 'net';
 
 import * as asn from '../data/maxmindData';
 import * as util from '../util';
@@ -15,7 +15,7 @@ async function asnLookupApi(ctx: any, ip: string) {
         return;
     }
 
-    if (!isIp(ip)) {
+    if (net.isIP(ip) == 0) {
         util.handleJsonp(ctx, { success: false, message: `${ip} is not a valid IP address` });
         return;
     }
@@ -49,7 +49,7 @@ async function asnLookupGet(ctx: any) {
 
   const ip = ctx.query.ip || util.getCurrentIP(ctx);
 
-  if (!isIp(ip)) {
+    if (net.isIP(ip) == 0) {
     ctx.flash('error', `${Handlebars.escapeExpression(ip)} is not a valid IP address!`);
   }
 
