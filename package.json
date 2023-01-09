@@ -15,7 +15,7 @@
     "koa-session": "^6.1.0",
     "koa-static": "^5.0.0",
     "koa-views": "^8.0.0",
-    "luxon": "^2.0.2",
+    "luxon": "^2.5.2",
     "maxmind": "^4.1.0",
     "nodemon": "^2.0.2",
     "pino": "^7.5.1",
