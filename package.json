@@ -3,7 +3,7 @@
     "axios": "^0.27.2",
     "bootstrap": "^4.5.3",
     "cheerio": "^1.0.0-rc.10",
-    "convict": "^6.2.3",
+    "convict": "^6.2.4",
     "haikunator": "^2.1.2",
     "handlebars": "^4.7.3",
     "js-yaml": "^4.0.0",
