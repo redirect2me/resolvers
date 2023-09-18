@@ -2,14 +2,13 @@
 
 <div class="alert alert-info">
     The TCP/IP protocol assigns <i>ports</i> to standard software so it
-    can send data to the correct software when it is all running on a single machine.<br/>
+    can send data to the correct process when it is all running on a single machine.<br/>
     <br/>
-    These are just the ones that I've needed to use in the past. The  
-    <a class="alert-link" href="https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.txt">complete official list</a>.
-    is maintained by IANA
+    See the <a href="#links">Useful Links section</a> (below) for the complete list.
 </div>
 
-<table class="table table-striped">
+<h2>Common Ones I Use</h2>
+<table class="border-left border-right border-bottom table table-striped">
     <thead>
         <tr>
             <th class="text-center">Port</th>
@@ -18,15 +17,43 @@
     </thead>
     <tbody>
 {{#each ports}}
+    {{#if this.shortlist}}
         <tr>
             <td class="text-center">{{this.port}}</td>
             <td>{{this.description}}</td>
         </tr>
+    {{/if}}
 {{/each}}
     </tbody>
 </table>
 
-<p>
-</p>
+<h2>Other I have looked up</h2>
+<table class="border-left border-right border-bottom table table-striped">
+    <thead>
+        <tr>
+            <th class="text-center">Port</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+{{#each ports}}
+    {{#unless this.shortlist}}
+        <tr>
+            <td class="text-center">{{this.port}}</td>
+            <td>{{this.description}}</td>
+        </tr>
+    {{/unless}}
+{{/each}}
+    </tbody>
+</table>
+
+<h2 id="links">Useful Links</h2>
+<ul>
+	<li>Steve Gibson's <a href="https://grc.com/port_22.htm">GRC site</a> has tons of details for many common ports.</li>
+	<li>On Linux, look in <code>/etc/services</code></li>
+	<li>On Microsoft Windows, look in <code>\WINDOWS\SYSTEM32\DRIVERS\ETC\SERVICES</code></li>
+	<li><a href="http://www.iana.org/assignments/port-numbers">IANA's Port Number Assignments</a> - the official source</li>
+	<li><a href="https://granneman.com/tech/networking/commonports">Scott Granneman's list of common ports</a> - somewhat longer than my list</li>
+</ul>
 
 {{>below}}

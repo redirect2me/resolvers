@@ -12,9 +12,9 @@ The source for the [Resolve.rs website](https://resolve.rs/) for troubleshooting
 It is a pretty standard node.js/TypeScript project.  Run with:
 
 ```bash
-yarn install
-yarn run build
-yarn run start
+npm install
+npm run build
+npm run start
 ```
 
 See [`src/config.ts`](https://github.com/redirect2me/resolvers/blob/main/src/config.ts) for the various environment variables that you can set.  The defaults should run but with limited functionality.
@@ -45,7 +45,6 @@ This code is licensed under the [GNU Affero General Public License v3.0](LICENSE
 [![Python](https://www.vectorlogo.zone/logos/python/python-ar21.svg)](https://www.python.org/ "data load script")
 [![Sass](https://www.vectorlogo.zone/logos/sass-lang/sass-lang-ar21.svg)](https://sass-lang.com/ "CSS builder")
 [![TypeScript](https://www.vectorlogo.zone/logos/typescriptlang/typescriptlang-ar21.svg)](https://www.typescriptlang.org/ "Programming Language")
-[![yarn](https://www.vectorlogo.zone/logos/yarnpkg/yarnpkg-ar21.svg)](https://yarnpkg.com/en/ "Node.JS Package Management")
 
 * Bitter by Sol Matas for [Huerta Tipográfica](https://www.huertatipografica.com/en)
 * Open Sans by [Steve Mattison](https://twitter.com/SteveMatteson1)

@@ -1,0 +1,100 @@
+- port: "20"
+  description: FTP - data
+- port: "21"
+  description: FTP - control
+- port: "22"
+  description: Secure Shell (SSH)
+  shortlist: true
+- port: "23"
+  description: Telnet
+  shortlist: true
+- port: "25"
+  description: SMTP
+  shortlist: true
+- port: "53"
+  description: DNS
+  shortlist: true
+- port: "67"
+  description: DHCP
+  shortlist: true
+- port: "68"
+  description: DHCP
+  shortlist: true
+- port: "69"
+  description: TFTP
+- port: "79"
+  description: "finger"
+- port: "80"
+  description: HTTP
+  shortlist: true
+- port: "110"
+  description: POP3
+  shortlist: true
+- port: "113"
+  description: IDENT [Steve Gibson article on why you see it](https://grc.com/port_113.htm) - my install of ProFTPd did it until I specifically disabled it.
+- port: "119"
+  description: NNTP (NetNews)
+- port: "123"
+  description: Network Time Protocol (NTP)
+  shortlist: true
+- port: "135, 137, 139"
+  description: "Microsoft Networking"
+- port: "143"
+  description: "IMAP"
+  shortlist: true
+- port: "161"
+  description: SNMP
+  shortlist: true
+- port: "194"
+  description: IRC
+- port: "220"
+  description: IMAP v3
+- port: "366"
+  description: SMTP
+  shortlist: true
+- port: "389"
+  description: LDAP
+  shortlist: true
+- port: "443"
+  description: HTTPS
+  shortlist: true
+- port: "445"
+  description: "Microsoft Directory Services"
+- port: "465"
+  description: SMTP SSL
+  shortlist: true
+- port: "500"
+  description: IKMP (used for some VPNs)
+- port: "631"
+  description: Internet Printing Protocol (IPP)
+  shortlist: true
+- port: "902"
+  description: VMWare Management Console
+- port: "993"
+  description: IMAP4 SSL
+  shortlist: true
+- port: "995"
+  description: POP3 SSL
+  shortlist: true
+- port: "1311"
+  description: Dell OpenManage's Web Server
+- port: "1433"
+  description: Microsoft SQLServer
+  shortlist: true
+- port: "3306"
+  description: MySQL
+  shortlist: true
+- port: "3389"
+  description: Remote Desktop Protocol (RDP)
+- port: "5432"
+  description: PostgreSQL
+  shortlist: true
+- port: "5500+"
+  description: VNC server connecting to viewer
+- port: "5800"
+  description: VNC web interface
+- port: "5900+"
+  description: VNC viewer connecting to server
+- port: "6379"
+  description: Redis
+  shortlist: true

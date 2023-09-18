@@ -1,6 +1,7 @@
 import { promises as fsPromises } from 'fs';
 import Router from 'koa-router';
 import * as path from 'path';
+import * as yaml from 'js-yaml';
 //import * as punycode from 'punycode';
 import * as asnlookup from '../actions/asnlookup';
 //import * as domains from '../data/domainData';
@@ -65,8 +66,8 @@ ipRouter.get('/ip/speedtest.html', async (ctx: any) => {
 });
 
 ipRouter.get('/ip/tcp-ports.html', async (ctx: any) => {
-    const portsFile = path.join(__dirname, '../..', 'data', 'tcp-ports.json');
-    const ports = JSON.parse(await fsPromises.readFile(portsFile, 'utf-8'));
+    const portsFile = path.join(__dirname, '../..', 'data', 'tcp-ports.yaml');
+    const ports = yaml.load(await fsPromises.readFile(portsFile, 'utf-8'));
     ctx.body = await ctx.render('ip/tcp-ports.hbs', {
         ports,
         title: 'Common TCP Ports',
