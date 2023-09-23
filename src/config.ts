@@ -1,4 +1,5 @@
 import { default as convict } from 'convict';
+import { v4 as uuidv4 } from 'uuid';
 
 const config = convict({
   abstractapiApiKey: {
@@ -45,6 +46,13 @@ const config = convict({
     default: null,
     doc: 'ACCESS_KEY for ipapi.com',
     env: 'IPAPI_ACCESS_KEY',
+    format: String,
+    sensitive: true,
+  },
+  ipapiisApiKey: {
+    default: null,
+    doc: 'API key for ipapi.is',
+    env: 'IPAPIIS_API_KEY',
     format: String,
     sensitive: true,
   },
@@ -131,7 +139,7 @@ const config = convict({
     sensitive: true,
   },
   sessionKey: {
-    default: 'DSTuYdDnzz3R4DX6XP77wVgbMAlXWp7W',
+    default: uuidv4(),
     doc: 'Random key for encrypting session',
     env: 'SESSION_KEY',
     format: String,

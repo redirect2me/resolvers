@@ -68,12 +68,16 @@
             <td id="ip2location">Pending...</td>
         </tr>
         <tr>
-            <td><a href="https://ip-api.com/">IP-API</a></td>
+            <td><a href="https://ip-api.com/">ip-api.com</a></td>
             <td id="ip_api">Pending...</td>
         </tr>
         <tr>
-            <td><a href="https://ipapi.com/">ipapi</a></td>
+            <td><a href="https://ipapi.com/">ipapi.com</a></td>
             <td id="ipapi">Pending...</td>
+        </tr>
+        <tr>
+            <td><a href="https://ipapi.is.com/">ipapi.is</a></td>
+            <td id="ipapiis">Pending...</td>
         </tr>
         <tr>
             <td><a href="https://ipdata.co/">ipdata</a></td>
@@ -176,8 +180,9 @@
     <li><a class="font-weight-bold" href="http://www.hostip.info/use.php">HostIP.info</a> - free, and you can download their database, but they recommend MaxMind for higher accuracy</li>
     <li><a class="font-weight-bold" href="https://www.ip2location.com/">IP2Location</a> - $49 for 100,000 lookups.  They also sell their database(s) for local use.</li>
     <li><a href="http://www.ip2nation.com/">ip2nation</a> - downloadable database, free, only gets the country (which is often good enough!)</li>
-    <li><a class="font-weight-bold" href="https://ip-api.com/">ip-api</a>: 45/minute free for non-commercial use (http only!), &euro;13/month for unlimited.</li>
-    <li><a class="font-weight-bold" href="https://ipapi.com/">ipapi</a>: 10,000/month free, $10/month for 50,000</li>
+    <li><a class="font-weight-bold" href="https://ip-api.com/">ip-api.com</a>: 45/minute free for non-commercial use (http only!), &euro;13/month for unlimited.</li>
+    <li><a class="font-weight-bold" href="https://ipapi.com/">ipapi.com</a>: 10,000/month free, $10/month for 50,000</li>
+    <li><a class="font-weight-bold" href="https://ipapi.is/">ipapi.is</a>: 1,000/day free, $20/month for 20,000, pay-as-you-go $20 for 600,000, <a href="https://ipapi.is/geolocation.html">free database download</a></li>
 	<li><a href="https://ifconfig.co/">ipconfig.co</a> - free 1 request/minute.  uses MaxMind data.  source available.
     <li><a class="font-weight-bold" href="https://ipdata.co/pricing.html">ipdata.co</a>: 1,500/day free, $10/month for 2,500/day</li>
     <li><a class="font-weight-bold" href="https://ipgeolocation.io/pricing.html">ipgeolocation.io</a> - 1,000/day free.  $15/month for 150,000</li>
@@ -448,6 +453,7 @@
     remoteLookup("ip2location", `/internal/ip2location.json?ip=${encodeURIComponent({{{ toJson ip }}})}`);
     remoteLookup("ip_api", `/internal/ip-api.json?ip=${encodeURIComponent({{{ toJson ip }}})}`);
     remoteLookup("ipapi", `/internal/ipapi.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
+    remoteLookup("ipapiis", `/internal/ipapiis.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("ipdata", `/internal/ipdata.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("ipinfo", `/internal/ipinfo.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("ipinsight", `/internal/ipinsight.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
