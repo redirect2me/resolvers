@@ -23,7 +23,8 @@ dnsRouter.get('/dns/index.html', async (ctx) => {
 dnsRouter.get('/dns/lookup.html', async (ctx:any) => {
   ctx.body = await ctx.render('dns/lookup.hbs', {
     hostname: ctx.query.hostname,
-    title: 'DNS Lookup'
+    title: 'DNS Lookup',
+    titleimg: '/images/bow.svg',
   });
 });
 

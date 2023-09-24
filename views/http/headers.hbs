@@ -31,17 +31,19 @@
     <div class="row align-items-center justify-content-center no-gutters">
         <div class="col-12 col-md-5 col-lg-4 py-8 py-md-11">
             <form action="/http/headers.html" class="mb-6" method="GET">
-                <div class="form-group">
-                    <label for="target">
+                <div class="mb-3">
+                    <label class="form-label" for="target">
                         Target URL
                     </label>
                     <input type="text" class="form-control" id="url" name="url" placeholder="" value="{{url}}" />
                 </div>
                 <!-- LATER: method (GET/POST/OPTIONS/HEAD) -->
                 <!-- LATER: user-agent (browsers/curl/wget/custom) -->
-                <button class="btn btn-block btn-primary" type="submit">
-                    Retrieve Headers
-                </button>
+                <div class="d-grid mb-3">
+                    <button class="btn btn-primary" type="submit">
+                        Retrieve Headers
+                    </button>
+                </div>
             </form>
         </div>
     </div> <!-- / .row -->

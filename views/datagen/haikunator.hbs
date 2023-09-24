@@ -8,7 +8,7 @@
 <div class="row pt-3 pb-5">
     <div class="col">
         {{#equals names.length  1}}
-        Your generated name is: <b class="ml-2">{{names.[0]}}</b>
+        Your generated name is: <b class="mb-2">{{names.[0]}}</b>
         {{else}}
         Your generated names are:
         <ul>
@@ -25,33 +25,34 @@
     <div class="row align-items-center justify-content-center no-gutters">
         <div class="col-12 col-md-5 col-lg-4 py-8 py-md-11">
             <form action="haikunator.html" class="mb-6" method="GET">
-                <div class="form-group">
-                    <label for="delimiter">
+                <div class="mb-3">
+                    <label class="form-label" for="delimiter">
                         Delimiter
                     </label>
                     <input type="text" class="form-control" id="delimiter" name="delimiter" placeholder="" value="{{delimiter}}" />
                 </div>
-                <div class="form-group">
-                    <label for="tokenLength">
+                <div class="mb-3">
+                    <label class="form-label" for="tokenLength">
                         Token length
                     </label>
                     <input type="text" class="form-control" id="tokenLength" name="tokenLength" placeholder="" value="{{tokenLength}}" />
                 </div>
-                <div class="form-group">
-                    <label for="tokenChars">
+                <div class="mb-3">
+                    <label class="form-label" for="tokenChars">
                         Characters for token
                     </label>
                     <input type="text" class="form-control" id="tokenChars" name="tokenChars" placeholder="" value="{{tokenChars}}" />
                 </div>
-                <div class="form-group">
-                    <label for="count">How many
+                <div class="mb-3">
+                    <label class="form-label" for="count">How many
                     </label>
                     <input type="text" class="form-control" id="count" name="count" placeholder="" value="{{count}}" />
                 </div>
-                <button class="btn btn-block btn-primary" type="submit">
-                    Generate
-                </button>
-
+                <div class="d-grid mb-3">
+                    <button class="btn btn-primary" type="submit">
+                        Generate
+                    </button>
+                </div>
             </form>
         </div>
     </div> <!-- / .row -->

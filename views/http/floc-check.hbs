@@ -29,7 +29,7 @@
             dataType: 'jsonp',
             error: function (xhr, status, err) {
                 $(el).empty()
-                    .append($("<img>").attr("src", "/images/16x16/cross-circle.png").addClass("pr-2"))
+                    .append($("<img>").attr("src", "/images/16x16/cross-circle.png").addClass("pe-2"))
                     .append($("<span>").text("server error"));
             },
             method: "GET",
@@ -39,12 +39,12 @@
                 const summary = $("<summary>");
                 if (!data.success) {
                     summary
-                        //.append($("<img>").attr("src", "/images/16x16/exclamation-red.png").addClass("pr-2"))
+                        //.append($("<img>").attr("src", "/images/16x16/exclamation-red.png").addClass("pe-2"))
                         .append($("<span>").text(data.message));
                 }
                 else {
                     summary
-                        //.append($("<img>").attr("src", "/images/16x16/tick.png").addClass("pr-2"))
+                        //.append($("<img>").attr("src", "/images/16x16/tick.png").addClass("pe-2"))
                         .append($("<span>").text(data.message));
                 }
                 $(el).empty()
@@ -76,16 +76,17 @@
     <div class="row align-items-center justify-content-center no-gutters">
         <div class="col-12 col-md-7 col-lg-6 py-8 py-md-11">
             <form action="floc-check.html" class="mb-6" method="POST">
-                <div class="form-group">
-                    <label for="urls">
+                <div class="mb-3">
+                    <label class="form-label" for="urls">
                         URLs
                     </label>
                     <textarea class="form-control" id="urls" name="urls" rows="{{rows}}">{{urlInput}}</textarea>
                 </div>
-                <button class="btn btn-block btn-primary" type="submit">
-                    Check
-                </button>
-
+                <div class="d-grid mb-3">
+                    <button class="btn btn-primary" type="submit">
+                        Check
+                    </button>
+                </div>
             </form>
         </div>
     </div> <!-- / .row -->

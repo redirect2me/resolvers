@@ -26,15 +26,17 @@
     <div class="row align-items-center justify-content-center no-gutters">
         <div class="col-12 col-md-5 col-lg-4 py-8 py-md-11">
             <form action="/ip/asn-lookup.html" class="mb-6" method="GET">
-                <div class="form-group">
-                    <label for="ip">
+                <div class="mb-3">
+                    <label class="form-label" for="ip">
                         IP Address
                     </label>
                     <input type="text" class="form-control" id="ip" name="ip" placeholder="" value="{{ip}}" />
                 </div>
-                <button class="btn btn-block btn-primary" type="submit">
-                    Check
-                </button>
+                <div class="d-grid mb-3">
+                    <button class="btn btn-primary" type="submit">
+                        Check
+                    </button>
+                </div>
             </form>
         </div>
     </div> <!-- / .row -->

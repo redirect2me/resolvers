@@ -10,40 +10,45 @@
     <div class="row align-items-center justify-content-center no-gutters">
         <div class="col-12 col-md-7 col-lg-6">
             <form action="hash.html" class="mb-3 p-3 border" method="GET">
-                <div class="form-group">
-                    <label for="string">
+                <div class="mb-3">
+                    <label class="form-label" for="string">
                         String
                     </label>
                     <input type="text" class="form-control" id="string" name="string" placeholder="" value="{{string}}" />
                 </div>
-                <button class="btn btn-block btn-primary" type="submit">
-                    Hash
-                </button>
+                <div class="d-grid mb-3">
+                    <button class="btn btn-primary" type="submit">
+                        Hash
+                    </button>
+                </div>
             </form>
 
             <form action="hash.html" class="mb-3 p-3 border" method="GET">
-                <div class="form-group">
-                    <label for="bytes">
+                <div class="mb-3">
+                    <label class="form-label" for="bytes">
                         Bytes
                     </label>
                     <input type="text" class="form-control" id="bytes" name="bytes" placeholder="" value="{{bytes}}" />
                 </div>
-                <button class="btn btn-block btn-primary" type="submit">
-                    Hash
-                </button>
+                <div class="d-grid mb-3">
+                    <button class="btn btn-primary" type="submit">
+                        Hash
+                    </button>
+                </div>
             </form>
 
             <form action="hash.html" class="mb-3 p-3 border"  enctype="multipart/form-data" method="POST">
-                <div class="form-group">
-                    <label for="file">
+                <div class="mb-3">
+                    <label class="form-label" for="file">
                         File
                     </label>
                     <input type="file" class="form-control" id="file" name="file" placeholder="" value="" />
                 </div>
-                <button class="btn btn-block btn-primary" type="submit">
-                    Hash
-                </button>
-
+                <div class="d-grid mb-3">
+                    <button class="btn btn-primary" type="submit">
+                        Hash
+                    </button>
+                </div>
             </form>
         </div>
     </div> <!-- / .row -->
@@ -79,9 +84,9 @@
 </table>
 
 <h2>Hashes</h2>
-<div role="region" aria-labelledby="Caption01" tabindex="0">
+<div class="table-responsive">
 
-<table class="table table-bordered">
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>Algorithm</th>

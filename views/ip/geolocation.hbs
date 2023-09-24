@@ -44,7 +44,7 @@
 {{#if is_current_ip}}
         <tr>
             <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API">Browser</a></td>
-            <td id="browser"><button class="btn btn-sm btn-outline-primary mr-2" onclick="browser();">Try now</button>  You will need to grant permission in the popup window.</td>
+            <td id="browser"><button class="btn btn-sm btn-outline-primary me-2" onclick="browser();">Try now</button>  You will need to grant permission in the popup window.</td>
         </tr>
         <tr>
             <td><a href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a></td>
@@ -140,8 +140,8 @@
     <div class="card col-lg-5 px-0">
         <div class="card-body">
             <h5 class="card-title text-center">IP Geolocation</h5>
-            <div class="form-group">
-                <label for="ip">IP Address</label>
+            <div class="mb-3">
+                <label class="form-label" for="ip">IP Address</label>
                 <input type="text" class="form-control" id="ip" name="ip" value="{{ip}}" />
             </div>
             <input class="btn btn-primary" type="submit" value="Locate" />

@@ -27,6 +27,7 @@ rootRouter.get('/', async (ctx:any) => {
 rootRouter.get('/api.html', async (ctx:any) => {
     ctx.body = await ctx.render('api.hbs', {
         title: 'API',
+        titleimg: '/images/puzzle.svg',
      });
 });
 
@@ -94,6 +95,7 @@ rootRouter.get('/tools.html', async (ctx:any) => {
     ctx.body = await ctx.render('tools.hbs', {
         current_ip: getCurrentIP(ctx),
         title: 'Tools',
+        titleimg: '/images/tools.svg',
      });
 });
 

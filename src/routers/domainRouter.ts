@@ -61,7 +61,8 @@ domainRouter.post('/domains/health-check.html',  async (ctx:any) => {
 async function healthCheckLow(ctx:any, domain:string) {
     ctx.body = await ctx.render('domains/health-check.hbs', {
         domain: domain.trim(),
-        title: 'Domain Health Check'
+        title: 'Domain Health Check',
+        titleimg: '/images/scales.svg',
       });
 }
 

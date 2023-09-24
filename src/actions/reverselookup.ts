@@ -56,7 +56,8 @@ async function reverseLookupAPIPost(ctx: any) {
 async function reverseLookupGet(ctx: any) {
     ctx.body = await ctx.render('dns/reverse-lookup.hbs', {
         ip: ctx.query.ip,
-    title: 'Reverse DNS Lookup'
+    title: 'Reverse DNS Lookup',
+    titleimg: '/images/boomerang.svg',
   });
 }
 

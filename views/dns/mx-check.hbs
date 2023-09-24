@@ -40,15 +40,17 @@
     <div class="row align-items-center justify-content-center no-gutters">
         <div class="col-12 col-md-7 col-lg-6 py-8 py-md-11">
             <form action="mx-check.html" class="mb-6" method="POST">
-                <div class="form-group">
+                <div class="mb-3">
                     <label for="domains">
                         Domains
                     </label>
                     <textarea class="form-control" id="domains" name="domains" rows="{{rows}}">{{domainInput}}</textarea>
                 </div>
-                <button class="btn btn-block btn-primary" type="submit">
-                    Check
-                </button>
+                <div class="d-grid mb-3">
+                    <button class="btn btn-primary" type="submit">
+                        Check
+                    </button>
+                </div>
             </form>
         </div>
     </div> <!-- / .row -->

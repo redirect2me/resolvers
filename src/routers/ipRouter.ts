@@ -56,6 +56,7 @@ ipRouter.get('/ip/geolocation.html', async (ctx:any) => {
         is_current_ip: ip == current_ip,
         maxmind_noscript: maxmind.cityLookupHtml(ip),
         maxmind: maxmind.cityLookup(ip),
+        titleimg: '/images/map.svg',
         title: 'IP Address Geolocation',
     });
 });
@@ -84,6 +85,7 @@ ipRouter.get('/ip/whatsmyip.html', async (ctx:any) => {
         current_ip,
         location,
         title: `What's my IP address?`,
+        titleimg: '/images/target.svg',
      });
 });
 

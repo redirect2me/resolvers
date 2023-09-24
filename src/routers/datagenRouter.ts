@@ -10,7 +10,7 @@ const datagenRouter = new Router();
 
 const DEFAULT_TOKEN_LENGTH = 2;
 const DEFAULT_TOKEN_CHARS = '23456789';
-const DEFAULT_SEPARATOR = 'x'
+const DEFAULT_SEPARATOR = '-'
 function generateNames(ctx: any): string[] {
 
     var haikunator = new Haikunator({
