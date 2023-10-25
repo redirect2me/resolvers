@@ -42,6 +42,13 @@ const config = convict({
     env: 'IP2LOCATION_PACKAGE',
     format: String,
   },
+  ip2locationioApiKey: {
+    default: null,
+    doc: 'API key for ip2location.io',
+    env: 'IP2LOCATIONIO_API_KEY',
+    format: String,
+    sensitive: true,
+  },
   ipapiAccessKey: {
     default: null,
     doc: 'ACCESS_KEY for ipapi.com',
