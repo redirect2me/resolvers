@@ -49,6 +49,7 @@ This code is licensed under the [GNU Affero General Public License v3.0](LICENSE
 * Bitter by Sol Matas for [Huerta Tipográfica](https://www.huertatipografica.com/en)
 * Open Sans by [Steve Mattison](https://twitter.com/SteveMatteson1)
 * Twitter banner photo by [Enrapture Captivating Media](https://unsplash.com/@enrapture)
+* [psl.min.js](https://github.com/lupomontero/psl/tree/main/dist) by [Lupo Montero](https://lupomontero.com/)
 * Additional geolocation sources are credited on the [geolocation test page](https://resolve.rs/ip/geolocation.html)
 
 ## Notes

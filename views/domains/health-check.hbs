@@ -28,6 +28,18 @@
                 <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
             </td>
         </tr>
+       <tr>
+            <td>SPF</td>
+            <td id="spfcheck-result">
+                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
+            </td>
+        </tr>
+       <tr>
+            <td>DMARC</td>
+            <td id="dmarccheck-result">
+                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
+            </td>
+        </tr>
         <tr>
             <td>NS</td>
             <td id="nscheck-result">
@@ -64,11 +76,24 @@
                 <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
             </td>
         </tr>
+        <tr>
+            <td>favicon.ico</td>
+            <td>
+                <img alt="favicon.ico" src="https://www.{{domain}}/favicon.ico" style="height:24pt;"/>
+            </td>
+        </tr>
+        <tr>
+            <td>favicon.svg</td>
+            <td>
+                <a href="https://www.{{domain}}/favicon.svg"><img alt="favicon.svg" src="https://www.{{domain}}/favicon.svg" style="height:24pt;"/></a>
+            </td>
+        </tr>
     </tbody>
 </table>
+<script src="/js/psl.min.js"></script>
 <script src="/js/dnssecCheck.js"></script>
 <script src="/js/expirationCheck.js"></script>
-<script src="/js/mxCheck.js"></script>
+<script src="/js/mxCheck.js{{noCacheDev}}"></script>
 <script src="/js/nsCheck.js"></script>
 <script src="/js/redirectCheck.js"></script>
 <script>
@@ -76,6 +101,8 @@
         dnssecCheck("{{domain}}", "#dnssec-result");
         expirationCheck("{{domain}}", "#expirationcheck-result");
         mxCheck("{{domain}}", "#mxcheck-result");
+        spfCheck("{{domain}}", "#spfcheck-result");
+        dmarcCheck("{{domain}}", "#dmarccheck-result");
         nsCheck("{{domain}}", "#nscheck-result");
         redirectCheck("http://{{domain}}/", "#redirectroothttp-result");
         redirectCheck("https://{{domain}}/", "#redirectroothttps-result");
