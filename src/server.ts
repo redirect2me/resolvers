@@ -138,6 +138,13 @@ app.use(KoaViews(path.join(__dirname, '..', 'views'), {
             isArray: function(target:any) {
                 return target && Array.isArray(target);
             },
+            noCacheDev: function(multiParam:boolean) {
+              if (process.env.COMMIT) {
+                return '';
+              }
+              logger.debug({ multiParam }, 'multiParam');
+              return `${multiParam ? '?' : '?'}nocache=${new Date().getTime()}`;
+            },
             toIso: function(d:Date) { return d ? d.toISOString() : '(none)'; },
             toJson: function(context:any) { return JSON.stringify(context, null, 2); },
             'toUpper': function (a: any) {

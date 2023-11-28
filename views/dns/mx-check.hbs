@@ -6,26 +6,37 @@
 <table class="table table-striped border-bottom">
     <thead>
         <tr>
-            <th>Domain</th>
-            <th>Result</th>
+            <th style="width:25%">Domain</th>
+            <th style="width:25%">MX</th>
+            <th style="width:25%">SPF</th>
+            <th style="width:25%">DMARC</th>
         </tr>
     </thead>
     <tbody>
 {{#each domains}}
         <tr>
             <td>{{this}}</td>
-            <td id="domain-{{@index}}">
+            <td id="mx-{{@index}}">
+                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
+            </td>
+            <td id="spf-{{@index}}">
+                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
+            </td>
+            <td id="dmarc-{{@index}}">
                 <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
             </td>
         </tr>
 {{/each}}
     </tbody>
 </table>
-<script src="/js/mxCheck.js"></script>
+<script src="/js/psl.min.js"></script>
+<script src="/js/mxCheck.js{{noCacheDev}}"></script>
 <script>
     $(function() {
 {{#each domains}}
-        mxCheck("{{this}}", "#domain-{{@index}}");
+        mxCheck("{{this}}", "#mx-{{@index}}");
+        spfCheck("{{this}}", "#spf-{{@index}}");
+        dmarcCheck("{{this}}", "#dmarc-{{@index}}");
 {{/each}}
     });
 </script>
