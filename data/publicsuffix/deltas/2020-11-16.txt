@@ -1,0 +1,3 @@
+-bloghp.id
++bloger.id
++of.je

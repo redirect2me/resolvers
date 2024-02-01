@@ -1,0 +1,12 @@
++*.builder.code.com
++*.dev-builder.code.com
++*.stg-builder.code.com
+-builder.code.com
+-dev-builder.code.com
++ibxos.it
++iliadboxos.it
++iservschule.de
++lolipopmc.jp
++messerli.app
++schulplattform.de
+-stg-builder.code.com

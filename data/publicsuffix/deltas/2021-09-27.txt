@@ -1,0 +1,8 @@
++*.digitaloceanspaces.com
+-agrinet.tn
+-defense.tn
+-edunet.tn
+-rnrt.tn
+-rns.tn
+-rnu.tn
+-turen.tn

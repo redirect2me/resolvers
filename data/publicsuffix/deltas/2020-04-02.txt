@@ -1,0 +1,3 @@
++*.azurecontainer.io
+-azurecontainer.io
+-k12.ri.us

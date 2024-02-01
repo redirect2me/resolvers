@@ -1,0 +1,9 @@
++*.developer.app
+-*.eu.pythonanywhere.com
+-*.pythonanywhere.com
++eu.pythonanywhere.com
++github.dev
++githubpreview.dev
++noop.app
++pythonanywhere.com
++storebase.store

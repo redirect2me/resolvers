@@ -1,0 +1,9 @@
++*.code.run
++*.northflank.app
++biz.my
+-caseih
+-code.run
++edgecompute.app
+-newholland
+-northflank.app
++noticeable.news

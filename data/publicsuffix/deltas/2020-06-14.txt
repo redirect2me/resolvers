@@ -1,0 +1,2 @@
+-fastpanel.direct
++gitpage.si

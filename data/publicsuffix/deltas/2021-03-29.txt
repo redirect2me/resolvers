@@ -1,0 +1,11 @@
++*.devcdnaccesso.com
++*.paywhirl.com
++forgeblocks.com
+-fujixerox
++hra.health
++multibaas.app
++multibaas.com
++ric.jelastic.vps-host.net
++shiftcrypto.dev
++shiftcrypto.io
++vps-host.net

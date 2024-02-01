@@ -1,0 +1,9 @@
++*.build.run
++*.database.run
++*.migration.run
+-couk.me
++deta.app
++deta.dev
++musician.io
++typedream.app
+-ukco.me

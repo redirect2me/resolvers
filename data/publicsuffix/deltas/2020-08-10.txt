@@ -1,0 +1,9 @@
++*.firenet.ch
++*.svc.firenet.ch
++bar0.net
++bar1.net
++bar2.net
++mcdir.ru
++na4u.ru
++rdv.to
++vps.mcdir.ru

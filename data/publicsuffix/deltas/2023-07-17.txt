@@ -1,0 +1,3 @@
+-hoteles
+-passagens
+-vuelos

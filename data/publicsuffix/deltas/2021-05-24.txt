@@ -1,0 +1,4 @@
+-*.id.forgerock.io
++id.forgerock.io
+-ra-ru.ru
+-zsew.ru

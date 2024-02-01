@@ -1,0 +1,12 @@
+-*.ye
+-applicationcloud.io
++com.ye
++edu.ye
++freemyip.com
++gov.ye
++mil.ye
++net.ye
++org.ye
+-scapp.io
++try-snowplow.com
++ye

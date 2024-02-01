@@ -1,0 +1,8 @@
++beta.tailscale.net
++com.cv
++edu.cv
++int.cv
++nome.cv
++org.cv
++siiites.com
++ts.net

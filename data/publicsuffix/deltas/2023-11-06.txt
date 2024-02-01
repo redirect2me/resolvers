@@ -1,0 +1,3 @@
+-kinder
+-rocher
++torun.pl

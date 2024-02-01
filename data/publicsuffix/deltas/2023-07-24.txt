@@ -1,0 +1,4 @@
+-clicketcloud.com
+-hidora.com
++storipress.app
+-users.scale.virtualcloud.com.br

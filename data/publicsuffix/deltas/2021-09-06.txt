@@ -1,0 +1,14 @@
++*.cloudera.site
++*.diher.solutions
++*.rss.my.id
++affinitylottery.org.uk
++barsy.ro
+-cloudera.site
+-customer.enonic.io
+-enonic.io
+-nctu.me
++pages.it.hs-heilbronn.de
++raffleentry.org.uk
++servers.run
++tabitorder.co.il
++weeklylottery.org.uk

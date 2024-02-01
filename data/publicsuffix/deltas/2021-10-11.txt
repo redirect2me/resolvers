@@ -1,0 +1,5 @@
++ip.linodeusercontent.com
+-qvc
+-swiftcover
++tickets.io
++upli.io

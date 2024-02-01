@@ -1,0 +1,11 @@
+-!teams.algorithmia.com
+-!test.algorithmia.com
+-*.algorithmia.com
++azurestaticapps.net
++centralus.azurestaticapps.net
++eastasia.azurestaticapps.net
++eastus2.azurestaticapps.net
++fh-muenster.io
++qoto.io
++westeurope.azurestaticapps.net
++westus2.azurestaticapps.net

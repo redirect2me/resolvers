@@ -1,0 +1,9 @@
++adimo.co.uk
++appudo.net
++httpbin.org
++minisite.ms
++mock.pstmn.io
+-multibaas.app
+-multibaas.com
++postman-echo.com
++pstmn.io
