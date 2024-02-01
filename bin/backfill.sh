@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# backfill the changelog history
+# backfill the changelog history: just a one-shot, but keeping in case I want to change the format
 #
 
 set -o errexit
@@ -8,7 +8,7 @@ set -o pipefail
 set -o nounset
 
 SCRIPT_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-REPO_HOME="$( cd "${SCRIPT_HOME}/.." && pwd )"
+REPO_HOME="$(realpath "${SCRIPT_HOME}/..")"
 
 # check if 1 parameter
 if [ $# -ne 1 ]; then

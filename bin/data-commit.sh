@@ -7,9 +7,12 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
+SCRIPT_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+REPO_HOME="$(realpath "${SCRIPT_HOME}/..")"
+
 echo "INFO: starting data commit at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
-TARGET_DIR="$(dirname "$0")"
+TARGET_DIR="${REPO_HOME}/data"
 
 echo "INFO: target directory is ${TARGET_DIR}"
 
@@ -24,6 +27,7 @@ if [ "${DIFF}" == "" ]; then
 else
 	echo "INFO: committing changes to ${DIFF}"
 	git add ${DIFF}
+	git add $(git ls-files --others --exclude-standard "${TARGET_DIR}")
 	git commit -m "Databases updated at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 	git push deploy main
 fi

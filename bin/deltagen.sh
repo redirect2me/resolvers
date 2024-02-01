@@ -8,7 +8,7 @@ set -o pipefail
 set -o nounset
 
 SCRIPT_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-REPO_HOME="$( cd "${SCRIPT_HOME}/.." && pwd )"
+REPO_HOME="$(realpath "${SCRIPT_HOME}/..")"
 
 # check 2 or 3 params
 if [ $# -ne 2 ] && [ $# -ne 3 ]; then

@@ -13,10 +13,10 @@ jobs:
       uses: actions/checkout@v1
 
     - name: Update ICANN
-      run: data/icann/update_icann.sh
+      run: bin/update_icann.sh
 
     - name: Update PublicSuffixList
-      run: data/publicsuffix/update_publicsuffix.sh
+      run: bin/update_publicsuffix.sh
 
     - name: Install SSH Client
       uses: webfactory/ssh-agent@v0.4.1
