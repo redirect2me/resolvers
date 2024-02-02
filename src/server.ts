@@ -9,6 +9,7 @@ import KoaPinoLogger from 'koa-pino-logger';
 import KoaSession from 'koa-session';
 import KoaStatic from 'koa-static';
 import KoaViews from '@ladjs/koa-views';
+import { DateTime } from 'luxon';
 import * as path from 'path';
 import * as punycode from 'punycode';
 import * as transliteration from 'transliteration';
@@ -152,6 +153,7 @@ app.use(KoaViews(path.join(__dirname, '..', 'views'), {
               return a ? a.toString().toUpperCase() : "";
             },
             toPunycode: function(domain:string) { return domain ? punycode.toASCII(domain) : '(null)'; },
+            toRFC2822: function(d:string) { return DateTime.fromISO(d).toRFC2822(); },
             transliterate: function(s:string) {
                 return transliteration.slugify(s, {
                     allowedChars: 'a-zA-Z0-9',

@@ -17,8 +17,8 @@ export interface ChangeLogEntry {
  */
 export class ChangeLog {
     cache: { [key: string]: ChangeLogEntry };
-    first: string;
-    last: string;
+    firstKey: string;
+    lastKey: string;
 
     constructor(dir: string) {
         this.init(dir);
@@ -32,14 +32,16 @@ export class ChangeLog {
 
             files.sort().reverse();
 
-            this.first = files[0];
-            this.last = files[files.length - 1];
 
             for (const filename of files) {
                 const filePath = `${dir}/${filename}`;
                 const fileContent = await fsPromises.readFile(filePath, 'utf-8');
                 const key = filename.replace(/\.[a-z]*/, '');
                 this.cache[key] = this.parse(key, fileContent);
+                if (this.firstKey === undefined) {
+                    this.firstKey = key;
+                }
+                this.lastKey = key;
             };
         } catch (err) {
             logger.error({ err, dir }, 'Error reading ChangeLog directory');
@@ -56,11 +58,11 @@ export class ChangeLog {
     }
 
     getFirst() {
-        return this.cache[this.first];
+        return this.cache[this.firstKey];
     }
 
     getLast() {
-        return this.cache[this.last];
+        return this.cache[this.lastKey];
     }   
 
     getKeys() {

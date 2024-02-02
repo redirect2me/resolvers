@@ -6,7 +6,7 @@
         <link>https://resolve.rs{{home}}</link>
         <description>{{description}}</description>
         <language>en-us</language>
-        <lastBuildDate>{{buildDate}}</lastBuildDate>
+        <lastBuildDate>{{pubDate}}</lastBuildDate>
         <pubDate>{{pubDate}}</pubDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/redirect2me/resolvers</generator>
@@ -17,7 +17,7 @@
             <title>{{this.count}} Changes on {{date}}</title>
             <link>https://resolve.rs{{../path}}/{{this.date}}.html</link>
             <description>{{this.raw}}</description>
-            <pubDate>Fri, 02 Feb 2024 00:00:00 +0000</pubDate>
+            <pubDate>{{toRFC2822 this.date}}</pubDate>
             <guid isPermaLink="true">https://resolve.rs{{../path}}/{{this.date}}.html</guid>
         </item>
         {{/each}}

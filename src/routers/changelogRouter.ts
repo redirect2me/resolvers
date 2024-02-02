@@ -2,6 +2,7 @@ import path from 'path';
 import Router from 'koa-router';
 
 import { ChangeLog } from '../changelog';
+import { DateTime } from 'luxon';
 
 
 class ChangeLogUI {
@@ -51,12 +52,17 @@ class ChangeLogUI {
         });
 
         this.changelogRouter.get(`${this.mount}/rss.xml`, async (ctx: any) => {
+
+            const startDate = this.changeLog.getFirst().date;
+            const pubDate = DateTime.fromISO(startDate, { zone: 'utc' }).toRFC2822();
+            
             ctx.body = await ctx.render('_changelog/rss.hbs', {
                 data: Object.values(this.changeLog.getAll()).slice(0, 20),
                 description: `Monitor changes to the ${this.title} via RSS`,
                 home: this.home,
                 name: `${this.title} Change Log`,
                 path: this.mount,
+                pubDate,
             });
             ctx.type = 'text/xml';
         });
@@ -96,7 +102,7 @@ const pslUI:ChangeLogUI = new ChangeLogUI(
     '/psl/index.html',
     '/psl/changelog',
     'Public Suffix List',
-    'https://botsin.space/@PublicSufficChanges',
+    'https://botsin.space/@PublicSuffixChanges',
 );
 const pslChangelogRouter = pslUI.changelogRouter;
 const pslGetUrls = pslUI.getUrls;
