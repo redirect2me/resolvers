@@ -1,0 +1,37 @@
+{{> above}}
+
+<p>
+{{#if next}}
+    <a class="btn btn-sm btn-outline-primary" href="{{next.date}}.html">&#xab; Earlier</a>
+{{else}}
+    <button class="btn btn-sm btn-outline-primary" disabled>&#xab; Earlier</button>
+{{/if}}
+    <a class="btn btn-sm btn-outline-primary" href="index.html">Index</a>
+{{#if previous}}
+    <a class="btn btn-sm btn-outline-primary" href="{{previous.date}}.html">Later &#xbb;</a>
+{{else}}
+    <button class="btn btn-sm btn-outline-primary" disabled>Later &#xbb;</button>
+{{/if}}
+</p>
+
+<p>Changes: {{data.count}}</p>
+
+{{#if data.add}}
+<h2>Adds ({{data.add.length}})</h2>
+<ul>
+    {{#each data.add}}
+    <li>{{this}}</li>
+    {{/each}}
+</ul>
+{{/if}}
+
+{{#if data.delete}}
+<h2>Drops ({{data.delete.length}})</h2>
+<ul>
+    {{#each data.delete}}
+    <li>{{this}}</li>
+    {{/each}}
+</ul>
+{{/if}}
+
+{{> below}}

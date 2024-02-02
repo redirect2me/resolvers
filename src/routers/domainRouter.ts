@@ -103,39 +103,54 @@ domainRouter.get('/domains/icann-vs-wsw.html', async (ctx:any) => {
 });
 
 domainRouter.get('/domains/psl-tlds.html', async (ctx:any) => {
-    ctx.body = await ctx.render('domains/psl-tlds.hbs', {
+    ctx.redirect(ctx, '/psl/index.html');
+});
+
+domainRouter.get('/psl/', async (ctx: any) => {
+    ctx.redirect(ctx, '/psl/index.html');
+});
+
+domainRouter.get('/domains/publicsuffix.html', async (ctx: any) => {
+    ctx.redirect(ctx, '/psl/test.html');
+});
+
+domainRouter.post('/domains/publicsuffix.html', async (ctx: any) => {
+    ctx.redirect(ctx, `/psl/test.html?q=${encodeURIComponent(ctx.request.body.hostname)}`);
+});
+
+domainRouter.get('/psl/index.html', async (ctx: any) => {
+    ctx.body = await ctx.render('psl/index.hbs', {
         domains: domainData.pslTlds,
-        title: 'PublicSuffixList Top Level Domains',
+        title: 'Public Suffix List Top Level Domains',
      });
 });
 
-domainRouter.get('/domains/publicsuffix.html', async (ctx:any) => {
-    ctx.body = await ctx.render('domains/publicsuffix.hbs', {
-        hostname: ctx.request.query.hostname,
-        title: 'Public suffix for a hostname',
-     });
-});
+domainRouter.get('/psl/test.html', async (ctx:any) => {
 
-domainRouter.post('/domains/publicsuffix.html', async (ctx:any) => {
-
-    const hostname = ctx.request.body.hostname;
-    if (!hostname) {
-      ctx.flash('error', 'You must enter a hostname to check!');
-      ctx.redirect('publicsuffix.html');
-      return;
+    const q = ctx.request.query.q;
+    const hostname = q;
+    let get:string|null|undefined;
+    let parsed:psl.ParsedDomain|psl.ParseError|null|undefined;
+    if (hostname) {
+        if (!psl.isValid(hostname)) {
+            ctx.flash('error', `${Handlebars.escapeExpression(hostname)} is not a valid public domain!`);
+        } else {
+            get = psl.get(hostname);
+            parsed = psl.parse(hostname);
+            
+            if (parsed.error) {
+                ctx.flash('error', `${parsed.error.message} for ${Handlebars.escapeExpression(hostname)}`);
+                parsed = null;
+            }   
+        }
     }
 
-    if (!psl.isValid(hostname)) {
-      ctx.flash('error', `${Handlebars.escapeExpression(hostname)} is not a valid hostname!`);
-      ctx.redirect(`publicsuffix.html?hostname=${encodeURIComponent(hostname)}`);
-      return;
-    }
-
-    ctx.body = await ctx.render('domains/publicsuffix.hbs', {
-        hostname: ctx.request.body.hostname,
-        get: psl.get(hostname),
-        parsed: psl.parse(hostname),
-        title: 'Public suffix for a hostname',
+    ctx.body = await ctx.render('psl/test.hbs', {
+        examples: ['test.github.io', 'github.io'],
+        get,
+        parsed,
+        q,
+        title: 'Public Suffix Test',
      });
 });
 

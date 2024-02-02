@@ -1,7 +1,7 @@
 {{> above}}
 
-{{#if hostname}}
-<h2>Results for {{hostname}}</h2>
+{{#if parsed}}
+<h2>Results for {{q}}</h2>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -37,13 +37,12 @@
 <div class="container d-flex flex-column">
     <div class="row align-items-center justify-content-center no-gutters">
         <div class="col-12 col-md-5 col-lg-4 py-8 py-md-11">
-            <form action="publicsuffix.html" class="mb-6" method="POST">
-
+            <form action="test.html" class="mb-6" method="GET">
                 <div class="mb-3">
-                    <label class="form-label" for="hostname">
+                    <label class="form-label" for="q">
                         Host name
                     </label>
-                    <input type="text" class="form-control" id="hostname" name="hostname" placeholder="" value="{{hostname}}" />
+                    <input type="text" class="form-control" id="q" name="q" placeholder="" value="{{q}}" />
                 </div>
                 <div class="d-grid mb-3">
                     <button class="btn btn-primary" type="submit">
@@ -54,4 +53,13 @@
         </div>
     </div> <!-- / .row -->
 </div> <!-- / .container -->
+
+<div class="row">
+    <div class="col">
+        <a class="btn btn-sm btn-outline-primary" href="index.html">Public Suffix List</a>
+    </div>
+    <div class="col text-end">
+        <a class="btn btn-sm btn-outline-primary" href="https://www.npmjs.com/package/psl">npm: psl</a>
+    </div>
+</div>
 {{> below}}

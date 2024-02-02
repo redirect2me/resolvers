@@ -1,0 +1,36 @@
+{{> above}}
+
+<!-- LATER: an "up" link somewhere? <a class="ms-1 btn btn-sm btn-outline-primary" href="../index.html">list</a> -->
+
+<div class="row">
+    <div class="col">
+    Changes: {{count}} 
+    </div>
+    <div class="col text-end">
+        <a href="{{aplink}}" rel="me"><img alt="Mastodon icon" class="ms-2" src="https://www.vectorlogo.zone/logos/joinmastodon/joinmastodon-tile.svg"
+                style="height:1.75em;" /></a>
+        <a href="rss.xml"><img alt="RSS icon" class="ms-2" src="https://mvi.marcuse.info/images/rss.svg"
+                style="height:1.75em;" /></a>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped"><ul>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Adds</th>
+            <th>Drops</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#each data}}
+        <tr>
+            <td><a href="{{@key}}.html">{{@key}}</a></td>
+            <td>{{this.add.length}}</td>
+            <td>{{this.delete.length}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+
+{{> below}}

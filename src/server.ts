@@ -16,6 +16,7 @@ import * as transliteration from 'transliteration';
 import config from './config';
 import * as asn from './data/maxmindData';
 import { resolverRouter } from './routers/resolverRouter';
+import { pslChangelogRouter, tldChangelogRouter } from './routers/changelogRouter';
 import { domainRouter } from './routers/domainRouter';
 import { httpRouter } from './routers/httpRouter';
 import { ipRouter } from './routers/ipRouter';
@@ -218,6 +219,8 @@ app.use(domainRouter.routes());
 app.use(httpRouter.routes());
 app.use(ipRouter.routes());
 app.use(infoRouter.routes());
+app.use(pslChangelogRouter.routes());
+app.use(tldChangelogRouter.routes());
 app.use(tldsRouter.routes());
 
 async function main() {

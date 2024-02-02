@@ -8,7 +8,15 @@
     <!-- LATER: last updated -->
 </div>
 
-<p>Count: {{domains.length}}</p>
+<div class="row mb-2">
+    <div class="col">
+        Count: {{domains.length}}
+    </div>
+    <div class="col text-end">
+        <a class="ms-2 btn btn-sm btn-outline-primary" href="test.html">Test</a>
+        <a class="ms-2 btn btn-sm btn-outline-primary" href="changelog/index.html">ChangeLog</a>
+    </div>
+</div>
 
 <ul>
 {{#each domains}}
