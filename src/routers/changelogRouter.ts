@@ -31,6 +31,7 @@ class ChangeLogUI {
                 aplink: this.aplink,
                 count: this.changeLog.getKeys().length,
                 data: this.changeLog.getAll(),
+                rssUrl: `https://resolve.rs${this.mount}/rss.xml`,
                 title: `${this.title} Change Log`,
             });
         });

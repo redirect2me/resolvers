@@ -8,7 +8,7 @@
     <script src="/js/jquery-3.5.1.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-  {{#if rootMeta}}<script type="application/ld+json">
+    {{#if rootMeta}}<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
@@ -18,6 +18,8 @@
     </script>
     <meta name="description" content="DNS and networking testing and troubleshooting tools, including IP geolocation and a list of open DNS resolvers." />{{/if}}
     <meta name="referrer" content="unsafe-url" />
+    {{#if rssUrl}}
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{{rssUrl}}" />{{/if}}
 </head>
 <body>
 <nav class="navbar navbar-light bg-light">
