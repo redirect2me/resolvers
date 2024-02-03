@@ -5,7 +5,7 @@ import * as punycode from 'punycode';
 
 const publicSuffixes:string[] = [];
 const icannTlds:string[] = [];
-const pslTlds:string[] = [];
+const pslTlds:{ [key: string]: string[] } = {};
 const niceTlds:string[] = [];
 const usableTlds:string[] = [];
 
@@ -27,18 +27,16 @@ async function initialize(logger:Pino.Logger) {
     publicSuffixes.filter(line => line.startsWith('*.') && line.indexOf('.', 3) == -1).forEach(line => usableTlds.push(line.slice(2)));
     usableTlds.sort();
 
-    const tldSet = new Set<string>();
     for (const domain of publicSuffixes) {
         const parts = domain.split('.');
         const last = parts[parts.length - 1].trim();
-        if (tldSet.has(last)) {
-            continue;
+        if (!pslTlds[last]) {
+            pslTlds[last] = [domain];
+        } else {
+            pslTlds[last].push(domain);
         }
-        tldSet.add(last);
     }
-
-    pslTlds.push(...tldSet.values());       //LATER: include ones that are in public suffix with a dot (i.e. that don't allow top-level registration)
-    pslTlds.sort();
+    //LATER: include ones that are in public suffix with a dot (i.e. that don't allow top-level registration)
 
     const niceFileName = path.join(__dirname, '../..', 'data', 'domain-suffix.txt');
 

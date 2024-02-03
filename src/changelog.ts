@@ -46,7 +46,7 @@ export class ChangeLog {
         } catch (err) {
             logger.error({ err, dir }, 'Error reading ChangeLog directory');
         }
-        logger.info({ count: this.cache.size, dir }, 'Files loaded into ChangeLog');
+        logger.info({ count: Object.keys(this.cache).length, dir }, 'Files loaded into ChangeLog');
     }
 
     getAll() {

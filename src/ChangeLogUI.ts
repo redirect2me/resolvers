@@ -1,19 +1,18 @@
-import path from 'path';
+import Handlebars from 'handlebars';
 import Router from 'koa-router';
-
-import { ChangeLog } from '../changelog';
 import { DateTime } from 'luxon';
 
+import { ChangeLog } from './changelog';
 
 class ChangeLogUI {
     changelogRouter: Router;
 
     constructor(
-        private changeLog:ChangeLog,
-        private home:string,
-        private mount:string,
-        private title:string,
-        private aplink:string,
+        private changeLog: ChangeLog,
+        private home: string,
+        private mount: string,
+        private title: string,
+        private aplink: string,
     ) {
         this.init();
     }
@@ -31,6 +30,7 @@ class ChangeLogUI {
                 aplink: this.aplink,
                 count: this.changeLog.getKeys().length,
                 data: this.changeLog.getAll(),
+                h1: new Handlebars.SafeString(`<a href="../index.html">${Handlebars.escapeExpression(this.title)}</a> Change Log`),
                 rssUrl: `https://resolve.rs${this.mount}/rss.xml`,
                 title: `${this.title} Change Log`,
             });
@@ -43,6 +43,8 @@ class ChangeLogUI {
             if (data) {
                 ctx.body = await ctx.render('_changelog/_index.hbs', {
                     data,
+                    date,
+                    h1: new Handlebars.SafeString(`<a href="../index.html">${Handlebars.escapeExpression(this.title)}</a> Changes on ${date}`),
                     next: this.changeLog.getNext(date),
                     previous: this.changeLog.getPrevious(date),
                     title: `${this.title} Changes on ${date}`,
@@ -56,7 +58,7 @@ class ChangeLogUI {
 
             const startDate = this.changeLog.getFirst().date;
             const pubDate = DateTime.fromISO(startDate, { zone: 'utc' }).toRFC2822();
-            
+
             ctx.body = await ctx.render('_changelog/rss.hbs', {
                 data: Object.values(this.changeLog.getAll()).slice(0, 20),
                 description: `Monitor changes to the ${this.title} via RSS`,
@@ -98,29 +100,4 @@ class ChangeLogUI {
     }
 }
 
-const pslUI:ChangeLogUI = new ChangeLogUI(
-    new ChangeLog(path.join(__dirname, '../../data/publicsuffix/deltas')),
-    '/psl/index.html',
-    '/psl/changelog',
-    'Public Suffix List',
-    'https://botsin.space/@PublicSuffixChanges',
-);
-const pslChangelogRouter = pslUI.changelogRouter;
-const pslGetUrls = pslUI.getUrls;
-
-const tldUI: ChangeLogUI = new ChangeLogUI(
-    new ChangeLog(path.join(__dirname, '../../data/icann/deltas')),
-    '/tlds/index.html',
-    '/tlds/changelog',
-    'ICANN TLD',
-    'https://botsin.space/@TLDChanges',
-);
-const tldChangelogRouter = tldUI.changelogRouter;
-const tldGetUrls = tldUI.getUrls;
-
-export {
-    pslChangelogRouter,
-    pslGetUrls,
-    tldChangelogRouter,
-    tldGetUrls,
-}
+export { ChangeLogUI }

@@ -1,8 +1,12 @@
 import * as punycode from 'punycode';
 import Router from 'koa-router';
+import path from 'path';
 import * as wsw from 'whoisserver-world'
 
 import * as rdapData from '../data/rdapData';
+import { ChangeLog } from '../changelog';
+import { ChangeLogUI } from '../ChangeLogUI';
+import * as domainData from '../data/domainData';
 
 const tldsRouter = new Router();
 
@@ -72,6 +76,7 @@ tldsRouter.get('/tlds/:tld/index.html', async (ctx:any) => {
     tldInfo.unicode = punycode.toUnicode(tld);
 
     ctx.body = await ctx.render('_tlds/index.hbs', {
+        publicSuffixes: domainData.pslTlds[tld],
         rdapUnofficial,
         sampleDomains,
         title: `Top Level Domain "${tld}"`,
@@ -92,7 +97,19 @@ function getUrls():string[] {
     return retVal;
 }
 
+const tldChangeLogUI: ChangeLogUI = new ChangeLogUI(
+    new ChangeLog(path.join(__dirname, '../../data/icann/deltas')),
+    '/tlds/index.html',
+    '/tlds/changelog',
+    'ICANN TLD',
+    'https://botsin.space/@TLDChanges',
+);
+const tldsChangeLogRouter = tldChangeLogUI.changelogRouter;
+const tldsChangeLogGetUrls = tldChangeLogUI.getUrls;
+
 export {
     tldsRouter,
-    getUrls
+    getUrls,
+    tldsChangeLogRouter,
+    tldsChangeLogGetUrls,
 }

@@ -1,7 +1,5 @@
 import KoaRouter from 'koa-router';
-import Handlebars from 'handlebars';
 import * as punycode from 'punycode';
-import * as psl from 'psl';
 import * as wsw from 'whoisserver-world'
 
 import * as domainData from '../data/domainData';
@@ -70,10 +68,10 @@ domainRouter.get('/domains/icann-vs-psl.html', async (ctx:any) => {
 
     const icannOnly = new Set<string>();
     domainData.icannTlds.forEach( domain => icannOnly.add(domain));
-    domainData.pslTlds.forEach( domain => icannOnly.delete(domain));
+    Object.keys(domainData.pslTlds).forEach( domain => icannOnly.delete(domain));
 
     const pslOnly = new Set<string>();
-    domainData.pslTlds.forEach( domain => pslOnly.add(domain));
+    Object.keys(domainData.pslTlds).forEach( domain => pslOnly.add(domain));
     domainData.icannTlds.forEach( domain => pslOnly.delete(domain));
 
     ctx.body = await ctx.render('domains/icann-vs-psl.hbs', {
@@ -102,14 +100,6 @@ domainRouter.get('/domains/icann-vs-wsw.html', async (ctx:any) => {
      });
 });
 
-domainRouter.get('/domains/psl-tlds.html', async (ctx:any) => {
-    ctx.redirect(ctx, '/psl/index.html');
-});
-
-domainRouter.get('/psl/', async (ctx: any) => {
-    ctx.redirect(ctx, '/psl/index.html');
-});
-
 domainRouter.get('/domains/publicsuffix.html', async (ctx: any) => {
     ctx.redirect(ctx, '/psl/test.html');
 });
@@ -118,40 +108,8 @@ domainRouter.post('/domains/publicsuffix.html', async (ctx: any) => {
     ctx.redirect(ctx, `/psl/test.html?q=${encodeURIComponent(ctx.request.body.hostname)}`);
 });
 
-domainRouter.get('/psl/index.html', async (ctx: any) => {
-    ctx.body = await ctx.render('psl/index.hbs', {
-        domains: domainData.pslTlds,
-        title: 'Public Suffix List Top Level Domains',
-     });
-});
-
-domainRouter.get('/psl/test.html', async (ctx:any) => {
-
-    const q = ctx.request.query.q;
-    const hostname = q;
-    let get:string|null|undefined;
-    let parsed:psl.ParsedDomain|psl.ParseError|null|undefined;
-    if (hostname) {
-        if (!psl.isValid(hostname)) {
-            ctx.flash('error', `${Handlebars.escapeExpression(hostname)} is not a valid public domain!`);
-        } else {
-            get = psl.get(hostname);
-            parsed = psl.parse(hostname);
-            
-            if (parsed.error) {
-                ctx.flash('error', `${parsed.error.message} for ${Handlebars.escapeExpression(hostname)}`);
-                parsed = null;
-            }   
-        }
-    }
-
-    ctx.body = await ctx.render('psl/test.hbs', {
-        examples: ['test.github.io', 'github.io'],
-        get,
-        parsed,
-        q,
-        title: 'Public Suffix Test',
-     });
+domainRouter.get('/domains/psl-tlds.html', async (ctx:any) => {
+    ctx.redirect(ctx, '/psl/index.html');
 });
 
 domainRouter.get('/domains/usable-tlds.html', async (ctx:any) => {

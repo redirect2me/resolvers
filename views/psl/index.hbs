@@ -10,7 +10,7 @@
 
 <div class="row mb-2">
     <div class="col">
-        Count: {{domains.length}}
+        Count: {{integerFormat domains.length}} top-level domains, {{integerFormat total}} public suffixes
     </div>
     <div class="col text-end">
         <a class="ms-2 btn btn-sm btn-outline-primary" href="test.html">Test</a>
@@ -18,10 +18,25 @@
     </div>
 </div>
 
-<ul>
-{{#each domains}}
-<li><a href="/tlds/{{this}}/index.html">{{this}}</a>{{#ifDomainUnicode this}} ({{toPunycode this}}){{/ifDomainUnicode}}</li>
-{{/each}}
-</ul>
-
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th class="w-25">Top Level Domain</th>
+            <th class="w-75">Public Suffixes</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each domains}}
+        <tr>
+            <td><a href="/tlds/{{this}}/index.html">{{this}}</a>{{#ifDomainUnicode this}} ({{toPunycode this}}){{/ifDomainUnicode}}</td>
+            <td><details>
+                <summary>{{length (get ../psl this) }}</summary>
+                    {{#each (get ../psl this)}}
+                    {{this}}<br/>
+                    {{/each}}
+            </details></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
 {{> below}}

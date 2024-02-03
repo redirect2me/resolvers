@@ -75,12 +75,23 @@
                 <details>
                   <summary>{{sampleDomains.length}}</summary>
                   {{#each sampleDomains}}
-                  {{this}}<br/>
+                  <a href="https://{{this}}/">{{this}}</a><br/>
                   {{/each}}
                 </details>
                 {{else}}
                 <i>(none)</i>
                 {{/if}}
+            </td>
+        </tr>
+        <tr>
+            <td>Public Suffixes</td>
+            <td>
+                <details>
+                    <summary>{{length publicSuffixes}}</summary>
+                    {{#each publicSuffixes}}
+                    {{this}}<br/>
+                    {{/each}}
+                </details>
             </td>
         </tr>
         <tr>

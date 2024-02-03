@@ -17,7 +17,6 @@ import * as transliteration from 'transliteration';
 import config from './config';
 import * as asn from './data/maxmindData';
 import { resolverRouter } from './routers/resolverRouter';
-import { pslChangelogRouter, tldChangelogRouter } from './routers/changelogRouter';
 import { domainRouter } from './routers/domainRouter';
 import { httpRouter } from './routers/httpRouter';
 import { ipRouter } from './routers/ipRouter';
@@ -25,9 +24,10 @@ import { logger , options as loggerOptions } from './logger';
 import { cryptoRouter } from './routers/cryptoRouter';
 import { datagenRouter } from './routers/datagenRouter';
 import { dnsRouter } from './routers/dnsRouter';
+import { pslRouter, pslChangeLogRouter } from './routers/pslRouter';
 import * as resolvers from './data/resolverData';
 import { rootRouter } from './routers/rootRouter';
-import { tldsRouter } from './routers/tldsRouter';
+import { tldsRouter, tldsChangeLogRouter } from './routers/tldsRouter';
 import { infoRouter } from './routers/infoRouter';
 import * as domains from './data/domainData';
 import * as rdapData from './data/rdapData';
@@ -124,6 +124,9 @@ app.use(KoaViews(path.join(__dirname, '..', 'views'), {
                 return result;
             },
             fromPunycode: function(domain:string) { return domain ? punycode.toUnicode(domain) : '(null)'; },
+            get: function (map: { [key: string]: any}, key:string) {
+                return map[key];
+            },
             ifDomainUnicode: function(context:any, options:any) { return context && !context.match(/^[a-z]+$/) ? options.fn(this) : options.inverse(this); },
             integerFormat: function(theNumber:any):string {
                 if (theNumber == 0) {
@@ -139,6 +142,9 @@ app.use(KoaViews(path.join(__dirname, '..', 'views'), {
             },
             isArray: function(target:any) {
                 return target && Array.isArray(target);
+            },
+            length: function(target:any) {
+                return target ? target.length : 0;
             },
             noCacheDev: function(multiParam:boolean) {
               if (process.env.COMMIT) {
@@ -221,8 +227,9 @@ app.use(domainRouter.routes());
 app.use(httpRouter.routes());
 app.use(ipRouter.routes());
 app.use(infoRouter.routes());
-app.use(pslChangelogRouter.routes());
-app.use(tldChangelogRouter.routes());
+app.use(pslChangeLogRouter.routes());
+app.use(pslRouter.routes());
+app.use(tldsChangeLogRouter.routes());
 app.use(tldsRouter.routes());
 
 async function main() {
