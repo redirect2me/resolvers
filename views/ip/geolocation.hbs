@@ -133,6 +133,12 @@
             <td><a href="https://dev.maxmind.com/geoip/geoip2/geolite2/">Maxmind</a></td>
             <td id="maxmind">{{{maxmind_noscript}}}</td>
         </tr>
+{{#if is_current_ip}}
+        <tr>
+            <td><a href="https://developer.fastly.com/reference/vcl/variables/geolocation/">Fastly</a></td>
+            <td id="fastly">Pending...</td>
+        </tr>
+{{/if}}
         <tr>
             <td><a href="https://radar.io/">radar.io</a></td>
             <td id="radario">Pending...</td>
@@ -207,6 +213,7 @@
     <!--<li><a class="fw-bold" href="https://labstack.com/ip#pricing">LabStack</a> - 10,000/month free, 50,000/month for $7</li>-->
     <li><a class="fw-bold" href="https://www.maxmind.com/en/geoip2-precision-services">MaxMind</a> - in addition to their free offering (used above), they have a commercial service that starts at $0.10 per 1,000 lookups.</li>
     <li><a href="https://www.melissa.com/v2/lookups/iplocation/ip/">Melissa</a> - 1,000/free, then $3 per 1,000.</li>
+    <li><a class="fw-bold" href="https://docs.netlify.com/edge-functions/api/#netlify-specific-context-object">Netlify</a> - edge functions include HTTP headers with full details, first 1M requests free <span class="badge badge-info">browser only</span></li>
     <li><a href="https://www.home.neustar/security-intelligence/ip-geopoint">UltraGeoPoint</a> (Neustar)- no pricing on website</li>
     <li><a class="fw-bold" href="https://radar.io/">radar.io</a> - free for 100,000/month</li>
     <li><a href="https://ip-geolocation.whoisxmlapi.com/api">WhoisXmlApi</a> - 1,000 free (total, not per month), $27/month for 100,000</li>
@@ -443,6 +450,7 @@
     remoteLookup('cloudflare', 'https://cf-geo.redirect2.me/api/cloudflare.json');
     remoteLookup('cloudflare-workers', 'https://cfw-geo.redirect2.me/api/cfw.json');
     remoteLookup('fastly', 'https://cdn-geo.global.ssl.fastly.net/api/fastly.json');
+    remoteLookup('netlify', 'https://netlify-geo.redirect.me/api/netlify.json');
 {{/if}}
     hostIpInfo({{{toJson ip}}});
     ipGeoLocation({{{toJson ip}}});
