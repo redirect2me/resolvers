@@ -21,7 +21,7 @@ jobs:
 
     - name: Configure date
       run: |
-        if [ -z "${{ github.event.inputs.date }}" ]; then
+        if [ "${{ github.event.inputs.date }}" == "" ]; then
           TARGET_DATE=${{ github.event.inputs.date }}
         else
           TARGET_DATE=$(date -u +%Y-%m-%d)
@@ -50,21 +50,23 @@ jobs:
         MASTODON_SERVER: ${{ secrets.MASTODON_TLD_SERVER }}
         MASTODON_USER_TOKEN: ${{ secrets.MASTODON_TLD_USER_TOKEN }}
       run: |
-        if [ -z "data/icann/deltas/${TARGET_DATE}.txt" ]; then
+        if [ -z "./data/icann/deltas/${TARGET_DATE}.txt" ]; then
           echo "No TLD changes found for ${TARGET_DATE}"
-          exit 0
+        else
+          cat "./data/icann/deltas/${TARGET_DATE}.txt"
         fi
-        ./social-post mastodon \
-          "ICANN TLD changes for ${TARGET_DATE}:\n$(cat data/icann/deltas/${TARGET_DATE}.txt)\n\nhttps://resolve.rs/tlds/changelog/index.html"
+        #./social-post mastodon \
+        #  "ICANN TLD changes for ${TARGET_DATE}:\n$(cat data/icann/deltas/${TARGET_DATE}.txt)\n\nhttps://resolve.rs/tlds/changelog/index.html"
 
     - name: PSL changes
       env:
         MASTODON_SERVER: ${{ secrets.MASTODON_PSL_SERVER }}
         MASTODON_USER_TOKEN: ${{ secrets.MASTODON_PSL_USER_TOKEN }}
       run: |
-        if [ -z "data/publicsuffix/deltas/${TARGET_DATE}.txt" ]; then
+        if [ -z "./data/publicsuffix/deltas/${TARGET_DATE}.txt" ]; then
           echo "No PSL changes found for ${TARGET_DATE}"
-          exit 0
+        else
+          cat "./data/publicsuffix/deltas/${TARGET_DATE}.txt"
         fi
-        ./social-post mastodon \
-          "Mozilla public suffix changes for ${TARGET_DATE}:\n$(cat data/publicsuffix/deltas/${TARGET_DATE}.txt)\n\nhttps://resolve.rs/psl/changelog/index.html"
+        #./social-post mastodon \
+        #  "Mozilla public suffix changes for ${TARGET_DATE}:\n$(cat data/publicsuffix/deltas/${TARGET_DATE}.txt)\n\nhttps://resolve.rs/psl/changelog/index.html"
