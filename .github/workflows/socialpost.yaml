@@ -54,7 +54,7 @@ jobs:
         else
             NEWLINE=$'\n'
             ./social-post mastodon \
-                "ICANN TLD changes for ${TARGET_DATE}:$NEWLINE$(cat data/icann/deltas/${TARGET_DATE}.txt)$NEWLINE$NEWLINEhttps://resolve.rs/tlds/changelog/index.html"
+                "ICANN TLD changes for ${TARGET_DATE}:${NEWLINE}$(cat data/icann/deltas/${TARGET_DATE}.txt)${NEWLINE}${NEWLINE}https://resolve.rs/tlds/changelog/index.html"
         fi
 
     - name: PSL changes
@@ -67,5 +67,5 @@ jobs:
         else
             NEWLINE=$'\n'
             ./social-post mastodon \
-                "Mozilla public suffix changes for ${TARGET_DATE}:$NEWLINE$(cat data/publicsuffix/deltas/${TARGET_DATE}.txt)$NEWLINE$NEWLINEhttps://resolve.rs/psl/changelog/index.html"
+                "Mozilla public suffix changes for ${TARGET_DATE}:${NEWLINE}$(cat data/publicsuffix/deltas/${TARGET_DATE}.txt)${NEWLINE}${NEWLINE}https://resolve.rs/psl/changelog/index.html"
         fi
