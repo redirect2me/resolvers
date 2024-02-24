@@ -65,6 +65,7 @@ jobs:
         if [ ! -f "data/publicsuffix/deltas/${TARGET_DATE}.txt" ]; then
             echo "No PSL changes found for ${TARGET_DATE}"
         else
+            NEWLINE=$'\n'
             ./social-post mastodon \
                 "Mozilla public suffix changes for ${TARGET_DATE}:$NEWLINE$(cat data/publicsuffix/deltas/${TARGET_DATE}.txt)$NEWLINE$NEWLINEhttps://resolve.rs/psl/changelog/index.html"
         fi
