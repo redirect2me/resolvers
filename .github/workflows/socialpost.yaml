@@ -16,34 +16,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-#    - name: Install dependencies
-#      run: sudo apt-get install -y curl jq librsvg2-bin
+    - name: Checkout
+      uses: actions/checkout@v1
 
-    - name: Configure date
+    - name: Configure target date
       run: |
         if [ "${{ github.event.inputs.date }}" != "" ]; then
           TARGET_DATE=${{ github.event.inputs.date }}
         else
           TARGET_DATE=$(date -u +%Y-%m-%d)
         fi
-
         echo "Checking for changes on ${TARGET_DATE}"
         echo "TARGET_DATE=${TARGET_DATE}" >> "$GITHUB_ENV"
 
     - name: Download social-post utility
       run: |
         curl \
-          --silent \
-          --location \
-          https://github.com/fileformat/social-post/releases/latest/download/social-post_Linux_x86_64.tar.gz \
-          > social-post.tar.gz
-
+            --silent \
+            --location \
+            https://github.com/fileformat/social-post/releases/latest/download/social-post_Linux_x86_64.tar.gz \
+            > social-post.tar.gz
         tar -xzf social-post.tar.gz social-post
 
 # LATER: Generate PNGs
+#    - name: Install dependencies
+#      run: sudo apt-get install -y curl jq librsvg2-bin
 #    - name: Generate PNGs
 #      run: true
-
 
     - name: TLD changes
       env:
@@ -52,10 +51,10 @@ jobs:
       run: |
         pwd
         find .
-        if [ ! -f "./data/icann/deltas/${TARGET_DATE}.txt" ]; then
+        if [ ! -f "data/icann/deltas/${TARGET_DATE}.txt" ]; then
           echo "No TLD changes found for ${TARGET_DATE}"
         else
-          cat "./data/icann/deltas/${TARGET_DATE}.txt"
+          cat "data/icann/deltas/${TARGET_DATE}.txt"
         fi
         #./social-post mastodon \
         #  "ICANN TLD changes for ${TARGET_DATE}:\n$(cat data/icann/deltas/${TARGET_DATE}.txt)\n\nhttps://resolve.rs/tlds/changelog/index.html"
@@ -65,10 +64,10 @@ jobs:
         MASTODON_SERVER: ${{ secrets.MASTODON_PSL_SERVER }}
         MASTODON_USER_TOKEN: ${{ secrets.MASTODON_PSL_USER_TOKEN }}
       run: |
-        if [ ! -f "./data/publicsuffix/deltas/${TARGET_DATE}.txt" ]; then
+        if [ ! -f "data/publicsuffix/deltas/${TARGET_DATE}.txt" ]; then
           echo "No PSL changes found for ${TARGET_DATE}"
         else
-          cat "./data/publicsuffix/deltas/${TARGET_DATE}.txt"
+          cat "data/publicsuffix/deltas/${TARGET_DATE}.txt"
         fi
         #./social-post mastodon \
         #  "Mozilla public suffix changes for ${TARGET_DATE}:\n$(cat data/publicsuffix/deltas/${TARGET_DATE}.txt)\n\nhttps://resolve.rs/psl/changelog/index.html"
