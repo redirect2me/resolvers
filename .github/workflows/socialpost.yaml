@@ -49,15 +49,13 @@ jobs:
         MASTODON_SERVER: ${{ secrets.MASTODON_TLD_SERVER }}
         MASTODON_USER_TOKEN: ${{ secrets.MASTODON_TLD_USER_TOKEN }}
       run: |
-        pwd
-        find .
         if [ ! -f "data/icann/deltas/${TARGET_DATE}.txt" ]; then
-          echo "No TLD changes found for ${TARGET_DATE}"
+            echo "No TLD changes found for ${TARGET_DATE}"
         else
-          cat "data/icann/deltas/${TARGET_DATE}.txt"
+            NEWLINE=$'\n'
+            ./social-post mastodon \
+                "ICANN TLD changes for ${TARGET_DATE}:$NEWLINE$(cat data/icann/deltas/${TARGET_DATE}.txt)$NEWLINE$NEWLINEhttps://resolve.rs/tlds/changelog/index.html"
         fi
-        #./social-post mastodon \
-        #  "ICANN TLD changes for ${TARGET_DATE}:\n$(cat data/icann/deltas/${TARGET_DATE}.txt)\n\nhttps://resolve.rs/tlds/changelog/index.html"
 
     - name: PSL changes
       env:
@@ -65,9 +63,8 @@ jobs:
         MASTODON_USER_TOKEN: ${{ secrets.MASTODON_PSL_USER_TOKEN }}
       run: |
         if [ ! -f "data/publicsuffix/deltas/${TARGET_DATE}.txt" ]; then
-          echo "No PSL changes found for ${TARGET_DATE}"
+            echo "No PSL changes found for ${TARGET_DATE}"
         else
-          cat "data/publicsuffix/deltas/${TARGET_DATE}.txt"
+            ./social-post mastodon \
+                "Mozilla public suffix changes for ${TARGET_DATE}:$NEWLINE$(cat data/publicsuffix/deltas/${TARGET_DATE}.txt)$NEWLINE$NEWLINEhttps://resolve.rs/psl/changelog/index.html"
         fi
-        #./social-post mastodon \
-        #  "Mozilla public suffix changes for ${TARGET_DATE}:\n$(cat data/publicsuffix/deltas/${TARGET_DATE}.txt)\n\nhttps://resolve.rs/psl/changelog/index.html"
