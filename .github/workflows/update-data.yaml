@@ -18,17 +18,5 @@ jobs:
     - name: Update PublicSuffixList
       run: bin/update_publicsuffix.sh
 
-    - name: Install SSH Client
-      uses: webfactory/ssh-agent@v0.4.1
-      with:
-        ssh-private-key: ${{ secrets.DEPLOY_KEY }}
-
-    - name: Prepare git and github
-      run: |
-        git config --global user.email "github-action@github.com"
-        git config --global user.name "Github Action"
-        git remote add deploy git@github.com:redirect2me/resolvers.git
-        git checkout main
-
     - name: Commit changes
-      run: data/data-commit.sh
+      run: bin/data-commit.sh
