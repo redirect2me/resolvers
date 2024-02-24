@@ -26,6 +26,8 @@ if [ "${DIFF}" == "" ]; then
 	echo "INFO: nothing to commit"
 else
 	echo "INFO: committing changes to ${DIFF}"
+	git config user.name "GitHub Action Bot"
+	git config user.email "<>"
 	git add ${DIFF}
 	git add $(git ls-files --others --exclude-standard "${TARGET_DIR}")
 	git commit -m "Databases updated at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
