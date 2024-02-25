@@ -55,7 +55,7 @@ pslRouter.get('/psl/test.html', async (ctx: any) => {
 
 const pslChangeLogUI:ChangeLogUI = new ChangeLogUI(
     new ChangeLog(path.join(__dirname, '../../data/publicsuffix/deltas')),
-    '/psl/index.html',
+    '/psl/changelog/index.html',
     '/psl/changelog',
     'Public Suffix List',
     'https://botsin.space/@PublicSuffixChanges',

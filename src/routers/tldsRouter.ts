@@ -99,7 +99,7 @@ function getUrls():string[] {
 
 const tldChangeLogUI: ChangeLogUI = new ChangeLogUI(
     new ChangeLog(path.join(__dirname, '../../data/icann/deltas')),
-    '/tlds/index.html',
+    '/tlds/changelog/index.html',
     '/tlds/changelog',
     'ICANN TLD',
     'https://botsin.space/@TLDChanges',

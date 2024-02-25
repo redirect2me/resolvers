@@ -1,4 +1,4 @@
-name: socialpost
+name: social-post
 
 on:
   schedule:
@@ -69,3 +69,14 @@ jobs:
             ./social-post mastodon \
                 "Mozilla public suffix changes for ${TARGET_DATE}:${NEWLINE}$(bin/max10lines.sh data/publicsuffix/deltas/${TARGET_DATE}.txt)${NEWLINE}${NEWLINE}https://resolve.rs/psl/changelog/index.html"
         fi
+
+    - name: Notify NodePing
+      env:
+        NODEPING_CHECKTOKEN: ${{ secrets.NODEPING_SOCIALPOST_CHECKTOKEN }}
+        NODEPING_ID: ${{ secrets.NODEPING_SOCIALPOST_ID }}
+      if: ${{ github.event.name == 'schedule' && $NODEPING_CHECKTOKEN != '' && $NODEPING_ID != '' }}
+      run: |
+        curl \
+            --silent \
+            --request POST \
+            "https://push.nodeping.com/v1?id=${NODEPING_ID}&checktoken=${NODEPING_CHECKTOKEN}"

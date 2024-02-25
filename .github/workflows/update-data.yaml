@@ -2,7 +2,7 @@ name: Check for data updates
 
 on:
   schedule:
-  - cron: '42 0 * * 1'
+  - cron: '42 0 * * *'
   workflow_dispatch:
 
 jobs:
@@ -32,3 +32,14 @@ jobs:
 
     - name: Commit changes
       run: bin/data-commit.sh
+
+    - name: Notify NodePing
+      env:
+        NODEPING_CHECKTOKEN: ${{ secrets.NODEPING_UPDATEDATA_CHECKTOKEN }}
+        NODEPING_ID: ${{ secrets.NODEPING_UPDATEDATA_ID }}
+      if: ${{ github.event.name == 'schedule' && $NODEPING_CHECKTOKEN != '' && $NODEPING_ID != '' }}
+      run: |
+        curl \
+            --silent \
+            --request POST \
+            "https://push.nodeping.com/v1?id=${NODEPING_ID}&checktoken=${NODEPING_CHECKTOKEN}"
