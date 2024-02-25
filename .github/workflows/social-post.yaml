@@ -74,7 +74,7 @@ jobs:
       env:
         NODEPING_CHECKTOKEN: ${{ secrets.NODEPING_SOCIALPOST_CHECKTOKEN }}
         NODEPING_ID: ${{ secrets.NODEPING_SOCIALPOST_ID }}
-      if: ${{ github.event.name == 'schedule' && $NODEPING_CHECKTOKEN != '' && $NODEPING_ID != '' }}
+      if: ${{ github.event.name == 'schedule' && env.NODEPING_CHECKTOKEN != '' && env.NODEPING_ID != '' }}
       run: |
         curl \
             --silent \
