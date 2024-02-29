@@ -54,8 +54,6 @@ This code is licensed under the [GNU Affero General Public License v3.0](LICENSE
 
 ## Notes
 
-Get additional flags with:
+Get additional flags from [Vexillo](https://www.kreativekorp.com/app/vexillo/)
+or [noto emoji](https://github.com/googlefonts/noto-emoji/tree/main/third_party/region-flags/waved-svg)
 
-```bash
-cp ~/fork/noto-emoji/build/resized_flags/XX.png ./static/images/flags
-```

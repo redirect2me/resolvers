@@ -15,16 +15,15 @@
   "description": "LATER",
   "details": "LATER",
   "draft": true,
-  "icon": "https://www.vectorlogo.zone/logos/uncensoreddns/uncensoreddns-icon.svg",
   "location": "dk",
-  "logo": "https://www.vectorlogo.zone/logos/uncensoreddns/uncensoreddns-ar21.svg",
   "name": "UncensoredDNS",
   "social": {
-    "irc": "#censurfridns (Freenode)",
+    "irc": "#censurfridns (Libera)",
+    "mastodon": "@tykling@mastodon.social",
     "twitter": "https://twitter.com/censurfridns"
   },
   "tags": [
-    "uncensored"
+    "unfiltered"
   ],
   "url": "https://blog.uncensoreddns.org/"
 }

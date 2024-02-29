@@ -17,9 +17,13 @@ async function initialize(logger:Pino.Logger) {
   for (const fileName of fileNames) {
     if (fileName.endsWith(".json")) {
       const key = fileName.slice(0, -5);
-      const resolver = JSON.parse(await fsPromises.readFile(path.join(dataDir, fileName), "utf-8"));
-      resolver.key = key;
-      cache.set(key, resolver);
+      try {
+        const resolver = JSON.parse(await fsPromises.readFile(path.join(dataDir, fileName), "utf-8"));
+        resolver.key = key;
+        cache.set(key, resolver);
+      } catch (err) {
+        logger.error({ err, fileName }, 'Error loading resolver');
+      }
     }
   }
 

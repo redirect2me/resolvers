@@ -1,0 +1,64 @@
+{{> above}}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th>Resolver</th>
+            <th>&nbsp;</th>
+            <th class="text-center">IPv4</th>
+            <th class="text-center">IPv6</th>
+            <th class="text-center">DoH</th>
+            <th class="text-center">DoT</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#each resolvers }}
+        <tr>
+            <td class="text-center">
+                {{#if this.draft}}
+                <img alt="Not working" src="/images/tombstone.svg" style="height:1.5em;" />
+                {{/if}}
+            </td>
+            <td>
+                {{#if this.icon}}
+                <img alt="{{this.name}} icon" src="{{this.icon}}" style="height:1.5em;">
+                {{/if}}
+            </td>
+            <td>
+                <a href="{{this.key}}/index.html" title="{{this.name}}">{{this.name}}</a>
+            </td>
+            <td>
+                {{#if this.location}}
+                <img alt="{{this.location}}" src="/images/flags/{{this.location}}.png" style="height:1.75em;" title="{{this.location}}"/>
+                {{/if}}
+            </td>
+            <td class="text-center">
+                {{#if this.config.default.ipv4}}
+                Y
+                {{/if}}
+            </td>
+            <td class="text-center">
+                {{#if this.config.default.ipv6}}
+                Y
+                {{/if}}
+            </td>
+            <td class="text-center">
+                {{#if this.config.default.doh}}
+                Y
+                {{/if}}
+            </td>
+            <td class="text-center">
+                {{#if this.config.default.dot}}
+                Y
+                {{/if}}
+            </td>
+            <td>
+                {{{this.notes}}}
+            </td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+{{> below}}

@@ -12,8 +12,8 @@
       ]
     }
   },
-  "description": "LATER",
-  "details": "LATER",
+  "notes": "Working, but no information available on their website, so I am assuming it is unsupported.",
+  "draft": true,
   "icon": "https://www.vectorlogo.zone/logos/verisign/verisign-icon.svg",
   "location": "us",
   "logo": "https://www.vectorlogo.zone/logos/verisign/verisign-ar21.svg",

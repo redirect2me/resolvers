@@ -3,24 +3,25 @@
   "config": {
     "default": {
       "ipv4": [
-        "23.253.163.53",
-        "198.101.242.72"
+        "76.76.19.19",
+        "76.223.122.150"
       ],
       "ipv6": [
-        "2001:4801:7825:103:be76:4eff:fe10:2e49",
-        "2001:4800:780e:510:a8cf:392e:ff04:8982"
+        "2602:fcbc::ad",
+        "2602:fcbc:2::ad"
       ]
     }
   },
   "description": "LATER",
-  "details": "LATER",
+  "draft": true,
   "icon": "https://www.vectorlogo.zone/logos/alternate-dns/alternate-dns-icon.svg",
-  "location": "unknown",
+  "location": "us",
   "logo": "https://www.vectorlogo.zone/logos/alternate-dns/alternate-dns-ar21.svg",
   "name": "Alternate DNS",
+  "notes": "Disabled due to slow responses.",
   "tags": [
-    "adblock",
-    "malware"
+    "filtered"
   ],
-  "url": "https://alternate-dns.com/index.php"
+  "url": "https://alternate-dns.com/index.php",
+  "verified": "2024-02-28"
 }

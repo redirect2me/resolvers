@@ -2,6 +2,7 @@
   "company": "DNS.WATCH",
   "config": {
     "default": {
+      "doh": "https://resolver2.dns.watch/dns-query",
       "ipv4": [
         "84.200.69.80",
         "84.200.70.40"
@@ -16,6 +17,7 @@
   "location": "de",
   "logo": "https://www.vectorlogo.zone/logos/dnswatch/dnswatch-ar21.svg",
   "name": "DNS.WATCH",
-  "tags": [],
-  "url": "https://dns.watch/index"
+  "tags": [ "unfiltered" ],
+  "url": "https://dns.watch/index",
+  "verified": "2024-02-25"
 }

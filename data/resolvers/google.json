@@ -2,6 +2,8 @@
   "company": "Google",
   "config": {
     "default": {
+      "doh": "https://dns.google/dns-query",
+      "dot": "tls://dns.google",
       "ipv4": [
         "8.8.8.8",
         "8.8.4.4"
@@ -16,6 +18,7 @@
   "location": "us",
   "logo": "https://www.vectorlogo.zone/logos/google/google-ar21.svg",
   "name": "Google Public DNS",
-  "tags": [],
-  "url": "https://developers.google.com/speed/public-dns/"
+  "tags": [ "unfiltered" ],
+  "url": "https://developers.google.com/speed/public-dns/",
+  "verified": "2024-02-25"
 }

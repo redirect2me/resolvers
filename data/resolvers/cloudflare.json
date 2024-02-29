@@ -2,9 +2,16 @@
   "company": "CloudFlare",
   "config": {
     "default": {
+      "doh": [
+        "https://cloudflare-dns.com/dns-query"
+      ],
       "ipv4": [
         "1.1.1.1",
         "1.0.0.1"
+      ],
+      "ipv6": [
+        "2606:4700:4700::1111",
+        "2606:4700:4700::1001"
       ]
     },
     "no-malware": {
@@ -21,15 +28,13 @@
     }
   },
   "icon": "https://www.vectorlogo.zone/logos/cloudflare/cloudflare-icon.svg",
-  "ipv6": [
-    "2606:4700:4700::1111",
-    "2606:4700:4700::1001"
-  ],
   "location": "us",
   "logo": "https://www.vectorlogo.zone/logos/cloudflare/cloudflare-ar21.svg",
   "name": "1.1.1.1",
   "tags": [
+    "filtered",
     "unfiltered"
   ],
-  "url": "https://one.one.one.one/"
+  "url": "https://one.one.one.one/",
+  "verified": "2024-02-25"
 }

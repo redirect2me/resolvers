@@ -1,40 +1,43 @@
 {
   "company": "AdGuard",
   "config": {
-    "adblock": {
-      "doh": [
-        "https://dns.adguard.com/dns-query"
-      ],
-      "dot": [
-        "dns.adguard.com"
-      ],
+    "default": {
+      "doh": "https://dns.adguard-dns.com/dns-query",
+      "dot": "tls://dns.adguard-dns.com",
       "ipv4": [
-        "176.103.130.130",
-        "176.103.130.131"
+        "94.140.14.14",
+        "94.140.15.15"
       ],
       "ipv6": [
-        "2a00:5a60::ad1:0ff",
-        "2a00:5a60::ad2:0ff"
+        "2a10:50c0::ad1:ff",
+        "2a10:50c0::ad2:ff"
+      ]
+    },
+    "unfiltered": {
+      "doh": "https://unfiltered.adguard-dns.com/dns-query",
+      "dot": "tls://unfiltered.adguard-dns.com",
+      "ipv4": [
+        "94.140.14.140",
+        "94.140.14.141"
+      ],
+      "ipv6": [
+        "2a10:50c0::1:ff",
+        "2a10:50c0::2:ff"
       ]
     },
     "family": {
-      "doh": [
-        "https://dns-family.adguard.com/dns"
-      ],
-      "dot": [
-        "dns-family.adguard.com"
-      ],
+      "doh": "https://family.adguard-dns.com/dns-query",
+      "dot": "tls://family.adguard-dns.com",
       "ipv4": [
-        "176.103.130.132",
-        "176.103.130.134"
+        "94.140.14.15",
+        "94.140.15.16"
       ],
       "ipv6": [
-        "2a00:5a60::bad1:0ff",
-        "2a00:5a60::bad2:0ff"
+        "2a10:50c0::bad1:ff",
+        "2a10:50c0::bad2:ff"
       ]
     }
   },
-  "default-config": "adblock",
   "description": "LATER",
   "details": "LATER",
   "draft": false,
@@ -43,9 +46,9 @@
   "logo": "https://www.vectorlogo.zone/logos/adguard/adguard-ar21.svg",
   "name": "AdGuard",
   "tags": [
-    "adblock",
-    "family",
-    "malware"
+    "unfiltered",
+    "filtered"
   ],
-  "url": "https://adguard.com/en/adguard-dns/overview.html"
+  "url": "https://adguard-dns.io/en/welcome.html",
+  "verified": "2024-02-25"
 }

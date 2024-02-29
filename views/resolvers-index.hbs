@@ -14,14 +14,20 @@
     </div>
 
     <div class="card-footer">
-      <a href="{{this.key}}/index.html">More...</a>
-      <small class="text-muted"><!-- LATER: tags -->
-      </small>
       {{#if this.location}}
-      <img alt="{{this.location}}" class="float-right" src="/images/flags/{{toUpper this.location}}.png" style="height:32px;" title="{{this.location}}" />
+      <img alt="{{this.location}}" class="float-end" src="/images/flags/{{this.location}}.png" style="height:3em;"
+        title="{{this.location}}" />
       {{/if}}
+      <a href="{{this.key}}/index.html">More...</a><br/>
+      <small class="text-muted">
+        {{#each this.tags}}
+          <span class="badge text-bg-primary">{{this}}</span>
+        {{/each}}
+      </small>
     </div>
   </div>
   {{/each}}
 </div>
+
+<p><a href="all.html">View all</a></p>
 {{> below}}

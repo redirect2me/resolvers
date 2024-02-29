@@ -2,16 +2,47 @@
   "company": "Quad9",
   "config": {
     "default": {
+      "doh": "https://dns.quad9.net/dns-query",
+      "dot": "tls://dns.quad9.net",
       "ipv4": [
         "9.9.9.9",
         "149.112.112.112"
+      ],
+      "ipv6": [
+        "2620:fe::fe",
+        "2620:fe::9"
+      ]
+    },
+    "secured": {
+      "doh": "https://dns11.quad9.net/dns-query",
+      "dot": "tls://dns11.quad9.net",
+      "ipv4": [
+        "9.9.9.11",
+        "149.112.112.11"
+      ],
+      "ipv6": [
+        "2620:fe::11",
+        "2620:fe::fe:11"
+      ]
+    },
+    "unsecured": {
+      "doh": "https://dns10.quad9.net/dns-query",
+      "dot": "tls://dns10.quad9.net",
+      "ipv4": [
+        "9.9.9.10",
+        "149.112.112.10"
+      ],
+      "ipv6": [
+        "2620:fe::10",
+        "2620:fe::fe:10"
       ]
     }
   },
   "icon": "https://www.vectorlogo.zone/logos/quad9/quad9-icon.svg",
-  "location": "us",
+  "location": "ch",
   "logo": "https://www.vectorlogo.zone/logos/quad9/quad9-ar21.svg",
   "name": "Quad9",
-  "tags": [],
-  "url": "https://www.quad9.com/"
+  "tags": [ "unfiltered" ],
+  "url": "https://www.quad9.com/",
+  "verified": "2024-02-25"
 }

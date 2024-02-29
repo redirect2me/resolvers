@@ -30,7 +30,7 @@ dnsRouter.get('/dns/lookup.html', async (ctx:any) => {
 
 dnsRouter.post('/dns/lookup.html', async (ctx:any) => {
 
-  const hostname = ctx.request.body.hostname;
+  let hostname = ctx.request.body.hostname;
   if (!hostname) {
     ctx.flash('error', 'You must enter a hostname to check!');
     ctx.redirect('/dns/lookup.html');
@@ -38,9 +38,19 @@ dnsRouter.post('/dns/lookup.html', async (ctx:any) => {
   }
 
   if (!psl.isValid(hostname)) {
-    ctx.flash('error', `${Handlebars.escapeExpression(hostname)} is not a valid hostname!`);
-    ctx.redirect(`/dns/lookup.html?hostname=${encodeURIComponent(hostname)}`);
-    return;
+    try {
+      const url = new URL(hostname);
+      hostname = url.hostname;
+    } catch (err) {
+      ctx.flash('error', `Unable to extract a hostname from "${Handlebars.escapeExpression(hostname)}"!`);
+      ctx.redirect(`/dns/lookup.html?hostname=${encodeURIComponent(hostname)}`);
+      return;
+    }
+    if (!psl.isValid(hostname)) {
+      ctx.flash('error', `${Handlebars.escapeExpression(hostname)} is not a valid hostname!`);
+      ctx.redirect(`/dns/lookup.html?hostname=${encodeURIComponent(hostname)}`);
+      return;
+    }
   }
 
   streamer.streamResponse(ctx, `DNS Lookup for ${hostname}`, async (stream) => {
@@ -51,10 +61,13 @@ dnsRouter.post('/dns/lookup.html', async (ctx:any) => {
         const dnsResolver = new dnsPromises.Resolver();
         dnsResolver.setServers(config.ipv4);
         stream.write(`<p>${resolver.name} (${configKey}): `);
-        const results = await dnsResolver.resolve4(hostname);
-        for (const result of results) {
-          stream.write(`${result} `);
-          //stream.write(`(${ await reverseDns(dnsResolver, result)})`);
+        try {
+          const results = await dnsResolver.resolve4(hostname);
+          for (const result of results) {
+            stream.write(`${result} `);
+          }
+        } catch (err) {
+          stream.write(`Error: ${err.message}`);
         }
       }
     }

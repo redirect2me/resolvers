@@ -1,7 +1,10 @@
 {
   "company": "Yandex",
   "config": {
-    "basic": {
+    "default": {
+      "description": "Basic",
+      "doh": "https://common.dot.dns.yandex.net/dns-query",
+      "dot": "tls://common.dot.dns.yandex.net",
       "ipv4": [
         "77.88.8.8",
         "77.88.8.1"
@@ -12,6 +15,9 @@
       ]
     },
     "family": {
+      "description": "Blocking websites with adult content, Blocking adult ads, Family search by Yandex, Protection from dangerous websites, Protection from fraudulent websites, Protection from botnets",
+      "doh": "https://family.dot.dns.yandex.net/dns-query",
+      "dot": "tls://family.dot.dns.yandex.net",
       "ipv4": [
         "77.88.8.7",
         "77.88.8.3"
@@ -22,6 +28,9 @@
       ]
     },
     "safe": {
+      "description": "Protection from dangerous websites, Protection from fraudulent websites, Protection from botnets",
+      "doh": "https://safe.dot.dns.yandex.net/dns-query",
+      "dot": "tls://safe.dot.dns.yandex.net",
       "ipv4": [
         "77.88.8.88",
         "77.88.8.2"
@@ -32,15 +41,14 @@
       ]
     }
   },
-  "default-config": "basic",
   "icon": "https://www.vectorlogo.zone/logos/yandex/yandex-icon.svg",
   "location": "ru",
   "logo": "https://www.vectorlogo.zone/logos/yandex/yandex-ar21.svg",
   "name": "Yandex.DNS",
   "tags": [
     "unfiltered",
-    "malware",
-    "family"
+    "filtered"
   ],
-  "url": "https://dns.yandex.com/"
+  "url": "https://dns.yandex.com/",
+  "verified": "2024-02-25"
 }

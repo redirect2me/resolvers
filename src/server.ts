@@ -200,24 +200,6 @@ app.use(async(ctx, next) => {
   }
 });
 
-rootRouter.get('/resolvers/', async (ctx) => {
-  ctx.redirect('/resolvers/index.html');
-});
-
-rootRouter.get('/resolvers/index.html', async (ctx:any) => {
-  ctx.body = await ctx.render('resolvers-index.hbs', {
-    title: 'Open DNS Resolver List',
-    resolvers: resolvers.getAll(ctx.request.query.draft).sort((a, b) => {
-      if (a.name > b.name) {
-        return 1;
-      } else if (a.name < b.name) {
-        return -1;
-      }
-      return 0;
-    })
-  });
-});
-
 app.use(rootRouter.routes());
 app.use(resolverRouter.routes());
 app.use(cryptoRouter.routes());
