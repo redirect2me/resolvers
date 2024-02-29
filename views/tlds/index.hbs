@@ -28,16 +28,16 @@
       <td>{{this.type}}</td>
       <td class="xtext-right">
         {{#unless this.ianaUrl}}
-          <span class="badge badge-danger">no IANA</span>
+          <span class="badge text-bg-danger">no IANA</span>
         {{/unless}}
         {{#unless this.whoisServer.length}}
-          <span class="badge badge-danger">no WHOIS</span>
+          <span class="badge text-bg-danger">no WHOIS</span>
         {{/unless}}
         {{#unless this.rdapServers.length}}
-          <span class="badge badge-danger">no RDAP</span>
+          <span class="badge text-bg-danger">no RDAP</span>
         {{/unless}}
         {{#unless this.registry}}
-          <span class="badge badge-danger">no registry</span>
+          <span class="badge text-bg-danger">no registry</span>
         {{/unless}}
       </td>
     </tr>

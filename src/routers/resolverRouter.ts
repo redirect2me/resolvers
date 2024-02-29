@@ -13,7 +13,7 @@ resolverRouter.get('/resolvers/', async (ctx) => {
 });
 
 resolverRouter.get('/resolvers/index.html', async (ctx: any) => {
-  ctx.body = await ctx.render('resolvers-index.hbs', {
+  ctx.body = await ctx.render('resolvers/index.hbs', {
     title: 'Open DNS Resolver List',
     resolvers: resolvers.getAll(ctx.request.query.draft).sort((a, b) => {
       if (a.name > b.name) {
@@ -53,7 +53,7 @@ resolverRouter.get('/resolvers/:resolver/index.html', async (ctx: any) => {
     ctx.redirect("/resolvers/index.html");
     return;
   }
-  ctx.body = await ctx.render('resolvers-detail.hbs', {
+  ctx.body = await ctx.render('_resolvers/index.hbs', {
     hostname: ctx.query.hostname,
     title: resolverData.name,
     titleimg: resolverData.icon,

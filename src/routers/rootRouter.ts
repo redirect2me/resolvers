@@ -27,7 +27,6 @@ rootRouter.get('/', async (ctx:any) => {
 rootRouter.get('/api.html', async (ctx:any) => {
     ctx.body = await ctx.render('api.hbs', {
         title: 'API',
-        titleimg: '/images/puzzle.svg',
      });
 });
 

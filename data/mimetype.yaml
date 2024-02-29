@@ -28,6 +28,7 @@
 - extension: rss
   mimetype: application/rss+xml
   name: RSS
+  notes: "text/xml is also widely used and does not force a download in Firefox."
 
 - extension: svg
   mimetype: image/svg+xml
