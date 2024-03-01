@@ -27,6 +27,7 @@
     },
     "family": {
       "doh": "https://family.adguard-dns.com/dns-query",
+      "doq": "quic://dns.adguard.com",
       "dot": "tls://family.adguard-dns.com",
       "ipv4": [
         "94.140.14.15",
