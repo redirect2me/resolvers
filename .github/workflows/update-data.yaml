@@ -1,4 +1,4 @@
-name: Check for data updates
+name: update-data
 
 on:
   schedule:
@@ -37,9 +37,13 @@ jobs:
       env:
         NODEPING_CHECKTOKEN: ${{ secrets.NODEPING_UPDATEDATA_CHECKTOKEN }}
         NODEPING_ID: ${{ secrets.NODEPING_UPDATEDATA_ID }}
-      if: ${{ github.event.name == 'schedule' && env.NODEPING_CHECKTOKEN != '' && env.NODEPING_ID != '' }}
+      if: ${{ github.event.name == 'schedule' }}
       run: |
-        curl \
-            --silent \
-            --request POST \
-            "https://push.nodeping.com/v1?id=${NODEPING_ID}&checktoken=${NODEPING_CHECKTOKEN}"
+        if [ "${NODEPING_CHECKTOKEN}" != "" && "${NODEPING_ID}" != "" ]; then
+          curl \
+              --silent \
+              --request POST \
+              "https://push.nodeping.com/v1?id=${NODEPING_ID}&checktoken=${NODEPING_CHECKTOKEN}"
+        else
+          echo "WARNING: nodeping not configured for update-data"
+        fi
