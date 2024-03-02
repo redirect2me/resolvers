@@ -37,7 +37,7 @@ jobs:
       env:
         NODEPING_CHECKTOKEN: ${{ secrets.NODEPING_UPDATEDATA_CHECKTOKEN }}
         NODEPING_ID: ${{ secrets.NODEPING_UPDATEDATA_ID }}
-      if: ${{ github.event.name == 'schedule' }}
+      if: ${{ github.event_name == 'schedule' }}
       run: |
         if [ "${NODEPING_CHECKTOKEN}" != "" && "${NODEPING_ID}" != "" ]; then
           curl \
