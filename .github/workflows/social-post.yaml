@@ -76,7 +76,7 @@ jobs:
         NODEPING_ID: ${{ secrets.NODEPING_SOCIALPOST_ID }}
       if: ${{ github.event_name == 'schedule' }}
       run: |
-        if [ "${NODEPING_CHECKTOKEN}" != "" && "${NODEPING_ID}" != "" ]; then
+        if [ "${NODEPING_CHECKTOKEN}" != "" ] && [ "${NODEPING_ID}" != "" ]; then
           curl \
               --silent \
               --request POST \
