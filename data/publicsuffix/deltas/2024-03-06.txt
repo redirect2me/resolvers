@@ -1,0 +1,2 @@
++*.my.canva.site
++*.my.canvasite.cn
