@@ -1,3 +1,12 @@
+# RDAP
+
+
+Generate list of TLDs to check:
+```
+curl https://resolve.rs/domains/tlds.json\?apikey\=abc@example.com | jq --raw-output '.domains[]' >cctlds.txt
+```
+
+
 https://www.iana.org/assignments/rdap-dns/rdap-dns.xhtml
 
 IANA maintains a [bootstrap file](https://data.iana.org/rdap/dns.json) for RDAP servers for DNS.  There are also [bootstrap files](https://data.iana.org/rdap/) for ASNs and IP addresses.

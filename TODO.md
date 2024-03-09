@@ -128,32 +128,14 @@ markdown -> use npm markdown-it
 * email configuration check
 * check for domain name availability across all tlds (use single-words in public-suffix-list)
 
-## Other Lists of Open Resolvers
-
-* https://en.wikipedia.org/wiki/Public_recursive_name_server
-* https://public-dns.info/
-* https://www.publicdns.xyz/
-* https://www.lifewire.com/free-and-public-dns-servers-2626062
-* https://dnsprivacy.org/wiki/display/DP/DNS+Privacy+Public+Resolvers
-
-* DNS Advantage
-* Level3
-* OpenNIC, https://www.opennic.org/
-* SafeDNS, https://www.safedns.com/en/
-* NextDNS, https://www.nextdns.io/
-
-## Not included:
-
-* DNSFilter, https://www.dnsfilter.com/, Commercial only
-* Hurricane Electric, https://dns.he.net/, Registration required
-
-
 ## other tools
 
 * http://ifconfig.io/ [source](https://github.com/georgyo/ifconfig.io)
-*
+* https://github.com/AdguardTeam/dnsproxy
+* https://github.com/ameshkov/dnslookup
 * https://www.dnsperf.com/
 * https://dnsmap.io/articles/
 * https://www.opennic.org/
 * https://dnsdetective.net/
 * http://www.whatsmydnsserver.com/
+* https://isc.sans.edu/tools/dnslookup.html
