@@ -15,7 +15,9 @@
       ]
     }
   },
+  "icon": "https://www.vectorlogo.zone/logos/nextdnsio/nextdnsio-icon.svg",
   "location": "us",
+  "logo": "https://www.vectorlogo.zone/logos/nextdnsio/nextdnsio-ar21.svg",
   "name": "NextDNS",
   "notes": "Note: these are my settings.  You should customize your own at <a href=\"https://nextdns.io\">NextDNS.io</a>.",
   "tags": [
