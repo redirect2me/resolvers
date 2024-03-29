@@ -1,0 +1,5 @@
+-*.cloudapp.azure.com
++cloudapp.azure.com
++graphic.design
++ipfs.nftstorage.link
++ir.md
