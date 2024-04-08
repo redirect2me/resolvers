@@ -1,4 +1,3 @@
-import * as psl from 'psl';
 import * as whoiser from 'whoiser';
 
 import * as util from '../util';
@@ -56,7 +55,7 @@ async function expirationCheckApiLow(ctx:any, domain:string) {
         return;
     }
 
-    if (!psl.isValid(domain)) {
+    if (!util.hasValidPublicSuffix(domain)) {
         util.handleJsonp(ctx, {
             'success': false,
             'message': 'Not a valid top level domain',

@@ -1,12 +1,12 @@
 import * as crypto from 'crypto';
 import Handlebars from 'handlebars';
-import * as psl from 'psl';
 import * as http from 'http';
 import * as https from 'https';
 import * as tls from 'tls';
 
 import { logger } from '../logger';
 import * as streamer from '../streamer';
+import * as util from '../util';
 
 async function tlsCertCheckGet(ctx:any) {
   ctx.body = await ctx.render('ip/tls-cert-check.hbs', {
@@ -40,7 +40,7 @@ async function tlsCertCheckPost(ctx:any) {
 
   }
 
-  if (!psl.isValid(hostname)) {
+  if (!util.hasValidPublicSuffix(hostname)) {
     ctx.flash('error', `${Handlebars.escapeExpression(hostname)} is not a valid hostname!`);
     ctx.redirect(`tls-cert-check.html?hostname=${encodeURIComponent(hostname)}`);
     return;
@@ -179,7 +179,7 @@ async function httpsCertCheckPost(ctx:any) {
         }
     }
 
-    if (!psl.isValid(hostname)) {
+    if (!util.hasValidPublicSuffix(hostname)) {
       ctx.flash('error', `${Handlebars.escapeExpression(hostname)} is not a valid hostname!`);
       ctx.redirect(`cert-check.html?hostname=${encodeURIComponent(hostname)}`);
       return;

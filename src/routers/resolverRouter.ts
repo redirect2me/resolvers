@@ -1,9 +1,9 @@
 import { promises as dnsPromises } from 'dns';
 import Router from 'koa-router';
-import * as psl from 'psl';
 
 import * as resolvers from '../data/resolverData';
 import * as streamer from '../streamer';
+import * as util from '../util';
 
 const resolverRouter = new Router();
 
@@ -77,7 +77,7 @@ resolverRouter.post('/resolvers/:resolver/index.html', async (ctx: any) => {
     return;
   }
 
-  if (!psl.isValid(hostname)) {
+  if (!util.hasValidPublicSuffix(hostname)) {
     ctx.flash('error', `${Handlebars.escapeExpression(hostname)} is not a valid hostname!`);
     ctx.redirect(`index.html?hostname=${encodeURIComponent(hostname)}`);
     return;

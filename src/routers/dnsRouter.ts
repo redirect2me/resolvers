@@ -1,7 +1,6 @@
 import { promises as dnsPromises } from 'dns';
 import Handlebars from 'handlebars';
 import Router from 'koa-router';
-import * as psl from 'psl';
 
 import * as dnssec from '../actions/dnssec';
 import * as mxcheck from '../actions/mxcheck';
@@ -9,6 +8,7 @@ import * as nscheck from '../actions/nscheck';
 import * as resolvers from '../data/resolverData';
 import * as reverselookup from '../actions/reverselookup';
 import * as streamer from '../streamer';
+import * as util from '../util';
 
 const dnsRouter = new Router();
 
@@ -36,7 +36,7 @@ dnsRouter.post('/dns/lookup.html', async (ctx:any) => {
     return;
   }
 
-  if (!psl.isValid(hostname)) {
+  if (!util.hasValidPublicSuffix(hostname)) {
     try {
       const url = new URL(hostname);
       hostname = url.hostname;
@@ -45,7 +45,7 @@ dnsRouter.post('/dns/lookup.html', async (ctx:any) => {
       ctx.redirect(`/dns/lookup.html?hostname=${encodeURIComponent(hostname)}`);
       return;
     }
-    if (!psl.isValid(hostname)) {
+    if (!util.hasValidPublicSuffix(hostname)) {
       ctx.flash('error', `${Handlebars.escapeExpression(hostname)} is not a valid hostname!`);
       ctx.redirect(`/dns/lookup.html?hostname=${encodeURIComponent(hostname)}`);
       return;

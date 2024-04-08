@@ -1,3 +1,21 @@
+import * as tldts from 'tldts';
+
+function hasValidPublicSuffix(domain:string):boolean {
+
+    // tldts is more accepting that psl
+    if (domain.indexOf('/') != -1 || domain.indexOf(':') != -1) {
+        return false;
+    }
+
+    const parsed = tldts.parse(domain);
+    if (parsed == null) {
+        return false;
+    }
+    if (parsed.domain === null) {
+        return false;
+    }
+    return true;
+}
 
 function getBoolean(val:string|string[]|undefined, defaultValue:boolean): boolean {
 
@@ -136,6 +154,7 @@ export {
     getFirst,
     getJsonp,
     handleJsonp,
+    hasValidPublicSuffix,
     parseUrl,
     safeParseInt,
     validateApiKey,

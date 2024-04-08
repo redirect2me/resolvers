@@ -1,11 +1,12 @@
 import Handlebars from 'handlebars';
 import KoaRouter from 'koa-router';
 import path from 'path';
-import * as psl from 'psl';
+import * as tldts from 'tldts';
 
 import { ChangeLog } from '../changelog';
 import { ChangeLogUI } from '../ChangeLogUI';
 import * as domainData from '../data/domainData';
+import * as util from '../util';
 
 const pslRouter = new KoaRouter();
 
@@ -15,7 +16,7 @@ pslRouter.get('/psl/', async (ctx: any) => {
 
 
 pslRouter.get('/psl/index.html', async (ctx: any) => {
-    
+
     ctx.body = await ctx.render('psl/index.hbs', {
         domains: Object.keys(domainData.pslTlds).sort((a, b) => { return a.localeCompare(b); }),
         psl: domainData.pslTlds,
@@ -29,18 +30,12 @@ pslRouter.get('/psl/test.html', async (ctx: any) => {
     const q = ctx.request.query.q;
     const hostname = q;
     let get: string | null | undefined;
-    let parsed: psl.ParsedDomain | psl.ParseError | null | undefined;
+    let parsed: any;
     if (hostname) {
-        if (!psl.isValid(hostname)) {
+        if (!util.hasValidPublicSuffix(hostname)) {
             ctx.flash('error', `${Handlebars.escapeExpression(hostname)} is not a valid public domain!`);
         } else {
-            get = psl.get(hostname);
-            parsed = psl.parse(hostname);
-
-            if (parsed.error) {
-                ctx.flash('error', `${parsed.error.message} for ${Handlebars.escapeExpression(hostname)}`);
-                parsed = null;
-            }
+            parsed = tldts.parse(hostname);
         }
     }
 

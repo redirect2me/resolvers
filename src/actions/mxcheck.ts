@@ -1,5 +1,5 @@
 import { promises as dnsPromises } from 'dns';
-import * as psl from 'psl';
+import * as tldts from 'tldts';
 
 import * as util from '../util';
 
@@ -56,7 +56,7 @@ async function mxCheckApiLow(ctx:any, domain:string) {
         return;
     }
 
-    if (!psl.isValid(domain)) {
+    if (!util.hasValidPublicSuffix(domain)) {
         util.handleJsonp(ctx, {
             'success': false,
             'message': 'Not a valid top level domain',
@@ -105,7 +105,7 @@ function makeMxMessage(results:any):string {
 
     for (const result of results) {
         try {
-            const tld = psl.get(result.exchange);
+            const tld = tldts.getDomain(result.exchange);
             if (!tld) {
                 companies.add(result.exchange);
             } else {

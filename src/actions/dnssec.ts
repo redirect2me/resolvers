@@ -1,5 +1,4 @@
 import axios, { AxiosResponse } from 'axios';
-import * as psl from 'psl';
 
 import * as util from '../util';
 
@@ -57,7 +56,7 @@ async function dnssecCheckApiLow(ctx:any, domain:string) {
         return;
     }
 
-    if (!psl.isValid(domain)) {
+    if (!util.hasValidPublicSuffix(domain)) {
         util.handleJsonp(ctx, {
             'success': false,
             'message': 'Not a valid top level domain',
