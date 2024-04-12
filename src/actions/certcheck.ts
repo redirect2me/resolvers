@@ -152,6 +152,92 @@ async function tlsCertCheckPost(ctx:any) {
   });
 }
 
+async function httpsBulkCertCheckGet(ctx:any) {
+    ctx.body = await ctx.render('http/bulk-cert-check.hbs', {
+      hostname: ctx.request.query['hostname'],
+      title: 'Bulk HTTPS Certificate Check'
+    });
+  }
+
+async function httpsBulkCertCheckPost(ctx:any) {
+    const hostnamesInput = ctx.request.body.hostnames || '';
+    const hostnames = hostnamesInput.split('\n').map((line:string) => line.trim()).filter((line:string) => line.length > 0);
+    ctx.body = await ctx.render('http/bulk-cert-check.hbs', {
+      hostnames,
+      hostnamesInput,
+      title: 'Bulk HTTPS Certificate Check'
+    });
+  }
+
+async function httpsCertCheckApi(ctx:any) {
+
+    let hostname = ctx.request.query['hostname'];
+    if (!hostname) {
+      util.handleJsonp(ctx, {
+        success: false,
+        message: 'You must pass a `hostname` parameter.'
+      })
+      return;
+    }
+
+    if (/^http(s)?:\/\//i.test(hostname)) {
+        try {
+            const url = new URL(hostname);
+            hostname = url.host;
+        } catch (err) {
+            util.handleJsonp(ctx, {
+              success: false,
+              message: `Unable to parse: ${err.message}`
+            });
+            return;
+        }
+    }
+
+    if (!util.hasValidPublicSuffix(hostname)) {
+        util.handleJsonp(ctx, {
+            success: false,
+            hostname,
+            message: 'Invalid hostname'
+        });
+        return;
+    }
+
+    let expires:string|null = null;
+
+    const options = {
+        agent: false,
+        checkServerIdentity: function(host:string, cert:any) {
+              do {
+                  if (expires == null && cert.valid_to) {
+                      expires = cert.valid_to;
+                  }
+                  logger.info({ subject: cert.subject, issuer: cert.issuerCertificate ? cert.issuerCertificate.subject : '(none)'}, "cert");
+                  if (cert == cert.issuerCertificate) {
+                      break;
+                  }
+                  cert = cert.issuerCertificate;
+              } while (cert)
+          },
+          ciphers: 'ALL',
+          hostname,
+          method: 'GET',
+          port: 443,
+          path: '/',
+          rejectUnauthorized: false,
+      };
+
+      const { req, res } = await httpsRequest(options);
+
+      logger.trace( { req, res }, "cert check response");
+
+      util.handleJsonp(ctx, {
+        success: true,
+        hostname,
+        expires,
+      });
+
+}
+
 async function httpsCertCheckGet(ctx:any) {
     ctx.body = await ctx.render('http/cert-check.hbs', {
       hostname: ctx.query.hostname,
@@ -269,6 +355,9 @@ function httpsRequest(options:any): Promise<{req:http.ClientRequest, res:http.In
 }
 
 export {
+    httpsBulkCertCheckGet,
+    httpsBulkCertCheckPost,
+    httpsCertCheckApi,
     httpsCertCheckGet,
     httpsCertCheckPost,
     httpsRequest,

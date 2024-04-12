@@ -82,6 +82,9 @@ httpRouter.all('/http/myheaders.json', async (ctx) => {
     });
 });
 
+httpRouter.get('/http/bulk-cert-check.html', certcheck.httpsBulkCertCheckGet);
+httpRouter.post('/http/bulk-cert-check.html', certcheck.httpsBulkCertCheckPost);
+httpRouter.get('/http/cert-check.json', certcheck.httpsCertCheckApi);
 httpRouter.get('/http/cert-check.html', certcheck.httpsCertCheckGet);
 httpRouter.post('/http/cert-check.html', certcheck.httpsCertCheckPost);
 

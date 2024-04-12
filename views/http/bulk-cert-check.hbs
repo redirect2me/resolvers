@@ -1,0 +1,86 @@
+{{> above}}
+{{#if hostnames}}
+
+<h2>Results</h2>
+
+<table class="table table-striped border-bottom">
+    <thead>
+        <tr>
+            <th>Hostname</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each hostnames}}
+        <tr>
+            <td><a href="{{this}}">{{this}}</a></td>
+            <td id="cert-{{@index}}">
+                <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading..." />
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script>
+
+    function certCheck(hostname, el) {
+            $.ajax({
+                cache: 'no-cache',
+                data: { hostname },
+                dataType: 'jsonp',
+                error: function (xhr, status, err) {
+                    $(el).empty()
+                        .append($("<img>").attr("src", "/images/16x16/cross-circle.png").addClass("pe-2"))
+                        .append($("<span>").text("server error"));
+                },
+                method: "GET",
+                success: function (data, status, xhr) {
+                    console.log("data=" + JSON.stringify(data));
+                    if (!data.success) {
+                        $(el).empty()
+                            .append($("<img>").attr("src", "/images/16x16/exclamation-red.png").addClass("pe-2"))
+                            .append($("<span>").text(data.message));
+                    }
+                    else {
+                        $(el).empty()
+                            .append($("<img>").attr("src", "/images/16x16/tick.png").addClass("pe-2"))
+                            .append($("<span>").text(data.message));
+                    }
+                },
+                timeout: 15000,
+                url: '/http/cert-check.json'
+            });
+        }
+    $(function () {
+        {{#each hostnames }}
+        certCheck("{{this}}", "#cert-{{@index}}");
+        {{/each}}
+    });
+</script>
+
+<h2>Try Again</h2>
+{{else}}
+<div class="alert alert-info">
+    HTTPS TLS certifcates (aka SSL certificates) need to be renewed periodically.  This is a tool to check the status of multiple certificates at once.
+</div>
+{{/if}}
+<div class="container d-flex flex-column">
+    <div class="row align-items-center justify-content-center no-gutters">
+        <div class="col-12 col-md-7 col-lg-6 py-8 py-md-11">
+            <form action="bulk-cert-check.html" class="mb-6" method="POST">
+                <div class="mb-3">
+                    <label class="form-label" for="hostnames">
+                        Hostnames
+                    </label>
+                    <textarea class="form-control" id="hostnames" name="hostnames" rows="{{rows}}">{{hostnamesInput}}</textarea>
+                </div>
+                <div class="d-grid mb-3">
+                    <button class="btn btn-primary" type="submit">
+                        Check
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div> <!-- / .row -->
+</div> <!-- / .container -->
+{{> below}}
