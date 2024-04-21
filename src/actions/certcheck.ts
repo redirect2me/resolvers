@@ -7,6 +7,7 @@ import * as tls from 'tls';
 import { logger } from '../logger';
 import * as streamer from '../streamer';
 import * as util from '../util';
+import { DateTime } from 'luxon';
 
 async function tlsCertCheckGet(ctx:any) {
   ctx.body = await ctx.render('ip/tls-cert-check.hbs', {
@@ -153,19 +154,28 @@ async function tlsCertCheckPost(ctx:any) {
 }
 
 async function httpsBulkCertCheckGet(ctx:any) {
+    const dangerDays = util.safeParseInt(ctx.request.query['dangerDays'], 7);
+    const warningDays = util.safeParseInt(ctx.request.query['warningDays'], 30);
+    const hostnamesInput = ctx.request.query['hostnames'] || '';
     ctx.body = await ctx.render('http/bulk-cert-check.hbs', {
-      hostname: ctx.request.query['hostname'],
-      title: 'Bulk HTTPS Certificate Check'
+        dangerDays,
+        hostnamesInput,
+        title: 'Bulk HTTPS Certificate Check',
+        warningDays,
     });
   }
 
 async function httpsBulkCertCheckPost(ctx:any) {
+    const dangerDays = util.safeParseInt(ctx.request.body['dangerDays'], 7);
+    const warningDays = util.safeParseInt(ctx.request.body['warningDays'], 30);
     const hostnamesInput = ctx.request.body.hostnames || '';
     const hostnames = hostnamesInput.split('\n').map((line:string) => line.trim()).filter((line:string) => line.length > 0);
     ctx.body = await ctx.render('http/bulk-cert-check.hbs', {
-      hostnames,
-      hostnamesInput,
-      title: 'Bulk HTTPS Certificate Check'
+        dangerDays,
+        hostnames,
+        hostnamesInput,
+        title: 'Bulk HTTPS Certificate Check',
+        warningDays,
     });
   }
 
@@ -202,16 +212,16 @@ async function httpsCertCheckApi(ctx:any) {
         return;
     }
 
-    let expires:string|null = null;
+    let expiresRaw:string|null = null;
 
     const options = {
         agent: false,
         checkServerIdentity: function(host:string, cert:any) {
               do {
-                  if (expires == null && cert.valid_to) {
-                      expires = cert.valid_to;
+                  if (expiresRaw == null && cert.valid_to) {
+                      expiresRaw = cert.valid_to;
                   }
-                  logger.info({ subject: cert.subject, issuer: cert.issuerCertificate ? cert.issuerCertificate.subject : '(none)'}, "cert");
+                  logger.info({ expiresRaw, target: hostname, subject: cert.subject, issuer: cert.issuerCertificate ? cert.issuerCertificate.subject : '(none)'}, "cert");
                   if (cert == cert.issuerCertificate) {
                       break;
                   }
@@ -228,12 +238,24 @@ async function httpsCertCheckApi(ctx:any) {
 
       const { req, res } = await httpsRequest(options);
 
-      logger.trace( { req, res }, "cert check response");
+      logger.trace( { expiresRaw, target: hostname, req, res }, "cert check response");
+
+      const expiresRawx = expiresRaw as string|null;    // ts thinks expiresRaw is 'never', but why???
+      const rawWithoutTz = expiresRawx != null ? expiresRawx.replaceAll(/ GMT$/g, '').replaceAll('  ', ' ') : null;
+      const expires = rawWithoutTz ? DateTime.fromFormat(rawWithoutTz, "LLL d HH:mm:ss yyyy", { zone: 'utc'}) : null;
+      const expiresStr = expires ? expires.setZone('utc').toFormat('yyyy-MM-dd HH:mm') : null;
+      const days = expires ? Math.floor(expires.diffNow('days').as('days')) : null;
 
       util.handleJsonp(ctx, {
         success: true,
         hostname,
-        expires,
+        message: expiresStr ? `${expiresStr} - ${days} days` : '',
+        days,
+        expires, //: expires?.setZone('utc').toISO(),
+        explainRegex: rawWithoutTz ? DateTime.fromFormatExplain(rawWithoutTz, "LLL d HH:mm:ss yyyy").regex?.source : null,
+        explain: rawWithoutTz ? DateTime.fromFormatExplain(rawWithoutTz, "LLL d HH:mm:ss yyyy") : null,
+        raw: expiresRaw,
+        rawWithoutTz,
       });
 
 }

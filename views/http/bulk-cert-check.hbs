@@ -23,6 +23,16 @@
 </table>
 <script>
 
+    function calcDayImage(days) {
+        if (days < {{dangerDays}}) {
+            return "exclamation-red";
+        }
+        if (days < {{warningDays}}) {
+            return "exclamation-frame";
+        }
+        return "tick";
+    }
+
     function certCheck(hostname, el) {
             $.ajax({
                 cache: 'no-cache',
@@ -38,12 +48,12 @@
                     console.log("data=" + JSON.stringify(data));
                     if (!data.success) {
                         $(el).empty()
-                            .append($("<img>").attr("src", "/images/16x16/exclamation-red.png").addClass("pe-2"))
+                            .append($("<img>").attr("src", "/images/16x16/cross-circle.png").addClass("pe-2"))
                             .append($("<span>").text(data.message));
                     }
                     else {
                         $(el).empty()
-                            .append($("<img>").attr("src", "/images/16x16/tick.png").addClass("pe-2"))
+                            .append($("<img>").attr("src", `/images/16x16/${calcDayImage(data.days)}.png`).addClass("pe-2"))
                             .append($("<span>").text(data.message));
                     }
                 },
@@ -73,6 +83,22 @@
                         Hostnames
                     </label>
                     <textarea class="form-control" id="hostnames" name="hostnames" rows="{{rows}}">{{hostnamesInput}}</textarea>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label" for="dangerDays">
+                        Danger days
+                    </label>
+                    <div class="col-sm-2">
+                        <input class="form-control" id="dangerDays" name="dangerDays" type="number" value="{{dangerDays}}" />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label" for="warningDays">
+                        Warning days
+                    </label>
+                    <div class="col-sm-2">
+                        <input class="form-control" id="warningDays" name="warningDays" type="number" value="{{warningDays}}" />
+                    </div>
                 </div>
                 <div class="d-grid mb-3">
                     <button class="btn btn-primary" type="submit">

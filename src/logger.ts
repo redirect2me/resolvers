@@ -5,6 +5,7 @@ import config from './config';
 
 
 const options:Pino.LoggerOptions = {
+    serializers: Pino.stdSerializers,
   // @ts-ignore
   level: config.get('logLevel'),
   name: process.env.npm_package_name || 'resolvers',
