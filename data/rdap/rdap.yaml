@@ -31,6 +31,7 @@ cctlds:
 
   co:
     rdap: https://rdap.nic.co/
+    working: true
 
   cr:
     rdap: https://rdap.nic.cr/
@@ -66,6 +67,7 @@ cctlds:
 
   in:
     rdap: https://rdap.registry.in/
+    working: true
 
   is:
     rdap: https://rdap.isnic.is/
@@ -77,6 +79,7 @@ cctlds:
 
   ke:
     rdap: https://rdap.kenic.or.ke/
+    working: true
 
   kg:
     rdap: https://rdap.nic.kg/
@@ -94,6 +97,7 @@ cctlds:
 
   li:
     rdap: https://rdap.nic.li/
+    working: true
 
   md:
     rdap: https://rdap.nic.md/
@@ -131,6 +135,7 @@ cctlds:
 
   sn:
     rdap: https://rdap.nic.sn/
+    working: true
 
   su:
     rdap: https://rdap.nic.su/

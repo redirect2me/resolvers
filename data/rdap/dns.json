@@ -1,6 +1,6 @@
 {
   "description": "RDAP bootstrap file for Domain Name System registrations",
-  "publication": "2024-02-26T20:00:02Z",
+  "publication": "2024-04-24T18:00:02Z",
   "services": [
     [
       [
@@ -24,6 +24,22 @@
       ],
       [
         "http://rdap.nic.cpa/"
+      ]
+    ],
+    [
+      [
+        "merckmsd"
+      ],
+      [
+        "http://rdap.nic.merckmsd/"
+      ]
+    ],
+    [
+      [
+        "msd"
+      ],
+      [
+        "http://rdap.nic.msd/"
       ]
     ],
     [
@@ -201,14 +217,6 @@
       ],
       [
         "https://rdap.centralnic.com/baby/"
-      ]
-    ],
-    [
-      [
-        "bar"
-      ],
-      [
-        "https://rdap.centralnic.com/bar/"
       ]
     ],
     [
@@ -789,14 +797,6 @@
     ],
     [
       [
-        "rest"
-      ],
-      [
-        "https://rdap.centralnic.com/rest/"
-      ]
-    ],
-    [
-      [
         "rugby"
       ],
       [
@@ -1062,7 +1062,6 @@
     ],
     [
       [
-        "global",
         "xn--5tzm5g"
       ],
       [
@@ -1162,9 +1161,18 @@
     ],
     [
       [
+        "int"
+      ],
+      [
+        "https://rdap.iana.org/"
+      ]
+    ],
+    [
+      [
         "abb",
         "abbott",
         "academy",
+        "accenture",
         "accountants",
         "actor",
         "aeg",
@@ -1181,13 +1189,13 @@
         "apple",
         "archi",
         "army",
+        "arte",
         "asda",
         "asia",
         "associates",
         "attorney",
         "auction",
         "audi",
-        "avianca",
         "band",
         "barclaycard",
         "barclays",
@@ -1205,6 +1213,7 @@
         "blockbuster",
         "bloomberg",
         "blue",
+        "bm",
         "bms",
         "bnpparibas",
         "boehringer",
@@ -1228,6 +1237,7 @@
         "catering",
         "center",
         "cern",
+        "cfa",
         "chanel",
         "chat",
         "cheap",
@@ -1240,6 +1250,7 @@
         "clinic",
         "clinique",
         "clothing",
+        "clubmed",
         "coach",
         "codes",
         "coffee",
@@ -1326,9 +1337,11 @@
         "gallo",
         "gallup",
         "games",
+        "genting",
         "george",
         "gifts",
         "glass",
+        "global",
         "gmbh",
         "gold",
         "golf",
@@ -1412,6 +1425,7 @@
         "ltd",
         "ltda",
         "lundbeck",
+        "maif",
         "maison",
         "management",
         "market",
@@ -1444,6 +1458,7 @@
         "ollo",
         "onl",
         "oracle",
+        "orange",
         "organic",
         "origins",
         "ott",
@@ -1497,6 +1512,7 @@
         "samsclub",
         "sanofi",
         "sarl",
+        "saxo",
         "sbi",
         "scholarships",
         "school",
@@ -1539,6 +1555,7 @@
         "tennis",
         "thd",
         "theater",
+        "tiaa",
         "tienda",
         "tips",
         "tires",
@@ -2498,6 +2515,14 @@
     ],
     [
       [
+        "gs"
+      ],
+      [
+        "https://rdap.nic.gs/"
+      ]
+    ],
+    [
+      [
         "hamburg"
       ],
       [
@@ -2898,6 +2923,14 @@
     ],
     [
       [
+        "ms"
+      ],
+      [
+        "https://rdap.nic.ms/"
+      ]
+    ],
+    [
+      [
         "museum"
       ],
       [
@@ -3250,14 +3283,6 @@
     ],
     [
       [
-        "saxo"
-      ],
-      [
-        "https://rdap.nic.saxo/"
-      ]
-    ],
-    [
-      [
         "scb"
       ],
       [
@@ -3374,6 +3399,14 @@
       ],
       [
         "https://rdap.nic.sport/"
+      ]
+    ],
+    [
+      [
+        "ss"
+      ],
+      [
+        "https://rdap.nic.ss/"
       ]
     ],
     [
@@ -3942,6 +3975,14 @@
       ],
       [
         "https://rdap.nic.zero/"
+      ]
+    ],
+    [
+      [
+        "zm"
+      ],
+      [
+        "https://rdap.nic.zm/"
       ]
     ],
     [
@@ -4572,10 +4613,27 @@
     ],
     [
       [
+        "si"
+      ],
+      [
+        "https://rdap.register.si/"
+      ]
+    ],
+    [
+      [
         "br"
       ],
       [
         "https://rdap.registro.br/"
+      ]
+    ],
+    [
+      [
+        "bar",
+        "rest"
+      ],
+      [
+        "https://rdap.registry.bar/rdap/"
       ]
     ],
     [
@@ -4602,6 +4660,14 @@
       ],
       [
         "https://rdap.registry.coop/rdap/"
+      ]
+    ],
+    [
+      [
+        "ec"
+      ],
+      [
+        "https://rdap.registry.ec/"
       ]
     ],
     [
@@ -4928,14 +4994,6 @@
     ],
     [
       [
-        "accenture"
-      ],
-      [
-        "https://tld-rdap.verisign.com/accenture/v1/"
-      ]
-    ],
-    [
-      [
         "airbus"
       ],
       [
@@ -4968,14 +5026,6 @@
     ],
     [
       [
-        "arte"
-      ],
-      [
-        "https://tld-rdap.verisign.com/arte/v1/"
-      ]
-    ],
-    [
-      [
         "bharti"
       ],
       [
@@ -4996,22 +5046,6 @@
       ],
       [
         "https://tld-rdap.verisign.com/cc/v1/"
-      ]
-    ],
-    [
-      [
-        "cfa"
-      ],
-      [
-        "https://tld-rdap.verisign.com/cfa/v1/"
-      ]
-    ],
-    [
-      [
-        "clubmed"
-      ],
-      [
-        "https://tld-rdap.verisign.com/clubmed/v1/"
       ]
     ],
     [
@@ -5048,22 +5082,6 @@
     ],
     [
       [
-        "genting"
-      ],
-      [
-        "https://tld-rdap.verisign.com/genting/v1/"
-      ]
-    ],
-    [
-      [
-        "guardian"
-      ],
-      [
-        "https://tld-rdap.verisign.com/guardian/v1/"
-      ]
-    ],
-    [
-      [
         "lego"
       ],
       [
@@ -5084,30 +5102,6 @@
       ],
       [
         "https://tld-rdap.verisign.com/living/v1/"
-      ]
-    ],
-    [
-      [
-        "maif"
-      ],
-      [
-        "https://tld-rdap.verisign.com/maif/v1/"
-      ]
-    ],
-    [
-      [
-        "merckmsd"
-      ],
-      [
-        "https://tld-rdap.verisign.com/merckmsd/v1/"
-      ]
-    ],
-    [
-      [
-        "msd"
-      ],
-      [
-        "https://tld-rdap.verisign.com/msd/v1/"
       ]
     ],
     [
@@ -5144,14 +5138,6 @@
     ],
     [
       [
-        "orange"
-      ],
-      [
-        "https://tld-rdap.verisign.com/orange/v1/"
-      ]
-    ],
-    [
-      [
         "rwe"
       ],
       [
@@ -5180,14 +5166,6 @@
       ],
       [
         "https://tld-rdap.verisign.com/swatch/v1/"
-      ]
-    ],
-    [
-      [
-        "tiaa"
-      ],
-      [
-        "https://tld-rdap.verisign.com/tiaa/v1/"
       ]
     ],
     [

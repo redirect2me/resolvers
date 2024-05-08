@@ -24,7 +24,7 @@
 {{#each list}}
     <tr id="rdap-{{this.unicode}}">
       <td><a href="/tlds/{{this.unicode}}/index.html">{{this.unicode}}</a></td>
-      <td>{{this.rdap}}</td>
+      <td><a href="{{this.rdap}}">{{this.rdap}}</a></td>
       <td>
         {{#unless this.official}}
           {{#unless this.working}}
@@ -39,6 +39,4 @@
 {{/each}}
   </tbody>
 </table>
-
-
 {{> below}}
