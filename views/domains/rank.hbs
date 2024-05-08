@@ -1,0 +1,59 @@
+{{> above}}
+{{#if domains}}
+
+<h2>Results</h2>
+
+<pre>{{toJson domains}}</pre>
+
+<table class="table table-striped border-bottom">
+    <thead>
+        <tr>
+            <th>Domain</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each domains}}
+        <tr>
+            <td>{{@key}}</td>
+            <td>{{#equals this -1}}(not ranked){{else}}{{this}}{{/equals}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+
+<h2>Try Again</h2>
+{{else}}
+<div class="alert alert-info">
+    Check the site rank on the <a class="alert-link" href="https://tranco-list.eu/">Tranco list</a>
+</div>
+{{/if}}
+<div class="container d-flex flex-column">
+    <div class="row align-items-center justify-content-center no-gutters">
+        <div class="col-12 col-md-7 col-lg-6 py-8 py-md-11">
+            <form action="rank.html" class="mb-6" method="POST">
+                <div class="mb-3">
+                    <label class="form-label" for="domains">
+                        Domains
+                    </label>
+                    <textarea class="form-control" id="domains" name="domains"
+                        rows="{{rows}}">{{domainInput}}</textarea>
+                </div>
+                <div class="d-grid mb-3">
+                    <button class="btn btn-primary" type="submit">
+                        Check Tranco rank
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div> <!-- / .row -->
+</div> <!-- / .container -->
+
+{{#if raw}}
+<details>
+    <summary>Raw siterank API Response</summary>
+    <pre>{{toJson raw}}</pre>
+</details>
+{{/if}}
+{{> below}}

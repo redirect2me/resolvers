@@ -1,176 +1,235 @@
-import KoaRouter from 'koa-router';
-import * as punycode from 'punycode';
-import * as wsw from 'whoisserver-world'
+import axios, { AxiosResponse } from "axios";
+import KoaRouter from "koa-router";
+import * as punycode from "punycode";
+import * as wsw from "whoisserver-world";
 
-import * as domainData from '../data/domainData';
-import * as domainFinder from '../actions/domainfinder';
-import * as expirationCheck from '../actions/expirationCheck';
-import * as rdapProxyConf from '../actions/rdapProxyConf';
-import * as rdapData from '../data/rdapData';
-import * as util from '../util';
+import * as domainData from "../data/domainData";
+import * as domainFinder from "../actions/domainfinder";
+import * as expirationCheck from "../actions/expirationCheck";
+import * as rdapProxyConf from "../actions/rdapProxyConf";
+import * as rdapData from "../data/rdapData";
+import * as util from "../util";
 
 const domainRouter = new KoaRouter();
 
-domainRouter.get('/domains/tlds.html', async (ctx:any) => {
-
-    ctx.body = await ctx.render('domains/tlds.hbs', {
+domainRouter.get("/domains/tlds.html", async (ctx: any) => {
+    ctx.body = await ctx.render("domains/tlds.hbs", {
         domains: domainData.icannTlds,
-        title: 'Top Level Domains',
-     });
+        title: "Top Level Domains",
+    });
 });
 
-domainRouter.get('/domains/', async (ctx) => {
-    ctx.redirect('/domains/index.html');
+domainRouter.get("/domains/", async (ctx) => {
+    ctx.redirect("/domains/index.html");
 });
 
-domainRouter.get('/domains/index.html', async (ctx) => {
-    ctx.redirect('/tools.html#domains');
+domainRouter.get("/domains/index.html", async (ctx) => {
+    ctx.redirect("/tools.html#domains");
 });
 
-domainRouter.get('/domains/tlds.txt', async (ctx) => {
+domainRouter.get("/domains/tlds.txt", async (ctx) => {
     const ifPunycode = util.getBoolean(ctx.request.query["punycode"], false);
 
-    const domains = ifPunycode ? domainData.icannTlds.map(x => punycode.toASCII(x)) : domainData.icannTlds;
+    const domains = ifPunycode
+        ? domainData.icannTlds.map((x) => punycode.toASCII(x))
+        : domainData.icannTlds;
 
-    ctx.body = domains.join('\n');
+    ctx.body = domains.join("\n");
 });
 
-domainRouter.get('/domains/tlds.json', async (ctx) => {
-
+domainRouter.get("/domains/tlds.json", async (ctx) => {
     if (!util.validateCaller(ctx)) {
         return;
     }
 
     const ifPunycode = util.getBoolean(ctx.request.query["punycode"], false);
 
-    const domains = ifPunycode ? domainData.icannTlds.map(x => punycode.toASCII(x)) : domainData.icannTlds;
+    const domains = ifPunycode
+        ? domainData.icannTlds.map((x) => punycode.toASCII(x))
+        : domainData.icannTlds;
 
-    util.handleJsonp(ctx, { success: true, count: domainData.icannTlds.length, domains });
+    util.handleJsonp(ctx, {
+        success: true,
+        count: domainData.icannTlds.length,
+        domains,
+    });
 });
 
-domainRouter.get('/domains/health-check.html', async (ctx:any) => {
-    await healthCheckLow(ctx, util.getFirst(ctx.query.domain) || '');
+domainRouter.get("/domains/health-check.html", async (ctx: any) => {
+    await healthCheckLow(ctx, util.getFirst(ctx.query.domain) || "");
 });
 
-domainRouter.post('/domains/health-check.html',  async (ctx:any) => {
-    await healthCheckLow(ctx, ctx.request.body.domain || '');
+domainRouter.post("/domains/health-check.html", async (ctx: any) => {
+    await healthCheckLow(ctx, ctx.request.body.domain || "");
 });
 
-async function healthCheckLow(ctx:any, domain:string) {
-    ctx.body = await ctx.render('domains/health-check.hbs', {
+async function healthCheckLow(ctx: any, domain: string) {
+    ctx.body = await ctx.render("domains/health-check.hbs", {
         domain: domain.trim(),
-        title: 'Domain Health Check',
-        titleimg: '/images/scales.svg',
-      });
+        title: "Domain Health Check",
+        titleimg: "/images/scales.svg",
+    });
 }
 
-domainRouter.get('/domains/icann-vs-psl.html', async (ctx:any) => {
-
+domainRouter.get("/domains/icann-vs-psl.html", async (ctx: any) => {
     const icannOnly = new Set<string>();
-    domainData.icannTlds.forEach( domain => icannOnly.add(domain));
-    Object.keys(domainData.pslTlds).forEach( domain => icannOnly.delete(domain));
+    domainData.icannTlds.forEach((domain) => icannOnly.add(domain));
+    Object.keys(domainData.pslTlds).forEach((domain) =>
+        icannOnly.delete(domain)
+    );
 
     const pslOnly = new Set<string>();
-    Object.keys(domainData.pslTlds).forEach( domain => pslOnly.add(domain));
-    domainData.icannTlds.forEach( domain => pslOnly.delete(domain));
+    Object.keys(domainData.pslTlds).forEach((domain) => pslOnly.add(domain));
+    domainData.icannTlds.forEach((domain) => pslOnly.delete(domain));
 
-    ctx.body = await ctx.render('domains/icann-vs-psl.hbs', {
+    ctx.body = await ctx.render("domains/icann-vs-psl.hbs", {
         domains: domainData.usableTlds,
         icannOnly: [...icannOnly],
         pslOnly: [...pslOnly],
-        title: 'Domains in ICANN vs PublicSuffixList',
-     });
+        title: "Domains in ICANN vs PublicSuffixList",
+    });
 });
 
-domainRouter.get('/domains/icann-vs-wsw.html', async (ctx:any) => {
-
+domainRouter.get("/domains/icann-vs-wsw.html", async (ctx: any) => {
     const icannOnly = new Set<string>();
-    domainData.icannTlds.forEach( domain => icannOnly.add(domain));
-    Object.getOwnPropertyNames(wsw.tlds()).forEach( domain => icannOnly.delete(punycode.toUnicode(domain)));
+    domainData.icannTlds.forEach((domain) => icannOnly.add(domain));
+    Object.getOwnPropertyNames(wsw.tlds()).forEach((domain) =>
+        icannOnly.delete(punycode.toUnicode(domain))
+    );
 
     const wswOnly = new Set<string>();
-    Object.getOwnPropertyNames(wsw.tlds()).forEach( domain => wswOnly.add(punycode.toUnicode(domain)));
-    domainData.icannTlds.forEach( domain => wswOnly.delete(domain));
+    Object.getOwnPropertyNames(wsw.tlds()).forEach((domain) =>
+        wswOnly.add(punycode.toUnicode(domain))
+    );
+    domainData.icannTlds.forEach((domain) => wswOnly.delete(domain));
 
-    ctx.body = await ctx.render('domains/icann-vs-wsw.hbs', {
+    ctx.body = await ctx.render("domains/icann-vs-wsw.hbs", {
         domains: domainData.usableTlds,
         icannOnly: [...icannOnly],
         wswOnly: [...wswOnly],
-        title: 'Domains in ICANN vs whoisserver-world',
-     });
+        title: "Domains in ICANN vs whoisserver-world",
+    });
 });
 
-domainRouter.get('/domains/publicsuffix.html', async (ctx: any) => {
-    ctx.redirect(ctx, '/psl/test.html');
+domainRouter.get("/domains/publicsuffix.html", async (ctx: any) => {
+    ctx.redirect(ctx, "/psl/test.html");
 });
 
-domainRouter.post('/domains/publicsuffix.html', async (ctx: any) => {
-    ctx.redirect(ctx, `/psl/test.html?q=${encodeURIComponent(ctx.request.body.hostname)}`);
+domainRouter.post("/domains/publicsuffix.html", async (ctx: any) => {
+    ctx.redirect(
+        ctx,
+        `/psl/test.html?q=${encodeURIComponent(ctx.request.body.hostname)}`
+    );
 });
 
-domainRouter.get('/domains/psl-tlds.html', async (ctx:any) => {
-    ctx.redirect(ctx, '/psl/index.html');
+domainRouter.get("/domains/psl-tlds.html", async (ctx: any) => {
+    ctx.redirect(ctx, "/psl/index.html");
 });
 
-domainRouter.get('/domains/usable-tlds.html', async (ctx:any) => {
-    ctx.body = await ctx.render('domains/usable-tlds.hbs', {
+domainRouter.get("/domains/usable-tlds.html", async (ctx: any) => {
+    ctx.body = await ctx.render("domains/usable-tlds.hbs", {
         domains: domainData.usableTlds,
-        title: 'Usable Top Level Domains',
-     });
+        title: "Usable Top Level Domains",
+    });
 });
 
-domainRouter.get('/domains/nice-tlds.html', async (ctx:any) => {
-    ctx.body = await ctx.render('domains/nice-tlds.hbs', {
+domainRouter.get("/domains/nice-tlds.html", async (ctx: any) => {
+    ctx.body = await ctx.render("domains/nice-tlds.hbs", {
         domains: domainData.niceTlds,
-        title: 'Nice Top Level Domains',
-     });
+        title: "Nice Top Level Domains",
+    });
 });
 
-
-domainRouter.get('/domains/punycode.html', async (ctx:any) => {
-
-    const domain = ctx.request.query['domain'];
-    let conversion = '';
-    let result = '';
+domainRouter.get("/domains/punycode.html", async (ctx: any) => {
+    const domain = ctx.request.query["domain"];
+    let conversion = "";
+    let result = "";
 
     if (domain) {
         if (domain.match(/^[-a-z0-9.]+$/i)) {
-            conversion = 'toUnicode';
+            conversion = "toUnicode";
             result = punycode.toUnicode(domain);
-        }
-        else {
-            conversion = 'toASCII';
+        } else {
+            conversion = "toASCII";
             result = punycode.toASCII(domain);
         }
     }
 
-    ctx.body = await ctx.render('domains/punycode.hbs', {
+    ctx.body = await ctx.render("domains/punycode.hbs", {
         conversion,
         domain,
-        h1: 'Punycode Converter',
+        h1: "Punycode Converter",
         result,
-        title: 'Online Punycode Converter',
-     });
+        title: "Online Punycode Converter",
+    });
 });
 
-domainRouter.get('/domains/rdap.html', async (ctx:any) => {
-    const theList = rdapData.list().filter(ri => ri.rdap);
+domainRouter.get("/domains/rank.html", async (ctx: any) => {
+    ctx.body = await ctx.render("domains/rank.hbs", {
+        domainInput: ctx.request.query.domains,
+        title: "Domain Rank",
+    });
+});
 
-    theList.sort((a, b) => (a.unicode.localeCompare(b.unicode)));
+domainRouter.post("/domains/rank.html", async (ctx: any) => {
+    const domainInput = ctx.request.body.domains;
 
-    ctx.body = await ctx.render('domains/rdap.hbs', {
+    const instance = axios.create({
+        headers: {
+            'User-Agent': 'resolve.rs/1.0'
+        },
+        maxRedirects: 0,
+        timeout: 5000,
+        validateStatus: () => true
+    });
+
+    let domains:null|{[key: string]:number} = null;
+    let raw:any;
+
+    try {
+        const params = new URLSearchParams({ domains: domainInput });
+        const response: AxiosResponse<any> = await instance.post('https://siterank.redirect2.me/api/multiple.json',
+            params.toString(),
+            { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+        );
+
+        raw = response.data;
+        domains = raw.results;
+    } catch (err) {
+        ctx.flash('error', err.message);
+    }
+
+    ctx.body = await ctx.render("domains/rank.hbs", {
+        domainInput,
+        domains,
+        title: "Domain Rank",
+        raw,
+        rows: 5,
+    });
+});
+
+domainRouter.get("/domains/rdap.html", async (ctx: any) => {
+    const theList = rdapData.list().filter((ri) => ri.rdap);
+
+    theList.sort((a, b) => a.unicode.localeCompare(b.unicode));
+
+    ctx.body = await ctx.render("domains/rdap.hbs", {
         list: theList,
-        title: 'RDAP Servers',
-     });
+        title: "RDAP Servers",
+    });
 });
 
-domainRouter.get('/domains/rdap-missing.html', async (ctx:any) => {
-    const theList = rdapData.list().filter(ri => ri.rdap);
+domainRouter.get("/domains/rdap-missing.html", async (ctx: any) => {
+    const theList = rdapData.list().filter((ri) => ri.rdap);
 
     const ianaSet = new Set<String>();
-    theList.forEach((ri) => { if (ri.official) { ianaSet.add(ri.unicode) }});
+    theList.forEach((ri) => {
+        if (ri.official) {
+            ianaSet.add(ri.unicode);
+        }
+    });
 
-    const missing:any[] = [];
+    const missing: any[] = [];
 
     domainData.icannTlds.forEach((tld) => {
         if (!ianaSet.has(tld)) {
@@ -178,42 +237,65 @@ domainRouter.get('/domains/rdap-missing.html', async (ctx:any) => {
             missing.push({
                 unicode: tld,
                 rdap: rdapInfo?.rdap,
-                unofficial: rdapInfo?.official == false && rdapInfo?.working == true,
-                found: rdapInfo?.official == false && !rdapInfo?.working
+                unofficial:
+                    rdapInfo?.official == false && rdapInfo?.working == true,
+                found: rdapInfo?.official == false && !rdapInfo?.working,
             });
         }
     });
 
-    const foundBad = theList.filter(ri => ri.official == false && !ri.working);
-    const foundWorking = theList.filter(ri => ri.official == false && ri.working);
+    const foundBad = theList.filter(
+        (ri) => ri.official == false && !ri.working
+    );
+    const foundWorking = theList.filter(
+        (ri) => ri.official == false && ri.working
+    );
 
-    ctx.body = await ctx.render('domains/rdap-missing.hbs', {
+    ctx.body = await ctx.render("domains/rdap-missing.hbs", {
         foundBad,
         foundWorking,
         iana: Array.from(ianaSet).sort(),
         missing,
-        title: 'Missing and Unofficial RDAP Servers',
-     });
+        title: "Missing and Unofficial RDAP Servers",
+    });
 });
 
-domainRouter.get('/domains/rdap.json', async (ctx:any) => {
+domainRouter.get("/domains/rdap.json", async (ctx: any) => {
+    const lookup: { [key: string]: string } = {};
 
-    const lookup: { [key:string]:string } = {};
-
-    rdapData.list().filter(ri => ri.official || ri.working).forEach(ri => { if (ri.rdap) { lookup[ri.tld] = ri.rdap; }});
+    rdapData
+        .list()
+        .filter((ri) => ri.official || ri.working)
+        .forEach((ri) => {
+            if (ri.rdap) {
+                lookup[ri.tld] = ri.rdap;
+            }
+        });
 
     util.handleJsonp(ctx, { success: true, lookup });
 });
 
-domainRouter.get('/domains/finder.html', domainFinder.domainFinderGet);
-domainRouter.post('/domains/finder.html', domainFinder.domainFinderPost);
-domainRouter.get('/domains/expiration-check.json', expirationCheck.expirationCheckApiGet);
-domainRouter.post('/domains/expiration-check.json', expirationCheck.expirationCheckApiPost);
-domainRouter.get('/domains/expiration-check.html', expirationCheck.expirationCheckGet);
-domainRouter.post('/domains/expiration-check.html', expirationCheck.expirationCheckPost);
-domainRouter.get('/domains/rdap-proxy.yaml', rdapProxyConf.rdapProxyConfGet );
+domainRouter.get("/domains/finder.html", domainFinder.domainFinderGet);
+domainRouter.post("/domains/finder.html", domainFinder.domainFinderPost);
+domainRouter.get(
+    "/domains/expiration-check.json",
+    expirationCheck.expirationCheckApiGet
+);
+domainRouter.post(
+    "/domains/expiration-check.json",
+    expirationCheck.expirationCheckApiPost
+);
+domainRouter.get(
+    "/domains/expiration-check.html",
+    expirationCheck.expirationCheckGet
+);
+domainRouter.post(
+    "/domains/expiration-check.html",
+    expirationCheck.expirationCheckPost
+);
+domainRouter.get("/domains/rdap-proxy.yaml", rdapProxyConf.rdapProxyConfGet);
 
-function getUrls():string[] {
+function getUrls(): string[] {
     return [
         "/domains/expiration-check.html",
         "/domains/finder.html",
@@ -229,7 +311,4 @@ function getUrls():string[] {
     ];
 }
 
-export {
-    domainRouter,
-    getUrls
-}
+export { domainRouter, getUrls };
