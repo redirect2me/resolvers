@@ -3,8 +3,6 @@
 
 <h2>Results</h2>
 
-<pre>{{toJson domains}}</pre>
-
 <table class="table table-striped border-bottom">
     <thead>
         <tr>
@@ -16,7 +14,7 @@
         {{#each domains}}
         <tr>
             <td>{{@key}}</td>
-            <td>{{#equals this -1}}(not ranked){{else}}{{this}}{{/equals}}</td>
+            <td>{{#equals this -1}}(not ranked){{else}}{{integerFormat this}}{{/equals}}</td>
         </tr>
         {{/each}}
     </tbody>
