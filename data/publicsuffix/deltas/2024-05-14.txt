@@ -1,0 +1,3 @@
++*.hosted.app
++expo.app
++staging.expo.app
