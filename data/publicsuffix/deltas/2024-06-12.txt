@@ -1,0 +1,12 @@
++barsy.dev
++barsy.gr
++barsy.rs
++barsy.store
++barsyonline.menu
++barsyonline.shop
++heiyu.space
++ind.mom
++media.strapiapp.com
++relay.evervault.app
++relay.evervault.dev
++strapiapp.com
