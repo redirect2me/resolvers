@@ -1,0 +1,12 @@
++*.d.crm.dev
++*.w.crm.dev
++*.wa.crm.dev
++*.wb.crm.dev
++*.wc.crm.dev
++*.wd.crm.dev
++*.we.crm.dev
++*.wf.crm.dev
++netfy.app
++obl.ong
++wp2.host
++wpsquared.site
