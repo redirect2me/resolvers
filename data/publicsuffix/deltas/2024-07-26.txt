@@ -1,0 +1,8 @@
+-backplaneapp.io
+-graphox.us
+-mintere.site
+-mozilla-iot.org
+-pagefrontapp.com
+-pcloud.host
+-shiftcrypto.dev
+-shiftcrypto.io
