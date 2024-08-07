@@ -1,0 +1,10 @@
+-*.devcdnaccesso.com
+-bitbridge.net
+-dev.static.land
+-sites.static.land
+-static.land
+-t3l3p0rt.net
+-tele.amune.org
+-wedeploy.io
+-wedeploy.me
+-wedeploy.sh
