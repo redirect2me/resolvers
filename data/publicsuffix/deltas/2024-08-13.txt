@@ -1,0 +1,4 @@
++*.wdh.app
++is-a-fullstack.dev
+-preview.wdh.app
+-wdh.app
