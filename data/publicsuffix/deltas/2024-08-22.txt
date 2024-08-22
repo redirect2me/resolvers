@@ -1,0 +1,13 @@
+-*.wdh.app
+-blogsite.xyz
++matlab.cloud
++modelscape.com
++mwcloudnonprod.com
++polyspace.com
++readthedocs-hosted.com
++routingthecloud.com
++routingthecloud.net
++routingthecloud.org
++wdh.app
+-wellbeingzone.co.uk
+-wellbeingzone.eu
