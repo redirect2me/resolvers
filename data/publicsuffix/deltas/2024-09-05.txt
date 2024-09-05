@@ -1,0 +1,5 @@
+-*.diher.solutions
+-*.rss.my.id
++diher.solutions
+-fireweb.app
++rss.my.id
