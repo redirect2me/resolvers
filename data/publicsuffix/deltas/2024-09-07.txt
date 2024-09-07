@@ -1,0 +1,7 @@
+-*.bzz.dapps.earth
+-*.dapps.earth
+-autocode.dev
++gob.cu
+-magnet.page
+-mc.eu.org
++nat.cu
