@@ -1,0 +1,11 @@
+-amscompute.com
+-cloud-fr1.unispace.io
+-cloud.jelastic.open.tim.it
++ctfcloud.net
+-faststacks.net
+-jelastic.regruhosting.ru
+-jelastic.tsukaeru.net
+-kilatiron.com
+-lon.wafaicloud.com
+-mycloud.by
+-upaas.kazteleport.kz
