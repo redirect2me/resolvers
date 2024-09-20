@@ -1,0 +1,5 @@
+-*.s5y.io
+-*.sensiosite.cloud
++hrsn.dev
+-ktistory.com
+-mycd.eu
