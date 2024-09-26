@@ -1,0 +1,3 @@
++hf.space
++shopware.shop
++static.hf.space
