@@ -1,0 +1,3 @@
+-alpha.bounty-full.com
+-beta.bounty-full.com
+-bounty-full.com
