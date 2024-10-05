@@ -1,14 +1,16 @@
 import Handlebars from 'handlebars';
-import KoaRouter from 'koa-router';
+import Router from '@koa/router';
 import path from 'path';
 import * as tldts from 'tldts';
+import * as url from "url";
 
-import { ChangeLog } from '../changelog';
-import { ChangeLogUI } from '../ChangeLogUI';
-import * as domainData from '../data/domainData';
-import * as util from '../util';
+import { ChangeLog } from "../changelog.js";
+import { ChangeLogUI } from "../ChangeLogUI.js";
+import * as domainData from "../data/domainData.js";
+import * as util from "../util.js";
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
-const pslRouter = new KoaRouter();
+const pslRouter = new Router();
 
 pslRouter.get('/psl/', async (ctx: any) => {
     ctx.redirect(ctx, '/psl/index.html');

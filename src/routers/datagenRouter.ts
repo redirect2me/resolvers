@@ -1,10 +1,11 @@
 //import { promises as fsPromises } from 'fs';
-import Haikunator from 'haikunator';
+import HaikunatorImpl from "haikunator";
+const Haikunator = HaikunatorImpl as unknown as typeof HaikunatorImpl.default;
 //import Handlebars from 'handlebars';
 import Koa from 'koa';
-import Router from 'koa-router';
+import Router from '@koa/router';
 
-import * as util from '../util';
+import * as util from "../util.js";
 
 const datagenRouter = new Router();
 

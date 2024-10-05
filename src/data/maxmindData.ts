@@ -8,7 +8,7 @@ import * as tmp from 'tmp-promise';
 import * as util from 'util';
 import * as zlib from 'zlib';
 
-import config from '../config';
+import config from "../config.js";
 const pipeline = util.promisify(stream.pipeline);
 
 let asnDatabase:Reader<AsnResponse>|null = null;

@@ -2,10 +2,10 @@ import { promises as dnsPromises } from 'dns';
 import Handlebars from 'handlebars';
 import * as net from 'net';
 
-import * as asn from '../data/maxmindData';
-import * as resolvers from '../data/resolverData';
-import * as streamer from '../streamer';
-import * as util from '../util';
+import * as asn from "../data/maxmindData.js";
+import * as resolvers from "../data/resolverData.js";
+import * as streamer from "../streamer.js";
+import * as util from "../util.js";
 
 async function reverseDns(dnsResolver:dnsPromises.Resolver, ip:string): Promise<string>{
 

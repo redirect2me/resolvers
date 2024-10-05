@@ -2,7 +2,7 @@ import * as yaml from 'js-yaml';
 import * as punycode from 'punycode';
 import * as wsw from 'whoisserver-world'
 
-import * as rdapData from '../data/rdapData';
+import * as rdapData from "../data/rdapData.js";
 
 type RdapProxyConf = {
   whois: { [key:string]: string}

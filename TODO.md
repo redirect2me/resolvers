@@ -48,7 +48,7 @@
 
 ## Grading
 
-* [ ] favicon: present, sizes, svg version
+* [ ] favicon: present, sizes, svg version (referenced in html)
 * [ ] robots.txt: present, # of lines, ?parse?
 * [ ] [MXToolbox](https://mxtoolbox.com/diagnostic.aspx)
 * [ ] [dt](https://github.com/42wim/dt/issues/1)

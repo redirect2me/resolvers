@@ -1,7 +1,7 @@
 import { promises as dnsPromises } from 'dns';
 import * as tldts from 'tldts';
 
-import * as util from '../util';
+import * as util from "../util.js";
 
 async function mxCheckGet(ctx:any) {
 

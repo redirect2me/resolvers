@@ -1,6 +1,8 @@
 import { promises as fsPromises } from 'fs';
 import * as path from 'path';
 import Pino from 'pino';
+import * as url from 'url';
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 type resolverData = {
   draft?: boolean,

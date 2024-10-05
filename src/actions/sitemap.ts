@@ -1,12 +1,12 @@
-import * as cryptoRouter from '../routers/cryptoRouter';
-import * as dnsRouter from '../routers/dnsRouter';
-import * as domainRouter from '../routers/domainRouter';
-import * as httpRouter from '../routers/httpRouter';
-import * as infoRouter from '../routers/infoRouter';
-import * as ipRouter from '../routers/ipRouter';
-import * as tldsRouter from '../routers/tldsRouter';
-import * as resolverRouter from '../routers/resolverRouter';
-import { pslChangeLogGetUrls } from '../routers/pslRouter';
+import * as cryptoRouter from "../routers/cryptoRouter.js";
+import * as dnsRouter from "../routers/dnsRouter.js";
+import * as domainRouter from "../routers/domainRouter.js";
+import * as httpRouter from "../routers/httpRouter.js";
+import * as infoRouter from '../routers/infoRouter.js';
+import * as ipRouter from '../routers/ipRouter.js';
+import * as tldsRouter from '../routers/tldsRouter.js';
+import * as resolverRouter from '../routers/resolverRouter.js';
+import { pslChangeLogGetUrls } from '../routers/pslRouter.js';
 
 async function sitemap(ctx:any) {
 

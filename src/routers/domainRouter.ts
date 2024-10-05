@@ -1,16 +1,16 @@
 import axios, { AxiosResponse } from "axios";
-import KoaRouter from "koa-router";
+import Router from "@koa/router";
 import * as punycode from "punycode";
 import * as wsw from "whoisserver-world";
 
-import * as domainData from "../data/domainData";
-import * as domainFinder from "../actions/domainfinder";
-import * as expirationCheck from "../actions/expirationCheck";
-import * as rdapProxyConf from "../actions/rdapProxyConf";
-import * as rdapData from "../data/rdapData";
-import * as util from "../util";
+import * as domainData from "../data/domainData.js";
+import * as domainFinder from "../actions/domainfinder.js";
+import * as expirationCheck from "../actions/expirationCheck.js";
+import * as rdapProxyConf from "../actions/rdapProxyConf.js";
+import * as rdapData from "../data/rdapData.js";
+import * as util from "../util.js";
 
-const domainRouter = new KoaRouter();
+const domainRouter = new Router();
 
 domainRouter.get("/domains/tlds.html", async (ctx: any) => {
     ctx.body = await ctx.render("domains/tlds.hbs", {

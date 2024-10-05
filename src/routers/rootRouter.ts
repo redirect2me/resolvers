@@ -1,11 +1,13 @@
-import Router from 'koa-router';
-import * as asn from '../data/maxmindData';
+import Router from '@koa/router';
 import * as os from 'os';
+import * as url from 'url';
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
-import * as resolvers from '../data/resolverData';
-import * as util from '../util';
-import { getCurrentIP } from './ipRouter';
-import { sitemap } from '../actions/sitemap';
+import * as asn from "../data/maxmindData.js";
+import * as resolvers from "../data/resolverData.js";
+import * as util from "../util.js";
+import { getCurrentIP } from "./ipRouter.js";
+import { sitemap } from "../actions/sitemap.js";
 
 const rootRouter = new Router();
 

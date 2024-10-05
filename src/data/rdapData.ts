@@ -3,7 +3,8 @@ import * as path from 'path';
 import Pino from 'pino';
 import * as punycode from 'punycode';
 import * as yaml from 'js-yaml';
-//import * as punycode from 'punycode';
+import * as url from 'url';
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 type rdapInfo = {
   notes?: string,

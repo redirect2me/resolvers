@@ -2,8 +2,8 @@ import axios from 'axios';
 import * as cheerio from 'cheerio';
 //import * as url from 'URL';
 
-//import { logger } from '../logger';
-import * as util from '../util';
+//import { logger } from '../logger.js';
+import * as util from "../util.js";
 
 function extractTitle(html:string):string {
 

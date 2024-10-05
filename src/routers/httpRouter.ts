@@ -1,19 +1,16 @@
 import { promises as fsPromises } from 'fs';
 import Koa from 'koa';
-import Router from 'koa-router';
+import Router from '@koa/router';
 import * as path from 'path';
 import * as yaml from 'js-yaml';
-//import * as punycode from 'punycode';
-//import * as domains from '../data/domainData';
-//import * as util from '../util';
-//import { URL } from 'url';
-import * as url from 'url';
+import * as url from "url";
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
-import * as certcheck from '../actions/certcheck';
-import * as floccheck from '../actions/floccheck';
-import * as headers from '../actions/headers';
-import * as redirectcheck from '../actions/redirectcheck';
-import * as util from '../util';
+import * as certcheck from "../actions/certcheck.js";
+import * as floccheck from "../actions/floccheck.js";
+import * as headers from "../actions/headers.js";
+import * as redirectcheck from "../actions/redirectcheck.js";
+import * as util from "../util.js";
 
 const httpRouter = new Router();
 

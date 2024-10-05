@@ -2,9 +2,9 @@ import crypto from 'crypto';
 import { promises as fsPromises } from 'fs';
 import Handlebars from 'handlebars';
 import Koa from 'koa';
-import Router from 'koa-router';
+import Router from '@koa/router';
 
-import * as util from '../util';
+import * as util from "../util.js";
 
 type HashResult = {algorithm:string,value:string};
 

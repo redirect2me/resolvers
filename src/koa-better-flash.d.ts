@@ -2,7 +2,7 @@ declare module 'koa-better-flash' {
 
     import { Middleware } from 'koa';
 
-    export = flash;
+    export default flash;
 
     function flash(): Middleware;
 

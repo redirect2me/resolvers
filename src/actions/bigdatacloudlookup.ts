@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
 //import * as url from 'URL';
 
-import config from '../config';
-//import { logger } from '../logger';
-//import * as util from '../util';
+import config from "../config.js";
+//import { logger } from '../logger.js';
+//import * as util from '../util.js';
 
 async function bigdatacloudLookup(ctx:any) {
     const ip = ctx.query['ip'];

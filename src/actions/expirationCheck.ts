@@ -1,6 +1,6 @@
 import * as whoiser from 'whoiser';
 
-import * as util from '../util';
+import * as util from "../util.js";
 
 async function expirationCheckGet(ctx:any) {
 

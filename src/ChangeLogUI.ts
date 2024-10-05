@@ -1,8 +1,8 @@
 import Handlebars from 'handlebars';
-import Router from 'koa-router';
+import Router from '@koa/router';
 import { DateTime } from 'luxon';
 
-import { ChangeLog } from './changelog';
+import { ChangeLog } from "./changelog.js";
 
 class ChangeLogUI {
     changelogRouter: Router;

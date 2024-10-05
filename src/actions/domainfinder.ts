@@ -1,8 +1,8 @@
 import { promises as dnsPromises } from 'dns';
 import Handlebars from 'handlebars';
 
-import { niceTlds as tlds } from '../data/domainData';
-import * as streamer from '../streamer';
+import { niceTlds as tlds } from "../data/domainData.js";
+import * as streamer from "../streamer.js";
 
 async function domainFinderGet(ctx:any) {
   ctx.body = await ctx.render('domains/finder.hbs', {

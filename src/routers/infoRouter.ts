@@ -1,5 +1,5 @@
 //import { promises as fsPromises } from 'fs';
-import Router from 'koa-router';
+import Router from '@koa/router';
 //import * as path from 'path';
 
 const infoRouter = new Router();

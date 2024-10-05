@@ -1,6 +1,6 @@
 import { promises as fsPromises } from 'fs';
 
-import { logger } from './logger';
+import { logger } from "./logger.js";
 
 export interface ChangeLogEntry {
     date: string;
@@ -50,7 +50,7 @@ export class ChangeLog {
     }
 
     getAll() {
-        return this.cache; 
+        return this.cache;
     }
 
     get(key: string) {
@@ -63,7 +63,7 @@ export class ChangeLog {
 
     getLast() {
         return this.cache[this.lastKey];
-    }   
+    }
 
     getKeys() {
         return Object.keys(this.cache);

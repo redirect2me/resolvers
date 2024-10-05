@@ -1,9 +1,9 @@
 import { promises as dnsPromises } from 'dns';
-import Router from 'koa-router';
+import Router from '@koa/router';
 
-import * as resolvers from '../data/resolverData';
-import * as streamer from '../streamer';
-import * as util from '../util';
+import * as resolvers from "../data/resolverData.js";
+import * as streamer from "../streamer.js";
+import * as util from "../util.js";
 
 const resolverRouter = new Router();
 

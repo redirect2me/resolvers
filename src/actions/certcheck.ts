@@ -4,9 +4,9 @@ import * as http from 'http';
 import * as https from 'https';
 import * as tls from 'tls';
 
-import { logger } from '../logger';
-import * as streamer from '../streamer';
-import * as util from '../util';
+import { logger } from "../logger.js";
+import * as streamer from "../streamer.js";
+import * as util from "../util.js";
 import { DateTime } from 'luxon';
 
 async function tlsCertCheckGet(ctx:any) {

@@ -1,14 +1,14 @@
 import { promises as dnsPromises } from 'dns';
 import Handlebars from 'handlebars';
-import Router from 'koa-router';
+import Router from '@koa/router';
 
-import * as dnssec from '../actions/dnssec';
-import * as mxcheck from '../actions/mxcheck';
-import * as nscheck from '../actions/nscheck';
-import * as resolvers from '../data/resolverData';
-import * as reverselookup from '../actions/reverselookup';
-import * as streamer from '../streamer';
-import * as util from '../util';
+import * as dnssec from '../actions/dnssec.js';
+import * as mxcheck from "../actions/mxcheck.js";
+import * as nscheck from "../actions/nscheck.js";
+import * as resolvers from "../data/resolverData.js";
+import * as reverselookup from "../actions/reverselookup.js";
+import * as streamer from "../streamer.js";
+import * as util from "../util.js";
 
 const dnsRouter = new Router();
 

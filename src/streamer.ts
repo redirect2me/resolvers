@@ -1,7 +1,7 @@
 import { PassThrough } from 'stream';
 //import Koa from 'koa';
 
-import { logger } from './logger';
+import { logger } from "./logger.js";
 
 async function streamResponse(ctx: any, title:string, fn:(s:PassThrough) => Promise<void>): Promise<any> {
 

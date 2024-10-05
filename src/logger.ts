@@ -1,7 +1,7 @@
-import Pino from 'pino';
+import { pino as Pino } from 'pino';
 //import PinoCaller from 'pino-caller';
 
-import config from './config';
+import config from "./config.js";
 
 
 const options:Pino.LoggerOptions = {

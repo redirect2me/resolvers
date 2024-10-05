@@ -1,12 +1,14 @@
 import * as punycode from 'punycode';
-import Router from 'koa-router';
+import Router from '@koa/router';
 import path from 'path';
 import * as wsw from 'whoisserver-world'
+import * as url from "url";
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
-import * as rdapData from '../data/rdapData';
-import { ChangeLog } from '../changelog';
-import { ChangeLogUI } from '../ChangeLogUI';
-import * as domainData from '../data/domainData';
+import * as rdapData from "../data/rdapData.js";
+import { ChangeLog } from "../changelog.js";
+import { ChangeLogUI } from "../ChangeLogUI.js";
+import * as domainData from "../data/domainData.js";
 
 const tldsRouter = new Router();
 

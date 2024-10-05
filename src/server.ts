@@ -1,10 +1,7 @@
-require('source-map-support').install(); // Required for using source-maps with logging
-
-//import { promises as dnsPromises } from 'dns';
 import Handlebars from 'handlebars';
 import Koa from 'koa';
-const flash = require('koa-better-flash');
-import KoaBody from 'koa-body';
+import flash from 'koa-better-flash';
+import { koaBody } from 'koa-body';
 import KoaPinoLogger from 'koa-pino-logger';
 import KoaSession from 'koa-session';
 import KoaStatic from 'koa-static';
@@ -13,25 +10,27 @@ import { DateTime } from 'luxon';
 import * as path from 'path';
 import * as punycode from 'punycode';
 import * as transliteration from 'transliteration';
+import * as url from 'url';
 
-import config from './config';
-import * as asn from './data/maxmindData';
-import { resolverRouter } from './routers/resolverRouter';
-import { domainRouter } from './routers/domainRouter';
-import { httpRouter } from './routers/httpRouter';
-import { ipRouter } from './routers/ipRouter';
-import { logger , options as loggerOptions } from './logger';
-import { cryptoRouter } from './routers/cryptoRouter';
-import { datagenRouter } from './routers/datagenRouter';
-import { dnsRouter } from './routers/dnsRouter';
-import { pslRouter, pslChangeLogRouter } from './routers/pslRouter';
-import * as resolvers from './data/resolverData';
-import { rootRouter } from './routers/rootRouter';
-import { tldsRouter, tldsChangeLogRouter } from './routers/tldsRouter';
-import { infoRouter } from './routers/infoRouter';
-import * as domains from './data/domainData';
-import * as rdapData from './data/rdapData';
-import * as util from './util';
+import config from "./config.js";
+import * as asn from "./data/maxmindData.js";
+import { resolverRouter } from "./routers/resolverRouter.js";
+import { domainRouter } from "./routers/domainRouter.js";
+import { httpRouter } from "./routers/httpRouter.js";
+import { ipRouter } from "./routers/ipRouter.js";
+import { logger, options as loggerOptions } from "./logger.js";
+import { cryptoRouter } from "./routers/cryptoRouter.js";
+import { datagenRouter } from "./routers/datagenRouter.js";
+import { dnsRouter } from "./routers/dnsRouter.js";
+import { pslRouter, pslChangeLogRouter } from "./routers/pslRouter.js";
+import * as resolvers from "./data/resolverData.js";
+import { rootRouter } from "./routers/rootRouter.js";
+import { tldsRouter, tldsChangeLogRouter } from "./routers/tldsRouter.js";
+import { infoRouter } from "./routers/infoRouter.js";
+import * as domains from "./data/domainData.js";
+import * as rdapData from "./data/rdapData.js";
+import * as util from "./util.js";
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 process.on('unhandledRejection', err => {
     logger.error({ err }, 'unhandledRejection');
@@ -41,7 +40,7 @@ const app = new Koa();
 
 app.proxy = true
 app.use(KoaPinoLogger(loggerOptions));
-app.use(KoaBody({
+app.use(koaBody({
     multipart: true,
   }));
 app.use(KoaStatic("static", { maxage: 24 * 60 * 60 * 1000 }));

@@ -1,7 +1,7 @@
 {
   "delay": "0",
-  "exec": "tsc && npm run start | pino-pretty",
+  "exec": "npm run build && npm run start | pino-pretty",
   "ext": "json,ts",
-  "ignore": [ ".idea/*", "dist/*" ],
+  "ignore": [ ".idea/*", "dist/*", "views/*" ],
   "verbose": true
 }

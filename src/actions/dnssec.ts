@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-import * as util from '../util';
+import * as util from "../util.js";
 
 const axiosInstance = axios.create({
     headers: { 'User-Agent': 'resolve.rs/1.0' },

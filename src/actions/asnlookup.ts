@@ -1,8 +1,8 @@
 import Handlebars from 'handlebars';
 import * as net from 'net';
 
-import * as asn from '../data/maxmindData';
-import * as util from '../util';
+import * as asn from "../data/maxmindData.js";
+import * as util from "../util.js";
 
 async function asnLookupApi(ctx: any, ip: string) {
 

@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-import config from '../config';
+import config from "../config.js";
 
 async function ip2locationioLookup(ctx: any) {
     const ip = ctx.query['ip'];

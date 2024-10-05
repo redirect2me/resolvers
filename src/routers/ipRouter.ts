@@ -1,34 +1,36 @@
 import { promises as fsPromises } from 'fs';
-import Router from 'koa-router';
+import Router from '@koa/router';
 import * as path from 'path';
 import * as yaml from 'js-yaml';
-//import * as punycode from 'punycode';
-import * as asnlookup from '../actions/asnlookup';
+import * as url from 'url';
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
+
+import * as asnlookup from "../actions/asnlookup.js";
 //import * as domains from '../data/domainData';
-import * as maxmind from '../data/maxmindData';
-import { getCurrentIP } from '../util';
+import * as maxmind from "../data/maxmindData.js";
+import { getCurrentIP } from "../util.js";
 //import { URL } from 'url';
 
-import * as certcheck from '../actions/certcheck';
-import { bigdatacloudLookup } from '../actions/bigdatacloudlookup';
-import { keycdnLookup } from '../actions/keycdnlookup';
-import { ipstackLookup } from '../actions/ipstacklookup';
-import { ipdataLookup } from '../actions/ipdatalookup';
-import { ip_apiLookup } from '../actions/ip_apilookup';
-import { ipapiLookup } from '../actions/ipapilookup';
-import { ipapiisLookup } from '../actions/ipapiislookup';
-import { ipinfoLookup } from '../actions/ipinfolookup';
-import { ipinsightLookup } from '../actions/ipinsightlookup';
-import { abstractapiLookup } from '../actions/abstractapilookup';
-import { ip2locationLookup } from '../actions/ip2locationlookup';
-import { ip2locationioLookup } from '../actions/ip2locationiolookup';
-import { ipregistryLookup } from '../actions/ipregistrylookup';
-import { labstackLookup } from '../actions/labstacklookup';
-import { radarioLookup } from '../actions/radariolookup';
-import { astroipLookup } from '../actions/astroiplookup';
+import * as certcheck from "../actions/certcheck.js";
+import { bigdatacloudLookup } from "../actions/bigdatacloudlookup.js";
+import { keycdnLookup } from "../actions/keycdnlookup.js";
+import { ipstackLookup } from "../actions/ipstacklookup.js";
+import { ipdataLookup } from "../actions/ipdatalookup.js";
+import { ip_apiLookup } from "../actions/ip_apilookup.js";
+import { ipapiLookup } from "../actions/ipapilookup.js";
+import { ipapiisLookup } from "../actions/ipapiislookup.js";
+import { ipinfoLookup } from "../actions/ipinfolookup.js";
+import { ipinsightLookup } from "../actions/ipinsightlookup.js";
+import { abstractapiLookup } from "../actions/abstractapilookup.js";
+import { ip2locationLookup } from "../actions/ip2locationlookup.js";
+import { ip2locationioLookup } from "../actions/ip2locationiolookup.js";
+import { ipregistryLookup } from "../actions/ipregistrylookup.js";
+import { labstackLookup } from "../actions/labstacklookup.js";
+import { radarioLookup } from "../actions/radariolookup.js";
+import { astroipLookup } from "../actions/astroiplookup.js";
 
-import config from '../config';
-import * as util from '../util';
+import config from "../config.js";
+import * as util from "../util.js";
 
 const ipRouter = new Router();
 

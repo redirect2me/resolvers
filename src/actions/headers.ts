@@ -1,7 +1,7 @@
 //import Handlebars from 'handlebars';
 import axios from 'axios';
 
-import * as util from '../util';
+import * as util from "../util.js";
 
 
 async function headersApi(ctx: any, targetUrl: string) {
