@@ -1,7 +1,6 @@
 //import { promises as fsPromises } from 'fs';
 import HaikunatorImpl from "haikunator";
 const Haikunator = HaikunatorImpl as unknown as typeof HaikunatorImpl.default;
-//import Handlebars from 'handlebars';
 import Koa from 'koa';
 import Router from '@koa/router';
 

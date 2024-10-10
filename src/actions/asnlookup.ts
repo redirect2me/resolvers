@@ -1,4 +1,4 @@
-import Handlebars from 'handlebars';
+import handlebars from 'handlebars';
 import * as net from 'net';
 
 import * as asn from "../data/maxmindData.js";
@@ -50,7 +50,7 @@ async function asnLookupGet(ctx: any) {
   const ip = ctx.query.ip || util.getCurrentIP(ctx);
 
     if (net.isIP(ip) == 0) {
-    ctx.flash('error', `${Handlebars.escapeExpression(ip)} is not a valid IP address!`);
+    ctx.flash('error', `${handlebars.escapeExpression(ip)} is not a valid IP address!`);
   }
 
   const asndata = asn.asnLookup(ip);

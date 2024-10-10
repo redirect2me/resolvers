@@ -1,4 +1,4 @@
-import Handlebars from 'handlebars';
+import handlebars from 'handlebars';
 import Koa from 'koa';
 import flash from 'koa-better-flash';
 import { koaBody } from 'koa-body';
@@ -63,7 +63,7 @@ app.use(async (ctx, next) => {
 });
 
 
-function displayFlash(ctx:Koa.Context):Handlebars.SafeString|string {
+function displayFlash(ctx:Koa.Context):handlebars.SafeString|string {
     if (!ctx) {
         return '';
     }
@@ -93,21 +93,21 @@ function displayFlash(ctx:Koa.Context):Handlebars.SafeString|string {
         }
     }
 
-    return new Handlebars.SafeString(retVal);
+    return new handlebars.SafeString(retVal);
 }
-Handlebars.registerHelper('flash', displayFlash);
+handlebars.registerHelper('flash', displayFlash);
 
 app.use(KoaViews(path.join(__dirname, '..', 'views'), {
     autoRender: false,
     map: { hbs: 'handlebars' },
     options: {
         helpers: {
-            'arrayToHtml': function (lines: any): Handlebars.SafeString {
+            'arrayToHtml': function (lines: any): handlebars.SafeString {
               let retVal = "";
               for (const line of lines) {
-                retVal += Handlebars.escapeExpression(line) + "<br/>";
+                retVal += handlebars.escapeExpression(line) + "<br/>";
               }
-              return new Handlebars.SafeString(retVal);
+              return new handlebars.SafeString(retVal);
             },
             'encodeURIComponent': function(a:any) {
                 return encodeURIComponent(a)

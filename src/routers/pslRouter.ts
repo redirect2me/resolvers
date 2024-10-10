@@ -1,4 +1,4 @@
-import Handlebars from 'handlebars';
+import handlebars from 'handlebars';
 import Router from '@koa/router';
 import path from 'path';
 import * as tldts from 'tldts';
@@ -35,7 +35,7 @@ pslRouter.get('/psl/test.html', async (ctx: any) => {
     let parsed: any;
     if (hostname) {
         if (!util.hasValidPublicSuffix(hostname)) {
-            ctx.flash('error', `${Handlebars.escapeExpression(hostname)} is not a valid public domain!`);
+            ctx.flash('error', `${handlebars.escapeExpression(hostname)} is not a valid public domain!`);
         } else {
             parsed = tldts.parse(hostname);
         }

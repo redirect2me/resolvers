@@ -1,5 +1,5 @@
 import * as crypto from 'crypto';
-import Handlebars from 'handlebars';
+import handlebars from 'handlebars';
 import * as http from 'http';
 import * as https from 'https';
 import * as tls from 'tls';
@@ -42,7 +42,7 @@ async function tlsCertCheckPost(ctx:any) {
   }
 
   if (!util.hasValidPublicSuffix(hostname)) {
-    ctx.flash('error', `${Handlebars.escapeExpression(hostname)} is not a valid hostname!`);
+    ctx.flash('error', `${handlebars.escapeExpression(hostname)} is not a valid hostname!`);
     ctx.redirect(`tls-cert-check.html?hostname=${encodeURIComponent(hostname)}`);
     return;
   }
@@ -281,14 +281,14 @@ async function httpsCertCheckPost(ctx:any) {
             const url = new URL(hostname);
             hostname = url.host;
         } catch (err) {
-            ctx.flash('error', `Unable to parse: ${Handlebars.escapeExpression(err.message)}`);
+            ctx.flash('error', `Unable to parse: ${handlebars.escapeExpression(err.message)}`);
             ctx.redirect(`cert-check.html?hostname=${encodeURIComponent(hostname)}`);
             return;
         }
     }
 
     if (!util.hasValidPublicSuffix(hostname)) {
-      ctx.flash('error', `${Handlebars.escapeExpression(hostname)} is not a valid hostname!`);
+      ctx.flash('error', `${handlebars.escapeExpression(hostname)} is not a valid hostname!`);
       ctx.redirect(`cert-check.html?hostname=${encodeURIComponent(hostname)}`);
       return;
     }

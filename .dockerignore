@@ -1,0 +1,16 @@
+*.crt
+Dockerfile.*
+.DS_Store
+.git
+.github
+.gitignore
+.editorconfig
+*.env*
+*.key
+*.log
+*.md
+node_modules
+*.pem
+*.sh
+*.tmp
+tmp*

@@ -1,7 +1,4 @@
 import Router from '@koa/router';
-import * as os from 'os';
-import * as url from 'url';
-const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 import * as asn from "../data/maxmindData.js";
 import * as resolvers from "../data/resolverData.js";
@@ -54,30 +51,6 @@ rootRouter.get('/status.json', async (ctx) => {
       retVal["tech"] = "NodeJS " + process.version;
       retVal["lastmod"] = process.env.LASTMOD || '(not set)';
       retVal["commit"] = process.env.COMMIT || '(not set)';
-      retVal["__dirname"] = __dirname;
-      retVal["__filename"] = __filename;
-      retVal["os.hostname"] = os.hostname();
-      retVal["os.type"] = os.type();
-      retVal["os.platform"] = os.platform();
-      retVal["os.arch"] = os.arch();
-      retVal["os.release"] = os.release();
-      retVal["os.uptime"] = os.uptime();
-      retVal["os.loadavg"] = os.loadavg();
-      retVal["os.totalmem"] = os.totalmem();
-      retVal["os.freemem"] = os.freemem();
-      retVal["os.cpus.length"] = os.cpus().length;
-      // too much junk: retVal["os.networkInterfaces"] = os.networkInterfaces();
-
-      retVal["process.arch"] = process.arch;
-      retVal["process.cwd"] = process.cwd();
-      retVal["process.execPath"] = process.execPath;
-      retVal["process.memoryUsage"] = process.memoryUsage();
-      retVal["process.platform"] = process.platform;
-      retVal["process.release"] = process.release;
-      retVal["process.title"] = process.title;
-      retVal["process.uptime"] = process.uptime();
-      retVal["process.version"] = process.version;
-      retVal["process.versions"] = process.versions;
 
       retVal["resolvers"] = resolvers.getAll().length;
 

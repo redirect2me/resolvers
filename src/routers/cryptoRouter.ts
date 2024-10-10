@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import { promises as fsPromises } from 'fs';
-import Handlebars from 'handlebars';
+import handlebars from 'handlebars';
 import Koa from 'koa';
 import Router from '@koa/router';
 
@@ -33,10 +33,10 @@ function toHexSeparated(bytes:Buffer):string {
     return dest.join(' ');
 }
 
-function toHexPretty(bytes:Buffer):Handlebars.SafeString|string {
+function toHexPretty(bytes:Buffer):handlebars.SafeString|string {
 
     if (bytes.length == 0) {
-        return new Handlebars.SafeString("<i>(none)</i>");
+        return new handlebars.SafeString("<i>(none)</i>");
     }
     if (bytes.length < 32) {
         return toHexSeparated(bytes);

@@ -1,4 +1,4 @@
-import Handlebars from 'handlebars';
+import handlebars from 'handlebars';
 import Router from '@koa/router';
 import { DateTime } from 'luxon';
 
@@ -30,7 +30,7 @@ class ChangeLogUI {
                 aplink: this.aplink,
                 count: this.changeLog.getKeys().length,
                 data: this.changeLog.getAll(),
-                h1: new Handlebars.SafeString(`<a href="../index.html">${Handlebars.escapeExpression(this.title)}</a> Change Log`),
+                h1: new handlebars.SafeString(`<a href="../index.html">${handlebars.escapeExpression(this.title)}</a> Change Log`),
                 rssUrl: `https://resolve.rs${this.mount}/rss.xml`,
                 title: `${this.title} Change Log`,
             });
@@ -44,7 +44,7 @@ class ChangeLogUI {
                 ctx.body = await ctx.render('_changelog/_index.hbs', {
                     data,
                     date,
-                    h1: new Handlebars.SafeString(`<a href="../index.html">${Handlebars.escapeExpression(this.title)}</a> Changes on ${date}`),
+                    h1: new handlebars.SafeString(`<a href="../index.html">${handlebars.escapeExpression(this.title)}</a> Changes on ${date}`),
                     next: this.changeLog.getNext(date),
                     previous: this.changeLog.getPrevious(date),
                     title: `${this.title} Changes on ${date}`,

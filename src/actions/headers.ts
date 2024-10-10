@@ -1,4 +1,3 @@
-//import Handlebars from 'handlebars';
 import axios from 'axios';
 
 import * as util from "../util.js";

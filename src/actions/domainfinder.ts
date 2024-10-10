@@ -1,5 +1,5 @@
 import { promises as dnsPromises } from 'dns';
-import Handlebars from 'handlebars';
+import handlebars from 'handlebars';
 
 import { niceTlds as tlds } from "../data/domainData.js";
 import * as streamer from "../streamer.js";
@@ -23,7 +23,7 @@ async function domainFinderPost(ctx:any) {
   word = word.toLowerCase().trim();
 
   if (!word.match(/^[a-z0-9]+/)) {
-    ctx.flash('error', `${Handlebars.escapeExpression(word)} is not a valid word: it can only contain a-z and 0-9!`);
+    ctx.flash('error', `${handlebars.escapeExpression(word)} is not a valid word: it can only contain a-z and 0-9!`);
     ctx.redirect(`finder.html?word=${encodeURIComponent(word)}`);
     return;
   }

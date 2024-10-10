@@ -1,5 +1,5 @@
 import { promises as dnsPromises } from 'dns';
-import Handlebars from 'handlebars';
+import handlebars from 'handlebars';
 import * as net from 'net';
 
 import * as asn from "../data/maxmindData.js";
@@ -71,7 +71,7 @@ async function reverseLookupPost(ctx: any) {
   }
 
   if (net.isIP(ip) == 0) {
-    ctx.flash('error', `${Handlebars.escapeExpression(ip)} is not a valid IP address!`);
+    ctx.flash('error', `${handlebars.escapeExpression(ip)} is not a valid IP address!`);
     ctx.redirect(`/dns/reverse-lookup.html?ip=${encodeURIComponent(ip)}`);
     return;
   }

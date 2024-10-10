@@ -1,5 +1,5 @@
 import { promises as dnsPromises } from 'dns';
-import Handlebars from 'handlebars';
+import handlebars from 'handlebars';
 import Router from '@koa/router';
 
 import * as dnssec from '../actions/dnssec.js';
@@ -41,12 +41,12 @@ dnsRouter.post('/dns/lookup.html', async (ctx:any) => {
       const url = new URL(hostname);
       hostname = url.hostname;
     } catch (err) {
-      ctx.flash('error', `Unable to extract a hostname from "${Handlebars.escapeExpression(hostname)}"!`);
+      ctx.flash('error', `Unable to extract a hostname from "${handlebars.escapeExpression(hostname)}"!`);
       ctx.redirect(`/dns/lookup.html?hostname=${encodeURIComponent(hostname)}`);
       return;
     }
     if (!util.hasValidPublicSuffix(hostname)) {
-      ctx.flash('error', `${Handlebars.escapeExpression(hostname)} is not a valid hostname!`);
+      ctx.flash('error', `${handlebars.escapeExpression(hostname)} is not a valid hostname!`);
       ctx.redirect(`/dns/lookup.html?hostname=${encodeURIComponent(hostname)}`);
       return;
     }

@@ -39,14 +39,14 @@
     "@types/koa-session": "^6.4.2",
     "@types/koa-static": "^4.0.1",
     "@types/luxon": "^3.3.2",
-    "@types/node": "^20.16.10",
+    "@types/node": "^20.16.11",
     "@types/psl": "^1.1.0",
     "@types/punycode": "^2.1.0",
     "@types/tmp": "^0.2.0",
     "@types/urijs": "^1.19.3",
     "@types/uuid": "^10.0.0",
     "pino-pretty": "^11.2.2",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.3"
   },
   "engines": {
     "node": ">=20",
