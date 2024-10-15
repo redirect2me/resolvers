@@ -1,0 +1,3 @@
+-preview.wdh.app
+-t.hrsn.dev
+-t.hrsn.net
