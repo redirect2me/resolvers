@@ -1,0 +1,10 @@
++co.io
++edu.io
+-gov.cu
++gov.io
+-md.ci
++mil.io
++net.io
++nom.io
++org.io
+-presse.ci
