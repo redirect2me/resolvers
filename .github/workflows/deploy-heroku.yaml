@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: git checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v4
 
     - name: deploy to Heroku
       run: git push https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git origin/main:main
