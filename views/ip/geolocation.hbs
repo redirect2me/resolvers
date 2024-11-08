@@ -47,6 +47,10 @@
             <td id="browser"><button class="btn btn-sm btn-outline-primary me-2" onclick="browser();">Try now</button>  You will need to grant permission in the popup window.</td>
         </tr>
         <tr>
+            <td><a href="https://www.bunny.net/">Bunny.net</a></td>
+            <td id="bunny">Pending...</td>
+        </tr>
+        <tr>
             <td><a href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare</a></td>
             <td id="cloudflare">Pending...</td>
         </tr>
@@ -183,6 +187,7 @@
     <!--<li><a class="fw-bold" href="https://ipinfo.backchannel.re/">Backchannel Research</a> - free, MaxMind data with a few additions</li>-->
     <li><a class="fw-bold" href="https://www.bigdatacloud.com/">BigDataCloud</a> - free for 10,000/month, then $2/month per 10,000.</li>
     <li><a class="fw-bold" href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API">Browser</a> - 100% client-side JavaScript, requires a user to accept permissions in a popup window. <span class="badge text-bg-info">browser only</span></li>
+    <li><a class="fw-bold" href="https://www.bunny.net/">Bunny.net</a> - includes HTTP headers with state and country if you are using their CDN. <span class="badge text-bg-info">browser only</span></li>
     <li><a class="fw-bold" href="https://support.cloudflare.com/hc/en-us/articles/200168236-Configuring-Cloudflare-IP-Geolocation">Cloudflare CDN</a> - includes an HTTP header with Country if you are using their CDN. <span class="badge text-bg-info">browser only</span></li>
     <li><a class="fw-bold" href="https://developers.cloudflare.com/fundamentals/reference/http-request-headers/">Cloudflare Workers</a> - includes headers on incoming requests. <span class="badge badge-info">browser only</span></li>
     <li><a href="https://www.cyscape.com/products/chawk/">CountryHawk</a> (Cyscape) - $669 per server per year</li>
@@ -446,6 +451,7 @@
 
 {{#if is_current_ip}}
     remoteLookup('appengine', 'https://ae-geo.redirect2.me/api/appengine.json');
+    remoteLookup('bunny', 'https://bunny-geo.redirect2.me/api/bunny.json');
     remoteLookup('aws', 'https://aws-geo.redirect2.me/api/aws.json');
     remoteLookup('cloudflare', 'https://cf-geo.redirect2.me/api/cloudflare.json');
     remoteLookup('cloudflare-workers', 'https://cfw-geo.redirect2.me/api/cfw.json');
