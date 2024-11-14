@@ -1,0 +1,7 @@
++lodz.pl
++pabianice.pl
++pages-research.it.hs-heilbronn.de
++plock.pl
++sieradz.pl
++skierniewice.pl
++zgierz.pl
