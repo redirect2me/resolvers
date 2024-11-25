@@ -1,0 +1,10 @@
+-com.is
+-edu.is
+-gov.is
++heyflow.page
++heyflow.site
+-info.au
+-int.is
+-net.is
+-nom.ad
+-org.is
