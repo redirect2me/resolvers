@@ -1,0 +1,11 @@
++ac.eg
++info.eg
++io.noc.ruhr-uni-bochum.de
++me.eg
++rub.de
++ruhr-uni-bochum.de
++sport.eg
++tv.eg
+-商業.tw
+-組織.tw
+-網路.tw
