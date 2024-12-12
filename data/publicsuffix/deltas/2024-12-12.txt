@@ -1,0 +1,6 @@
+-aaa.vodka
++dyn.addr.tools
+-herokussl.com
++myaddr.dev
++myaddr.io
++myaddr.tools
