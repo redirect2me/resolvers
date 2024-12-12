@@ -1,0 +1,53 @@
+{{>above}}
+
+<script>
+    function onImageError(event) {
+        event.target.src = '/images/broken-image.svg';
+    }
+</script>
+
+{{#if results}}
+<h2>Results for {{domain}}</h2>
+
+<div class="row mt-3">
+    <div class="col d-flex flex-wrap justify-content-center">
+        {{#each results}}
+        <div class="card m-3 d-inline-block" style="width:18rem;background-image:url('/images/memphis-mini.png');">
+            <img src="{{logoUrl}}" class="card-img-top p-3" alt="logo for {{../domain}} from {{provider}}" onerror="onImageError(event)">
+            <h5 class="card-footer border-top bg-body-tertiary mb-0"><a href="{{providerUrl}}">{{provider}}</a></h5>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+<hr>
+<h2>Try another</h2>
+{{/if}}
+
+<div class="container d-flex flex-column">
+    <div class="row align-items-center justify-content-center no-gutters">
+        <div class="col-12 col-md-5 col-lg-4 py-8 py-md-11">
+            <form action="logo-api-comparison.html" class="mb-6" method="GET">
+                <div class="mb-3">
+                    <label class="form-label" for="domain">
+                        Domain name
+                    </label>
+                    <input type="text" class="form-control" id="domain" name="domain" placeholder=""
+                        value="{{domain}}" />
+                </div>
+                <div class="d-grid mb-3">
+                    <button class="btn btn-primary" type="submit">
+                        Test
+                    </button>
+                </div>
+                <div class="d-grid mb-3">
+                    <a class="btn btn-outline-primary" href="random-logo.html">
+                        Try a random domain
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div> <!-- / .row -->
+</div> <!-- / .container -->
+
+{{>below}}

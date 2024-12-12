@@ -23,6 +23,13 @@ const config = convict({
     format: String,
     sensitive: true,
   },
+  brandfetchApiKey: {
+    default: null,
+    doc: 'API key for brandfetch.com',
+    env: 'BRANDFETCH_API_KEY',
+    format: String,
+    sensitive: true,
+ },
   buildId: {
     default: process.env.COMMIT || `local@${new Date().getTime()}`,
     doc: 'Unique Build ID (commit hash or timestamp) for cache busting',
@@ -117,6 +124,13 @@ const config = convict({
     doc: 'pino logging level [fatal, error, warn, info, debug, trace]',
     env: 'LOG_LEVEL',
     format: ['fatal', 'error', 'warn', 'info', 'debug', 'trace'],
+  },
+  logodevToken: {
+    default: null,
+    doc: 'API token for logodev.com',
+    env: 'LOGODEV_TOKEN',
+    format: String,
+    sensitive: true,
   },
   maxmindUrlBase: {
     default: null,
