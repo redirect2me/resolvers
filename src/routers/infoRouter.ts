@@ -80,7 +80,7 @@ infoRouter.get("/info/logo-api-comparison.html", async (ctx: any) => {
             results.push({
                 provider: "Brandfetch",
                 providerUrl: "https://brandfetch.com/developers",
-                logoUrl: `https://cdn.brandfetch.io/${domain}/w/256/h/256?c=${config.get(
+                logoUrl: `https://cdn.brandfetch.io/${encodeURIComponent(domain)}/w/256/h/256?c=${config.get(
                     "brandfetchApiKey"
                 )}`,
             });
@@ -88,31 +88,31 @@ infoRouter.get("/info/logo-api-comparison.html", async (ctx: any) => {
         results.push({
             provider: "Clearbit",
             providerUrl: "https://clearbit.com/",
-            logoUrl: `https://logo.clearbit.com/${domain}`,
+            logoUrl: `https://logo.clearbit.com/${encodeURIComponent(domain)}`,
         });
         results.push({
             provider: "CUFinder",
             providerUrl: "https://cufinder.io/enrichment-engine/logo-api",
-            logoUrl: `https://api.cufinder.io/logo/${domain}`,
+            logoUrl: `https://api.cufinder.io/logo/${encodeURIComponent(domain)}`,
         });
         if (config.get("logodevToken")) {
             results.push({
                 provider: "logo.dev",
                 providerUrl: "https://logo.dev",
-                logoUrl: `https://img.logo.dev/${domain}?token=${config.get(
+                logoUrl: `https://img.logo.dev/${encodeURIComponent(domain)}?token=${encodeURIComponent(config.get(
                     "logodevToken"
-                )}`,
+                ) || "")}`,
             });
         }
         results.push({
             provider: "Lucky Logo",
-            providerUrl: "https://lucky.logosear.ch/",
-            logoUrl: `https://lucky.logosear.ch/logo?url=${domain}`,
+            providerUrl: `https://lucky.logosear.ch/all-logos.html?url=${encodeURIComponent(domain)}`,
+            logoUrl: `https://lucky.logosear.ch/logo?url=${encodeURIComponent(domain)}`,
         });
         results.push({
             provider: "Uplead",
             providerUrl: "https://www.uplead.com/free-company-logo-api/",
-            logoUrl: `https://logo.uplead.com/${domain}`,
+            logoUrl: `https://logo.uplead.com/${encodeURIComponent(domain)}`,
         });
     }
 
