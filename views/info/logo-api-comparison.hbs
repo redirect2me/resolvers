@@ -13,7 +13,7 @@
     <div class="col d-flex flex-wrap justify-content-center">
         {{#each results}}
         <div class="card m-3 d-inline-block" style="width:18rem;background-image:url('/images/memphis-mini.png');">
-            <img src="{{logoUrl}}" class="card-img-top p-3" alt="logo for {{../domain}} from {{provider}}" onerror="onImageError(event)">
+            <a href="https://view.svg.zone/view.html?zoom=max&amp;backUrl={{../encodedCurrentUrl}}&amp;url={{encodeURIComponent logoUrl}}"><img src="{{logoUrl}}" class="card-img-top p-3" alt="logo for {{../domain}} from {{provider}}" onerror="onImageError(event)"></a>
             <h5 class="card-footer border-top bg-body-tertiary mb-0"><a href="{{providerUrl}}">{{provider}}</a></h5>
         </div>
         {{/each}}

@@ -117,8 +117,9 @@ infoRouter.get("/info/logo-api-comparison.html", async (ctx: any) => {
     }
 
     ctx.body = await ctx.render("info/logo-api-comparison.hbs", {
-        title: "Logo API comparision",
+        title: `Logo API comparision`,
         domain,
+        encodedCurrentUrl: encodeURIComponent(ctx.request.href),
         results,
     });
 });
