@@ -7,6 +7,6 @@ set -o nounset
 COMMIT=$(git rev-parse --short HEAD)
 LASTMOD=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 
-git push heroku
+git push -f heroku
 
 heroku config:set "COMMIT=${COMMIT}" "LASTMOD=${LASTMOD}"
