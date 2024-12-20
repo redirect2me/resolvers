@@ -43,7 +43,11 @@
         <tr>
             <td>Registry</td>
             <td>
+            {{#if tld.registry}}
                 <a href="{{tld.registry}}">{{tld.registry}}</a>
+            {{else}}
+                <i>(none)</i>
+            {{/if}}
             </td>
         </tr>
         <tr>
