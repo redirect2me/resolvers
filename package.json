@@ -9,6 +9,7 @@
     "convict": "^6.2.3",
     "haikunator": "^2.1.2",
     "handlebars": "^4.7.3",
+    "isbot": "^5.1.18",
     "js-yaml": "^4.0.0",
     "koa": "^2.7.0",
     "koa-better-flash": "0.0.4",

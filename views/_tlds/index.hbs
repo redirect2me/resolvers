@@ -68,21 +68,19 @@
                 {{/each}}
             </td>
         </tr>
+        {{#if sampleDomains.length}}
         <tr>
             <td>Sample domains</td>
             <td>
-              {{#if sampleDomains.length}}
                 <details>
                   <summary>{{sampleDomains.length}}</summary>
                   {{#each sampleDomains}}
                   <a href="https://{{this}}/">{{this}}</a><br/>
                   {{/each}}
                 </details>
-                {{else}}
-                <i>(none)</i>
-                {{/if}}
             </td>
         </tr>
+        {{/if}}
         <tr>
             <td>Public Suffixes</td>
             <td>
