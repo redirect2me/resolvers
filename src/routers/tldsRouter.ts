@@ -86,18 +86,7 @@ tldsRouter.get('/tlds/:tld/index.html', async (ctx:any) => {
     });
 });
 
-function getUrls():string[] {
-    const retVal = [
-        "/tlds/index.html",
-    ];
 
-    Object.getOwnPropertyNames(wsw.tlds()).forEach((tldRaw) => {
-        const tld = punycode.toUnicode(tldRaw);
-        retVal.push(`/tlds/${tld}/index.html`);
-    });
-
-    return retVal;
-}
 
 const tldChangeLogUI: ChangeLogUI = new ChangeLogUI(
     new ChangeLog(path.join(__dirname, '../../data/icann/deltas')),
@@ -107,11 +96,18 @@ const tldChangeLogUI: ChangeLogUI = new ChangeLogUI(
     'https://botsin.space/@TLDChanges',
 );
 const tldsChangeLogRouter = tldChangeLogUI.changelogRouter;
-const tldsChangeLogGetUrls = tldChangeLogUI.getUrls;
 
-export {
-    tldsRouter,
-    getUrls,
-    tldsChangeLogRouter,
-    tldsChangeLogGetUrls,
+function getUrls(): string[] {
+    const retVal = ["/tlds/index.html"];
+
+    Object.getOwnPropertyNames(wsw.tlds()).forEach((tldRaw) => {
+        const tld = punycode.toUnicode(tldRaw);
+        retVal.push(`/tlds/${tld}/index.html`);
+    });
+
+    retVal.push(...tldChangeLogUI.getUrls());
+
+    return retVal;
 }
+
+export { getUrls, tldsChangeLogRouter, tldsRouter };

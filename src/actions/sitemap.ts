@@ -6,7 +6,7 @@ import * as infoRouter from '../routers/infoRouter.js';
 import * as ipRouter from '../routers/ipRouter.js';
 import * as tldsRouter from '../routers/tldsRouter.js';
 import * as resolverRouter from '../routers/resolverRouter.js';
-import { pslChangeLogGetUrls } from '../routers/pslRouter.js';
+import * as pslRouter from '../routers/pslRouter.js';
 
 async function sitemap(ctx:any) {
 
@@ -19,9 +19,8 @@ async function sitemap(ctx:any) {
     urls.push(...infoRouter.getUrls());
     urls.push(...ipRouter.getUrls());
     urls.push(...resolverRouter.getUrls());
-    urls.push(...pslChangeLogGetUrls());
+    urls.push(...pslRouter.getUrls());
     urls.push(...tldsRouter.getUrls());
-    urls.push(...tldsRouter.tldsChangeLogGetUrls());
 
     // hard-coded to avoid circular dependencies
     urls.push("/");

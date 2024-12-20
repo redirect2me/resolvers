@@ -58,10 +58,13 @@ const pslChangeLogUI:ChangeLogUI = new ChangeLogUI(
     'https://botsin.space/@PublicSuffixChanges',
 );
 const pslChangeLogRouter = pslChangeLogUI.changelogRouter;
-const pslChangeLogGetUrls = pslChangeLogUI.getUrls;
 
-export {
-    pslRouter,
-    pslChangeLogRouter,
-    pslChangeLogGetUrls,
+function getUrls() {
+    return [
+        '/psl/index.html',
+        '/psl/test.html',
+        ...pslChangeLogUI.getUrls(),
+    ];
 }
+
+export { getUrls, pslRouter, pslChangeLogRouter };

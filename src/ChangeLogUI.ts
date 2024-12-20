@@ -91,13 +91,18 @@ class ChangeLogUI {
                 ctx.status = 404;
             }
         });
+
+        this.getUrls = () => {
+            const keys = this.changeLog.getKeys().slice(0, 10);
+            const retVal = [`${this.mount}/index.html`];
+            for (const key of keys) {
+                retVal.push(`${this.mount}/${key}.html`);
+            }
+            return retVal;
+        }
     }
 
-    getUrls(): string[] {
-        return [
-            `${this.mount}/index.html`,
-        ];
-    }
+    getUrls: () => string[];
 }
 
 export { ChangeLogUI }
