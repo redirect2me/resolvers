@@ -1,0 +1,10 @@
++botda.sh
++botdash.app
++botdash.dev
++botdash.gg
++botdash.net
++botdash.xyz
+-curv.dev
+-diher.solutions
+-gon.pk
+-rss.my.id
