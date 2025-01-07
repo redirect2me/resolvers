@@ -36,6 +36,13 @@ const config = convict({
     env: 'BUILD_ID',
     format: String
   },
+  companyenrichAccessKey: {
+    default: null,
+    doc: 'Access key for companyenrich.com',
+    env: 'COMPANYENRICH_ACCESS_KEY',
+    format: String,
+    sensitive: true,
+  },
   ip2locationApiKey: {
     default: null,
     doc: 'API key for ip2location.com',
