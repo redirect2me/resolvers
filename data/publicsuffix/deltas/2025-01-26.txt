@@ -1,0 +1,4 @@
++edu.ug
++gov.ug
++mil.ug
++us.ug
