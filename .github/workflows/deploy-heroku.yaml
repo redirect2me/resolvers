@@ -18,14 +18,20 @@ jobs:
     steps:
     - name: git checkout
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
     - name: deploy to Heroku
       run: |
         git rev-parse main
         git ls-remote --heads https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git main
-        git push --verbose https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git main:main
+        git push --force --verbose https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git main:main
 
     - name: update env vars
-      run: heroku config:set --app ${{ secrets.HEROKU_APP_NAME }} "COMMIT=${GITHUB_SHA:0:7}" "LASTMOD=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+      run: |
+        echo "INFO: installing Heroku CLI"
+        npm i -g heroku
+        echo "INFO: updating env vars"
+        heroku config:set --app ${{ secrets.HEROKU_APP_NAME }} "COMMIT=${GITHUB_SHA:0:7}" "LASTMOD=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
