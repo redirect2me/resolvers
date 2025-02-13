@@ -1,0 +1,2 @@
++bubbleapps.io
++cdn.bubble.io
