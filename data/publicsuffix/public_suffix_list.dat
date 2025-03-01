@@ -5,8 +5,8 @@
 // Please pull this list from, and only from https://publicsuffix.org/list/public_suffix_list.dat,
 // rather than any other VCS sites. Pulling from any other URL is not guaranteed to be supported.
 
-// VERSION: 2025-02-27_07-53-30_UTC
-// COMMIT: 23f7ef2b96a01338ac761a395aa5d37572850567
+// VERSION: 2025-02-28_15-38-48_UTC
+// COMMIT: efd2e6619780eac110988b3b529c4a88fcd64d96
 
 // Instructions on pulling and using this list can be found at https://publicsuffix.org/list/.
 
@@ -15605,6 +15605,7 @@ pleskns.com
 wp2.host
 pdns.page
 plesk.page
+cpanel.site
 wpsquared.site
 
 // WebWaddle Ltd : https://webwaddle.com/
