@@ -1,0 +1,4 @@
++ai.kr
++io.kr
++it.kr
++me.kr
