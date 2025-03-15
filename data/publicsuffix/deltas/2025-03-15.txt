@@ -1,0 +1,2 @@
++*.inbrowser.dev
++*.inbrowser.link
