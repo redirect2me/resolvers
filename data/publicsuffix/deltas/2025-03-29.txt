@@ -1,0 +1,4 @@
++*.appwrite.run
++appwrite.global
++ipfs.storacha.link
++ipfs.w3s.link
