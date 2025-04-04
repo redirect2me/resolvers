@@ -1,0 +1,69 @@
+{{>above}}
+
+<script>
+    function onImageError(event) {
+        event.target.src = '/images/broken-image.svg';
+    }
+</script>
+
+{{#if results}}
+<h2>Results</h2>
+
+<table class="table table-striped border-bottom">
+    <tbody>
+        <tr>
+            <td>URL</td>
+            <td><a href="{{results.url}}">{{results.url}}</a></td>
+        </tr>
+        <tr>
+            <td>Account</td>
+            <td>{{results.account}}</td>
+        </tr>
+        <tr>
+            <td>Is it an ActivityPub user?</td>
+            <td>
+                {{#if results.success}}Yes{{else}}No{{/if}}
+            </td>
+        </tr>
+        <tr>
+            <td>Message</td>
+            <td>{{results.message}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<details>
+    <summary>Raw data</summary>
+    <pre>{{toJson results}}</pre>
+</details>
+
+<hr>
+<h2>Try another</h2>
+{{else}}
+<div class="alert alert-info" role="alert">
+    Enter a URL to see if it is a valid ActivityPub user that can be followed.
+</div>
+{{/if}}
+
+<div class="container d-flex flex-column">
+    <div class="row align-items-center justify-content-center no-gutters">
+        <div class="col-12 col-md-5 col-lg-4 py-8 py-md-11">
+            <form action="activitypub-detector.html" class="mb-6" method="GET">
+                <div class="mb-3">
+                    <label class="form-label" for="url">
+                        URL
+                    </label>
+                    <input type="text" class="form-control" id="url" name="url" placeholder="https://example.com/@user"
+                        value="{{url}}" />
+                </div>
+                <div class="d-grid mb-3">
+                    <button class="btn btn-primary" type="submit">
+                        Test
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div> <!-- / .row -->
+</div> <!-- / .container -->
+
+{{>below}}

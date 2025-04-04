@@ -18,8 +18,135 @@ infoRouter.get("/info/index.html", async (ctx) => {
     ctx.redirect("/tools.html#info");
 });
 
-infoRouter.get("/info/companyenrich", async (ctx: any) => {
+type ActivityPubData = {
+    success: boolean;
+    message: string;
+    url: string;
+    error?: string;
+    isWebfinger?: boolean;
+    account?: string;
+    webfingerUrl?: string;
+};
 
+async function activityPubData(q: string): Promise<ActivityPubData> {
+    if (!q) {
+        return {
+            success: false,
+            message: "No URL provided",
+            url: "",
+        };
+    }
+    let theUrl: URL | undefined;
+    try {
+        theUrl = new URL(q);
+    } catch (err) {
+        return {
+            success: false,
+            message: "Invalid URL: unable to parse",
+            error: err.message,
+            url: q,
+        };
+    }
+
+    if (!util.hasValidPublicSuffix(theUrl.hostname)) {
+        return {
+            success: false,
+            message: "Invalid URL: not a public suffix",
+            url: theUrl.href,
+        };
+    }
+
+    if (
+        theUrl.pathname.length < 3 ||
+        (theUrl.pathname.charAt(2) != "@") == false
+    ) {
+        return {
+            success: false,
+            message: "Invalid URL: not an account URL",
+            url: theUrl.href,
+        };
+    }
+
+    const account = `${theUrl.pathname.slice(2)}@${theUrl.hostname}`;
+    const webfingerUrl = `https://${encodeURIComponent(
+        theUrl.hostname
+    )}/.well-known/webfinger?resource=acct:${encodeURIComponent(account)}`;
+
+    let resp: Response | undefined;
+    try {
+        resp = await fetch(webfingerUrl, {
+            method: "GET",
+            headers: {
+                Accept: "application/jrd+json",
+                "User-Agent": `resolve.rs/1.0 ActivityPub Detector`,
+            },
+        });
+    } catch (err) {
+        return {
+            success: false,
+            message: "Webfinger fetch failed",
+            url: theUrl.href,
+            error: err.message,
+            account,
+            webfingerUrl,
+        };
+    }
+    //https://mastodon.social/.well-known/webfinger?resource=acct:%40gargron%40mastodon.social
+    //https://mastodon.social/.well-known/webfinger?resource=acct:gargron@mastodon.social
+    if (resp.status !== 200) {
+        return {
+            success: false,
+            message: `Webfinger lookup error`,
+            url: theUrl.href,
+            error: `HTTP status code ${resp.status}`,
+            account,
+            webfingerUrl,
+        };
+    }
+
+    let json: any;
+    try {
+        json = await resp.json();
+    } catch (err) {
+        return {
+            success: false,
+            message: "Webfinger response parse error",
+            url: theUrl.href,
+            error: err.message,
+            account,
+            webfingerUrl,
+        };
+    }
+
+    logger.debug({ json, account, webfingerUrl }, "Webfinger response");
+
+    return {
+        success: true,
+        message: "ActivityPub detected via Webfinger",
+        url: theUrl.href,
+        isWebfinger: true,
+        account,
+        webfingerUrl,
+    };
+}
+
+infoRouter.get("/info/activitypub-detector.html", async (ctx) => {
+
+    const q = util.getFirst(ctx.request.query.url || "");
+    ctx.body = await ctx.render("info/activitypub-detector.hbs", {
+        title: "ActivityPub Detector",
+        results: q ? await activityPubData(q) : null,
+        url: q,
+    });
+});
+
+infoRouter.get("/info/activitypub-detector.json", async (ctx) => {
+    const q = util.getFirst(ctx.request.query.url || "");
+
+    util.handleJsonp(ctx, await activityPubData(q));
+});
+
+infoRouter.get("/info/companyenrich", async (ctx: any) => {
     const domain = ctx.request.query.domain;
     if (!domain || !config.get("companyenrichAccessKey")) {
         ctx.status = 400;
@@ -49,7 +176,10 @@ infoRouter.get("/info/companyenrich", async (ctx: any) => {
                 },
             }
         );
-        logger.trace({ data: response.data, domain, provider: "companyenrich" }, "Logo fetch result");
+        logger.trace(
+            { data: response.data, domain, provider: "companyenrich" },
+            "Logo fetch result"
+        );
         if (response.status == 200) {
             if (!response.data.logo_url) {
                 ctx.body = {
@@ -61,7 +191,10 @@ infoRouter.get("/info/companyenrich", async (ctx: any) => {
             ctx.redirect(response.data.logo_url);
             return;
         }
-        logger.warn({ domain, provider: "companyenrich", raw: response.data }, "Logo fetch error");
+        logger.warn(
+            { domain, provider: "companyenrich", raw: response.data },
+            "Logo fetch error"
+        );
         ctx.body = {
             success: false,
             message: `Status from api.companyenrich.com: ${response.status}`,
