@@ -1,0 +1,10 @@
++*.devinapps.com
++auth-fips.us-gov-east-1.amazoncognito.com
++auth.ap-southeast-5.amazoncognito.com
++convex.app
++convex.cloud
+-devinapps.com
++e2b.app
++figma.site
++seg.ar
+-staging.devinapps.com
