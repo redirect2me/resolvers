@@ -1,0 +1,6 @@
+-!ignored.sub.wc.psl.hrsn.dev
+-!ignored.wc.psl.hrsn.dev
+-*.sub.wc.psl.hrsn.dev
+-*.wc.psl.hrsn.dev
+-localhostcert.net
+-sub.psl.hrsn.dev
