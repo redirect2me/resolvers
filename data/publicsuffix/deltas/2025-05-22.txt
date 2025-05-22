@@ -1,0 +1,6 @@
++api.lp.dev
+-cloud66.zone
++eliv-cdn.kr
++frontend.encr.app
++github.app
++objects.lp.dev
