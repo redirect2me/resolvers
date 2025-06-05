@@ -1,0 +1,2 @@
++*.lutrausercontent.com
++vercel.run
