@@ -1,0 +1,5 @@
++*.nxa.eu
++4.at
++my.at
++my.de
++nx.gw
