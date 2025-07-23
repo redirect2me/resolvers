@@ -1,0 +1,2 @@
++lovable.run
++lovable.sh
