@@ -1,0 +1,3 @@
+-glitch.me
++same-app.com
++same-preview.com
