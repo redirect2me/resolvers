@@ -1,0 +1,5 @@
++api.br
++ia.br
+-lib.de.us
++social.br
++xyz.br
