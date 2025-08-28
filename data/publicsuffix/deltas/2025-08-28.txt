@@ -1,0 +1,4 @@
++realtime.supabase.co
+-redstone
++storage.supabase.co
++wal.app

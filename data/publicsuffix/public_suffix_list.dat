@@ -5,8 +5,8 @@
 // Please pull this list from, and only from https://publicsuffix.org/list/public_suffix_list.dat,
 // rather than any other VCS sites. Pulling from any other URL is not guaranteed to be supported.
 
-// VERSION: 2025-08-26_08-09-47_UTC
-// COMMIT: 44211b0fbb8b4e09b89a553f5b26c6a02f889c4b
+// VERSION: 2025-08-27_16-36-23_UTC
+// COMMIT: 519af36326939e3b6c07fbbd30806f67a570b2ba
 
 // Instructions on pulling and using this list can be found at https://publicsuffix.org/list/.
 
@@ -6797,7 +6797,7 @@ org.zw
 
 // newGTLDs
 
-// List of new gTLDs imported from https://www.icann.org/resources/registries/gtlds/v2/gtlds.json on 2025-08-19T15:20:18Z
+// List of new gTLDs imported from https://www.icann.org/resources/registries/gtlds/v2/gtlds.json on 2025-08-27T15:19:08Z
 // This list is auto-generated, don't edit it manually.
 // aaa : American Automobile Association, Inc.
 // https://www.iana.org/domains/root/db/aaa.html
@@ -9766,10 +9766,6 @@ recipes
 // red : Identity Digital Domains Limited
 // https://www.iana.org/domains/root/db/red.html
 red
-
-// redstone : Redstone Haute Couture Co., Ltd.
-// https://www.iana.org/domains/root/db/redstone.html
-redstone
 
 // redumbrella : Travelers TLD, LLC
 // https://www.iana.org/domains/root/db/redumbrella.html
@@ -15532,8 +15528,10 @@ utwente.io
 temp-dns.com
 
 // Supabase : https://supabase.io
-// Submitted by Inian Parameshwaran <security@supabase.io>
+// Submitted by Supabase Security <psl-maintainers@supabase.io>
 supabase.co
+realtime.supabase.co
+storage.supabase.co
 supabase.in
 supabase.net
 
@@ -15805,6 +15803,10 @@ voorloper.cloud
 // Waffle Computer Inc., Ltd. : https://docs.waffleinfo.com
 // Submitted by Masayuki Note <masa@blade.wafflecell.com>
 wafflecell.com
+
+// Walrus : https://walrus.xyz
+// Submitted by Max Spector <info@walrus.xyz>
+wal.app
 
 // Webflow, Inc. : https://www.webflow.com
 // Submitted by Webflow Security Team <security@webflow.com>
