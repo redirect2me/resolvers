@@ -1,0 +1,3 @@
++hackclub.app
+-lib.ms.us
++shop.brendly.ba
