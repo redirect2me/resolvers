@@ -170,11 +170,12 @@ async function httpsBulkCertCheckPost(ctx:any) {
     const warningDays = util.safeParseInt(ctx.request.body['warningDays'], 30);
     const hostnamesInput = ctx.request.body.hostnames || '';
     const hostnames = hostnamesInput.split('\n').map((line:string) => line.trim()).filter((line:string) => line.length > 0);
-    ctx.body = await ctx.render('http/bulk-cert-check.hbs', {
+    ctx.body = await ctx.render("http/bulk-cert-check.hbs", {
         dangerDays,
         hostnames,
         hostnamesInput,
-        title: 'Bulk HTTPS Certificate Check',
+        rows: Math.min(12, hostnames.length + 2),
+        title: "Bulk HTTPS Certificate Check",
         warningDays,
     });
   }

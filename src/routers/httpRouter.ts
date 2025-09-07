@@ -7,6 +7,7 @@ import * as url from "url";
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 import * as certcheck from "../actions/certcheck.js";
+import * as cspcheck from "../actions/cspcheck.js";
 import * as floccheck from "../actions/floccheck.js";
 import * as headers from "../actions/headers.js";
 import * as redirectcheck from "../actions/redirectcheck.js";
@@ -84,6 +85,10 @@ httpRouter.post('/http/bulk-cert-check.html', certcheck.httpsBulkCertCheckPost);
 httpRouter.get('/http/cert-check.json', certcheck.httpsCertCheckApi);
 httpRouter.get('/http/cert-check.html', certcheck.httpsCertCheckGet);
 httpRouter.post('/http/cert-check.html', certcheck.httpsCertCheckPost);
+
+httpRouter.get("/http/bulk-csp-check.html", cspcheck.BulkCspCheckGet);
+httpRouter.post("/http/bulk-csp-check.html", cspcheck.BulkCspCheckPost);
+httpRouter.get("/http/csp-check.json", cspcheck.CspCheckApi);
 
 httpRouter.get('/http/floc-check.html', floccheck.flocCheckGet);
 httpRouter.post('/http/floc-check.html', floccheck.flocCheckPost);
