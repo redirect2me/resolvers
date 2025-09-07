@@ -24,7 +24,7 @@
   <div class="card col-md-5 col-11 m-3 p-0">
     <div class="card-body">
       <h5 class="card-title text-center" id="whichdns">
-            <img src="https://which.nameserve.rs/favicon.svg" class="me-2" style="height: 1.75rem;" alt="Geolocation Icon" />
+            <img src="https://which.resolve.rs/favicon.svg" class="me-2" style="height: 1.75rem;" alt="Geolocation Icon" />
             Your Nameservers</h5>
       <p class="card-text" id="currentdns">
         <img alt="spinner" src="/images/spinner.svg" style="height:24pt;" title="Loading current DNS server info" />
@@ -196,7 +196,7 @@ $(function whichDns() {
       }
     },
     timeout: 15000,
-    url: `https://${Math.floor(Math.random() * 1000000000).toString()}.which.nameserve.rs/api.json`
+    url: `https://${Math.floor(Math.random() * 1000000000).toString()}.which.resolve.rs/api.json`
   });
 });
 
