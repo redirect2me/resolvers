@@ -1,0 +1,16 @@
+-*.bd
++ac.bd
++ai.bd
++bd
++co.bd
++com.bd
++edu.bd
++gov.bd
++id.bd
++info.bd
++it.bd
++mil.bd
++net.bd
++org.bd
++sch.bd
++tv.bd
