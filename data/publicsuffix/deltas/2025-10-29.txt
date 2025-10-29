@@ -1,0 +1,3 @@
++gitbook.io
++ia.ve
++statichost.page
