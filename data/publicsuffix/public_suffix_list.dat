@@ -5,8 +5,8 @@
 // Please pull this list from, and only from https://publicsuffix.org/list/public_suffix_list.dat,
 // rather than any other VCS sites. Pulling from any other URL is not guaranteed to be supported.
 
-// VERSION: 2025-10-27_21-45-06_UTC
-// COMMIT: 8515b0cb8b0e2941a37803493c9d68f1c7ceb67e
+// VERSION: 2025-10-28_19-13-05_UTC
+// COMMIT: edb46e9c5f146e9302eb6f37b0c859b10ca9354c
 
 // Instructions on pulling and using this list can be found at https://publicsuffix.org/list/.
 
@@ -12598,6 +12598,7 @@ cloudbeesusercontent.io
 
 // Cloudflare, Inc. : https://www.cloudflare.com/
 // Submitted by Cloudflare Team <publicsuffixlist@cloudflare.com>
+cloudflare.app
 cf-ipfs.com
 cloudflare-ipfs.com
 trycloudflare.com
