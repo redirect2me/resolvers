@@ -1,0 +1,3 @@
++emergent.cloud
++emergent.host
++umso.co
