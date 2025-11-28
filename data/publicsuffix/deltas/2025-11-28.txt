@@ -1,0 +1,7 @@
++azure-api.us
++azurewebsites.us
++gadget.app
++gadget.host
+-obl.ong
++servicebus.usgovcloudapi.net
++usgovcloudapp.net
