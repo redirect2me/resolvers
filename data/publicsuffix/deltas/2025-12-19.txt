@@ -1,0 +1,14 @@
++cc.cd
++ccwu.cc
+-edgeapp.net
+-en-root.fr
++hercules-app.com
++hercules-dev.com
++magicpatterns.app
++magicpatternsapp.com
++onhercules.app
+-platterp.us
+-shw.io
++sprites.app
+-storipress.app
++us.ci
