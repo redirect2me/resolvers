@@ -1,0 +1,17 @@
++*.ap-north-1.r.cloud.int.apple
++*.ap-south-1.r.cloud.int.apple
++*.ap-south-2.r.cloud.int.apple
++*.cloud.int.apple
++*.eu-central-1.r.cloud.int.apple
++*.eu-north-1.r.cloud.int.apple
++*.r.cloud.int.apple
++*.us-central-1.r.cloud.int.apple
++*.us-central-2.r.cloud.int.apple
++*.us-east-1.r.cloud.int.apple
++*.us-east-2.r.cloud.int.apple
++*.us-west-1.r.cloud.int.apple
++*.us-west-2.r.cloud.int.apple
++*.us-west-3.r.cloud.int.apple
++appwrite.network
++indevs.in
++int.apple
