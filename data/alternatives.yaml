@@ -1,0 +1,50 @@
+- name: "Lifewire"
+  title: "The Best Free and Public DNS Servers"
+  url: "https://www.lifewire.com/free-and-public-dns-servers-2626062"
+  date: "2024"
+
+- name: "Wikipedia"
+  title: "Public recursive name server"
+  url: "https://en.wikipedia.org/wiki/Public_recursive_name_server"
+  date: "2024"
+
+- name: "AdGuard"
+  title: "Known DNS Providers"
+  url: "https://adguard-dns.io/kb/general/dns-providers/"
+  date: "2024"
+
+- name: "Public-DNS.info"
+  title: "Public DNS Server List"
+  url: "https://public-dns.info/"
+  notes: "Huge list made by scanning the internet for open DNS servers.  CSV export available."
+
+- name: "PublicDNS.xyz"
+  title: "Public DNS"
+  url: "https://www.publicdns.xyz/"
+  notes: "Intrusive advertising"
+
+
+* https://dnsprivacy.org/wiki/display/DP/DNS+Privacy+Public+Resolvers
+
+* DNS Advantage
+* Level3
+* OpenNIC, https://www.opennic.org/
+* SafeDNS, https://www.safedns.com/en/
+* NextDNS, https://www.nextdns.io/
+* DNSFilter, https://www.dnsfilter.com/, Commercial only
+* Hurricane Electric, https://dns.he.net/, Registration required
+* OVH (France)
+IPv4: 213.186.33.99
+Opennic
+IPv4: 109.69.8.34, 95.85.9.86
+IPv6: 2001:4ba0:cafe:0383:0123:4567:89ab:cdef, 2403:2f00:f002:208:216:3eff:fe70:5202
+Others DNS
+By Swiss Privacy Foundation https://www.privacyfoundation.ch/de/service/server.html
+By WikiLeaks wiki https://www.wikileaks.org/wiki/Alternative_DNS
+https://adguard-dns.io/kb/general/dns-providers/
+
+https://adguard-dns.io/kb/general/dns-providers/
+https://www.publicdns.xyz/
+
+# TODO:
+# https://controld.com/free-dns
