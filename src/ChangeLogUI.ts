@@ -64,6 +64,7 @@ class ChangeLogUI {
                 description: `Monitor changes to the ${this.title} via RSS`,
                 home: this.home,
                 name: `${this.title} Change Log`,
+                nocache: Date.now(),
                 path: this.mount,
                 pubDate,
             });
