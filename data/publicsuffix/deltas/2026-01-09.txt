@@ -1,0 +1,3 @@
++*.bwcloud-os-instance.de
++deuxfleurs.eu
++deuxfleurs.page
