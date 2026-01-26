@@ -1,0 +1,5 @@
++auth.cognito-idp.eusc-de-east-1.on.amazonwebservices.eu
++s3-website.dualstack.us-gov-east-1.amazonaws.com
++s3-website.dualstack.us-gov-west-1.amazonaws.com
++transfer-webapp.ap-southeast-7.on.aws
++transfer-webapp.mx-central-1.on.aws
