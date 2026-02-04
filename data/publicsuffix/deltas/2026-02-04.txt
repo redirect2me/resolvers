@@ -1,0 +1,9 @@
+-12chars.dev
+-12chars.it
+-12chars.pro
++blob.core.usgovcloudapi.net
++file.core.usgovcloudapi.net
++file.core.windows.net
++usgovtrafficmanager.net
++web.core.usgovcloudapi.net
++web.core.windows.net
