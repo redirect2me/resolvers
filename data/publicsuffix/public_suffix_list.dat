@@ -5,8 +5,8 @@
 // Please pull this list from, and only from https://publicsuffix.org/list/public_suffix_list.dat,
 // rather than any other VCS sites. Pulling from any other URL is not guaranteed to be supported.
 
-// VERSION: 2026-02-18_20-59-15_UTC
-// COMMIT: dfc780b86d5da2f178a1d944f5d7c10c42839c5f
+// VERSION: 2026-02-22_09-28-21_UTC
+// COMMIT: eec9da6693468b13c59b5fccf8fa17e21d3da2d7
 
 // Instructions on pulling and using this list can be found at https://publicsuffix.org/list/.
 
@@ -16157,6 +16157,11 @@ localcert.net
 // Submitted by Douglas Chen <psl@windsurf.com>
 windsurf.app
 windsurf.build
+
+// WirelessCar : https://wirelesscar.com
+// Submitted by Martin Lindberg <drive-platform@wirelesscar.com>
+drive-platform.com
+drive-platform.io
 
 // WISP : https://wisp.gg
 // Submitted by Stepan Fedotov <stepan@wisp.gg>
