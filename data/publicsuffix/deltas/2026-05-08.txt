@@ -1,0 +1,2 @@
++*.zerops.zone
++prg1-zerops.zone
