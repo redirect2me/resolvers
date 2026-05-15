@@ -1,0 +1,4 @@
+-cc.nd.us
+-lib.nd.us
++t3.storage.dev
++t3.storageapi.dev
