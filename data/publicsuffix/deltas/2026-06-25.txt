@@ -1,0 +1,16 @@
++ddns.berlin
++ddns.wtf
++ddnssec.de
++dnshome.at
++dnshome.cloud
++dnshome.eu
++dnshome.it
++dyn.now
++dyndnssec.de
++heimdns.de
++heimdns.online
++puter.app
++puter.site
++puter.work
++resolve.bar
++srvdns.de
