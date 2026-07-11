@@ -53,7 +53,8 @@ app.use(KoaSession({
 app.use(flash());
 app.use(async (ctx, next) => {
   ctx.state.ctx = ctx;
-  if (ctx.request.body.debug) {
+    const body = ctx.request.body;
+    if (body && typeof body === 'object' && !Array.isArray(body) && 'debug' in body && body.debug) {
       ctx.state.debug = true;
   } else if (ctx.query.debug) {
       ctx.state.debug = true;
@@ -192,9 +193,9 @@ app.use(async(ctx, next) => {
       logger.error( { err, url: ctx.url }, '500 error');
       ctx.status = 500;
       if (ctx.path.endsWith('.json')) {
-        util.handleJsonp(ctx, { message: `Server error ${err.message}`, success: false });
+        util.handleJsonp(ctx, { message: `Server error ${(err instanceof Error ? err.message : String(err))}`, success: false });
       } else {
-        ctx.body = await ctx.render('500.hbs', { title: 'Server Error', message: err.message });
+        ctx.body = await ctx.render('500.hbs', { title: 'Server Error', message: (err instanceof Error ? err.message : String(err)) });
       }
   }
 });

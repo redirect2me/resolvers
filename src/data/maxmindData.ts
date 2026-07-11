@@ -96,7 +96,7 @@ function asnLookupStr(ip:string): string {
         }
         return `${asnResult.autonomous_system_organization} (${asnResult.autonomous_system_number})`;
     } catch (err) {
-        return err.message;
+        return (err instanceof Error ? err.message : String(err));
     }
 }
 function cityLookup(ip:string): CityResponse|null {
@@ -118,7 +118,7 @@ function cityLookupHtml(ip:string): string {
         }
         return `${cityResult.city?.names.en}, ${cityResult.country?.names.en}: <a href="https://www.openstreetmap.org/?mlat=${cityResult.location?.latitude}&mlon=${cityResult.location?.longitude}&zoom=12">${cityResult.location?.latitude}, ${cityResult.location?.longitude}</a>`;
     } catch (err) {
-        return err.message;
+        return (err instanceof Error ? err.message : String(err));
     }
 }
 

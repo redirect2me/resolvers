@@ -43,7 +43,7 @@ async function activityPubData(q: string): Promise<ActivityPubData> {
         return {
             success: false,
             message: "Invalid URL: unable to parse",
-            error: err.message,
+            error: (err instanceof Error ? err.message : String(err)),
             url: q,
         };
     }
@@ -86,7 +86,7 @@ async function activityPubData(q: string): Promise<ActivityPubData> {
             success: false,
             message: "Webfinger fetch failed",
             url: theUrl.href,
-            error: err.message,
+            error: (err instanceof Error ? err.message : String(err)),
             account,
             webfingerUrl,
         };
@@ -112,7 +112,7 @@ async function activityPubData(q: string): Promise<ActivityPubData> {
             success: false,
             message: "Webfinger response parse error",
             url: theUrl.href,
-            error: err.message,
+            error: (err instanceof Error ? err.message : String(err)),
             account,
             webfingerUrl,
         };
@@ -208,7 +208,7 @@ infoRouter.get("/info/companyenrich", async (ctx: any) => {
         );
         ctx.body = {
             success: false,
-            message: err.message,
+            message: (err instanceof Error ? err.message : String(err)),
         };
         return;
     }

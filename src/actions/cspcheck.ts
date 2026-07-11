@@ -94,7 +94,7 @@ async function CspCheckApi(ctx: any) {
     } catch (err) {
         ctx.log.error({ err, urlParam }, "Unable to check CSP");
         retVal.success = false;
-        retVal.message = err.message;
+        retVal.message = (err instanceof Error ? err.message : String(err));
     }
 
     util.handleJsonp(ctx, retVal);

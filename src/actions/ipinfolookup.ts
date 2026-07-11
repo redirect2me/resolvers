@@ -49,7 +49,7 @@ async function ipinfoLookup(ctx:any) {
         ctx.log.debug({ data: retVal, ip, provider: 'ipinfo' }, 'Geolocation result')
     } catch (err) {
         retVal.success = false;
-        retVal.message = err.message;
+        retVal.message = (err instanceof Error ? err.message : String(err));
         ctx.log.warn({ data: retVal, err, ip, provider: 'ipinfo' }, 'Geolocation error')
     }
 

@@ -105,7 +105,7 @@ async function redirectCheckApiLow(ctx:any, urlParam:string) {
     } catch (err) {
         ctx.log.error({ err, urlParam }, 'Unable to check redirect');
         retVal.success = false;
-        retVal.message = err.message;
+        retVal.message = (err instanceof Error ? err.message : String(err));
     }
 
     util.handleJsonp(ctx, retVal);

@@ -16,9 +16,9 @@ export interface ChangeLogEntry {
  * loads a list of files (yyyy-mm-dd.ext) from a directory and provides methods to access them
  */
 export class ChangeLog {
-    cache: { [key: string]: ChangeLogEntry };
-    firstKey: string;
-    lastKey: string;
+    cache: { [key: string]: ChangeLogEntry } = {};
+    firstKey = '';
+    lastKey = '';
 
     constructor(dir: string) {
         this.init(dir);

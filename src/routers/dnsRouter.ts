@@ -66,7 +66,7 @@ dnsRouter.post('/dns/lookup.html', async (ctx:any) => {
             stream.write(`${result} `);
           }
         } catch (err) {
-          stream.write(`Error: ${err.message}`);
+          stream.write(`Error: ${(err instanceof Error ? err.message : String(err))}`);
         }
       }
     }

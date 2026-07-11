@@ -196,7 +196,7 @@ domainRouter.post("/domains/rank.html", async (ctx: any) => {
         raw = response.data;
         domains = raw.results;
     } catch (err) {
-        ctx.flash('error', err.message);
+        ctx.flash('error', (err instanceof Error ? err.message : String(err)));
     }
 
     ctx.body = await ctx.render("domains/rank.hbs", {

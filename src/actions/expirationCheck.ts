@@ -65,7 +65,7 @@ async function expirationCheckApiLow(ctx:any, domain:string) {
     }
 
     try {
-        const results = await whoiser.domain(domain);
+        const results = await whoiser.whoisDomain(domain);
 
         util.handleJsonp(ctx, {
             success: true,

@@ -45,7 +45,7 @@ async function ipapiisLookup(ctx:any) {
         ctx.log.debug({ data: retVal, ip, provider: 'ipapiis' }, 'Geolocation result')
     } catch (err) {
         retVal.success = false;
-        retVal.message = err.message;
+        retVal.message = (err instanceof Error ? err.message : String(err));
         ctx.log.warn({ data: retVal, err, ip, provider: 'ipapiis' }, 'Geolocation error')
     }
 

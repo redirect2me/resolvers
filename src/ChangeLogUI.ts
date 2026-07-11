@@ -5,7 +5,7 @@ import { DateTime } from 'luxon';
 import { ChangeLog } from "./changelog.js";
 
 class ChangeLogUI {
-    changelogRouter: Router;
+    changelogRouter!: Router;
 
     constructor(
         private changeLog: ChangeLog,
@@ -56,7 +56,7 @@ class ChangeLogUI {
 
         this.changelogRouter.get(`${this.mount}/rss.xml`, async (ctx: any) => {
 
-            const startDate = this.changeLog.getFirst().date;
+            const startDate = this.changeLog.getFirst()?.date;
             const pubDate = DateTime.fromISO(startDate, { zone: 'utc' }).toRFC2822();
 
             ctx.body = await ctx.render('_changelog/rss.hbs', {
@@ -103,7 +103,7 @@ class ChangeLogUI {
         }
     }
 
-    getUrls: () => string[];
+    getUrls!: () => string[];
 }
 
 export { ChangeLogUI }

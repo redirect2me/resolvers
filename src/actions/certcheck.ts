@@ -130,7 +130,7 @@ async function tlsCertCheckPost(ctx:any) {
             resolve();
         });
         tlsSocket.on('error', (err) => {
-            stream.write(`<div class="alert alert-danger">${err.message}</div>`);
+            stream.write(`<div class="alert alert-danger">${(err instanceof Error ? err.message : String(err))}</div>`);
             //alert, continue
             tlsSocket.end();
             resolve();
@@ -198,7 +198,7 @@ async function httpsCertCheckApi(ctx:any) {
         } catch (err) {
             util.handleJsonp(ctx, {
               success: false,
-              message: `Unable to parse: ${err.message}`
+              message: `Unable to parse: ${(err instanceof Error ? err.message : String(err))}`
             });
             return;
         }
@@ -282,7 +282,7 @@ async function httpsCertCheckPost(ctx:any) {
             const url = new URL(hostname);
             hostname = url.host;
         } catch (err) {
-            ctx.flash('error', `Unable to parse: ${handlebars.escapeExpression(err.message)}`);
+            ctx.flash('error', `Unable to parse: ${handlebars.escapeExpression((err instanceof Error ? err.message : String(err)))}`);
             ctx.redirect(`cert-check.html?hostname=${encodeURIComponent(hostname)}`);
             return;
         }

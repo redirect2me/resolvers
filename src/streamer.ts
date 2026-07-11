@@ -16,7 +16,7 @@ async function streamResponse(ctx: any, title:string, fn:(s:PassThrough) => Prom
     }
     catch (err) {
       logger.error({ err, title }, 'error while streaming response');
-      stream.write(`<div class="alert alert-danger">ERROR: ${err.message}</div>`);
+      stream.write(`<div class="alert alert-danger">ERROR: ${(err instanceof Error ? err.message : String(err))}</div>`);
     }
     stream.write(await ctx.render("stream-below.hbs", {}));
     stream.end();

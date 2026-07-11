@@ -30,7 +30,7 @@ async function headersApi(ctx: any, targetUrl: string) {
             success: false,
             err,
             input: targetUrl,
-            message: `${err.message} when checking ${targetUrl}`
+            message: `${(err instanceof Error ? err.message : String(err))} when checking ${targetUrl}`
         });
         return;
     }
@@ -84,7 +84,7 @@ async function headersGet(ctx: any) {
                 result = await getHeaders(ctx, theUrl);
             } catch (err) {
                 ctx.log.error({ err, urlParam }, 'Unable to check redirect');
-                ctx.flash('error', `${err.message} when checking ${urlParam}`);
+                ctx.flash('error', `${(err instanceof Error ? err.message : String(err))} when checking ${urlParam}`);
             }
         }
     }

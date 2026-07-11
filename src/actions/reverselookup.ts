@@ -13,7 +13,7 @@ async function reverseDns(dnsResolver:dnsPromises.Resolver, ip:string): Promise<
     return (await dnsResolver.reverse(ip)).join(',');
   }
   catch (err) {
-    return err.message;
+    return (err instanceof Error ? err.message : String(err));
   }
 }
 
@@ -41,7 +41,7 @@ async function reverseDnsApi(ctx: any, ip: string) {
     util.handleJsonp(ctx, { success: true, input: ip, results, asn: asnstr });
   }
   catch (err) {
-    util.handleJsonp(ctx, { asn: asnstr, success: false, message: `reverse lookup failed: ${err.message}` });
+    util.handleJsonp(ctx, { asn: asnstr, success: false, message: `reverse lookup failed: ${(err instanceof Error ? err.message : String(err))}` });
   }
 }
 

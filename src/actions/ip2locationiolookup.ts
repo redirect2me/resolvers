@@ -44,7 +44,7 @@ async function ip2locationioLookup(ctx: any) {
         ctx.log.debug({ data: retVal, ip, provider: 'ip2locationio' }, 'Geolocation result')
     } catch (err) {
         retVal.success = false;
-        retVal.message = err.message;
+        retVal.message = (err instanceof Error ? err.message : String(err));
         ctx.log.warn({ data: retVal, err, ip, provider: 'ip2locationio' }, 'Geolocation error')
     }
 

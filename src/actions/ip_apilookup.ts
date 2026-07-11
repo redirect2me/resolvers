@@ -34,7 +34,7 @@ async function ip_apiLookup(ctx: any) {
         ctx.log.debug({ data: retVal, ip, provider: 'ip-api' }, 'Geolocation result')
     } catch (err) {
         retVal.success = false;
-        retVal.message = err.message;
+        retVal.message = (err instanceof Error ? err.message : String(err));
         ctx.log.warn({ data: retVal, err, ip, provider: 'ip-api' }, 'Geolocation error');
     }
 

@@ -47,7 +47,7 @@ async function radarioLookup(ctx:any) {
         ctx.log.debug({ data: retVal, ip, provider: 'radario' }, 'Geolocation result')
     } catch (err) {
         retVal.success = false;
-        retVal.message = err.message;
+        retVal.message = (err instanceof Error ? err.message : String(err));
         ctx.log.warn({ data: retVal, err, ip, provider: 'radario' }, 'Geolocation error')
     }
 
