@@ -84,6 +84,7 @@ cryptoRouter.all('/crypto/hash.json', async (ctx:Koa.ExtendableContext) => {
 
     let bytes:Buffer = Buffer.alloc(0);
     let theString:string = '';
+    const request = ctx.request as Koa.Request & { files?: { file?: any | any[] } };
     if (ctx.query) {
         if (ctx.query.string) {
             theString = util.getFirst(ctx.query.string);
@@ -92,8 +93,8 @@ cryptoRouter.all('/crypto/hash.json', async (ctx:Koa.ExtendableContext) => {
             bytes = Buffer.from(util.getFirst(ctx.query.bytes), 'hex');
         }
     } else if (ctx.request.method == 'post') {
-        if (ctx.request.files && ctx.request.files.file) {
-            const file = Array.isArray(ctx.request.files.file) ? ctx.request.files.file[0] : ctx.request.files.file;
+        if (request.files && request.files.file) {
+            const file = Array.isArray(request.files.file) ? request.files.file[0] : request.files.file;
             bytes = await fsPromises.readFile(file.filepath);
         }
     }

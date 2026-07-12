@@ -53,7 +53,8 @@ app.use(KoaSession({
 app.use(flash());
 app.use(async (ctx, next) => {
   ctx.state.ctx = ctx;
-    const body = ctx.request.body;
+        const request = ctx.request as Koa.Request & { body?: unknown };
+        const body = request.body;
     if (body && typeof body === 'object' && !Array.isArray(body) && 'debug' in body && body.debug) {
       ctx.state.debug = true;
   } else if (ctx.query.debug) {
