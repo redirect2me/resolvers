@@ -44,7 +44,7 @@ ipRouter.get('/ip/index.html', async (ctx) => {
 
 ipRouter.get('/ip/geolocation.html', async (ctx:any) => {
 
-    let ip = ctx.request.query['ip'] || ctx.request.body.ip;
+    let ip = ctx.request.query['ip'] || ctx.request.body?.ip;
     const current_ip = getCurrentIP(ctx);
     if (!ip) {
       ip = current_ip;

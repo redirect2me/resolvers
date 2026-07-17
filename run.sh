@@ -16,4 +16,9 @@ if [ -f "${ENV_FILE}" ]; then
     export $(cat "${ENV_FILE}")
 fi
 
+if [ ! -d "node_modules" ]; then
+    echo "INFO: installing npm dependencies"
+    npm install
+fi
+
 npx nodemon

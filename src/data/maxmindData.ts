@@ -9,6 +9,7 @@ import * as util from 'util';
 import * as zlib from 'zlib';
 
 import config from "../config.js";
+import { logger } from '../logger.js';
 const pipeline = util.promisify(stream.pipeline);
 
 let asnDatabase:Reader<AsnResponse>|null = null;
@@ -101,7 +102,8 @@ function asnLookupStr(ip:string): string {
 }
 function cityLookup(ip:string): CityResponse|null {
     if (cityDatabase == null) {
-        throw new Error("asn.initialize not called or failed");
+        logger.error({ err: new Error("asn.initialize not called or failed") }, "Unable to cityLookup");
+        return null;
     }
     return cityDatabase.get(ip);
 }
