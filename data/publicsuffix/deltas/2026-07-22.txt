@@ -1,0 +1,16 @@
+-*.cryptonomic.net
+-api.stdlib.com
+-aquila.it
+-dh.bytemark.co.uk
+-hzc.io
+-onfabrica.com
+-protonet.io
+-storj.farm
++su.it
++sud-sardegna.it
++sudsardegna.it
+-trentinosudtirol.it
+-uk0.bigv.io
+-valdaosta.it
++verbano-cusio-ossola.it
+-vm.bytemark.co.uk
