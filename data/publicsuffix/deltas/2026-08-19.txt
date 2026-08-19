@@ -1,0 +1,10 @@
++*.aivencloud.com
++*.cursorusercontent.com
+-adaptable.app
++ams.scw.site
++codepen.app
++codepen.dev
++here.now
++online-server.cloud
++scw.site
++waw.scw.site
