@@ -1,0 +1,4 @@
++*.azure.databricksapps.com
++aws-gov.databricksapps.us
++aws.databricksapps.com
++gcp.databricksapps.com
