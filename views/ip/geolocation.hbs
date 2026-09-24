@@ -116,6 +116,10 @@
             <td id="ipstack">Pending...</td>
         </tr>
         <tr>
+            <td><a href="https://iptrust.co/">iptrust.co</a></td>
+            <td id="iptrust">Pending...</td>
+        </tr>
+        <tr>
             <td><a href="https://ipwhois.io/">ipwhois.io</a></td>
             <td id="ipwhois">Pending...</td>
         </tr>
@@ -212,6 +216,7 @@
     <li><a class="fw-bold" href="https://www.iplocate.io/">iplocate.io</a> - 1,000/day free, $15/month for 10,000/month</li>
     <li><a href="https://iplocate.xyz/">iplocate.xyz</a> - nice UI, no API.</li>
     <li><a class="fw-bold" href="https://ipstack.com/">ipstack.com</a> 10,000/month free, $10/month for 50,000</li>
+    <li><a class="fw-bold" href="https://iptrust.co/">iptrust.co</a> - free for 10,000 lookups/month, then €19/month for 100,000</li>
     <li><a href="https://ipwhois.io/">ipwhois.io</a> - free for 10,000/month non-commerical, $11/month for 250,000.</li>
     <li><a class="fw-bold" href="https://ipregistry.co/">ipregistry.co</a> - free for 100,000/month, then $0.10 per 1,000.</li>
     <li><a class="fw-bold" href="https://tools.keycdn.com/geo">KeyCDN</a> - free but requires a link back to their site.  &ldquo;includes data from MaxMind&rdquo;</li>
@@ -494,6 +499,7 @@
         }
     });
     remoteLookup("ipstack", `/internal/ipstack.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
+    remoteLookup("iptrust", `/internal/iptrust.json?ip=${encodeURIComponent({{{toJson ip}}})}`);
     remoteLookup("ipwhois", `https://ipwhois.app/json/${encodeURIComponent({{{toJson ip}}})}`, (data) => {
         return {
             success: true,

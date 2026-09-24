@@ -80,14 +80,14 @@ async function initialize(logger:Pino.Logger) {
 
 function asnLookup(ip:string): AsnResponse|null {
     if (asnDatabase == null) {
-        throw new Error("asn.initialize not called or failed");
+        return null;
     }
     return asnDatabase.get(ip);
 }
 
 function asnLookupStr(ip:string): string {
     if (asnDatabase == null) {
-        return "ERROR: initialize not called or failed";
+        return `No ASN database available`;
     }
     try {
         const asnResult = asnDatabase.get(ip);

@@ -112,6 +112,13 @@ const config = convict({
     format: String,
     sensitive: true,
   },
+  iptrustApiKey: {
+    default: null,
+    doc: 'API key for iptrust.co',
+    env: 'IPTRUST_API_KEY',
+    format: String,
+    sensitive: true,
+  },
   ipregistryApiKey: {
     default: null,
     doc: 'API key for ipregistry.co',
