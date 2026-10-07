@@ -5,8 +5,8 @@
 // Please pull this list from, and only from https://publicsuffix.org/list/public_suffix_list.dat,
 // rather than any other VCS sites. Pulling from any other URL is not guaranteed to be supported.
 
-// VERSION: 2026-10-01_23-02-52_UTC
-// COMMIT: 6cd82aff889e3d64e5e03bc5c1f43da1934a960a
+// VERSION: 2026-10-06_07-09-37_UTC
+// COMMIT: f7f7b5f404fbfbc463a1d802baa2a5e5da4f9e81
 
 // Instructions on pulling and using this list can be found at https://publicsuffix.org/list/.
 
@@ -15514,6 +15514,10 @@ repl.run
 // Submitted by Tim Perry <tim@resin.io>
 resindevice.io
 devices.resinstaging.io
+
+// Retool : https://retool.com
+// Submitted by Andrew Guan <security@retool.com>
+retool.app
 
 // Rico Developments Limited : https://adimo.co
 // Submitted by Colin Brown <hello@adimo.co>
