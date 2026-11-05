@@ -1,0 +1,5 @@
++linkyhost.page
++manus.space
++pagelemon.dev
++sanity.run
++sanity.studio
