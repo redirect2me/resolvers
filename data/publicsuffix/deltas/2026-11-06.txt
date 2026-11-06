@@ -1,0 +1,5 @@
++*.apps.grok.bot
++*.pages.grok.bot
++auth.lovable.app
++docsflowy.site
++sliplane.app
