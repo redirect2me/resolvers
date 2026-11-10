@@ -5,8 +5,8 @@
 // Please pull this list from, and only from https://publicsuffix.org/list/public_suffix_list.dat,
 // rather than any other VCS sites. Pulling from any other URL is not guaranteed to be supported.
 
-// VERSION: 2026-11-08_13-21-08_UTC
-// COMMIT: 7a21dc3491d43db036124fdd6a3a77d1cc44ad8a
+// VERSION: 2026-11-09_10-58-07_UTC
+// COMMIT: c682e9e4600a1581e7e58bc21675159d7e713b31
 
 // Instructions on pulling and using this list can be found at https://publicsuffix.org/list/.
 
@@ -12545,6 +12545,10 @@ blackbaudcdn.net
 // Blatech : http://www.blatech.net
 // Submitted by Luke Bratch <luke@bratch.co.uk>
 of.je
+
+// BlitzWorks : https://blitz.cloud
+// Submitted by BlitzWorks <hallo@blitzworks.io>
+prod.page
 
 // Block, Inc. : https://block.xyz
 // Submitted by Jonathan Boice <security@block.xyz>
