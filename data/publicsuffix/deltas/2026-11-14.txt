@@ -1,0 +1,6 @@
++app.amba.host
++cdn.amba.host
++crbts.app
++fn.amba.host
++go.amba.host
++medusajs.site
