@@ -1,0 +1,6 @@
++*.2na.am
++apps.devs.ai
++ceero.site
++ginta.page
++loc.cc
++solidres.page
