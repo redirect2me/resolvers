@@ -5,8 +5,8 @@
 // Please pull this list from, and only from https://publicsuffix.org/list/public_suffix_list.dat,
 // rather than any other VCS sites. Pulling from any other URL is not guaranteed to be supported.
 
-// VERSION: 2026-11-16_22-30-55_UTC
-// COMMIT: e56d8b1472585675d92eb86b4e02a140a6ef11e0
+// VERSION: 2026-11-17_12-20-36_UTC
+// COMMIT: fcba7a49d0fb087c3c05330a003f27a9739a4c33
 
 // Instructions on pulling and using this list can be found at https://publicsuffix.org/list/.
 
@@ -12881,6 +12881,10 @@ site.hosting-cluster.nl
 // Submitted by Contentful Developer Experience Team <prd-ecosystem-dx@contentful.com>
 ctfcloud.net
 
+// Converge AI Pte. Ltd. : https://converge.ai
+// Submitted by Tyler <support@enter.pro>
+prod.enter.pro
+
 // Convex : https://convex.dev/
 // Submitted by James Cowling <security@convex.dev>
 convex.app
@@ -13860,6 +13864,11 @@ futuremailing.at
 gadget.app
 gadget.host
 
+// Gcore : https://gcore.com/
+// Submitted by Maryia Miskevich <fastedge@gcore.com>
+fastedge.app
+gcorecdn.com
+
 // GDS : https://www.gov.uk/service-manual/technology/managing-domain-names
 // Submitted by Stephen Ford <hostmaster@digital.cabinet-office.gov.uk>
 campaign.gov.uk
@@ -14541,6 +14550,10 @@ kiloapps.io
 // Submitted by Felipe Keller Braz <felipebraz@kinghost.com.br>
 kinghost.net
 uni5.net
+
+// Kliv : https://kliv.dev
+// Submitted by Anders Olsson <security@kliv.dev>
+kliv.site
 
 // KoobinEvent, SL : https://www.koobin.com
 // Submitted by Iván Oliva <ivan.oliva@koobin.com>
@@ -16426,6 +16439,10 @@ it.com
 // Umso Software Inc. : https://www.umso.com
 // Submitted by Alexis Taylor <security@umso.com>
 umso.co
+
+// Uncloud : https://uncloud.run
+// Submitted by Pasha Sviderski <support@uncloud.run>
+uncld.dev
 
 // Unison Computing, PBC : https://unison.cloud
 // Submitted by Simon Højberg <security@unison.cloud>
